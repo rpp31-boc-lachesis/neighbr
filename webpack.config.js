@@ -2,7 +2,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const entryDir = path.join(__dirname, 'client/src/index.js');
+const entryDir = path.join(__dirname, 'client/src/index.jsx');
 const outputDir = path.join(__dirname, 'client/dist');
 
 module.exports = {
