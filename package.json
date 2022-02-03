@@ -6,7 +6,7 @@
   "scripts": {
     "start:dev": "nodemon ./server/index.js",
     "build:dev": "webpack --mode development -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage --detectOpenHandles"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "babel-loader": "^8.2.3",
     "eslint": "^8.8.0",
@@ -58,7 +59,8 @@
     "rules": {
       "no-undef": "off",
       "import/extensions": "off",
-      "comma-dangle": "off"
+      "comma-dangle": "off",
+      "react/jsx-filename-extension": "off"
     }
   }
 }
