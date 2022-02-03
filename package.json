@@ -59,8 +59,7 @@
     "rules": {
       "no-undef": "off",
       "import/extensions": "off",
-      "comma-dangle": "off",
-      "react/jsx-filename-extension": "off"
+      "comma-dangle": "off"
     }
   }
 }
