@@ -2,5 +2,6 @@
 hence the testEnvironment variable. */
 module.exports = {
   verbose: true,
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
+  reporters: ['default', 'jest-junit']
 };

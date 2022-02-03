@@ -49,6 +49,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.7",
+    "jest-junit": "^13.0.0",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2",
     "webpack": "^5.68.0",
