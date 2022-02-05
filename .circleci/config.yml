@@ -25,5 +25,5 @@ jobs:
       - run:
           name: Run Tests
           command: jest --collect-coverage=true
-      - store artifacts:
-          path: ~/coverage
+      - store_artifacts:
+          path: coverage
