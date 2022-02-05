@@ -25,7 +25,7 @@ jobs:
             - /home/circleci/.npm
       - run:
           name: Run Tests
-          command: npm run test:ci
+          command: npm list #run test:ci
       - store_artifacts:
           path: coverage
 
