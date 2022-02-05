@@ -44,7 +44,10 @@ jobs:
           docker_layer_caching: false
       - run:
           name: Create Docker Context
-          command: docker context create deploy-server --docker host=http://${DEPLOY_IP}
+          command: |
+            ssh ec2-user@${DEPLOY_IP} touch .env |
+            docker context create deploy-server --docker host=http://${DEPLOY_IP}
+
       - run:
           name: Deploy With Docker-Compose
           command: docker-compose --context deploy-server up -d
