@@ -7,7 +7,7 @@ version: 2.1
 #       - node/test:
           # test-results-for: jest
 jobs:
-  test:
+  build:
     working_directory: ~/neighbr
     docker:
       - image: cimg/node:14.19.0
