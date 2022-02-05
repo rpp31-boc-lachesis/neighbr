@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "start:dev": "nodemon ./server/index.js",
     "build:dev": "webpack --mode development -w",
-    "test": "jest --coverage --detectOpenHandles"
+    "test": "jest --coverage --detectOpenHandles",
+    "test:ci": "jest --coverage --ci --detectOpenHandles"
   },
   "repository": {
     "type": "git",
