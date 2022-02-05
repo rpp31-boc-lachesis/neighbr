@@ -7,7 +7,7 @@ version: 2.1
 #       - node/test:
           # test-results-for: jest
 jobs:
-  build:
+  test:
     working_directory: ~/neighbr
     docker:
       - image: cimg/node:14.19.0
@@ -18,12 +18,21 @@ jobs:
       - run:
           name: Install Dependencies
           command: npm ci
+          # npm ci is the npm install for container environments
       - save_cache:
           key: npm-cache-v1-{{ checksum "package-lock.json" }}
           paths:
             - /home/circleci/.npm
       - run:
           name: Run Tests
-          command: npx jest --collect-coverage=true
+          command: npm run test
       - store_artifacts:
           path: coverage
+
+  # deploy:
+  #   working_directory: ~/neighbr
+  #   docker:
+  #     - image: cimg/node:14.19.0
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
