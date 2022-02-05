@@ -23,8 +23,7 @@ jobs:
 
   deploy:
     working_directory: ~/neighbr
-    docker:
-      - image: cimg/node:14.19.0
+    machine: true
     steps:
       - checkout
       - restore_cache:
