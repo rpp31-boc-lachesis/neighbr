@@ -44,7 +44,9 @@ jobs:
           command: |
             touch .env |
             docker context create deploy-server --docker host=http://${DEPLOY_IP}
-
+      - run:
+          name: Stop current docker container
+          command: docker-compose --context deploy-server down
       - run:
           name: Deploy With Docker-Compose
           command: docker-compose --context deploy-server up -d
