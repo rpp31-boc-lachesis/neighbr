@@ -1,4 +1,3 @@
-version: 2.1
 jobs:
   build:
     working_directory: ~/neighbr
@@ -47,5 +46,18 @@ jobs:
           name: Create Docker Context
           command: docker context create deploy-server --docker host=http://${DEPLOY_IP}
       - run:
-          name: Deploy With Docker-Docker-Compose
+          name: Deploy With Docker-Compose
           command: docker-compose --context deploy-server up -d
+workflows:
+  version: 2
+
+  build_and_test:
+    jobs:
+      - build
+
+  deploy:
+    jobs:
+      - deploy #:
+        # filters:
+        #   branches:
+        #     only: master
