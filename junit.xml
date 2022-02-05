@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="1" failures="0" errors="0" time="2.452">
-  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-03T23:42:48" time="1.128" tests="1">
-    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.021">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="3.279">
+  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-05T02:12:25" time="2.12" tests="3">
+    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.082">
+    </testcase>
+    <testcase classname="&lt;App /&gt; Renders title" name="&lt;App /&gt; Renders title" time="0.067">
+    </testcase>
+    <testcase classname="&lt;App /&gt; Renders clickable button" name="&lt;App /&gt; Renders clickable button" time="0.047">
     </testcase>
   </testsuite>
 </testsuites>
