@@ -1,3 +1,4 @@
+version: 2.1
 jobs:
   build:
     working_directory: ~/neighbr
@@ -61,7 +62,4 @@ workflows:
 
   deploy:
     jobs:
-      - deploy #:
-        # filters:
-        #   branches:
-        #     only: master
+      - deploy
