@@ -4,9 +4,11 @@
   "description": "a service-oriented application with a focus on building community",
   "main": "index.js",
   "scripts": {
+    "start": "node ./server/index.js",
+    "build": "webpack --mode production",
     "start:dev": "nodemon ./server/index.js",
     "build:dev": "webpack --mode development -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage --detectOpenHandles"
   },
   "repository": {
     "type": "git",

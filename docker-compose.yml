@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  neighbr:
+    env_file: .env
+    environment:
+      - PORT
+      - NODE_ENV
+      - DB_URI=mongodb://mongo:27017
+    build: .
+    ports:
+      - 3000:3000
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ~/mongodb/database:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
