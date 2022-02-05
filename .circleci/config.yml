@@ -43,12 +43,12 @@ jobs:
       - run:
           name: Create Docker Context
           command: |
-            touch .env |
+            touch .env
             docker context create deploy-server --docker "host=ssh://${DEPLOY_IP}"
       - run:
           name: Stop current docker container
           command: |
-            docker-compose --context deploy-server down |
+            docker-compose --context deploy-server down
             docker context use deploy-server
       - run:
           name: Deploy With Docker-Compose
