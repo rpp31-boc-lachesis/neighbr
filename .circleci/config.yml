@@ -44,6 +44,8 @@ jobs:
           name: Create Docker Context
           command: |
             touch .env
+            sudo apt update
+            sudo apt upgrade docker
             docker context create deployserver --docker "host=ssh://${DEPLOY_IP}"
       - run:
           name: Stop current docker container
