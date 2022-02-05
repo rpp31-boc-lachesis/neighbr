@@ -46,10 +46,12 @@ jobs:
             docker context create deploy-server --docker "host=ssh://${DEPLOY_IP}"
       - run:
           name: Stop current docker container
-          command: docker-compose --context deploy-server down
+          command: |
+            docker-compose --context deploy-server down |
+            docker context use deploy-server
       - run:
           name: Deploy With Docker-Compose
-          command: docker-compose --context deploy-server up -d
+          command: docker-compose up -d
 workflows:
   version: 2
 
