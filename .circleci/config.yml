@@ -30,7 +30,7 @@ jobs:
           key: npm-cache-v1.1-{{ checksum "package-lock.json" }}
       - run:
           name: Install Dependencies
-          command: npm ci --include=dev
+          command: npm install
           # npm ci is the npm install for container environments
       - save_cache:
           key: npm-cache-v1.1-{{ checksum "package-lock.json" }}
