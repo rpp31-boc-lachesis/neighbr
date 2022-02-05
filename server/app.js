@@ -10,7 +10,7 @@ app.use(compression());
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.status(200).send('Hello World!');
+  res.redirect('/');
 });
 
 module.exports = app;
