@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Create Docker Context
           command: |
-            ssh ec2-user@${DEPLOY_IP} touch .env |
+            ssh ec2-user@${DEPLOY_IP} 'touch .env' |
             docker context create deploy-server --docker host=http://${DEPLOY_IP}
 
       - run:
