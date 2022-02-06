@@ -47,7 +47,7 @@ jobs:
             touch .env
             sudo apt update
             sudo apt install --only-upgrade docker
-            docker context create deployserver --docker "host=ssh://${DEPLOY_IP}"
+            docker context create deployserver --docker "host=ssh://ec2-user@${DEPLOY_IP}"
       - run:
           name: Stop current docker container
           command: |
