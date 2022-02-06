@@ -7,8 +7,6 @@ services:
       - NODE_ENV
       - DB_URI=mongodb://mongo:27017
     build: .
-    ports:
-      - 3000:3000
   mongo:
     image: mongo
     restart: always
@@ -17,3 +15,11 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_PORT=80
