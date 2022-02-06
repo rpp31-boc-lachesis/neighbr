@@ -53,7 +53,7 @@ jobs:
             docker-compose down
       - run:
           name: Deploy With Docker-Compose
-          command: docker-compose up -d
+          command: COMPOSE_DOCKER_CLI_BUILD=0 docker-compose up -d
 workflows:
   version: 2
 
