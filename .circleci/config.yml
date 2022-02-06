@@ -24,7 +24,8 @@ jobs:
 
   deploy:
     working_directory: ~/neighbr
-    machine: true
+    machine:
+      image: ubuntu-2004:202111-02
     steps:
       - checkout
       - restore_cache:
