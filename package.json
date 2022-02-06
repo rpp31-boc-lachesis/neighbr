@@ -4,9 +4,12 @@
   "description": "a service-oriented application with a focus on building community",
   "main": "index.js",
   "scripts": {
+    "start": "node ./server/index.js",
+    "build": "webpack --mode production",
     "start:dev": "nodemon ./server/index.js",
     "build:dev": "webpack --mode development -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --coverage --runInBand --detectOpenHandles",
+    "test:ci": "jest --coverage --ci --runInBand --detectOpenHandles --reporters=default --reporters=jest-junit"
   },
   "repository": {
     "type": "git",
@@ -39,6 +42,7 @@
     "@babel/core": "^7.16.12",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "babel-loader": "^8.2.3",
     "eslint": "^8.8.0",
@@ -48,6 +52,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "jest": "^27.4.7",
+    "jest-junit": "^13.0.0",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2",
     "webpack": "^5.68.0",

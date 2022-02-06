@@ -1,0 +1,7 @@
+coverage
+dataSet
+node_modules
+config/*
+.vscode
+.git
+./*.log
