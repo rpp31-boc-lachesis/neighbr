@@ -49,10 +49,13 @@ jobs:
             touch .env
             docker context create deployserver --docker "host=ssh://ec2-user@${DEPLOY_IP}"
       - run:
-          name: Stop current docker container
+          name: Stop current docker container and clean up
           command: |
             docker context use deployserver
             docker-compose down
+            docker system prune -f
+            docker volume prune -f
+            docker image rm `docker images | grep nginx | sed 's/\ \ */ /g' | cut -f3 -d\ `
       - run:
           name: Deploy With Docker-Compose
           command: COMPOSE_DOCKER_CLI_BUILD=0 docker-compose up -d
