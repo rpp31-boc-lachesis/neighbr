@@ -59,7 +59,8 @@ jobs:
           environment:
             SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
           name: Run deploy script
-          command: "ssh ec2-user@neighbr.site bash ./deploy.sh"
+          command: |
+            ssh ec2-user@neighbr.site "cd neighbr && bash ./deploy.sh"
 
       # - run:
       #     name: Create Docker Context
