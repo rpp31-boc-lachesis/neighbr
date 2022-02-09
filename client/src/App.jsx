@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar.jsx';
-import Splash from './components/Splash.jsx';
+import Navbar from './components/Splash/Navbar.jsx';
+import Splash from './components/Splash/Splash.jsx';
 import Other from './components/Other.jsx';
 import Error from './components/Error.jsx';
 // import Typography from '@mui/material/Typography';
