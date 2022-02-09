@@ -44,20 +44,27 @@ jobs:
           fingerprints:
             - "30:2c:ba:e2:ad:f3:c3:bb:77:6b:70:b5:29:84:b1:7c"
       - run:
-          name: Create Docker Context
-          command: |
-            touch .env
-            docker context create deployserver --docker "host=ssh://ec2-user@${DEPLOY_IP}"
+          name: Rsync to instance
+          command: "rsync -av . ${CI_USER}@${DEPLOY_HOSTNAME}: --filter=':- .gitignore' --exclude=.git"
       - run:
-          name: Stop current docker container and clean up
-          command: |
-            docker context use deployserver
-            docker-compose down
-            docker system prune -f
-            docker volume prune -f
-      - run:
-          name: Deploy With Docker-Compose
-          command: COMPOSE_DOCKER_CLI_BUILD=0 docker-compose up -d
+          name: Run deploy script
+          command: "ssh ${CI_USER}@${DEPLOY_HOSTNAME} bash ./deploy.sh"
+
+      # - run:
+      #     name: Create Docker Context
+      #     command: |
+      #       touch .env
+      #       docker context create deployserver --docker "host=ssh://ec2-user@${DEPLOY_IP}"
+      # - run:
+      #     name: Stop current docker container and clean up
+      #     command: |
+      #       docker context use deployserver
+      #       docker-compose down
+      #       docker system prune -f
+      #       docker volume prune -f
+      # - run:
+      #     name: Deploy With Docker-Compose
+      #     command: COMPOSE_DOCKER_CLI_BUILD=0 docker-compose up -d
 workflows:
   version: 2
 
@@ -67,6 +74,6 @@ workflows:
       - deploy:
           requires:
             - build
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
