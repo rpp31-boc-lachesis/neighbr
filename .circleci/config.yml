@@ -47,12 +47,12 @@ jobs:
           name: Rsync to instance
           environment:
             SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
-          command: "rsync -av -e 'ssh -o StrictHostKeyChecking=no' . ${CI_USER}@${DEPLOY_HOSTNAME}:neighbr --filter=':- .gitignore' --exclude=.git"
+          command: "rsync -av -e 'ssh -o StrictHostKeyChecking=no' . ${SSH_URL}:neighbr --filter=':- .gitignore' --exclude=.git"
       - run:
           environment:
             SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
           name: Run deploy script
-          command: "ssh $SSH_URL bash ./deploy.sh"
+          command: "ssh ${SSH_URL} bash ./deploy.sh"
 
       # - run:
       #     name: Create Docker Context
