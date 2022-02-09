@@ -119,3 +119,6 @@ bundle.js
 
 # Redis cache
 **.rdb
+
+# Package-lock
+package-lock.json
