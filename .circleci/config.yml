@@ -47,7 +47,9 @@ jobs:
             - "30:2c:ba:e2:ad:f3:c3:bb:77:6b:70:b5:29:84:b1:7c"
       - run:
           name: Rsync to instance
-          command: "rsync -av -e 'ssh -o StrictHostKeyChecking=no' . ec2-user@neighbr.site:neighbr --filter=':- .gitignore' --exclude=.git"
+          command: |
+            sudo apt update && sudo apt install rsync -y
+            "rsync -av -e 'ssh -o StrictHostKeyChecking=no' . ec2-user@neighbr.site:neighbr --filter=':- .gitignore' --exclude=.git"
       - run:
           environment:
             SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
