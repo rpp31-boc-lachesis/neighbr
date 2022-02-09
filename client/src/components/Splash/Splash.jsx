@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
-import splash from '../../images/Splash.png';
+
 const Splash = () => {
 
   const overall = {
@@ -34,7 +34,7 @@ const Splash = () => {
         <p>is here for you!</p>
       </div>
       <div>
-        <img style={photo} src={splash} alt="splash" />
+        <img style={photo} src='https://i.ibb.co/9WdVCrG/image1.png' alt="splash" />
       </div>
     </div>
   );
