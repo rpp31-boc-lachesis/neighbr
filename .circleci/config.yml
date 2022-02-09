@@ -47,7 +47,7 @@ jobs:
           name: Rsync to instance
           environment:
             SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
-          command: "rsync -av -e 'ssh -o StrictHostKeyChecking=no' . ${CI_USER}@${DEPLOY_HOSTNAME}: --filter=':- .gitignore' --exclude=.git"
+          command: "rsync -av -e 'ssh -o StrictHostKeyChecking=no' . ${CI_USER}@${DEPLOY_HOSTNAME}:neighbr --filter=':- .gitignore' --exclude=.git"
       - run:
           environment:
             SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
