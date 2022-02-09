@@ -45,10 +45,14 @@ jobs:
             - "30:2c:ba:e2:ad:f3:c3:bb:77:6b:70:b5:29:84:b1:7c"
       - run:
           name: Rsync to instance
-          command: "rsync -av . ${CI_USER}@${DEPLOY_HOSTNAME}: --filter=':- .gitignore' --exclude=.git"
+          environment:
+            SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
+          command: "rsync -av -e 'ssh -o StrictHostChecking=no' . ${CI_USER}@${DEPLOY_HOSTNAME}: --filter=':- .gitignore' --exclude=.git"
       - run:
+          environment:
+            SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
           name: Run deploy script
-          command: "ssh ${CI_USER}@${DEPLOY_HOSTNAME} bash ./deploy.sh"
+          command: "ssh $SSH_URL bash ./deploy.sh"
 
       # - run:
       #     name: Create Docker Context
