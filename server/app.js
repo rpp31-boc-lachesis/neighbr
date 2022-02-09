@@ -1,6 +1,7 @@
+const express = require('express');
 const path = require('path');
 const compression = require('compression');
-const express = require('express');
+const userControllers = require('../controllers/users');
 
 const app = express();
 
@@ -12,5 +13,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.redirect('/');
 });
+
+app.get('/users', userControllers.getUser);
+app.post('/users', userControllers.postUser);
 
 module.exports = app;
