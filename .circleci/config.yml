@@ -11,7 +11,6 @@ jobs:
       - run:
           name: Install Dependencies
           command: npm ci --include=dev
-          # npm ci is the npm install for container environments
       - save_cache:
           key: npm-cache-v1.1-{{ checksum "package-lock.json" }}
           paths:
@@ -26,16 +25,15 @@ jobs:
 
   deploy:
     working_directory: ~/neighbr
-    machine:
-      image: ubuntu-2004:202111-02
+    docker:
+      -  image: cimg/node:14.19.0
     steps:
       - checkout
       - restore_cache:
           key: npm-cache-v1.1-{{ checksum "package-lock.json" }}
       - run:
           name: Install Dependencies
-          command: npm install
-          # npm ci is the npm install for container environments
+          command: npm ci
       - save_cache:
           key: npm-cache-v1.1-{{ checksum "package-lock.json" }}
           paths:
@@ -44,21 +42,21 @@ jobs:
           fingerprints:
             - "30:2c:ba:e2:ad:f3:c3:bb:77:6b:70:b5:29:84:b1:7c"
       - run:
-          name: Create Docker Context
+          name: Install Rsync
           command: |
-            touch .env
-            docker context create deployserver --docker "host=ssh://ec2-user@${DEPLOY_IP}"
+            sudo apt update
+            sudo apt install rsync -y
+
       - run:
-          name: Stop current docker container and clean up
+          name: Rsync to instance
           command: |
-            docker context use deployserver
-            docker-compose down
-            docker system prune -f
-            docker volume prune -f
-            # docker image rm `docker images | grep nginx | sed 's/\ \ */ /g' | cut -f3 -d\ `
+            rsync -av -e 'ssh -o StrictHostKeyChecking=no' . ec2-user@neighbr.site:neighbr --filter=':- .gitignore' --exclude=.git
       - run:
-          name: Deploy With Docker-Compose
-          command: COMPOSE_DOCKER_CLI_BUILD=0 docker-compose up -d
+          environment:
+            SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
+          name: Run deploy script
+          command: |
+            ssh ec2-user@neighbr.site "cd neighbr && bash ./deploy.sh"
 workflows:
   version: 2
 
