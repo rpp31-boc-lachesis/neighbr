@@ -12,18 +12,6 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#C85CDB',
-    },
-    secondary: {
-      main: '#5FC6C9',
-    },
-  },
-});
-
 const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -36,7 +24,6 @@ const Signup = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -139,7 +126,6 @@ const Signup = () => {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
   )
 };
 

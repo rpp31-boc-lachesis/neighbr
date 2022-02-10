@@ -24,16 +24,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 //   );
 // }
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#C85CDB',
-    },
-    secondary: {
-      main: '#5FC6C9',
-    },
-  },
-});
 
 const Login = () => {
   const handleSubmit = (event) => {
@@ -47,7 +37,6 @@ const Login = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -120,7 +109,6 @@ const Login = () => {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
   )
 };
 
