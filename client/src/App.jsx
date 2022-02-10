@@ -1,4 +1,5 @@
 import React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Splash/Navbar.jsx';
 import Splash from './components/Splash/Splash.jsx';

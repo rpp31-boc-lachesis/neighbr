@@ -28,11 +28,16 @@ const Item = styled(Paper)(({ theme }) => ({
 // }
 export default function RunnerDash(props) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
+    <Box height="100%">
+    <Container justifyContent="center" alignItems="center" height="100%" maxwidth="sm">
+      <Grid container justifyContent="center" alignItems="center" minHeight="100%" spacing={2}>
         <Grid item xs={4}>
-          <Container>
-            <Button>Post New Run</Button>
+          <Container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            maxwidth="sm">
+            <Button variant="contained">Post New Run</Button>
             <img src={wavyBuddyPoint} alt="" />
           </Container>
         </Grid>
@@ -43,6 +48,7 @@ export default function RunnerDash(props) {
           <Item>Right</Item>
         </Grid>
       </Grid>
+    </Container>
     </Box>
   );
 }
