@@ -10,6 +10,7 @@ const Splash = () => {
   };
 
   const logo = {
+    fontFamily: "Optima",
     position: 'absolute',
     left:'32%',
     top: '32%',
@@ -28,12 +29,14 @@ const Splash = () => {
   };
 
   const p1 = {
+    fontFamily: "Optima",
     position: 'absolute',
     left:'28%',
     top: '25%'
   }
 
   const p2 = {
+    fontFamily: "Optima",
     fontSize:'60px',
     color:'black'
   }

@@ -20,6 +20,9 @@ const theme = createTheme({
       main: '#5FC6C9',
     },
   },
+  typography: {
+    fontFamily: 'Roboto'
+  }
 });
 
 class App extends React.Component {
