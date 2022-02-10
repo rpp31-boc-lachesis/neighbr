@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 const Signup = () => {
@@ -75,7 +74,6 @@ const Signup = () => {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                autoFocus
               />
               <TextField
                 margin="normal"
@@ -85,7 +83,6 @@ const Signup = () => {
                 label="Location"
                 name="location"
                 autoComplete="location"
-                autoFocus
               />
               <TextField
                 margin="normal"
@@ -95,7 +92,6 @@ const Signup = () => {
                 label="Age (18+)"
                 name="Age"
                 autoComplete="Age"
-                autoFocus
               />
               <TextField
                 margin="normal"
