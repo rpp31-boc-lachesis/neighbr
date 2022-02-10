@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar.jsx';
 
 const Splash = () => {
 
@@ -28,6 +29,7 @@ const Splash = () => {
 
   return (
     <div>
+      <Navbar />
       <div style={overall}>
         <p>Your Favorite</p>
         <p style={logo}>Neighbr</p>

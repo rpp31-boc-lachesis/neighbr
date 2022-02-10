@@ -19,8 +19,8 @@ const Navbar = () => {
   return (
     <ThemeProvider theme={theme}>
       <Stack direction="row" spacing={3} justifyContent="end" sx={{ mr: 5, mt: 5 }} >
-            <Button color = 'primary' variant="outlined">Log In</Button>
-            <Button color = 'secondary' variant="outlined">Sign Up</Button>
+            <Button color = 'primary' variant="outlined"><Link to='/login'>Log In</Link></Button>
+            <Button color = 'secondary' variant="outlined"><Link to='/signup'>Sign Up</Link></Button>
       </Stack>
     </ThemeProvider>
 
