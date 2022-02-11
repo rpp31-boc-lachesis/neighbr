@@ -5,10 +5,10 @@ import {
   DialogTitle,
   Typography,
   Button,
-  Grid
+  Grid,
+  Avatar
   // Box
 } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
@@ -25,7 +25,7 @@ export default function ProfileCard(props) {
   const { handleClose } = props;
   // const classes = useStyles();
   return (
-    <div className="ProfileCard" style={{ height: '480px', width: '415px' }}>
+    <div className="ProfileCard" style={{ height: '525px', width: '415px' }}>
       <div className="ProfileCardHeader">
         <Grid container>
           <Grid item sm={10}>
@@ -45,7 +45,7 @@ export default function ProfileCard(props) {
       <DialogContent dividers sx={{ height: '180px', width: 'auto' }}>
         <Grid container sx={{ maxHeight: '20%' }}>
           <Grid item sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <AccountCircleIcon sx={{ fontSize: '800%' }} />
+            <Avatar alt="profile image" src="" sx={{ height: '115px', width: '115px', backgroundColor: 'coral' }} />
             <Typography variant="h5" component="div">
               Tiffany
             </Typography>
@@ -54,15 +54,15 @@ export default function ProfileCard(props) {
             </Typography>
           </Grid>
           <Grid item sm={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarHalfIcon />
-            <StarOutlineIcon />
+            <StarIcon sx={{ color: '#C85CDB' }} />
+            <StarIcon sx={{ color: '#C85CDB' }} />
+            <StarIcon sx={{ color: '#C85CDB' }} />
+            <StarHalfIcon sx={{ color: '#C85CDB' }} />
+            <StarOutlineIcon sx={{ color: '#C85CDB' }} />
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogContent>
+      <DialogContent dividers>
         <Typography sx={{ fontSize: '16px' }}>
           Hi there! I love building community and serving my fellow Neighbrs!
           See what I did there? I am always out and about, so if you have any items
@@ -70,8 +70,36 @@ export default function ProfileCard(props) {
         </Typography>
       </DialogContent>
       <Grid>
-        <Grid item sm={10} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          Errand data here!
+        <Grid item sm={10} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <Typography>
+            Previous Requests
+          </Typography>
+          <div style={{ display: 'flex', flexDirection: 'column', height: '100px', width: '300px', overflow: 'scroll' }}>
+            <div>
+              Item
+            </div>
+            <div>
+              Item
+            </div>
+            <div>
+              Item
+            </div>
+            <div>
+              Item
+            </div>
+            <div>
+              Item
+            </div>
+            <div>
+              Item
+            </div>
+            <div>
+              Item
+            </div>
+            <div>
+              Item
+            </div>
+          </div>
         </Grid>
       </Grid>
     </div>
