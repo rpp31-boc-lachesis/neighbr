@@ -103,8 +103,8 @@ typings/
 .tern-port
 
 # Distribution files
-bundle.js
-!dist/index.html
+client/dist/*
+!client/dist/index.html
 
 # DS_STORE
 **.DS_Store
