@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Runner from '@mui/icons-material/AutoAwesomeRounded';
 import Requester from '@mui/icons-material/PersonSearchRounded';
@@ -59,7 +60,9 @@ class Main extends React.Component {
             <div style={decoWrapper}>
               <img alt="above btn" style={deco} src="https://ucarecdn.com/983739cd-c15a-4d31-a4af-1b32b6ebcf1e/" />
             </div>
-            <Button color="primary" variant="contained" startIcon={<Runner />} sx={{ width: 370, height: 50 }}>Want to post a run?</Button>
+            <Link to="/runnerDash">
+              <Button color="primary" variant="contained" startIcon={<Runner />} sx={{ width: 370, height: 50 }}>Want to post a run?</Button>
+            </Link>
             <Button color="secondary" variant="contained" startIcon={<Requester />} sx={{ color: '#FFFFFF', width: 370, height: 50 }}>Would you like to find a runner?</Button>
           </Stack>
         </ThemeProvider>

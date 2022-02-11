@@ -81,14 +81,16 @@ function Login() {
               id="password"
               autoComplete="current-password"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Log In
-            </Button>
+            <RouterLink to="/main">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Log In
+              </Button>
+            </RouterLink>
             <Grid container>
               <Grid item>
                 <RouterLink to="/signup">
