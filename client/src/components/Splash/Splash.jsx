@@ -1,22 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 import Navbar from './Navbar.jsx';
 
-const Splash = () => {
-
+function Splash() {
   const overall = {
-    fontFamily: "Optima",
+    fontFamily: 'Optima',
     fontSize: '60px'
   };
 
   const logo = {
-    fontFamily: "Optima",
+    fontFamily: 'Optima',
     position: 'absolute',
-    left:'32%',
+    left: '32%',
     top: '32%',
     color: '#C85CDB',
     fontSize: '100px',
-    display: "inline-block",
+    display: 'inline-block',
     whiteSpace: 'nowrap'
   };
 
@@ -29,17 +27,17 @@ const Splash = () => {
   };
 
   const p1 = {
-    fontFamily: "Optima",
+    fontFamily: 'Optima',
     position: 'absolute',
-    left:'28%',
+    left: '28%',
     top: '25%'
-  }
+  };
 
   const p2 = {
-    fontFamily: "Optima",
-    fontSize:'60px',
-    color:'black'
-  }
+    fontFamily: 'Optima',
+    fontSize: '60px',
+    color: 'black'
+  };
 
   return (
     <div>
@@ -48,11 +46,11 @@ const Splash = () => {
         <span style={p1}>Your Favorite</span>
         <div style={logo}>
           <span>Neighbr</span>
-          <span style = {p2}> is here for you!</span>
+          <span style={p2}> is here for you!</span>
         </div>
       </div>
       <div>
-        <img style={photo} src='https://i.ibb.co/9WdVCrG/image1.png' alt="splash" />
+        <img style={photo} src="https://i.ibb.co/9WdVCrG/image1.png" alt="splash" />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Splash/Navbar.jsx';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Splash from './components/Splash/Splash.jsx';
 import Other from './components/Other.jsx';
 import Error from './components/Error.jsx';
@@ -9,8 +9,6 @@ import Login from './components/Splash/Login.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 const theme = createTheme({
   palette: {
     primary: {
