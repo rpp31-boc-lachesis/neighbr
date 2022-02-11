@@ -13,15 +13,12 @@ import Destination from './Destination.jsx';
 
 export default function RunnerDash(props) {
   const { destinations } = props;
-  const Destinations = destinations.map((dest, index) => <Destination dest={dest} key={`dest${index}`} />);
+  const Destinations = destinations.map((dest, index) => <Destination dest={dest} key={dest.id} />);
   return (
-    <Container justifyContent="center" alignItems="center" maxwidth="sm">
+    <Container maxwidth="sm">
       <Grid container justifyContent="center" alignItems="center" spacing={2}>
         <Grid item xs={4}>
           <Container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
             maxwidth="sm"
           >
             <Button variant="contained">Post New Run</Button>
@@ -29,6 +26,7 @@ export default function RunnerDash(props) {
           </Container>
         </Grid>
         <Grid item xs={6}>
+          Current Runs
           <Stack spacing={2}>
             {Destinations}
           </Stack>
@@ -45,9 +43,9 @@ RunnerDash.propTypes = {
     propTypes.shape(
       {
         destination: propTypes.string.isRequired,
-        date: propTypes.string.isRequired,
-        startTime: propTypes.string.isRequired,
-        endTime: propTypes.string.isRequired,
+        date: propTypes.instanceOf(Date).isRequired,
+        startTime: propTypes.instanceOf(Date).isRequired,
+        endTime: propTypes.instanceOf(Date).isRequired,
         transportation: propTypes.string.isRequired,
       }
     )
