@@ -74,7 +74,14 @@ export default function ProfileCard(props) {
           <Typography>
             Previous Requests
           </Typography>
-          <div style={{ display: 'flex', flexDirection: 'column', height: '100px', width: '300px', overflow: 'scroll' }}>
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '100px',
+            width: '300px',
+            overflow: 'scroll'
+          }}
+          >
             <div>
               Item
             </div>
