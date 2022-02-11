@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Splash/Navbar.jsx';
-import Splash from './components/Splash/Splash.jsx';
+// import Navbar from './components/Splash/Navbar.jsx';
+// import Splash from './components/Splash/Splash.jsx';
+import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
 import Error from './components/Error.jsx';
 // import Typography from '@mui/material/Typography';
@@ -18,9 +19,10 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
-          <Route path="/" element={<Splash />} />
+          {/* <Route path="/" element={<Splash />} /> */}
+          <Route path="/" element={<Main />} />
           <Route path="/other" element={<Other />} />
           <Route path="*" element={<Error />} />
         </Routes>
