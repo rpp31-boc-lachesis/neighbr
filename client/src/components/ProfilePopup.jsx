@@ -10,7 +10,6 @@ export default function ProfilePopup() {
   const handleClick = (event) => {
     event.preventDefault();
     event.persist();
-    console.log(event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
 
@@ -35,7 +34,6 @@ export default function ProfilePopup() {
           vertical: 'top',
           horizontal: 'center',
         }}
-        sx={{ borderRadius: '15px' }}
       >
         <ProfileCard handleClose={handleClose} />
       </Popover>

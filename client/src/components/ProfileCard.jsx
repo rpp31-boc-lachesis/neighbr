@@ -6,12 +6,17 @@ import {
   Typography,
   Button,
   Grid,
-  Avatar
+  Avatar,
+  Paper,
+  Stack
   // Box
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import CloseIcon from '@mui/icons-material/Close';
 // import { createMUITheme, ThemeProvider } from '@mui/material/styles';
 
 // const useStyles = makeStyles({
@@ -20,6 +25,13 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 //     height: '550px'
 //   }
 // });
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  // textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function ProfileCard(props) {
   const { handleClose } = props;
@@ -36,8 +48,8 @@ export default function ProfileCard(props) {
             </DialogTitle>
           </Grid>
           <Grid item sm={2} sx={{ display: 'flex', alignContent: 'center', padding: '0px' }}>
-            <Button onClick={handleClose}>
-              X
+            <Button onClick={handleClose} sx={{ color: 'primary' }}>
+              <CloseIcon />
             </Button>
           </Grid>
         </Grid>
@@ -75,37 +87,67 @@ export default function ProfileCard(props) {
             Previous Requests
           </Typography>
           <div style={{
-            display: 'flex',
-            flexDirection: 'column',
             height: '100px',
-            width: '300px',
+            width: '350px',
             overflow: 'scroll'
           }}
           >
-            <div>
-              Item
-            </div>
-            <div>
-              Item
-            </div>
-            <div>
-              Item
-            </div>
-            <div>
-              Item
-            </div>
-            <div>
-              Item
-            </div>
-            <div>
-              Item
-            </div>
-            <div>
-              Item
-            </div>
-            <div>
-              Item
-            </div>
+            <Stack>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                height: '55px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <RestaurantIcon />
+                    Coffee
+                  </Grid>
+                  <Grid>
+                    Size: small | Weight: light | Destination: San Francisco
+                    | Distance: 2.4mi | Est. Time: 24min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                height: '55px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <RestaurantIcon />
+                    Bananas
+                  </Grid>
+                  <Grid>
+                    Size: small | Weight: light | Destination: San Francisco
+                    | Distance: 2.4mi | Est. Time: 24min
+                  </Grid>
+                </Grid>
+              </Item>
+            </Stack>
           </div>
         </Grid>
       </Grid>
