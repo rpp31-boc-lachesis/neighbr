@@ -16,7 +16,7 @@ app.get('/users/:username', userController.getOneUser);
 app.post('/users', userController.postUser);
 // Catch all route for redirect must be last so others can fire first! :)
 app.get('/*', (req, res) => {
-  res.redirect('/');
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
 module.exports = app;
