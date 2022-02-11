@@ -60,7 +60,7 @@ class Main extends React.Component {
             <div style={decoWrapper}>
               <img alt="above btn" style={deco} src="https://ucarecdn.com/983739cd-c15a-4d31-a4af-1b32b6ebcf1e/" />
             </div>
-            <Link to="/runnerDash">
+            <Link style={{ textDecoration: 'none' }} to="/runnerDash">
               <Button color="primary" variant="contained" startIcon={<Runner />} sx={{ width: 370, height: 50 }}>Want to post a run?</Button>
             </Link>
             <Button color="secondary" variant="contained" startIcon={<Requester />} sx={{ color: '#FFFFFF', width: 370, height: 50 }}>Would you like to find a runner?</Button>

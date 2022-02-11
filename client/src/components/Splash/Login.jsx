@@ -81,7 +81,7 @@ function Login() {
               id="password"
               autoComplete="current-password"
             />
-            <RouterLink to="/main">
+            <RouterLink style={{ textDecoration: 'none' }} to="/main">
               <Button
                 type="submit"
                 fullWidth
@@ -93,7 +93,7 @@ function Login() {
             </RouterLink>
             <Grid container>
               <Grid item>
-                <RouterLink to="/signup">
+                <RouterLink style={{ textDecoration: 'none' }} to="/signup">
                   Don&apos;t have an account? Sign Up
                 </RouterLink>
               </Grid>
