@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-// import React, {useState, useEffect} from 'react';
-=======
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -12,7 +9,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
->>>>>>> master
 
 function Signup() {
   const handleSubmit = (event) => {

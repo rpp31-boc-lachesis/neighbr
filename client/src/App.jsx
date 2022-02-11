@@ -6,13 +6,9 @@ import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import Error from './components/Error.jsx';
-<<<<<<< HEAD
-import ProfilePopup from './components/ProfilePopup.jsx';
-=======
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
->>>>>>> master
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
@@ -48,17 +44,6 @@ class App extends React.Component {
 
   render() {
     return (
-<<<<<<< HEAD
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Splash />} />
-          <Route path="/other" element={<Other />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-        <ProfilePopup />
-      </Router>
-=======
       <ThemeProvider theme={theme}>
         <Router>
           <Routes>
@@ -72,7 +57,6 @@ class App extends React.Component {
           </Routes>
         </Router>
       </ThemeProvider>
->>>>>>> master
     );
   }
 }
