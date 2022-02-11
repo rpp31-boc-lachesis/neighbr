@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import AddRunForm from './AddRunForm.jsx'
+import AddRunForm from './AddRunForm.jsx';
 
 const style = {
   position: 'absolute',
@@ -34,7 +34,7 @@ export default function AddRunModal(props) {
         sx={{ '.MuiBox-root': { borderRadius: '4px' } }}
       >
         <Box sx={style}>
-          <AddRunForm />
+          <AddRunForm handlePostDest={props.handlePostDest} />
         </Box>
       </Modal>
     </div>
