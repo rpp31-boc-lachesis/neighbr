@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import wavyBuddyPoint from '../../assets/wavyBuddiesStanding.png';
 import Destination from './Destination.jsx';
+import AddRunModal from './AddRunModal.jsx';
 
 export default function RunnerDash(props) {
   const { destinations } = props;
@@ -21,7 +22,7 @@ export default function RunnerDash(props) {
           <Container
             maxwidth="sm"
           >
-            <Button variant="contained">Post New Run</Button>
+            <AddRunModal />
             <img src={wavyBuddyPoint} alt="" />
           </Container>
         </Grid>

@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import useTheme from '@mui/styles'
 
 const style = {
   position: 'absolute',
@@ -24,9 +23,17 @@ export default function AddRunModal(props) {
 
   return (
     <div>
-      <Box sx={style}>
-        open={ open }
-      </Box>
+      <Button variant="contained" onClick={handleOpen}>Post New Run</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-new-run"
+        aria-describedby="modal-description"
+      >
+        <Box sx={style}>
+          Text
+        </Box>
+      </Modal>
     </div>
-  )
+  );
 }
