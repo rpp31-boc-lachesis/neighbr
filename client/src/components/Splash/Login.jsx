@@ -93,8 +93,9 @@ function Login() {
             </RouterLink>
             <Grid container>
               <Grid item>
-                <RouterLink style={{ textDecoration: 'none' }} to="/signup">
-                  Don&apos;t have an account? Sign Up
+                Don&apos;t have an account?&nbsp;
+                <RouterLink style={{ textDecoration: 'none', color: '#C85CDB', fontWeight: 'bold' }} to="/signup">
+                  Sign Up
                 </RouterLink>
               </Grid>
             </Grid>
