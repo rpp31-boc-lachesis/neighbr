@@ -1,48 +1,102 @@
 /* eslint-disable react/function-component-definition */
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
-import ToolBar from '@mui/material/Toolbar';
+import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
-import MenuIcon from '@mui/icons-material/Menu';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
-// import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#5FC6C9',
-    },
-    secondary: {
-      main: '#C85CDB',
-    },
-  },
-});
+import Avatar from '@mui/material/Avatar';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/CloseRounded';
+import HomeIcon from '@mui/icons-material/HomeRounded';
+import SendIcon from '@mui/icons-material/SendRounded';
+import SearchIcon from '@mui/icons-material/SearchRounded';
+import DashboardIcon from '@mui/icons-material/DashboardRounded';
 
 const Header = () => {
-  const logo = (<Typography variant="h6" component="h1">Neighbr</Typography>);
+  const [state, setOpen] = React.useState(false);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const logo = (<Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography>);
+  const list = (
+    <List>
+      {['', 'Home', 'Post Your Run', 'Find Your Runner', 'Runner Dashboard', 'Requester Dashboard'].map((text, i) => (
+        <ListItem button key={text} onClick={handleDrawerClose}>
+          <ListItemIcon sx={{ color: '#EF5DA8' }}>
+            {
+              {
+                0: <CloseIcon />,
+                1: <HomeIcon />,
+                2: <SendIcon />,
+                3: <SearchIcon />,
+                4: <DashboardIcon />,
+                5: <DashboardIcon />
+              }[i]
+            }
+          </ListItemIcon>
+          <ListItemText primary={text} />
+        </ListItem>
+      ))}
+    </List>
+  );
 
   return (
-    <ThemeProvider theme={theme}>
-      <AppBar position="fixed" color="primary">
-        <ToolBar>
-          <Box sx={{ display: 'flex' }}>
-          <IconButton
-              color="inherit"
+    <>
+      <AppBar position="fixed" sx={{ background: '#5FC6C9', color: '#FFFFFF' }}>
+        <Box sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}
+        >
+          <Box>
+            <IconButton
+              size="large"
               aria-label="open drawer"
-              // onClick={handleDrawerOpen}
-              edge="start"
-            // sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
+              onClick={handleDrawerOpen}
+              sx={{ color: '#FFFFFF' }}
+            >
+              <MenuIcon />
+            </IconButton>
           </Box>
           {logo}
-        </ToolBar>
+          <Box>
+            <Tooltip title="User">
+              <IconButton>
+                <Avatar size="small" alt="Hack Rector" src="https://ucarecdn.com/88f0c4ce-01b1-4771-8de4-fb2ce647dba9/" sx={{ backgroundColor: '#FFFFFF' }} />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        </Box>
       </AppBar>
-    </ThemeProvider>
+      <Drawer
+        variant="temporary"
+        anchor="left"
+        open={state}
+        onClose={handleDrawerClose}
+        sx={{
+          width: 240,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: 240,
+            boxSizing: 'border-box',
+          },
+        }}
+      >
+        {list}
+      </Drawer>
+    </>
   );
-}
+};
 
 export default Header;
