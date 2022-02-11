@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import AddRunForm from './AddRunForm.jsx'
 
 const style = {
   position: 'absolute',
@@ -14,6 +15,7 @@ const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
+  '& .MuiTextField-root': { m: 1 },
 };
 
 export default function AddRunModal(props) {
@@ -29,9 +31,10 @@ export default function AddRunModal(props) {
         onClose={handleClose}
         aria-labelledby="modal-new-run"
         aria-describedby="modal-description"
+        sx={{ '.MuiBox-root': { borderRadius: '4px' } }}
       >
         <Box sx={style}>
-          Text
+          <AddRunForm />
         </Box>
       </Modal>
     </div>
