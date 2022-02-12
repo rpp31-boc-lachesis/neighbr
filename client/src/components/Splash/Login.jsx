@@ -93,20 +93,21 @@ function Login(props) {
               id="password"
               autoComplete="current-password"
             />
-            {/* <RouterLink to="/main"> */}
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Log In
-            </Button>
-            {/* </RouterLink> */}
+            <RouterLink style={{ textDecoration: 'none' }} to="/main">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Log In
+              </Button>
+            </RouterLink>
             <Grid container>
               <Grid item>
-                <RouterLink to="/signup">
-                  Don&apos;t have an account? Sign Up
+                Don&apos;t have an account?&nbsp;
+                <RouterLink style={{ textDecoration: 'none', color: '#C85CDB', fontWeight: 'bold' }} to="/signup">
+                  Sign Up
                 </RouterLink>
               </Grid>
             </Grid>

@@ -24,7 +24,7 @@ function Signup() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(https://i.ibb.co/ssdBN2k/Screen-Shot-2022-02-09-at-9-22-23-PM.png)',
+          backgroundImage: 'url(https://i.ibb.co/ZmMGMGq/Screen-Shot-2022-02-11-at-12-43-26-PM.png)',
           backgroundRepeat: 'no-repeat',
           backgroundColor: (t) => (t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900]),
           backgroundSize: 'cover',
@@ -41,7 +41,7 @@ function Signup() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <PeopleIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -57,6 +57,7 @@ function Signup() {
               name="username"
               autoComplete="usernmae"
               autoFocus
+              color="secondary"
             />
             <TextField
               margin="normal"
@@ -66,6 +67,7 @@ function Signup() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              color="secondary"
             />
             <TextField
               margin="normal"
@@ -75,6 +77,7 @@ function Signup() {
               label="Location"
               name="location"
               autoComplete="location"
+              color="secondary"
             />
             <TextField
               margin="normal"
@@ -84,6 +87,7 @@ function Signup() {
               label="Age (18+)"
               name="Age"
               autoComplete="Age"
+              color="secondary"
             />
             <TextField
               margin="normal"
@@ -94,12 +98,14 @@ function Signup() {
               type="password"
               id="password"
               autoComplete="current-password"
+              color="secondary"
             />
-            <RouterLink to="/main">
+            <RouterLink style={{ textDecoration: 'none' }} to="/main">
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
+                color="secondary"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign Up
@@ -107,8 +113,9 @@ function Signup() {
             </RouterLink>
             <Grid container>
               <Grid item>
-                <RouterLink to="/login">
-                  Already have an account? Log In
+                Already have an account?&nbsp;
+                <RouterLink style={{ textDecoration: 'none', color: '#5FC6C9', fontWeight: 'bold' }} to="/login">
+                  Log In
                 </RouterLink>
               </Grid>
             </Grid>
