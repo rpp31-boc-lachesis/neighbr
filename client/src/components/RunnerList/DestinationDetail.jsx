@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import propTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
+import { Link as RouterLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
@@ -34,7 +35,9 @@ function DestinationDetail() {
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 <div className='entryColumn'>
+                <RouterLink style={{ textDecoration: 'none' }} to="/main">
                 <Avatar>S</Avatar>
+                </RouterLink>
                   <div className='detailItem textEnd topLineRight'>Steve</div>
                   <div className='detailItem textEnd'>By: Car</div>
                   <div className='detailItem textEnd'>San Francisco</div>
