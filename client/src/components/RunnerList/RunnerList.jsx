@@ -60,7 +60,6 @@ function RunnerList() {
   //   </div>
   // </div>
   <>
-    <Header />
     <Container maxwidth="sm" sx={{border: '0px dashed red', margin: '0px'}}>
       <Grid container sx={{ flexGrow: 1, height: '600px', border: '0px solid  green', margin: '60px' }} justifyContent="center" alignItems="center" spacing={2}>
 {/* left column */}
