@@ -38,6 +38,7 @@
     "cors": "^2.8.5",
     "dayjs": "^1.10.7",
     "express": "^4.17.2",
+    "mapbox-gl": "^2.7.0",
     "mongoose": "^6.1.10",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
