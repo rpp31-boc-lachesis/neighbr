@@ -65,7 +65,7 @@ export default function Header() {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: '#5FC6C9', color: '#FFFFFF' }}>
+      <AppBar position="sticky" sx={{ background: '#5FC6C9', color: '#FFFFFF' }}>
         <Box sx={{
           display: 'flex',
           alignItems: 'center',
