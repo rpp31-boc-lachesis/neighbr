@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -26,25 +27,38 @@ export default function Header() {
     setOpen(false);
   };
 
-  const logo = (<Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography>);
+  const logo = (<RouterLink to="/main" style={{ color: '#FFFFFF' }}><Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography></RouterLink>);
   const list = (
     <List>
       {['', 'Home', 'Post Your Run', 'Find Your Runner', 'Runner Dashboard', 'Requester Dashboard'].map((text, i) => (
-        <ListItem button key={text} onClick={handleDrawerClose}>
-          <ListItemIcon sx={{ color: '#EF5DA8' }}>
-            {
+        <RouterLink
+          key={text}
+          to={{
+            0: '#',
+            1: '/main',
+            2: '/runnerDash',
+            3: '',
+            4: '/runnerDash',
+            5: ''
+          }[i]}
+          style={{ color: '#707070' }}
+        >
+          <ListItem button key={text} onClick={handleDrawerClose}>
+            <ListItemIcon sx={{ color: '#EF5DA8' }}>
               {
-                0: <CloseIcon />,
-                1: <HomeIcon />,
-                2: <SendIcon />,
-                3: <SearchIcon />,
-                4: <DashboardIcon />,
-                5: <DashboardIcon />
-              }[i]
-            }
-          </ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
+                {
+                  0: <CloseIcon />,
+                  1: <HomeIcon />,
+                  2: <SendIcon />,
+                  3: <SearchIcon />,
+                  4: <DashboardIcon />,
+                  5: <DashboardIcon />
+                }[i]
+              }
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        </RouterLink>
       ))}
     </List>
   );
