@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const errands = mongoose.Schema({
+const errandSchema = mongoose.Schema({
   category: String,
   req_items: {
     item: String,
@@ -34,5 +34,5 @@ const errands = mongoose.Schema({
   }
 });
 
-const Errands = mongoose.model('Errand', errands);
+const Errands = mongoose.model('Errand', errandSchema);
 module.exports = Errands;

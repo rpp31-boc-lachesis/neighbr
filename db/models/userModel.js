@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const users = mongoose.Schema({
+const userSchema = mongoose.Schema({
   id: {
     type: Number,
     index: true,
@@ -111,7 +111,7 @@ const users = mongoose.Schema({
   ]
 });
 
-const Users = mongoose.model('User', users);
+const Users = mongoose.model('User', userSchema);
 // const someUsername = 'Tom';
 // Users.create({ username: someUsername });
 module.exports = Users;
