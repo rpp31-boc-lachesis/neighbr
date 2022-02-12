@@ -45,6 +45,9 @@ function DestinationDetail() {
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
+                <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
+                <Button>Request</Button>
+                </RouterLink>
                 {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '0px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>
