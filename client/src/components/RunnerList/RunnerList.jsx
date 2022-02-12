@@ -59,9 +59,9 @@ function RunnerList() {
   //     </div>
   //   </div>
   // </div>
-  <>
-    <Container maxwidth="sm" sx={{border: '0px dashed red', margin: '0px'}}>
-      <Grid container sx={{ flexGrow: 1, height: '600px', border: '0px solid  green', margin: '60px' }} justifyContent="center" alignItems="center" spacing={2}>
+
+    <Container maxwidth="sm" sx={{border: '0px dashed red'}}>
+      <Grid container sx={{ flexGrow: 1, height: '600px', border: '0px solid  green', marginTop: '20px' }} justifyContent="center" alignItems="center" spacing={2}>
 {/* left column */}
         <Grid container item direction="column" sx={{ minHeight: '100%', border: '0px solid orange' }} xs={2}>
           {/* <Container
@@ -112,9 +112,9 @@ function RunnerList() {
           </Stack>
         </Grid>
       </Grid>
+      <Footer />
     </Container>
-    <Footer />
-  </>
+
   );
 }
 
