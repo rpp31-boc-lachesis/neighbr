@@ -10,6 +10,7 @@ import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Avatar from '@mui/material/Avatar';
 //temp
 import Header from '../Home/Header.jsx';
 import Footer from '../Home/Footer.jsx';
