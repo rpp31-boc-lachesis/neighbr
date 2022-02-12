@@ -57,7 +57,6 @@ class App extends React.Component {
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>
-        <ProfilePopup />
       </ThemeProvider>
     );
   }
