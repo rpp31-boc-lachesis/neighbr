@@ -6,12 +6,9 @@ import Header from './components/Home/Header.jsx';
 import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
-<<<<<<< HEAD
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
-=======
 import RunnerList from './components/RunnerList/RunnerList.jsx';
 import RequestStatus from './components/RequestDash/RequestStatus.jsx';
->>>>>>> origin/master
 import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
