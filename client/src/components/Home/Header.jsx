@@ -1,5 +1,5 @@
-/* eslint-disable react/function-component-definition */
 import React from 'react';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -18,7 +18,7 @@ import SendIcon from '@mui/icons-material/SendRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';
 import DashboardIcon from '@mui/icons-material/DashboardRounded';
 
-const Header = () => {
+export default function Header() {
   const [state, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -27,32 +27,45 @@ const Header = () => {
     setOpen(false);
   };
 
-  const logo = (<Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography>);
+  const logo = (<RouterLink to="/main" style={{ color: '#FFFFFF' }}><Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography></RouterLink>);
   const list = (
     <List>
       {['', 'Home', 'Post Your Run', 'Find Your Runner', 'Runner Dashboard', 'Requester Dashboard'].map((text, i) => (
-        <ListItem button key={text} onClick={handleDrawerClose}>
-          <ListItemIcon sx={{ color: '#EF5DA8' }}>
-            {
+        <RouterLink
+          key={text}
+          to={{
+            0: '#',
+            1: '/main',
+            2: '/runnerDash',
+            3: '/requestDash',
+            4: '/runnerDash',
+            5: '/requestDash'
+          }[i]}
+          style={{ color: '#707070' }}
+        >
+          <ListItem button key={text} onClick={handleDrawerClose}>
+            <ListItemIcon sx={{ color: '#EF5DA8' }}>
               {
-                0: <CloseIcon />,
-                1: <HomeIcon />,
-                2: <SendIcon />,
-                3: <SearchIcon />,
-                4: <DashboardIcon />,
-                5: <DashboardIcon />
-              }[i]
-            }
-          </ListItemIcon>
-          <ListItemText primary={text} />
-        </ListItem>
+                {
+                  0: <CloseIcon />,
+                  1: <HomeIcon />,
+                  2: <SendIcon />,
+                  3: <SearchIcon />,
+                  4: <DashboardIcon />,
+                  5: <DashboardIcon />
+                }[i]
+              }
+            </ListItemIcon>
+            <ListItemText primary={text} />
+          </ListItem>
+        </RouterLink>
       ))}
     </List>
   );
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: '#5FC6C9', color: '#FFFFFF' }}>
+      <AppBar position="sticky" sx={{ background: '#5FC6C9', color: '#FFFFFF' }}>
         <Box sx={{
           display: 'flex',
           alignItems: 'center',
@@ -97,6 +110,4 @@ const Header = () => {
       </Drawer>
     </>
   );
-};
-
-export default Header;
+}
