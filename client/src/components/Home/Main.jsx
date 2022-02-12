@@ -5,7 +5,6 @@ import Runner from '@mui/icons-material/AutoAwesomeRounded';
 import Requester from '@mui/icons-material/PersonSearchRounded';
 import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import Header from './Header.jsx';
 import Footer from './Footer.jsx';
 
 const theme = createTheme({
@@ -41,13 +40,9 @@ const resImage = {
   height: '70%'
 };
 
-export default function Main(props) {
-  const { handleLogin } = props;
-
+export default function Main() {
   return (
     <>
-      {/* <Header /> */}
-      {/* {() => handleLogin()} */}
       <ThemeProvider theme={theme}>
         <Stack direction="column" spacing={2} alignItems="center" sx={{ mt: 13, mb: 3 }}>
           <div style={decoWrapper}>
