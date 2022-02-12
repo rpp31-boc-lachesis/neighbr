@@ -1,0 +1,34 @@
+
+.entryColumn {
+  /* background: lightgreen; */
+  border: 1px dashed lightgreen;
+  width: 50%;
+  align-self: flex-end;
+}
+
+.lineItem {
+  border: 1px dashed lightslategray;
+  margin: 8px 8px;
+  padding: 0px;
+}
+
+.textEnd {
+  text-align: end;
+}
+
+.topLineLeft {
+  /* margin-top: 15px; */
+  font-size: x-large;
+  display: flex;
+  flex-direction: row;
+}
+
+.topLineRight {
+  /* margin-top: 15px; */
+  color: magenta;
+}
+
+.locationNumber {
+  color: white;
+  margin: 0px 20px 0px 0px;
+}
