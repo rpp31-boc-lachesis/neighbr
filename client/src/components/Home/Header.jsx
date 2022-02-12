@@ -37,9 +37,9 @@ export default function Header() {
             0: '#',
             1: '/main',
             2: '/runnerDash',
-            3: '',
+            3: '/requestDash',
             4: '/runnerDash',
-            5: ''
+            5: '/requestDash'
           }[i]}
           style={{ color: '#707070' }}
         >
