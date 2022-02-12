@@ -1,4 +1,3 @@
-/* eslint-disable react/function-component-definition */
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
@@ -18,7 +17,7 @@ import SendIcon from '@mui/icons-material/SendRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';
 import DashboardIcon from '@mui/icons-material/DashboardRounded';
 
-const Header = () => {
+export default function Header() {
   const [state, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -97,6 +96,4 @@ const Header = () => {
       </Drawer>
     </>
   );
-};
-
-export default Header;
+}
