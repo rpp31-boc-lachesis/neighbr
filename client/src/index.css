@@ -6,3 +6,6 @@ body,html {
 * {
   box-sizing: content-box;
 }
+a {
+  text-decoration: none;
+}
