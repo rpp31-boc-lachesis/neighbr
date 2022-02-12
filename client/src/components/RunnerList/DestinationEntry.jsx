@@ -61,7 +61,6 @@ function DestinationEntry() {
   // </div>
   <>
   {/* entryBox */}
-  <RouterLink style={{ textDecoration: 'none' }} to="/runnerDash">
             <Box sx={{
               height: '100px',
               minWidth: '100%',
@@ -99,7 +98,6 @@ function DestinationEntry() {
                 </Stack> */}
               </Stack>
           </Box>
-          </RouterLink>
           </>
   );
 }

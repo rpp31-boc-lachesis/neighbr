@@ -65,7 +65,7 @@ class App extends React.Component {
             <Route path="/login" element={<Login handleLogin={this.handleLogin} />} />
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
-            <Route path="/runnerList" element={<RunnerList />} />
+            <Route path="/requestDash" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostDest={this.handlePostDest} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="*" element={<Error />} />
