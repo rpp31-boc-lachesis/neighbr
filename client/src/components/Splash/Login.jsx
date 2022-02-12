@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -23,9 +23,20 @@ import Typography from '@mui/material/Typography';
 //   );
 // }
 
-function Login() {
+function Login(props) {
+  const [user, setUser] = React.useState(null);
+  const [error, setError] = React.useState(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    // fetch user from database
+    // if there's matched user
+    // redirect to main page
+    props.handleLogin();
+    // set user with found one
+    setUser('Maxine453');
+    // otherwise display error message
+    setError('Uhhh, we couldn\'t find the id or password');
   };
 
   return (
@@ -60,6 +71,7 @@ function Login() {
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
+          {user && (<Navigate to="/main" replace />)}
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -91,8 +103,9 @@ function Login() {
             </Button>
             <Grid container>
               <Grid item>
-                <RouterLink to="/signup">
-                  Don&apos;t have an account? Sign Up
+                Don&apos;t have an account?&nbsp;
+                <RouterLink style={{ textDecoration: 'none', color: '#C85CDB', fontWeight: 'bold' }} to="/signup">
+                  Sign Up
                 </RouterLink>
               </Grid>
             </Grid>
