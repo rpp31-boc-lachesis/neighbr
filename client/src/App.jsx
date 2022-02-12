@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Splash from './components/Splash/Splash.jsx';
 import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
+import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
@@ -18,7 +19,7 @@ const theme = createTheme({
     },
     secondary: {
       main: '#5FC6C9',
-    },
+    }
   },
   typography: {
     fontFamily: 'Roboto'
@@ -51,6 +52,7 @@ class App extends React.Component {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostDest={this.handlePostDest} />} />
+            <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>
