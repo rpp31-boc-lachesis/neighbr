@@ -27,7 +27,7 @@ export default function RunnerDash(props) {
             <img src={wavyBuddyPoint} alt="" />
           {/* </Container> */}
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={4} sx={{overflow: 'scroll'}}>
           <Typography variant='h5'>Current Runs</Typography>
           <Stack spacing={2}>
             {Destinations}
@@ -35,7 +35,9 @@ export default function RunnerDash(props) {
         </Grid>
         <Grid item xs={5} sx={{ height: '100%' }}>
           <Box sx={{ minHeight: '100%', minWidth: '100%', border: '1px solid black', borderRadius: '2px' }}>
-
+            <Link to="/runnerStatus">
+              <Button variant="contained">Details</Button>
+            </Link>
           </Box>
         </Grid>
       </Grid>
