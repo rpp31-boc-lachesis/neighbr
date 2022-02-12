@@ -11,11 +11,20 @@ export default function Destination(props) {
   const { dest } = props;
   const { destination, date, startTime, endTime, transportation } = dest;
   return (
-    <Card elevation={4}>
+    <Card
+      elevation={4}
+      sx={{
+        bgcolor: 'secondary.main',
+        color: 'white',
+        '&:hover': {
+          bgcolor: 'secondary.light'
+        }
+      }}
+    >
       <CardContent>
-        <Typography variant="h4">{`${destination} by: ${transportation}`}</Typography>
-        <Typography variant="body">{`Start: ${startTime} End: ${endTime}`}</Typography>
-        <Typography variant="body">{`Date: ${date}`}</Typography>
+        <Typography variant="h5">{`${destination} by: ${transportation}`}</Typography>
+        <Typography variant="body2">{`Start: ${startTime} End: ${endTime}`}</Typography>
+        <Typography variant="body2">{`Date: ${date}`}</Typography>
       </CardContent>
       <CardActions>
         <Button variant="contained">Add Destination</Button>
@@ -27,9 +36,9 @@ export default function Destination(props) {
 Destination.propTypes = {
   dest: propTypes.shape({
     destination: propTypes.string.isRequired,
-    date: propTypes.string.isRequired,
-    startTime: propTypes.string.isRequired,
-    endTime: propTypes.string.isRequired,
+    date: propTypes.instanceOf(Date).isRequired,
+    startTime: propTypes.instanceOf(Date).isRequired,
+    endTime: propTypes.instanceOf(Date).isRequired,
     transportation: propTypes.string.isRequired,
   }).isRequired,
 };
