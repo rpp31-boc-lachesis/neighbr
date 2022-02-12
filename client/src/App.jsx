@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import Splash from './components/Splash/Splash.jsx';
+import Header from './components/Home/Header.jsx';
 import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
@@ -31,8 +32,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       destinations: [],
+      isLoggedIn: false
     };
     this.handlePostDest = this.handlePostDest.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   handlePostDest(run) {
@@ -42,15 +45,21 @@ class App extends React.Component {
     });
   }
 
+  handleLogin() {
+    this.setState({ isLoggedIn: true });
+  }
+
   render() {
+    const { isLoggedIn } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <Router>
+          {(isLoggedIn) ? <Header /> : null }
           <Routes>
             <Route path="/" element={<Splash />} />
             <Route path="/other" element={<Other />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login handleLogin={this.handleLogin} />} />
             <Route path="/main" element={<Main />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostDest={this.handlePostDest} />} />
             <Route path="*" element={<Error />} />
