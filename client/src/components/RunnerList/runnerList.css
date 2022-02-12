@@ -1,13 +1,13 @@
 
 .entryColumn {
   /* background: lightgreen; */
-  border: 1px dashed lightgreen;
+  border: 0px dashed lightgreen;
   width: 50%;
   align-self: flex-end;
 }
 
 .lineItem {
-  border: 1px dashed lightslategray;
+  border: 0px dashed lightslategray;
   margin: 8px 8px;
   padding: 0px;
 }
@@ -34,7 +34,7 @@
 }
 
 .detailItem {
-  border: 1px dashed lightslategray;
+  border: 0px dashed lightslategray;
   margin: 8px 8px;
   padding: 0px;
 }

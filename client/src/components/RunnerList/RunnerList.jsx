@@ -61,10 +61,10 @@ function RunnerList() {
   // </div>
   <>
     <Header />
-    <Container maxwidth="sm" sx={{border: '1px dashed red', margin: '0px'}}>
-      <Grid container sx={{ flexGrow: 1, height: '600px', border: '1px solid  green', margin: '60px' }} justifyContent="center" alignItems="center" spacing={2}>
+    <Container maxwidth="sm" sx={{border: '0px dashed red', margin: '0px'}}>
+      <Grid container sx={{ flexGrow: 1, height: '600px', border: '0px solid  green', margin: '60px' }} justifyContent="center" alignItems="center" spacing={2}>
 {/* left column */}
-        <Grid container item direction="column" sx={{ minHeight: '100%', border: '1px solid orange' }} xs={2}>
+        <Grid container item direction="column" sx={{ minHeight: '100%', border: '0px solid orange' }} xs={2}>
           {/* <Container
           maxwidth="sm"
         > */}
@@ -88,9 +88,9 @@ function RunnerList() {
           </center>
         </Grid>
 {/* middle column */}
-        <Grid item xs={4} sx={{ minHeight: '100%', border: '1px solid orange' }}>
+        <Grid item xs={4} sx={{ minHeight: '100%', border: '0px solid orange' }}>
           {/* <Typography variant='h5'>Current Runs</Typography> */}
-          <Stack spacing={2} sx={{ minHeight: '100%', border: '1px solid blue'}}>
+          <Stack spacing={2} sx={{ minHeight: '100%', border: '0px solid blue'}}>
       -- sort by: distance
           <DestinationEntry />
           <DestinationEntry />
@@ -99,14 +99,14 @@ function RunnerList() {
           </Stack>
         </Grid>
 {/* right column */}
-        <Grid item xs={6} sx={{ minHeight: '100%', border: '1px solid orange' }}>
-        <Stack spacing={2} sx={{ minHeight: '100%', border: '1px solid blue' }}>
-          <Box sx={{ height: '40vh', maxWidth: '564px', border: '1px solid black', borderRadius: '2px' }}>
-            <div style={{width: '100%', height: '100%', background: 'orange'}}>
+        <Grid item xs={6} sx={{ minHeight: '100%', border: '0px solid orange' }}>
+        <Stack spacing={2} sx={{ minHeight: '100%', border: '0px solid blue' }}>
+          <Box sx={{ height: '40vh', maxWidth: '564px', border: '0px solid black', borderRadius: '2px' }}>
+            <div style={{width: '100%', height: '100%'}}>
             <img className='mapImage' src="https://www.evernote.com/l/AAUb4rYWCdJDBaV76K7JnS7CHkR1LNFYPm8B/image.png" alt='a map'></img>
             </div>
           </Box>
-          <Box sx={{ height: '35vh', minWidth: '100%', border: '1px solid black', borderRadius: '2px', backgroundColor: '#de9de9' }}>
+          <Box sx={{ height: '35vh', minWidth: '100%', border: '0px solid black', borderRadius: '2px', backgroundColor: '#de9de9' }}>
             detail
             <DestinationDetail />
           </Box>
