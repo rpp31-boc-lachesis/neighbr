@@ -7,9 +7,17 @@ export default function ProfileButton(props) {
   const { handleClick } = props;
   return (
     <Button
+      color="primary"
       variant="contained"
       startIcon={<AccountCircleIcon />}
       onClick={handleClick}
+      sx={{
+        boxSizing: 'unset',
+        width: '130px',
+        height: '16px',
+        padding: '2px',
+        borderRadius: '8px'
+      }}
     >
       View Profile
     </Button>

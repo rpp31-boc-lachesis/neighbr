@@ -8,14 +8,15 @@ import {
   Grid,
   Avatar,
   Paper,
-  Stack
-  // Box
+  Stack,
+  Box
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import StarIcon from '@mui/icons-material/Star';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
+import ConstructionIcon from '@mui/icons-material/Construction';
 import CloseIcon from '@mui/icons-material/Close';
 // import { createMUITheme, ThemeProvider } from '@mui/material/styles';
 
@@ -37,7 +38,7 @@ export default function ProfileCard(props) {
   const { handleClose } = props;
   // const classes = useStyles();
   return (
-    <div className="ProfileCard" style={{ height: '525px', width: '415px' }}>
+    <div className="ProfileCard" style={{ height: '530px', width: '350px' }}>
       <div className="ProfileCardHeader">
         <Grid container>
           <Grid item sm={10}>
@@ -54,9 +55,9 @@ export default function ProfileCard(props) {
           </Grid>
         </Grid>
       </div>
-      <DialogContent dividers sx={{ height: '180px', width: 'auto' }}>
+      <DialogContent dividers sx={{ height: '180px', width: 'auto', padding: '10px' }}>
         <Grid container sx={{ maxHeight: '20%' }}>
-          <Grid item sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <Grid item sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
             <Avatar alt="profile image" src="" sx={{ height: '115px', width: '115px', backgroundColor: 'coral' }} />
             <Typography variant="h5" component="div">
               Tiffany
@@ -65,16 +66,16 @@ export default function ProfileCard(props) {
               San Francisco
             </Typography>
           </Grid>
-          <Grid item sm={6} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-            <StarIcon sx={{ color: '#C85CDB' }} />
-            <StarIcon sx={{ color: '#C85CDB' }} />
-            <StarIcon sx={{ color: '#C85CDB' }} />
-            <StarHalfIcon sx={{ color: '#C85CDB' }} />
-            <StarOutlineIcon sx={{ color: '#C85CDB' }} />
+          <Grid item sm={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <StarIcon sx={{ color: '#5E4CFF' }} />
+            <StarIcon sx={{ color: '#5E4CFF' }} />
+            <StarIcon sx={{ color: '#5E4CFF' }} />
+            <StarHalfIcon sx={{ color: '#5E4CFF' }} />
+            <StarOutlineIcon sx={{ color: '#5E4CFF' }} />
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogContent dividers>
+      <DialogContent dividers sx={{ padding: '10px' }}>
         <Typography sx={{ fontSize: '16px' }}>
           Hi there! I love building community and serving my fellow Neighbrs!
           See what I did there? I am always out and about, so if you have any items
@@ -82,7 +83,7 @@ export default function ProfileCard(props) {
         </Typography>
       </DialogContent>
       <Grid>
-        <Grid item sm={10} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Box item sm={10} textAlign="center">
           <Typography>
             Previous Requests
           </Typography>
@@ -92,12 +93,20 @@ export default function ProfileCard(props) {
             overflow: 'scroll'
           }}
           >
-            <Stack>
+            <Stack sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              width: '325px',
+              padding: '10px',
+              gap: '5px'
+            }}
+            >
               <Item sx={{
                 border: '2px solid #B23CDB',
                 backgroundColor: '#C85CDB',
                 color: 'white',
-                height: '55px'
+                height: '65px',
+                borderRadius: '8px'
               }}
               >
                 <Grid container>
@@ -111,10 +120,10 @@ export default function ProfileCard(props) {
                       fontWeight: 'bold'
                     }}
                   >
-                    <RestaurantIcon />
+                    <RestaurantIcon sx={{ margin: '2px' }} />
                     Coffee
                   </Grid>
-                  <Grid>
+                  <Grid sx={{ padding: '5px' }}>
                     Size: small | Weight: light | Destination: San Francisco
                     | Distance: 2.4mi | Est. Time: 24min
                   </Grid>
@@ -124,7 +133,8 @@ export default function ProfileCard(props) {
                 border: '2px solid #B23CDB',
                 backgroundColor: '#C85CDB',
                 color: 'white',
-                height: '55px'
+                height: '65px',
+                borderRadius: '8px'
               }}
               >
                 <Grid container>
@@ -138,18 +148,18 @@ export default function ProfileCard(props) {
                       fontWeight: 'bold'
                     }}
                   >
-                    <RestaurantIcon />
-                    Bananas
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
                   </Grid>
-                  <Grid>
-                    Size: small | Weight: light | Destination: San Francisco
-                    | Distance: 2.4mi | Est. Time: 24min
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
                   </Grid>
                 </Grid>
               </Item>
             </Stack>
           </div>
-        </Grid>
+        </Box>
       </Grid>
     </div>
   );
