@@ -1,9 +1,7 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/function-component-definition */
 import React from 'react';
 import Paper from '@mui/material/Paper';
 
-const Footer = () => {
+export default function Footer() {
   return (
     <Paper
       sx={{
@@ -18,10 +16,9 @@ const Footer = () => {
         verticalAlignment: 'middle',
         textAlign: 'center',
       }}
-      elevation={5}>
+      elevation={5}
+    >
       <p>© Neighbr. All rights reserved.</p>
     </Paper>
   );
-};
-
-export default Footer;
+}

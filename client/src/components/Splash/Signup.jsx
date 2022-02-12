@@ -100,7 +100,7 @@ function Signup() {
               autoComplete="current-password"
               color="secondary"
             />
-            <RouterLink style={{ textDecoration: 'none' }} to="/main">
+            <RouterLink to="/main">
               <Button
                 type="submit"
                 fullWidth
@@ -114,7 +114,7 @@ function Signup() {
             <Grid container>
               <Grid item>
                 Already have an account?&nbsp;
-                <RouterLink style={{ textDecoration: 'none', color: '#5FC6C9', fontWeight: 'bold' }} to="/login">
+                <RouterLink style={{ color: '#5FC6C9', fontWeight: 'bold' }} to="/login">
                   Log In
                 </RouterLink>
               </Grid>
