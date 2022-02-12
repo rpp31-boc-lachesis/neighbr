@@ -7,6 +7,7 @@ import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
+import RequestStatus from './components/RequestDash/RequestStatus.jsx';
 import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
@@ -62,8 +63,9 @@ class App extends React.Component {
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login handleLogin={this.handleLogin} />} />
             <Route path="/main" element={<Main />} />
-            <Route path="/requestDash" element={<RunnerList />} />
+            <Route path="/runnerList" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostDest={this.handlePostDest} />} />
+            <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>
