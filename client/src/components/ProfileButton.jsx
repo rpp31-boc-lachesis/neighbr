@@ -14,7 +14,7 @@ export default function ProfileButton(props) {
       sx={{
         boxSizing: 'unset',
         width: '130px',
-        height: '16px',
+        height: '18px',
         padding: '2px',
         borderRadius: '8px'
       }}
