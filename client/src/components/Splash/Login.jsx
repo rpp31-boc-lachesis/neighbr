@@ -31,10 +31,10 @@ function Login(props) {
     event.preventDefault();
     // fetch user from database
     // if there's matched user
-      // redirect to main page
-      props.handleLogin();
-      // set user with found one
-      setUser('Maxine453');
+    // redirect to main page
+    props.handleLogin();
+    // set user with found one
+    setUser('Maxine453');
     // otherwise display error message
     setError('Uhhh, we couldn\'t find the id or password');
   };
@@ -93,16 +93,14 @@ function Login(props) {
               id="password"
               autoComplete="current-password"
             />
-            <RouterLink style={{ textDecoration: 'none' }} to="/main">
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Log In
-              </Button>
-            </RouterLink>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Log In
+            </Button>
             <Grid container>
               <Grid item>
                 Don&apos;t have an account?&nbsp;

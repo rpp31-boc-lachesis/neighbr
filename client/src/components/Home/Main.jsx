@@ -10,7 +10,7 @@ class Main extends React.Component {
     this.state = {
     };
   }
-  
+
   render() {
     return (
       <>
@@ -21,3 +21,5 @@ class Main extends React.Component {
     );
   }
 }
+
+export default Main;
