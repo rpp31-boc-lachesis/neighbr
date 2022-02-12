@@ -4,6 +4,9 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+
+mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
 
 class RunnerStatus extends React.Component {
   constructor(props) {
@@ -13,12 +16,19 @@ class RunnerStatus extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const map = new mapboxgl.Map({
+      container: 'mapContainer',
+      style: 'mapbox://styles/mapbox/streets-v11'
+    });
+  }
+
   render() {
     return (
       <Container>
         <Grid
           container
-          height="100%"
+          height="100vh"
           direction="row"
           justifyContent="center"
           alignItems="center"
@@ -100,7 +110,27 @@ class RunnerStatus extends React.Component {
             direction="column"
             alignItems="center"
           >
-            <Typography>Map</Typography>
+            <Box
+              sx={{
+                width: '100%',
+                textAlign: 'start',
+              }}
+            >
+              <Box
+                id="mapContainer"
+                container
+                sx={{
+                  border: 1,
+                  borderRadius: 4,
+                  borderColor: '#F88202',
+                  height: '50vh',
+                  width: '100%'
+                }}
+                item
+              >
+                <Typography>Map</Typography>
+              </Box>
+            </Box>
             <Typography>Errand Details</Typography>
           </Grid>
         </Grid>
