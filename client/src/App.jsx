@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import Splash from './components/Splash/Splash.jsx';
 import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
@@ -12,7 +12,7 @@ import Login from './components/Splash/Login.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
-const theme = createTheme({
+const theme = responsiveFontSizes(createTheme({
   palette: {
     primary: {
       main: '#C85CDB',
@@ -24,7 +24,7 @@ const theme = createTheme({
   typography: {
     fontFamily: 'Roboto'
   }
-});
+}));
 
 class App extends React.Component {
   constructor(props) {
