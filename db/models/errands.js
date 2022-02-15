@@ -11,12 +11,12 @@ const errands = Schema({
     size: String,
     notes: String,
     status: String,
-    requester: Schema.types.ObjectId,
-    runner: Schema.types.ObjectId,
+    requester: mongoose.Types.ObjectId,
+    runner: mongoose.Types.ObjectId,
     transportation: String
   },
   message: {
-    requester: Schema.types.ObjectId,
+    requester: mongoose.Types.ObjectId,
     notes: String
   },
   pickup: {
@@ -24,14 +24,14 @@ const errands = Schema({
     address: String
   },
   dropoff: {
-    requester: Schema.types.ObjectId,
+    requester: mongoose.Types.ObjectId,
     address: String
   },
   date: Date,
   start_time: Date,
   end_time: Date,
   received_rating: {
-    requester: String,
+    requester: mongoose.Types.ObjectId,
     rating: Number
   }
 });

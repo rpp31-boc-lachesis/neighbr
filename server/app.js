@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const userController = require('../controllers/userController');
-const { getRun, addRun } = require('../controllers/runController');
+const { getRuns, addRun } = require('../controllers/runController');
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.get('/users', userController.getAllUsers);
 app.get('/users/:username', userController.getOneUser);
 app.post('/users', userController.postUser);
 
-app.get('/runs', getRun)
+app.get('/runs', getRuns);
 app.post('/runs', addRun);
 // Catch all route for redirect must be last so others can fire first! :)
 app.get('/*', (req, res) => {

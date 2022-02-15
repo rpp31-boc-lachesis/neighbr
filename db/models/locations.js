@@ -12,8 +12,8 @@ const locationSchema = new mongoose.Schema({
   postcode: String,
   coordinates: Array,
   region: String,
-  runs: [{ type: Schema.types.ObjectId, ref: 'Run' }],
-  errands: [{ type: Schema.types.ObjectId, ref: 'Errands' }],
+  runs: [{ type: mongoose.Types.ObjectId, ref: 'Run' }],
+  errands: [{ type: mongoose.Types.ObjectId, ref: 'Errands' }],
 });
 
 const Location = mongoose.model('Location', locationSchema);

@@ -16,13 +16,14 @@ export default function AddRunForm(props) {
   const [stopTime, setStop] = React.useState(new Date());
   const [transportation, setTransportation] = React.useState('')
 
-  const { handlePostDest } = props;
+  const { handlePostRun } = props;
 
   const handleDestChange = (event) => {
     setDestination(event.target.value);
   };
 
   const handleSubmit = () => {
+    console.log('click')
     const run = {
       destination,
       date,
@@ -30,12 +31,12 @@ export default function AddRunForm(props) {
       stopTime,
       transportation,
     };
-    handlePostDest(run);
+    handlePostRun(run);
   };
 
   return (
     <Box component="form">
-      <Typography variant='h5' sx={{color: 'secondary.main'}}>Enter your Run</Typography>
+      <Typography variant="h5" sx={{color: 'secondary.main'}}>Enter your Run</Typography>
       <LocalizationProvider dateAdapter={DateAdapter}>
         <TextField
           required
@@ -72,7 +73,7 @@ export default function AddRunForm(props) {
           onChange={(e) => setTransportation(e.target.value)}
         />
       </LocalizationProvider>
-      <Button variant="contained" onClick={handleSubmit}>Submit Run</Button>
+      <Button onClick={handleSubmit} variant="contained">Submit Run</Button>
     </Box>
   );
 }
