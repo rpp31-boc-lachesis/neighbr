@@ -1,20 +1,77 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
-const users = mongoose.Schema({
-  first_name: String,
-  last_name: String,
-  username: String,
-  email: String,
-  password: String,
-  address: String,
-  city: String,
-  state: String,
-  zip: String,
-  bio: String,
+const users = Schema({
+  first_name: {
+    type: String,
+    index: true,
+    required: true
+  },
+  last_name: {
+    type: String,
+    index: true,
+    required: true
+  },
+  username: {
+    type: String,
+    index: true,
+    unique: true,
+    required: true
+  },
+  email: {
+    type: String,
+    index: true,
+    unique: true,
+    required: true
+  },
+  password: {
+    type: String,
+    index: true,
+    required: true
+  },
+  avatar_url: {
+    type: String
+  },
+  street_address: {
+    type: String,
+    index: true,
+    required: true
+  },
+  city: {
+    type: String,
+    index: true,
+    required: true
+  },
+  state: {
+    type: String,
+    index: true,
+    required: true
+  },
+  zip: {
+    type: String,
+    index: true,
+    required: true
+  },
+  country: {
+    type: String
+  },
+  coordinates: {
+    lat: {
+      type: String
+    },
+    long: {
+      type: String
+    }
+  },
+  bio: {
+    type: String
+  },
   rating: Number,
-  req_history: [{ type: mongoose.Types.ObjectId, ref: 'Users' }],
-  run_history: [{ type: mongoose.Types.ObjectId, ref: 'Users' }],
+  rated_times: Number,
+  created_at: Date,
+  req_history: [{ type: mongoose.Types.ObjectId, ref: 'Errands' }],
+  run_history: [{ type: mongoose.Types.ObjectId, ref: 'Runs' }],
   // req_history: {
   //   category: String,
   //   req_items: {
