@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import Errand from './Errand.jsx';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
 
@@ -12,7 +13,8 @@ class RunnerStatus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      newRequests: [{ errandName: 'groceries', requesterName: 'Tiffany' }],
+      acceptedErrands: []
     };
   }
 
@@ -25,21 +27,30 @@ class RunnerStatus extends React.Component {
 
   render() {
     return (
-      <Container>
+      <Grid
+        container
+        sx={{
+          padding: '4vw'
+        }}
+        // alignItems="center"
+        height="100%"
+      >
         <Grid
+          item
           container
-          height="100vh"
           direction="row"
-          justifyContent="center"
+          justifyContent="space-evenly"
           alignItems="center"
         >
           <Grid // left column
             xs
+            sx={{ paddingRight: '1vh' }}
             item
+            height="100%"
             container
             direction="column"
             alignItems="center"
-            justifyContent="space-around"
+            justifyContent="space-between"
           >
             <Box
               sx={{
@@ -49,6 +60,7 @@ class RunnerStatus extends React.Component {
             >
               <Typography sx={{ color: 'secondary.main' }}>Run Details</Typography>
               <Box
+                minHeight="20vh"
                 sx={{
                   bgcolor: 'secondary.light',
                   border: 1,
@@ -62,24 +74,33 @@ class RunnerStatus extends React.Component {
               </Box>
             </Box>
             <Box
+              item
               sx={{
                 width: '100%',
                 textAlign: 'start',
               }}
             >
               <Typography sx={{ color: '#F88202' }}>New Requests</Typography>
-              <Box
+              <Grid
+                id="NewRequestsBox"
                 container
+                minHeight="20vh"
                 sx={{
                   border: 1,
                   borderRadius: 4,
                   borderColor: '#F88202',
-                  width: '100%'
+                  width: '100%',
+                  padding: '1vh'
                 }}
-                item
+                alignItems="center"
+                justifyContent="center"
               >
-                <Typography item>Placeholder</Typography>
-              </Box>
+                <Errand
+                  type="NewRequest"
+                  errandName={this.state.newRequests[0].errandName}
+                  requesterName={this.state.newRequests[0].requesterName}
+                />
+              </Grid>
             </Box>
             <Box
               sx={{
@@ -90,6 +111,7 @@ class RunnerStatus extends React.Component {
               <Typography sx={{ color: '#F88202' }}>Accepted Errands</Typography>
               <Box
                 container
+                minHeight="30vh"
                 sx={{
                   border: 1,
                   borderRadius: 4,
@@ -98,24 +120,38 @@ class RunnerStatus extends React.Component {
                 }}
                 item
               >
-                <Typography>Placeholder</Typography>
+                {
+                  this.state.acceptedErrands.map((req) => {
+                    return (
+                      <Errand
+                        type="AcceptedErrand"
+                        errandName={req.errandName}
+                        requesterName={req.requesterName}
+                      />
+                    )
+                  })
+                }
               </Box>
             </Box>
 
           </Grid>
           <Grid // right column
             xs
+            sx={{
+              paddingLeft: '1vh',
+              height: '100%'
+            }}
             item
             container
             direction="column"
             alignItems="center"
+            justifyContent="space-between"
           >
             <Box
-              sx={{
-                width: '100%',
-                textAlign: 'start',
-              }}
+              item
+              sx={{ width: '100%' }}
             >
+              <Typography>&nbsp;</Typography>
               <Box
                 id="mapContainer"
                 container
@@ -131,10 +167,23 @@ class RunnerStatus extends React.Component {
                 <Typography>Map</Typography>
               </Box>
             </Box>
-            <Typography>Errand Details</Typography>
+            <Box
+              container
+              sx={{
+                height: '20vh',
+                bgcolor: 'primary.light',
+                border: 1,
+                borderRadius: 4,
+                borderColor: 'primary.main',
+                width: '100%'
+              }}
+              item
+            >
+              <Typography>Placeholder</Typography>
+            </Box>
           </Grid>
         </Grid>
-      </Container>
+      </Grid>
     );
   }
 }
