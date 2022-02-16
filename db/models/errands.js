@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-// const { Schema } = require('mongoose');
 
-const errandSchema = mongoose.Schema(
+const { Schema } = mongoose;
+
+const errandSchema = Schema(
   {
     category: String,
     req_items: {

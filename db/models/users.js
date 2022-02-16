@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-const { Schema } = require('mongoose');
+const dayjs = require('dayjs');
+
+const { Schema } = mongoose;
 
 // const userId = Schema.ObjectId;
 
-const userSchema = mongoose.Schema(
+const userSchema = Schema(
   {
     first_name: {
       type: String,
@@ -69,78 +71,23 @@ const userSchema = mongoose.Schema(
     bio: {
       type: String
     },
+    dob: String,
     age: Number,
-    rating: Number,
-    rated_times: Number,
-    created_at: Date,
+    sum_rating: Number,
+    rating_count: Number,
+    created_at: String,
     req_history: [
       {
-        id: Schema.ObjectId,
-        category: String,
-        item: String,
-        quantity: Number,
-        weight: String,
-        size: String,
-        notes: String,
-        status: String,
-        runner: String,
-        date: Date,
-        pickup: {
-          coordinates: {
-            lat: {
-              type: String
-            },
-            long: {
-              type: String
-            }
-          }
-        },
-        dropoff: {
-          coordinates: {
-            lat: {
-              type: String
-            },
-            long: {
-              type: String
-            }
-          }
-        }
+        type: mongoose.Types.ObjectId,
+        ref: 'Errands'
       }
     ],
     run_history: [
       {
-        id: Schema.ObjectId,
-        category: String,
-        item: String,
-        quantity: Number,
-        weight: String,
-        size: String,
-        notes: String,
-        status: String,
-        runner: String,
-        date: Date,
-        pickup: {
-          coordinates: {
-            lat: {
-              type: String
-            },
-            long: {
-              type: String
-            }
-          }
-        },
-        dropoff: {
-          coordinates: {
-            lat: {
-              type: String
-            },
-            long: {
-              type: String
-            }
-          }
-        }
+        type: mongoose.Types.ObjectId,
+        ref: 'Runs'
       }
-    ]
+    ],
   },
   { collection: 'users' }
 );
@@ -3554,30 +3501,6 @@ const userData = {
   }
 };
 
-const mappedData = userData.results.map((user) => (
-  {
-    first_name: user.name.first,
-    last_name: user.name.last,
-    username: userData.results[0].login.username,
-    email: userData.results[0].email,
-    password: userData.results[0].login.password,
-    avatar_url: userData.results[0].picture.large,
-    street_address: `${userData.results[0].location.street.number} ${userData.results[0].location.street.name}`,
-    city: userData.results[0].location.city,
-    state: userData.results[0].location.state,
-    zip: userData.results[0].location.postcode,
-    country: userData.results[0].location.street.country,
-    coordinates: {
-      lat: userData.results[0].location.coordinates.latitude,
-      long: userData.results[0].location.coordinates.longitude
-    },
-    bio: '',
-    rating: 0,
-    rated_times: 0,
-    created_at: new Date()
-  }
-));
-
 const userCoordinates = [
   {
     street: '351 9th Avenue',
@@ -3812,43 +3735,117 @@ const userCoordinates = [
     zip: '94123',
     lat: '37.79829808740386',
     long: '-122.42878726434952'
+  },
+  {
+    street: '61 Jefferson St',
+    zip: '94133',
+    lat: '37.811831761074956',
+    long: '-122.41228387881156'
+  },
+  {
+    street: '15 Green St',
+    zip: '94111',
+    lat: '37.80536794183571',
+    long: '-122.39625502037946'
+  },
+  {
+    street: '540 Broadway',
+    zip: '94133',
+    lat: '37.8012782945984',
+    long: '-122.40543822052284'
+  },
+  {
+    street: '420 Montgomery St',
+    zip: '94104',
+    lat: '37.795605183203804',
+    long: '-122.40259977684215'
+  },
+  {
+    street: '400 California St',
+    zip: '94104',
+    lat: '37.79705648572996',
+    long: '-122.40093010408883'
+  },
+  {
+    street: '608 Commercial St',
+    zip: '94111',
+    lat: '37.79745229056152',
+    long: '-122.4041024823202'
+  },
+  {
+    street: '100 34th Ave',
+    zip: '94121',
+    lat: '37.788831245893924',
+    long: '-122.4996522105501'
+  },
+  {
+    street: '50 Hagiwara Tea Garden Dr',
+    zip: '94118',
+    lat: '37.775182010384306',
+    long: '-122.46700785627056'
+  },
+  {
+    street: '199 Museum Way',
+    zip: '94114',
+    lat: '37.768855900261265',
+    long: '-122.43920750294863'
+  },
+  {
+    street: '2569 3rd St',
+    zip: '94107',
+    lat: '37.76213971143479',
+    long: '-122.38678124224865'
+  },
+  {
+    street: '30 Clarion Alley',
+    zip: '94110',
+    lat: '37.76755067680214',
+    long: '-122.42076040125337'
   }
 ];
+console.log('Total Addresses:', userCoordinates.length);
 
-console.log(userCoordinates.length);
+const mappedData = userData.results.map((user) => {
+  const randomAddressIndex = Math.floor(Math.random() * userCoordinates.length);
+  // console.log('Random Address Index:', randomAddressIndex);
+  const ratingCount = Math.floor(Math.random() * (5 - 1) + 1);
+  const currentDate = dayjs(new Date()).locale('en').format();
+  // console.log('Current Date:', currentDate);
 
-// console.log('MAPPED DATA:', mappedData);
+  return {
+    first_name: user.name.first,
+    last_name: user.name.last,
+    username: user.login.username,
+    email: user.email,
+    password: user.login.password,
+    avatar_url: user.picture.large,
+    street_address: userCoordinates[randomAddressIndex].street,
+    city: 'San Francisco',
+    state: 'CA',
+    zip: userCoordinates[randomAddressIndex].zip,
+    country: 'USA',
+    coordinates: {
+      lat: userCoordinates[randomAddressIndex].lat,
+      long: userCoordinates[randomAddressIndex].long
+    },
+    bio: '',
+    dob: user.dob.date,
+    age: user.dob.age,
+    sum_rating: 5,
+    rating_count: ratingCount,
+    created_at: currentDate
+  };
+});
 
-// or use bulkWrite(array)
+const sampleData = mappedData.slice(0, 10);
+console.log('SAMPLE DATA:', sampleData);
 
-// Users.create({
-//   first_name: userData.results[0].name.first,
-//   last_name: userData.results[0].name.last,
-//   username: userData.results[0].login.username,
-//   email: userData.results[0].email,
-//   password: userData.results[0].login.password,
-//   avatar_url: userData.results[0].picture.large,
-//   street_address: `${userData.results[0].location.street.number}
-//   ${userData.results[0].location.street.name}`,
-//   city: 'San Francisco',
-//   state: 'CA',
-//   zip: userData.results[0].location.postcode,
-//   country: 'USA',
-//   coordinates: {
-//     lat: userData.results[0].location.coordinates.latitude,
-//     long: userData.results[0].location.coordinates.longitude
-//   },
-//   bio: '',
-//   age: userData.results[0].dob.age,
-//   rating: 0, RANDOM NUMBER
-//   rated_times: 5, RANDOM NUMBER MUST BE A FACTOR
-//   created_at: new Date() USE DATE LIBRARY
-// })
-//   .then((results) => {
-//     console.log(results);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
+Users.insertMany(mappedData)
+  .then((results) => {
+    console.log(results);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 module.exports = Users;
