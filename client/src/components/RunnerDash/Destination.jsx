@@ -6,6 +6,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 export default function Destination(props) {
   const { dest } = props;
@@ -22,9 +23,11 @@ export default function Destination(props) {
       }}
     >
       <CardContent>
-        <Typography variant="h5">{`${destination} by: ${transportation}`}</Typography>
-        <Typography variant="body2">{`Start: ${startTime} End: ${endTime}`}</Typography>
-        <Typography variant="body2">{`Date: ${date}`}</Typography>
+        <Grid>
+          <Typography variant="h5">{`${destination} by: ${transportation}`}</Typography>
+          <Typography variant="body2">{`Start: ${startTime} End: ${endTime}`}</Typography>
+          <Typography variant="body2">{`Date: ${date}`}</Typography>
+        </Grid>
       </CardContent>
       <CardActions>
         <Button variant="contained">Add Destination</Button>
