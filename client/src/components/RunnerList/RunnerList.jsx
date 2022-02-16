@@ -67,7 +67,7 @@ function RunnerList() {
           {/* <Container
           maxwidth="sm"
         > */}
-          {/* <AddRunModal handlePostDest={handlePostDest} /> */}
+          {/* <AddRunModal handlePostRun={handlePostRun} /> */}
           {/* <img src={wavyBuddyPoint} alt="" /> */}
           {/* </Container> */}
           <center>

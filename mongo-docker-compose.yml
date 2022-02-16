@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ~/mongodb/database:/data/db
+    ports: 51234
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
