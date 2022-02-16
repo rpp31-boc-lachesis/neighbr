@@ -69,6 +69,7 @@ const userSchema = mongoose.Schema(
     bio: {
       type: String
     },
+    age: Number,
     rating: Number,
     rated_times: Number,
     created_at: Date,
@@ -3577,7 +3578,246 @@ const mappedData = userData.results.map((user) => (
   }
 ));
 
-console.log('MAPPED DATA:', mappedData);
+const userCoordinates = [
+  {
+    street: '351 9th Avenue',
+    zip: '94118',
+    lat: '37.781840',
+    long: '-122.468100'
+  },
+  {
+    street: '15th Avenue and Kirkham',
+    zip: '94122',
+    lat: '37.760040',
+    long: '-122.472570'
+  },
+  {
+    street: '24th and York Street',
+    zip: '94110',
+    lat: '37.752860',
+    long: '-122.408200'
+  },
+  {
+    street: 'Diamond Street and 29th Street',
+    zip: '94131',
+    lat: '37.743180',
+    long: '-122.435570'
+  },
+  {
+    street: 'Ingalls Street and Oakdale',
+    zip: '94124',
+    lat: '37.73056401523301',
+    long: '-122.38293788891652'
+  },
+  {
+    street: 'Middle Drive East and Bowling Green',
+    zip: '94122',
+    lat: '37.77053821558841',
+    long: '-122.46027740241054'
+  },
+  {
+    street: 'Steiner St & Hayes St',
+    zip: '94117',
+    lat: '37.77053821558841',
+    long: '-122.46027740241054'
+  },
+  {
+    street: '1705 14th Ave',
+    zip: '94122',
+    lat: '37.75969115983477',
+    long: '-122.47094942992244'
+  },
+  {
+    street: '2002 12th Ave',
+    zip: '94116',
+    lat: '37.753677915232295',
+    long: '-122.46766045684726'
+  },
+  {
+    street: '145 Santa Clara Ave',
+    zip: '94127',
+    lat: '37.74002441048474',
+    long: '-122.46519372704087'
+  },
+  {
+    street: 'Bay St & Larkin St',
+    zip: '94109',
+    lat: '37.807542690131754',
+    long: '-122.42091557410086'
+  },
+  {
+    street: 'Gough St & Washington St',
+    zip: '94109',
+    lat: '37.79707232743883',
+    long: '-122.42754129236314'
+  },
+  {
+    street: '642 Commercial St',
+    zip: '94111',
+    lat: '37.799085973998956',
+    long: '-122.40562545503404'
+  },
+  {
+    street: 'California St & Taylor St',
+    zip: '94108',
+    lat: '37.794857252824926',
+    long: '-122.4125060086141'
+  },
+  {
+    street: 'The Embarcadero & Folsom St',
+    zip: '94105',
+    lat: '37.796065483575',
+    long: '-122.38931599469613'
+  },
+  {
+    street: '950 Gough St',
+    zip: '94102',
+    lat: '37.786399084307526',
+    long: '-122.42626711577424'
+  },
+  {
+    street: 'Roosevelt Way & Museum Way',
+    zip: '94114',
+    lat: '37.77008416815424',
+    long: '-122.44002822293434'
+  },
+  {
+    street: 'Dolores St & 19th St',
+    zip: '94114',
+    lat: '37.76464506264343',
+    long: '-122.4277961276809'
+  },
+  {
+    street: '290 Channel St',
+    zip: '94158',
+    lat: '37.7773356865317',
+    long: '-122.39415786573394'
+  },
+  {
+    street: '451 Berry St',
+    zip: '94158',
+    lat: '37.77471716471657',
+    long: '-122.398744901454'
+  },
+  {
+    street: '2500 17th St',
+    zip: '94110',
+    lat: '37.771037013845536',
+    long: '-122.40840349747282'
+  },
+  {
+    street: '2824 24th St',
+    zip: '94110',
+    lat: '37.75909513063095',
+    long: '-122.40840349747282'
+  },
+  {
+    street: '3416 Folsom St',
+    zip: '94110',
+    lat: '37.7485086676771',
+    long: '-122.41286669282842'
+  },
+  {
+    street: '3223 Ortega St',
+    zip: '94122',
+    lat: '37.753220591136724',
+    long: '-122.4975133171614'
+  },
+  {
+    street: '1305 18th Ave',
+    zip: '94122',
+    lat: '37.76597652245018',
+    long: '-122.47604832589626'
+  },
+  {
+    street: '190 Lenox Way',
+    zip: '94127',
+    lat: '37.74479135835824',
+    long: '-122.46610816215603'
+  },
+  {
+    street: '155 Winston Dr',
+    zip: '94132',
+    lat: '37.729980921882465',
+    long: '-122.4744636621116'
+  },
+  {
+    street: '345 Randolph St',
+    zip: '94132',
+    lat: '37.717160880808066',
+    long: '-122.46572087399332'
+  },
+  {
+    street: '201 Leland Ave',
+    zip: '94134',
+    lat: '37.71543907148925',
+    long: '-122.40823950647385'
+  },
+  {
+    street: '5075 3rd St',
+    zip: '94124',
+    lat: '37.73512856002669',
+    long: '-122.39121474201859'
+  },
+  {
+    street: '500 Cortland Ave',
+    zip: '94110',
+    lat: '37.74081352279533',
+    long: '-122.41592714668352'
+  },
+  {
+    street: '451 Jersey St',
+    zip: '94114',
+    lat: '37.7518311200275',
+    long: '-122.43500000846335'
+  },
+  {
+    street: '300 Bartlett St',
+    zip: '94110',
+    lat: '37.7536371269842',
+    long: '-122.42003866065397'
+  },
+  {
+    street: '1616 20th St',
+    zip: '94107',
+    lat: '37.76140245457369',
+    long: '-122.39776795208275'
+  },
+  {
+    street: '960 4th St',
+    zip: '94158',
+    lat: '37.77659924547458',
+    long: '-122.39314861698027'
+  },
+  {
+    street: '100 Larkin St',
+    zip: '94102',
+    lat: '37.78067228978095',
+    long: '-122.41553568690844'
+  },
+  {
+    street: '1135 Powell St',
+    zip: '94108',
+    lat: '37.79652953655477',
+    long: '-122.41001564815288'
+  },
+  {
+    street: '850 Columbus Ave',
+    zip: '94133',
+    lat: '37.803945756592654',
+    long: '-122.4131201846777'
+  },
+  {
+    street: '1801 Green St',
+    zip: '94123',
+    lat: '37.79829808740386',
+    long: '-122.42878726434952'
+  }
+];
+
+console.log(userCoordinates.length);
+
+// console.log('MAPPED DATA:', mappedData);
 
 // or use bulkWrite(array)
 
@@ -3590,18 +3830,19 @@ console.log('MAPPED DATA:', mappedData);
 //   avatar_url: userData.results[0].picture.large,
 //   street_address: `${userData.results[0].location.street.number}
 //   ${userData.results[0].location.street.name}`,
-//   city: userData.results[0].location.city,
-//   state: userData.results[0].location.state,
+//   city: 'San Francisco',
+//   state: 'CA',
 //   zip: userData.results[0].location.postcode,
-//   country: userData.results[0].location.street.country,
+//   country: 'USA',
 //   coordinates: {
 //     lat: userData.results[0].location.coordinates.latitude,
 //     long: userData.results[0].location.coordinates.longitude
 //   },
-//   bio: 'Hey this is a user!',
-//   rating: 0,
-//   rated_times: 0,
-//   created_at: new Date()
+//   bio: '',
+//   age: userData.results[0].dob.age,
+//   rating: 0, RANDOM NUMBER
+//   rated_times: 5, RANDOM NUMBER MUST BE A FACTOR
+//   created_at: new Date() USE DATE LIBRARY
 // })
 //   .then((results) => {
 //     console.log(results);
