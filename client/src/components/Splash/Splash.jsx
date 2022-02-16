@@ -21,9 +21,9 @@ function Splash() {
   const photo = {
     position: 'absolute',
     bottom: '5%',
-    left: '30%',
+    left: '25%',
     height: '50%',
-    width: '40%'
+    width: '50%'
   };
 
   const p1 = {
@@ -50,7 +50,7 @@ function Splash() {
         </div>
       </div>
       <div>
-        <img style={photo} src="https://i.ibb.co/9WdVCrG/image1.png" alt="splash" />
+        <img style={photo} src="https://ucarecdn.com/d4060b59-7e76-4b0a-8529-ea2f56d5825f/" alt="splash" />
       </div>
     </div>
   );
