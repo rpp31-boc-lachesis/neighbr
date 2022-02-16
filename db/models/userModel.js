@@ -70,6 +70,7 @@ const userSchema = mongoose.Schema(
       type: String
     },
     rating: Number,
+    rated_times: Number,
     created_at: Date,
     req_history: [
       {
@@ -187,6 +188,7 @@ Users.create({
   },
   bio: 'Hey this is a user!',
   rating: 0,
+  rated_times: 0,
   created_at: new Date(),
   req_history: [
     {
