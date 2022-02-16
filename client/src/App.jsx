@@ -42,13 +42,13 @@ class App extends React.Component {
   }
 
   handlePostRun(run) {
-    // const { destinations } = this.state;
-    // this.setState({
-    //   destinations: [...destinations, run]
-    // });
+    const { destinations } = this.state;
+    this.setState({
+      destinations: [...destinations, run]
+    });
     fetch('/runs', {
       method: 'POST',
-      body: 'run',
+      body: JSON.stringify(run),
       headers: { 'Content-Type': 'application/json' },
     })
       .then((response) => {

@@ -13,7 +13,7 @@ const {
 module.exports.getRuns = async (req, res) => {
   await getAllRuns((err, data) => {
     if (err) {
-      res.status(500).send(err);
+      res.status(500).send(err.message);
     } else {
       res.send(data);
     }
@@ -21,6 +21,11 @@ module.exports.getRuns = async (req, res) => {
 };
 
 module.exports.addRun = (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
+  createRun(req.body, (err, data) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.send(data);
+    }
+  });
 };
