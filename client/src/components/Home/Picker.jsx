@@ -41,7 +41,7 @@ export default function Picker() {
         <Link to="/runnerDash">
           <Button color="primary" variant="contained" startIcon={<Runner />} sx={{ width: 370, height: 50 }}>Want to post a run?</Button>
         </Link>
-        <Link to="/requestDash">
+        <Link to="/runnerList">
           <Button color="secondary" variant="contained" startIcon={<Requester />} sx={{ color: '#FFFFFF', width: 370, height: 50 }}>Would you like to find a runner?</Button>
         </Link>
       </Stack>

@@ -6,7 +6,6 @@ import Header from './components/Home/Header.jsx';
 import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
-import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
 import RequestStatus from './components/RequestDash/RequestStatus.jsx';
 import Error from './components/Error.jsx';
@@ -23,7 +22,7 @@ const theme = responsiveFontSizes(createTheme({
     },
     secondary: {
       main: '#5FC6C9',
-    }
+    },
   },
   typography: {
     fontFamily: 'Roboto'
@@ -65,9 +64,8 @@ class App extends React.Component {
             <Route path="/login" element={<Login handleLogin={this.handleLogin} />} />
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
-            <Route path="/requestDash" element={<RunnerList />} />
+            <Route path="/runnerList" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostDest={this.handlePostDest} />} />
-            <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>

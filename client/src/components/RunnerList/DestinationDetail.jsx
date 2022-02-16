@@ -22,8 +22,8 @@ function DestinationDetail() {
   return (
   <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '0px solid black', borderRadius: '10px', background: '#de9de9'}}>
-              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '0px dashed blue' }}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 <div className='entryColumn'>
                 <div className='detailItem topLineLeft'>
                   <div className='locationNumber'>1</div>
@@ -48,7 +48,7 @@ function DestinationDetail() {
                 <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
                 <Button>Request</Button>
                 </RouterLink>
-                {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '0px dashed blue' }}>
+                {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>
                   <EntryBox>Item 3</EntryBox>
