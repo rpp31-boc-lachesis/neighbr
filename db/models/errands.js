@@ -36,5 +36,5 @@ const errands = Schema({
   }
 });
 
-const Errands = mongoose.model('Errands', errands);
+const Errands = mongoose.model('Errand', errands);
 module.exports = Errands;
