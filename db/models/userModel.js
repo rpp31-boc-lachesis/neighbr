@@ -3555,8 +3555,8 @@ const userData = {
 
 const mappedData = userData.results.map((user) => (
   {
-    first_name: userData.results[0].name.first,
-    last_name: userData.results[0].name.last,
+    first_name: user.name.first,
+    last_name: user.name.last,
     username: userData.results[0].login.username,
     email: userData.results[0].email,
     password: userData.results[0].login.password,
@@ -3570,7 +3570,7 @@ const mappedData = userData.results.map((user) => (
       lat: userData.results[0].location.coordinates.latitude,
       long: userData.results[0].location.coordinates.longitude
     },
-    bio: 'Hey this is a user!',
+    bio: '',
     rating: 0,
     rated_times: 0,
     created_at: new Date()
@@ -3588,7 +3588,8 @@ console.log('MAPPED DATA:', mappedData);
 //   email: userData.results[0].email,
 //   password: userData.results[0].login.password,
 //   avatar_url: userData.results[0].picture.large,
-//   street_address: `${userData.results[0].location.street.number} ${userData.results[0].location.street.name}`,
+//   street_address: `${userData.results[0].location.street.number}
+//   ${userData.results[0].location.street.name}`,
 //   city: userData.results[0].location.city,
 //   state: userData.results[0].location.state,
 //   zip: userData.results[0].location.postcode,
