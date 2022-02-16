@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
-const dayjs = require('dayjs');
 
 const { Schema } = mongoose;
-
-// const userId = Schema.ObjectId;
 
 const userSchema = Schema(
   {
