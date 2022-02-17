@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Rsync to instance
           command: |
-            rsync -av -e 'ssh -o StrictHostKeyChecking=no' . ec2-user@neighbr.site:neighbr --filter=':- .gitignore' --exclude=.git
+            rsync -avz -e 'ssh -o StrictHostKeyChecking=no' . ec2-user@neighbr.site:neighbr --filter=':- .gitignore' --exclude=.git
       - run:
           environment:
             SSH_URL: ${CI_USER}@${DEPLOY_HOSTNAME}
