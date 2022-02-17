@@ -58,7 +58,7 @@ export default function ProfileCard(props) {
       <DialogContent dividers sx={{ height: '180px', width: 'auto', padding: '10px' }}>
         <Grid container sx={{ maxHeight: '20%' }}>
           <Grid item sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
-            <Avatar alt="profile image" src="https://randomuser.me/api/portraits/men/6.jpg" sx={{ height: '115px', width: '115px', backgroundColor: 'coral' }} />
+            <Avatar alt="profile image" src="https://randomuser.me/api/portraits/women/81.jpg" sx={{ height: '115px', width: '115px', backgroundColor: 'coral' }} />
             <Typography variant="h5" component="div">
               Tiffany
             </Typography>
