@@ -22,7 +22,14 @@ export default function Error() {
         <Typography variant="h3" color="secondary">
           Hello,
         </Typography>
-        <Typography variant="h2" color="primary">
+        <Typography
+          variant="h2"
+          color="primary"
+          sx={{
+            paddingLeft: '20px',
+            fontWeight: 'bold'
+          }}
+        >
           Neighbr!
         </Typography>
       </Grid>
