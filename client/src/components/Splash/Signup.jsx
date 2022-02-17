@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useReducer } from 'react';
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,8 +12,30 @@ import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
 
 function Signup() {
+  const [formInput, setFormInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      username: '',
+      email: '',
+      password: ''
+    }
+  );
+
   const handleSubmit = (event) => {
     event.preventDefault();
+    const data = { formInput };
+    axios.post('/signup', data.formInput)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleInput = (event) => {
+    const { name, value } = event.target;
+    setFormInput({ [name]: value });
   };
 
   return (
@@ -58,6 +81,8 @@ function Signup() {
               autoComplete="usernmae"
               autoFocus
               color="secondary"
+              defaultValue={formInput.usename}
+              onChange={handleInput}
             />
             <TextField
               margin="normal"
@@ -68,6 +93,9 @@ function Signup() {
               name="email"
               autoComplete="email"
               color="secondary"
+              helperText="e.g. name@gmail.com"
+              defaultValue={formInput.email}
+              onChange={handleInput}
             />
             <TextField
               margin="normal"
@@ -99,18 +127,20 @@ function Signup() {
               id="password"
               autoComplete="current-password"
               color="secondary"
+              defaultValue={formInput.password}
+              onChange={handleInput}
             />
-            <RouterLink to="/main">
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign Up
-              </Button>
-            </RouterLink>
+            {/* <RouterLink to="/main"> */}
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            {/* </RouterLink> */}
             <Grid container>
               <Grid item>
                 Already have an account?&nbsp;

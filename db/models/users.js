@@ -7,12 +7,12 @@ const userSchema = Schema(
     first_name: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     last_name: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     username: {
       type: String,
@@ -26,7 +26,12 @@ const userSchema = Schema(
       unique: true,
       required: true
     },
-    password: {
+    hash: {
+      type: String,
+      index: true,
+      required: true
+    },
+    salt: {
       type: String,
       index: true,
       required: true
@@ -37,22 +42,22 @@ const userSchema = Schema(
     street_address: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     city: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     state: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     zip: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     country: {
       type: String
