@@ -1,5 +1,9 @@
 const crypto = require('crypto');
+const fs = require('fs');
 const jsonwebtoken = require('jsonwebtoken');
+
+const PRIV_KEY = fs.readFileSync(`${__dirname}/priv_key.pem`);
+const PUB_KEY = fs.readFileSync(`${__dirname}/pub_key.pem`);
 
 module.exports = {
   issueJWT: (user) => {
@@ -10,7 +14,7 @@ module.exports = {
       iat: Date.now()
     };
 
-    const signedToken = jsonwebtoken.sign(payload, process.env.jwtSecret, { expiresIn, algorithm: 'RS256' });
+    const signedToken = jsonwebtoken.sign(payload, PRIV_KEY, { expiresIn, algorithm: 'RS256' });
     return {
       token: `Bearer ${signedToken}`,
       expires: expiresIn
@@ -21,7 +25,6 @@ module.exports = {
     return hash === hashVerify;
   },
   genPassword: (password) => {
-    // TO DO
     const salt = crypto.randomBytes(32).toString('hex');
     const genHash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
     return {
