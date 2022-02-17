@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const errands = mongoose.Schema({
+const { Schema } = mongoose;
+
+const errands = Schema({
   category: String,
   req_items: {
     item: String,
@@ -9,12 +11,12 @@ const errands = mongoose.Schema({
     size: String,
     notes: String,
     status: String,
-    requester: String,
-    runner: String,
+    requester: mongoose.Types.ObjectId,
+    runner: mongoose.Types.ObjectId,
     transportation: String
   },
   message: {
-    requester: String,
+    requester: mongoose.Types.ObjectId,
     notes: String
   },
   pickup: {
@@ -22,17 +24,17 @@ const errands = mongoose.Schema({
     address: String
   },
   dropoff: {
-    requester: String,
+    requester: mongoose.Types.ObjectId,
     address: String
   },
   date: Date,
   start_time: Date,
   end_time: Date,
   received_rating: {
-    requester: String,
+    requester: mongoose.Types.ObjectId,
     rating: Number
   }
 });
 
-const Errands = mongoose.model('Errands', errands);
+const Errands = mongoose.model('Errand', errands);
 module.exports = Errands;
