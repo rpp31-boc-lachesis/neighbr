@@ -18,14 +18,6 @@ import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import CloseIcon from '@mui/icons-material/Close';
-// import { createMUITheme, ThemeProvider } from '@mui/material/styles';
-
-// const useStyles = makeStyles({
-//   profileCard: {
-//     width: '400px',
-//     height: '550px'
-//   }
-// });
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
