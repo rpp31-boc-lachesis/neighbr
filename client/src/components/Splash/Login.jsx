@@ -36,6 +36,7 @@ function Login(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // front-end validation
     props.handleLogin();
     axios.request({
       url: '/login',

@@ -1,6 +1,4 @@
 const User = require('../db/models/users');
-// const config = require('../db/auth/config');
-
 const utils = require('./utils.js');
 
 module.exports = {
