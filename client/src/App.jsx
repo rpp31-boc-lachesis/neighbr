@@ -13,7 +13,7 @@ import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
-// import ProfilePopup from './components/ProfilePopup.jsx';
+import ProfilePopup from './components/ProfilePopup.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
@@ -80,6 +80,7 @@ class App extends React.Component {
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="*" element={<Error />} />
           </Routes>
+          <ProfilePopup />
         </Router>
       </ThemeProvider>
     );

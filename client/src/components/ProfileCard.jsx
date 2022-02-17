@@ -9,12 +9,10 @@ import {
   Avatar,
   Paper,
   Stack,
-  Box
+  Box,
+  Rating
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import StarIcon from '@mui/icons-material/Star';
-import StarHalfIcon from '@mui/icons-material/StarHalf';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import CloseIcon from '@mui/icons-material/Close';
@@ -59,11 +57,15 @@ export default function ProfileCard(props) {
             </Typography>
           </Grid>
           <Grid item sm={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <StarIcon sx={{ color: '#5E4CFF' }} />
-            <StarIcon sx={{ color: '#5E4CFF' }} />
-            <StarIcon sx={{ color: '#5E4CFF' }} />
-            <StarHalfIcon sx={{ color: '#5E4CFF' }} />
-            <StarOutlineIcon sx={{ color: '#5E4CFF' }} />
+            <Rating
+              name="half-rating-read"
+              value={3.5}
+              precision={0.5}
+              readOnly
+              sx={{
+                color: '#5E4CFF'
+              }}
+            />
           </Grid>
         </Grid>
       </DialogContent>
