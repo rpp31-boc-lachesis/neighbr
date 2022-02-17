@@ -1,4 +1,6 @@
 const User = require('../db/models/users');
+// const config = require('../db/auth/config');
+
 const utils = require('./utils.js');
 
 module.exports = {
@@ -18,7 +20,7 @@ module.exports = {
         }
       })
       .catch((e) => {
-        console.error(e);
+        // console.error(e);
         next(e);
       });
   },
@@ -35,31 +37,31 @@ module.exports = {
           }
         ]
       });
-      console.log(userR.toArray());
-    } catch (e) {
-      console.error(e);
-    }
+      if (userR.length > 0) {
+        res.json({ success: false, msg: 'This username/email has been registered!' });
+      } else {
+        const saltHash = utils.genPassword(req.body.password);
+        const { salt, hash } = saltHash;
 
-    if (userR.toArray()) {
-      res.json({ success: false, msg: 'This username/email has been registered!' });
-    }
-
-    const saltHash = utils.genPassword(req.body.password);
-    const { salt, hash } = saltHash.salt;
-
-    const newUser = new User({
-      username: req.body.username,
-      hash,
-      salt
-    });
-
-    try {
-      newUser.save()
-        .then((user) => {
-          res.json({ success: true, user });
+        const newUser = new User({
+          username: req.body.username,
+          email: req.body.email,
+          hash,
+          salt
         });
-    } catch (err) {
-      res.json({ success: false, msg: err });
+
+        try {
+          newUser.save()
+            .then((user) => {
+              res.json({ success: true, user });
+            });
+        } catch (err) {
+          res.json({ success: false, msg: err });
+        }
+      }
+    } catch (e) {
+      // console.error(e);
+      next(e);
     }
     // if (!req.body.username || !req.body.password || !req.body.email) {
     //   res.json({ success: false, msg: 'Please pass username and password.' });
