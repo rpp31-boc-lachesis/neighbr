@@ -5,7 +5,7 @@ services:
     restart: always
     volumes:
       - ~/mongodb/database:/data/db
-    ports: 51234
+    ports: 51234:27017
     environment:
       - MONGO_INITDB_ROOT_USERNAME
       - MONGO_INITDB_ROOT_PASSWORD
