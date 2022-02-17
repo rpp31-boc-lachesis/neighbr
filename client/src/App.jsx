@@ -78,9 +78,9 @@ class App extends React.Component {
             <Route path="/requestDash" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
+            <Route path="/profile" element={<ProfilePopup />} />
             <Route path="*" element={<Error />} />
           </Routes>
-          <ProfilePopup />
         </Router>
       </ThemeProvider>
     );

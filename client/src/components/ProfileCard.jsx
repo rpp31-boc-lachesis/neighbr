@@ -28,14 +28,14 @@ export default function ProfileCard(props) {
   const { handleClose } = props;
   // const classes = useStyles();
   return (
-    <div className="ProfileCard" style={{ height: '530px', width: '350px' }}>
+    <div className="ProfileCard" style={{ height: '530px', width: '325px' }}>
       <div className="ProfileCardHeader">
-        <Grid container>
+        <Grid container sx={{ height: '30px' }}>
           <Grid item sm={10}>
             <DialogTitle sx={{ padding: '5px' }}>
-              <Typography variant="h6" component="div" sx={{ padding: '5px' }}>
+              {/* <Typography variant="h6" component="div" sx={{ padding: '5px' }}>
                 Neighbr Profile
-              </Typography>
+              </Typography> */}
             </DialogTitle>
           </Grid>
           <Grid item sm={2} sx={{ display: 'flex', alignContent: 'center', padding: '0px' }}>
@@ -45,10 +45,33 @@ export default function ProfileCard(props) {
           </Grid>
         </Grid>
       </div>
-      <DialogContent dividers sx={{ height: '180px', width: 'auto', padding: '10px' }}>
-        <Grid container sx={{ maxHeight: '20%' }}>
-          <Grid item sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
-            <Avatar alt="profile image" src="https://randomuser.me/api/portraits/women/81.jpg" sx={{ height: '115px', width: '115px', backgroundColor: 'coral' }} />
+      <DialogContent
+        sx={{
+          height: '200px',
+          width: 'auto',
+          padding: '8px'
+        }}
+      >
+        <Grid
+          container
+          sx={{
+            maxHeight: '20%'
+          }}
+        >
+          <Grid
+            item
+            sm={7}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+            <Avatar
+              alt="profile image"
+              src="https://randomuser.me/api/portraits/women/81.jpg"
+              sx={{ height: '142px', width: '142px' }}
+            />
             <Typography variant="h5" component="div">
               Tiffany
             </Typography>
@@ -56,20 +79,22 @@ export default function ProfileCard(props) {
               San Francisco
             </Typography>
           </Grid>
-          <Grid item sm={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Grid item sm={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Rating
               name="half-rating-read"
               value={3.5}
               precision={0.5}
               readOnly
               sx={{
-                color: '#5E4CFF'
+                color: '#5E4CFF',
+                paddingTop: '10px',
+                paddingRight: '8px'
               }}
             />
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogContent dividers sx={{ padding: '10px' }}>
+      <DialogContent sx={{ padding: '10px' }}>
         <Typography sx={{ fontSize: '16px' }}>
           Hi there! I love building community and serving my fellow Neighbrs!
           See what I did there? I am always out and about, so if you have any items
@@ -78,19 +103,19 @@ export default function ProfileCard(props) {
       </DialogContent>
       <Grid>
         <Box item sm={10} textAlign="center">
-          <Typography>
+          <Typography variant="h6">
             Previous Requests
           </Typography>
           <div style={{
             height: '100px',
-            width: '350px',
+            width: '325px',
             overflow: 'scroll'
           }}
           >
             <Stack sx={{
               display: 'flex',
               justifyContent: 'center',
-              width: '325px',
+              width: '300px',
               padding: '10px',
               gap: '5px'
             }}
