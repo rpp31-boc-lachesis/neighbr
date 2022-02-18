@@ -11,7 +11,8 @@ const options = {
   algorithms: ['RS256']
 };
 
-module.export = (passport) => {
+module.exports = (passport) => {
+  console.log('hitting passport function')
   passport.use(new Strategy(options, (jwtPayload, done) => {
     Users.findOne({ username: jwtPayload.sub }, (err, user) => {
       if (err) {
