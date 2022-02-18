@@ -1,10 +1,10 @@
 import React from 'react';
-import ProfilePopup from './ProfilePopup.jsx';
+import ProfilePopover from './ProfilePopover.jsx';
 
 export default function Profile() {
   return (
     <div>
-      <ProfilePopup />
+      <ProfilePopover />
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { Popover } from '@mui/material';
 import ProfileButton from './ProfileButton.jsx';
 import ProfileCard from './ProfileCard.jsx';
 
-export default function ProfilePopup() {
+export default function ProfilePopover() {
   // const [ openPopup, setOpenPopup ] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
 
