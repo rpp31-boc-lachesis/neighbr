@@ -8,6 +8,7 @@ const createErrand = (errandObject, callback) => {
 
 const getAllErrands = (callback) => {
   Errand.find()
+    .lean()
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };

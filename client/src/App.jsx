@@ -39,7 +39,7 @@ class App extends React.Component {
       error: null,
       destinations: [],
       isLoggedIn: false,
-      loaded: false,
+      isLoaded: false,
       locations: [],
       runs: [],
       users: [],
@@ -52,47 +52,53 @@ class App extends React.Component {
     const { locations, runs, users, errands } = this.state;
     const fetches = [
       fetch('/locations')
-        .then((res) => res.json)
+        .then((res) => res.json())
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              let oldArr = [...locations];
+              const oldArr = [...locations];
               this.setState({ locations: [...oldArr, ...result] });
             }
           },
-          (error) => { this.setState({ error }); }
+          (error) => { this.setState({ isLoaded: true, error }); }
         ),
       fetch('/runs')
-        .then((res) => res.json)
+        .then((res) => res.json())
         .then(
           (result) => {
-            let oldArr = [...runs];
-            this.setState({ runs: [...oldArr, ...result] });
+            if (Array.isArray(result)) {
+              const oldArr = [...runs];
+              this.setState({ runs: [...oldArr, ...result] });
+            }
           },
-          (error) => { this.setState({ error }); }
+          (error) => { this.setState({ isLoaded: true, error }); }
         ),
       fetch('/users')
-        .then((res) => res.json)
+        .then((res) => res.json())
         .then(
           (result) => {
-            let oldArr = [...users];
-            this.setState({ users: [...oldArr, ...result] });
+            if (Array.isArray(result)) {
+              const oldArr = [...users];
+              this.setState({ users: [...oldArr, ...result] });
+            }
           },
-          (error) => { this.setState({ error }); }
+          (error) => { this.setState({ isLoaded: true, error }); }
         ),
       fetch('/errands')
-        .then((res) => res.json)
+        .then((res) => res.json())
         .then(
           (result) => {
-            let oldArr = [...errands];
-            this.setState({ errands: [...oldArr, ...result] });
+            if (Array.isArray(result)) {
+              const oldArr = [...errands];
+              this.setState({ errands: [...oldArr, ...result] });
+            }
           },
-          (error) => { this.setState({ error }); }
-        ),
+          (error) => { this.setState({ isLoaded: true, error }); }
+        )
     ];
 
     Promise.all(fetches)
-      .then(this.setState({ loaded: true }));
+      .then(this.setState({ isLoaded: true }));
   }
 
   handlePostRun(run) {
@@ -116,7 +122,15 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn } = this.state;
+    // eslint-disable-next-line object-curly-newline
+    const { error, isLoaded, isLoggedIn, destinations, locations, users, runs } = this.state;
+    if (error) {
+      return <Error />;
+    }
+
+    if (!isLoaded) {
+      return <div>Loading...</div>;
+    }
     return (
       <ThemeProvider theme={theme}>
         <Router>
