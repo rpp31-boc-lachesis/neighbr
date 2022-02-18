@@ -113,6 +113,6 @@ function Login({ user, handleAuth }) {
 export default Login;
 
 Login.propTypes = {
-  user: propTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
   handleAuth: PropTypes.func.isRequired
 };

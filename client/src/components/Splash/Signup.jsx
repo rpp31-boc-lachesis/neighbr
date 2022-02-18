@@ -280,6 +280,6 @@ function Signup({ user, handleAuth }) {
 export default Signup;
 
 Signup.propTypes = {
-  user: propTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
   handleAuth: PropTypes.func.isRequired
 };
