@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-
 const { Schema } = mongoose;
-const Errands = require('./errands.js');
 
 const userSchema = Schema(
   {
@@ -77,7 +75,7 @@ const userSchema = Schema(
     req_history: [
       {
         type: mongoose.Types.ObjectId,
-        ref: 'Errands'
+        ref: 'Errand'
       }
     ],
     run_history: [
@@ -86,8 +84,10 @@ const userSchema = Schema(
         ref: 'Run'
       }
     ],
-  },
-  { collection: 'users' }
+  }
+  // { collection: 'users' }
 );
+
+// const Users = mongoose.model('User', userSchema);
 
 module.exports = userSchema;

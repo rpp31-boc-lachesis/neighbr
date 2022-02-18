@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const errandSchema = new Schema({
+const errandSchema = Schema({
   category: String,
   req_items: {
     item: String,
@@ -36,4 +36,5 @@ const errandSchema = new Schema({
   }
 });
 
+// const Errand = mongoose.model('Errand', errandSchema);
 module.exports = errandSchema;

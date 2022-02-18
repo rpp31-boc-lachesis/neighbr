@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
-const Errands = require('./errands.js');
-const Run = require('./runs.js');
 
 const { Schema } = mongoose;
 
-const locationSchema = new Schema({
+const locationSchema = new mongoose.Schema({
   mapboxId: String,
   placeText: String,
   placeName: String,
@@ -15,7 +13,9 @@ const locationSchema = new Schema({
   coordinates: Array,
   region: String,
   runs: [{ type: mongoose.Types.ObjectId, ref: 'Run' }],
-  errands: [{ type: mongoose.Types.ObjectId, ref: 'Errands' }],
+  errands: [{ type: mongoose.Types.ObjectId, ref: 'Errand' }],
 });
+
+// const Location = mongoose.model('Location', locationSchema);
 
 module.exports = locationSchema;

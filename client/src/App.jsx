@@ -17,6 +17,7 @@ import Login from './components/Splash/Login.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
+
 const theme = responsiveFontSizes(createTheme({
   palette: {
     primary: {
@@ -54,8 +55,10 @@ class App extends React.Component {
         .then((res) => res.json)
         .then(
           (result) => {
-            let oldArr = [...locations];
-            this.setState({ locations: [...oldArr, ...result] });
+            if (Array.isArray(result)) {
+              let oldArr = [...locations];
+              this.setState({ locations: [...oldArr, ...result] });
+            }
           },
           (error) => { this.setState({ error }); }
         ),
@@ -63,7 +66,6 @@ class App extends React.Component {
         .then((res) => res.json)
         .then(
           (result) => {
-            console.log(result)
             let oldArr = [...runs];
             this.setState({ runs: [...oldArr, ...result] });
           },

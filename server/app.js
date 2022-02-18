@@ -2,10 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const compression = require('compression');
-const mongoose = require('mongoose');
 const userController = require('../controllers/userController');
-const { getAllErrands } = require('../controllers/errandController');
 const { getRuns, addRun } = require('../controllers/runController');
+const { getAllErrands } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
 const { getLocations } = require('../controllers/locationController');
 
