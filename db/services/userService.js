@@ -1,5 +1,5 @@
 // import model for querying db
-const Users = require('../models/users');
+const Users = require('../models/users.js');
 
 // define and export services for request handlers
 
