@@ -7,12 +7,12 @@ module.exports = {
   getAllUsers: () => (
     Users.find()
   ),
-  getOneUser: (oneUsername) => (
-    Users.find({ username: oneUsername })
+  getOneUser: (user) => (
+    Users.find({ username: user })
   ),
-  createUser: (newUsername) => (
+  createUser: (newUser) => (
     Users.create({
-      username: newUsername
+      username: newUser
     })
   )
 };
