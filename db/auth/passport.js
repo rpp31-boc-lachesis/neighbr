@@ -1,9 +1,13 @@
 const { Strategy, ExtractJwt } = require('passport-jwt');
+const fs = require('fs');
+const path = require('path');
 const Users = require('../models/users');
+
+const PUB_KEY = fs.readFileSync(path.join(__dirname, '../..', 'controllers/signature/pub_key.pem'));
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.jwtSecret,
+  secretOrKey: PUB_KEY,
   algorithms: ['RS256']
 };
 
