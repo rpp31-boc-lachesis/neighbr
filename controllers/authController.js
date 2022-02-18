@@ -8,7 +8,7 @@ module.exports = {
       if (!user) {
         res.status(401).json({ message: 'could not find user' });
       }
-      const isValid = utils.comparePassword(req.body.password, user.hash, user.salt);
+      const isValid = utils.comparePassword(req.body.password, user.password, user.salt);
       if (isValid) {
         // issue JWT token
         const tokenObj = utils.issueJWT(user);
@@ -46,10 +46,19 @@ module.exports = {
         const { salt, hash } = saltHash;
 
         const newUser = new Users({
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
           username: req.body.username,
           email: req.body.email,
-          hash,
-          salt
+          password: hash,
+          salt,
+          avatar_url: req.body.avatar_url,
+          street_address: req.body.street_address,
+          city: req.body.city,
+          state: req.body.state,
+          zip: req.body.zip,
+          country: req.body.country,
+          bio: req.body.bio
         });
 
         try {

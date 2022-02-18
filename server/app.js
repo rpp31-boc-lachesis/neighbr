@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+
 const app = express();
 const path = require('path');
 const compression = require('compression');
@@ -32,8 +33,8 @@ app.post('/runs', addRun);
 // Catch all route for redirect must be last so others can fire first! :)
 // passport.authenticate('jwt', { session: false })
 // add auth here to make sure after refresh, user still login
-
-app.get('/*', passport.authenticate('jwt', { session: false }), (req, res) => {
+// passport.authenticate('jwt', { session: false }),
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 

@@ -15,15 +15,31 @@ function Signup() {
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
+      first_name: '',
+      last_name: '',
       username: '',
       email: '',
-      password: ''
+      password: '',
+      avatar_url: 'https://i.ibb.co/9H7KLLs/image5.png',
+      street_address: '',
+      city: '',
+      state: '',
+      zip: '',
+      country: 'US',
+      bio: '',
+      showPassword: false
     }
   );
+
+  // const validate = () => {
+  //   const temp = {};
+  //   temp.first_name = values.first_name ? '' : 'This field is required.';
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { formInput };
+
     axios.post('/signup', data.formInput)
       .then((response) => {
         console.log(response.data);
@@ -57,7 +73,7 @@ function Signup() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
-            my: 15,
+            my: 4,
             mx: 4,
             display: 'flex',
             flexDirection: 'column',
@@ -71,65 +87,162 @@ function Signup() {
             Sign Up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="usernmae"
-              autoFocus
-              color="secondary"
-              defaultValue={formInput.usename}
-              onChange={handleInput}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              color="secondary"
-              helperText="e.g. name@gmail.com"
-              defaultValue={formInput.email}
-              onChange={handleInput}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="location"
-              label="Location"
-              name="location"
-              autoComplete="location"
-              color="secondary"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="age"
-              label="Age (18+)"
-              name="Age"
-              autoComplete="Age"
-              color="secondary"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              color="secondary"
-              defaultValue={formInput.password}
-              onChange={handleInput}
-            />
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  margin="none"
+                  required
+                  id="first_name"
+                  label="First Name"
+                  name="first_name"
+                  autoFocus
+                  color="secondary"
+                  fullWidth
+                  defaultValue={formInput.first_name}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  margin="none"
+                  required
+                  id="last_name"
+                  label="Last Name"
+                  name="last_name"
+                  color="secondary"
+                  fullWidth
+                  defaultValue={formInput.last_name}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="none"
+                  required
+                  id="username"
+                  label="Username"
+                  name="username"
+                  autoComplete="username"
+                  color="secondary"
+                  fullWidth
+                  defaultValue={formInput.username}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="none"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  color="secondary"
+                  defaultValue={formInput.email}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="none"
+                  required
+                  fullWidth
+                  id="street_address"
+                  label="Address Line"
+                  name="street_address"
+                  autoComplete="street_address"
+                  color="secondary"
+                  defaultValue={formInput.street_address}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  margin="none"
+                  required
+                  id="city"
+                  label="City"
+                  name="city"
+                  autoComplete="city"
+                  color="secondary"
+                  fullWidth
+                  defaultValue={formInput.city}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  margin="none"
+                  required
+                  id="state"
+                  label="State"
+                  name="state"
+                  autoComplete="state"
+                  color="secondary"
+                  fullWidth
+                  defaultValue={formInput.state}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  margin="none"
+                  required
+                  id="zip"
+                  label="ZIP Code"
+                  name="zip"
+                  autoComplete="zip"
+                  color="secondary"
+                  fullWidth
+                  defaultValue={formInput.zip}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  margin="none"
+                  id="country"
+                  label="Country"
+                  name="country"
+                  autoComplete="country"
+                  color="secondary"
+                  fullWidth
+                  defaultValue={formInput.country}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="none"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  color="secondary"
+                  defaultValue={formInput.password}
+                  onChange={handleInput}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="none"
+                  multiline
+                  maxRows={4}
+                  fullWidth
+                  name="bio"
+                  label="Introduce Yourself ..."
+                  type="bio"
+                  id="bio"
+                  color="secondary"
+                  defaultValue={formInput.bio}
+                  onChange={handleInput}
+                />
+              </Grid>
+            </Grid>
             {/* <RouterLink to="/main"> */}
             <Button
               type="submit"
