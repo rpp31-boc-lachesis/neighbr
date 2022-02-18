@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import axios from 'axios';
 import Splash from './components/Splash/Splash.jsx';
 import Header from './components/Home/Header.jsx';
 import Main from './components/Home/Main.jsx';
@@ -43,6 +44,7 @@ class App extends React.Component {
       locations: [],
       runs: [],
       users: [],
+      errands: [],
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -51,8 +53,8 @@ class App extends React.Component {
   componentDidMount() {
     const { locations, runs, users, errands } = this.state;
     const fetches = [
-      fetch('/locations')
-        .then((res) => res.json())
+      axios.get('/locations')
+        .then((res) => res.data)
         .then(
           (result) => {
             if (Array.isArray(result)) {
@@ -62,8 +64,8 @@ class App extends React.Component {
           },
           (error) => { this.setState({ isLoaded: true, error }); }
         ),
-      fetch('/runs')
-        .then((res) => res.json())
+      axios.get('/runs')
+        .then((res) => res.data)
         .then(
           (result) => {
             if (Array.isArray(result)) {
@@ -73,8 +75,8 @@ class App extends React.Component {
           },
           (error) => { this.setState({ isLoaded: true, error }); }
         ),
-      fetch('/users')
-        .then((res) => res.json())
+      axios.get('/users')
+        .then((res) => res.data)
         .then(
           (result) => {
             if (Array.isArray(result)) {
@@ -84,8 +86,8 @@ class App extends React.Component {
           },
           (error) => { this.setState({ isLoaded: true, error }); }
         ),
-      fetch('/errands')
-        .then((res) => res.json())
+      axios.get('/errands')
+        .then((res) => res.data)
         .then(
           (result) => {
             if (Array.isArray(result)) {
