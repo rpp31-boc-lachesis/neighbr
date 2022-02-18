@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link as RouterLink, Navigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -18,7 +18,7 @@ import SendIcon from '@mui/icons-material/SendRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';
 import DashboardIcon from '@mui/icons-material/DashboardRounded';
 
-export default function Header() {
+export default function Header(props) {
   const [state, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -84,9 +84,9 @@ export default function Header() {
           </Box>
           {logo}
           <Box>
-            <Tooltip title="User">
+            <Tooltip title={props.user}>
               <IconButton>
-                <Avatar size="small" alt="Hack Rector" src="https://ucarecdn.com/88f0c4ce-01b1-4771-8de4-fb2ce647dba9/" sx={{ backgroundColor: '#FFFFFF' }} />
+                <Avatar size="small" alt="Hack Rector" src={props.userPhoto} sx={{ backgroundColor: '#FFFFFF' }} />
               </IconButton>
             </Tooltip>
           </Box>

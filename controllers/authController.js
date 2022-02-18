@@ -12,7 +12,12 @@ module.exports = {
       if (isValid) {
         // issue JWT token
         const tokenObj = utils.issueJWT(user);
-        res.status(200).json({ token: tokenObj.token, expiresIn: tokenObj.expires });
+        res.status(200).json({
+          token: tokenObj.token,
+          expiresIn: tokenObj.expires,
+          avatar_url: user.avatar_url,
+          username: user.username
+        });
       } else {
         res.status(401).json({ message: 'You entered the wrong password' });
       }

@@ -39,6 +39,7 @@ class App extends React.Component {
     this.state = {
       destinations: [],
       user: '',
+      userPhoto: '',
       isLoggedIn: false
     };
     this.handlePostRun = this.handlePostRun.bind(this);
@@ -76,7 +77,8 @@ class App extends React.Component {
         // console.log(expire.$d)
         this.setState({
           isLoggedIn: true,
-          user: data.username
+          user: data.username,
+          userPhoto: data.avatar_url
         });
       })
       .catch((e) => {
@@ -86,11 +88,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn, user } = this.state;
+    const { isLoggedIn, user, userPhoto } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          {(isLoggedIn) ? <Header /> : null }
+          {(isLoggedIn) ? <Header userPhoto={userPhoto} user={user} /> : null }
           <Routes>
             <Route path="/" element={<Splash />} />
             <Route path="/other" element={<Other />} />

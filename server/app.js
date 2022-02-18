@@ -4,7 +4,6 @@ const app = express();
 const path = require('path');
 const compression = require('compression');
 const passport = require('passport');
-const cors = require('cors');
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 const { getRuns, addRun } = require('../controllers/runController');
@@ -17,7 +16,6 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 
 app.post('/login', authController.login);
 app.post('/signup', authController.signup);
@@ -33,7 +31,9 @@ app.post('/runs', addRun);
 
 // Catch all route for redirect must be last so others can fire first! :)
 // passport.authenticate('jwt', { session: false })
-app.get('/*', (req, res) => {
+// add auth here to make sure after refresh, user still login
+
+app.get('/*', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
