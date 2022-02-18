@@ -24,8 +24,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ProfileCard(props) {
-  const { handleClose } = props;
+export default function ProfileCard({ handleClose, currentUser }) {
   // const classes = useStyles();
   return (
     <div className="ProfileCard" style={{ height: '530px', width: '325px' }}>
@@ -69,20 +68,20 @@ export default function ProfileCard(props) {
           >
             <Avatar
               alt="profile image"
-              src="https://randomuser.me/api/portraits/women/81.jpg"
+              src={currentUser.avatar_url}
               sx={{ height: '142px', width: '142px' }}
             />
             <Typography variant="h5" component="div">
-              Tiffany
+              {currentUser.first_name}
             </Typography>
             <Typography variant="h6" component="div" sx={{ opacity: 0.6 }}>
-              San Francisco
+              {currentUser.city}
             </Typography>
           </Grid>
           <Grid item sm={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Rating
               name="half-rating-read"
-              value={3.5}
+              value={(currentUser.sum_rating / currentUser.rating_count)}
               precision={0.5}
               readOnly
               sx={{
@@ -96,6 +95,7 @@ export default function ProfileCard(props) {
       </DialogContent>
       <DialogContent sx={{ padding: '10px' }}>
         <Typography sx={{ fontSize: '16px' }}>
+          {/* {currentUser.bio} */}
           Hi there! I love building community and serving my fellow Neighbrs!
           See what I did there? I am always out and about, so if you have any items
           you need picked up, just holler! Thanks!
@@ -185,5 +185,7 @@ export default function ProfileCard(props) {
 }
 
 ProfileCard.propTypes = {
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  currentUser: PropTypes.object.isRequired
 };
