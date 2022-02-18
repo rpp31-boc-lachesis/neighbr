@@ -13,14 +13,17 @@ const options = {
 // verify
 module.exports = (passport) => {
   passport.use(new Strategy(options, (jwtPayload, done) => {
-    Users.findOne({ _id: jwtPayload.sub }, (err, user) => {
-      if (err) {
-        return done(err, false);
-      }
-      if (user) {
-        return done(null, user);
-      }
-      return done(null, false);
-    });
+    // Users.findOne({ _id: jwtPayload.sub }, (err, user) => {
+    //   if (err) {
+    //     console.log(err)
+    //     return done(err, false);
+    //   }
+    //   if (user) {
+    //     console.log(user);
+    //     return done(null, user);
+    //   }
+    //   console.log('passport')
+    //   return done(null, false);
+    // });
   }));
 };

@@ -10,16 +10,22 @@ const authService = {
     localStorage.removeItem('token');
     localStorage.removeItem('expires');
   },
-  getExpiration: () => {
-    const expiration = localStorage.getItem('expires');
-    const expiresAt = JSON.parse(expiration);
-    return dayjs(expiresAt);
-  },
-  isLoggedIn: () => {
-    dayjs().isBefore(getExpiration());
-  },
   isLoggedOut: () => {
     !isLoggedIn();
+  },
+  jwtInterceptor: (axios) => {
+    axios.interceptors.request.use((req) => {
+      // add auth header with jwt if account is logged in and request is to the api url
+      const expiresAt = JSON.parse(localStorage.getItem('expires'));
+      const isLoggedIn = dayjs().isBefore(dayjs(expiresAt));
+      // const isApiUrl = req.url.startsWith(api);
+
+      if (isLoggedIn) {
+        req.headers.Authorization = localStorage.getItem('token');
+      }
+      console.log('jwtInterceptor', req)
+      return req;
+    });
   }
 };
 

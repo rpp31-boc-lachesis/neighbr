@@ -10,7 +10,6 @@ module.exports = {
       }
       const isValid = utils.comparePassword(req.body.password, user.hash, user.salt);
       if (isValid) {
-        // issue JWT token
         const tokenObj = utils.issueJWT(user);
         res.status(200).json({
           token: tokenObj.token,
@@ -46,10 +45,19 @@ module.exports = {
         const { salt, hash } = saltHash;
 
         const newUser = new Users({
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
           username: req.body.username,
           email: req.body.email,
-          hash,
-          salt
+          password: hash,
+          salt,
+          avatar_url: req.body.avatar_url,
+          street_address: req.body.street_address,
+          city: req.body.city,
+          state: req.body.state,
+          zip: req.body.zip,
+          country: req.body.country,
+          bio: req.body.bio
         });
 
         try {

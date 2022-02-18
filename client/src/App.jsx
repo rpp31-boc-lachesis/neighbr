@@ -19,6 +19,9 @@ import authService from './auth.js';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
+
+authService.jwtInterceptor(axios);
+
 const theme = responsiveFontSizes(createTheme({
   palette: {
     primary: {
@@ -94,7 +97,7 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={<Splash />} />
             <Route path="/other" element={<Other />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/signup" element={<Signup handleAuth={this.handleAuth} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
