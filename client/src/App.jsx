@@ -40,7 +40,6 @@ class App extends React.Component {
       destinations: [],
       user: '',
       userPhoto: '',
-      isLoggedIn: false
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
@@ -76,7 +75,6 @@ class App extends React.Component {
         // const expire = authService.getExpiration();
         // console.log(expire.$d)
         this.setState({
-          isLoggedIn: true,
           user: data.username,
           userPhoto: data.avatar_url
         });
@@ -88,11 +86,11 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn, user, userPhoto } = this.state;
+    const { user, userPhoto } = this.state;
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          {(isLoggedIn) ? <Header userPhoto={userPhoto} user={user} /> : null }
+          {user ? <Header userPhoto={userPhoto} user={user} /> : null }
           <Routes>
             <Route path="/" element={<Splash />} />
             <Route path="/other" element={<Other />} />
