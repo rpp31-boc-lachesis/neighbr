@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const locationSchema = new mongoose.Schema({
+const locationSchema = new Schema({
   mapboxId: String,
   placeText: String,
   placeName: String,
