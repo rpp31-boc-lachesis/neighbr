@@ -1,17 +1,17 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, Navigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
 
-function Signup() {
+function Signup({ user, handleAuth }) {
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -31,6 +31,8 @@ function Signup() {
     }
   );
 
+  const [loginData, setLoginData] = useState({ username: '', password: '' });
+
   // const validate = () => {
   //   const temp = {};
   //   temp.first_name = values.first_name ? '' : 'This field is required.';
@@ -47,6 +49,11 @@ function Signup() {
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  const handleLogin = (e) => {
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
   };
 
   const handleInput = (event) => {
@@ -86,7 +93,8 @@ function Signup() {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          { user && (<Navigate to="/main" replace />)}
+          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleAuth(e, loginData); }} sx={{ mt: 1 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -126,7 +134,7 @@ function Signup() {
                   color="secondary"
                   fullWidth
                   defaultValue={formInput.username}
-                  onChange={handleInput}
+                  onChange={(e) => { handleInput(e); handleLogin(e); }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -224,7 +232,7 @@ function Signup() {
                   autoComplete="current-password"
                   color="secondary"
                   defaultValue={formInput.password}
-                  onChange={handleInput}
+                  onChange={(e) => { handleInput(e); handleLogin(e); }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -270,3 +278,8 @@ function Signup() {
 }
 
 export default Signup;
+
+Signup.propTypes = {
+  user: propTypes.string.isRequired,
+  handleAuth: PropTypes.func.isRequired
+};

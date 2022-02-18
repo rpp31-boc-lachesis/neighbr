@@ -23,7 +23,7 @@ import Typography from '@mui/material/Typography';
 //   );
 // }
 
-function Login(props) {
+function Login({ user, handleAuth }) {
   const [loginData, setLoginData] = React.useState({ username: '', password: '' });
 
   const handleChange = (e) => {
@@ -63,8 +63,8 @@ function Login(props) {
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
-          {props.user && (<Navigate to="/main" replace />)}
-          <Box component="form" noValidate onSubmit={(e) => props.handleAuth(e, loginData)} sx={{ mt: 1 }}>
+          { user && (<Navigate to="/main" replace />)}
+          <Box component="form" noValidate onSubmit={(e) => handleAuth(e, loginData)} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -111,3 +111,8 @@ function Login(props) {
 }
 
 export default Login;
+
+Login.propTypes = {
+  user: propTypes.string.isRequired,
+  handleAuth: PropTypes.func.isRequired
+};

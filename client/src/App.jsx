@@ -94,7 +94,7 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={<Splash />} />
             <Route path="/other" element={<Other />} />
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/signup" element={<Signup handleAuth={this.handleAuth} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
