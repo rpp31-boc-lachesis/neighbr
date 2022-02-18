@@ -12,9 +12,9 @@ const options = {
 };
 
 module.exports = (passport) => {
-  console.log('hitting passport function')
   passport.use(new Strategy(options, (jwtPayload, done) => {
-    Users.findOne({ username: jwtPayload.sub }, (err, user) => {
+    Users.findOne({ _id: jwtPayload.sub }, (err, user) => {
+      console.log(jwt_payload)
       if (err) {
         return done(err, false);
       }
