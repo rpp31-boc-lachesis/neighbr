@@ -1,10 +1,10 @@
+/* eslint-disable react/jsx-no-bind */
 import React from 'react';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import errands from './errandTestData.js';
 import Errand from './Errand.jsx';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
@@ -13,7 +13,8 @@ class RunnerStatus extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newRequests: [{ errandName: 'groceries', requesterName: 'Tiffany' }],
+      map: undefined,
+      newRequests: [],
       acceptedErrands: []
     };
   }
@@ -21,11 +22,56 @@ class RunnerStatus extends React.Component {
   componentDidMount() {
     const map = new mapboxgl.Map({
       container: 'mapContainer',
-      style: 'mapbox://styles/mapbox/streets-v11'
+      style: 'mapbox://styles/mapbox/streets-v11',
+    });
+    this.setState({
+      map,
+      newRequests: errands
+    });
+  }
+
+  onRequestAccept(errandObj) {
+    const { dropoff } = errandObj;
+    const { address } = dropoff;
+    const { newRequests, acceptedErrands } = this.state;
+    const requestsArr = [...newRequests];
+    const acceptedRequest = requestsArr.splice(0, 1);
+
+    const newAcceptedErrands = [...acceptedErrands, acceptedRequest[0]];
+
+    const mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+    mapboxClient.geocoding
+      .forwardGeocode({
+        query: address,
+        autocomplete: false,
+        limit: 1
+      })
+      .send()
+      .then((response) => {
+        if (
+          !response
+          || !response.body
+          || !response.body.features
+          || !response.body.features.length
+        ) {
+          console.error('Invalid response:');
+          console.error(response);
+          return;
+        }
+        const feature = response.body.features[0];
+        const { map } = this.state;
+        new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+      });
+
+    this.setState({
+      newRequests: requestsArr,
+      acceptedErrands: newAcceptedErrands
     });
   }
 
   render() {
+    const { newRequests, acceptedErrands } = this.state;
+
     return (
       <Grid
         container
@@ -95,11 +141,16 @@ class RunnerStatus extends React.Component {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Errand
-                  type="NewRequest"
-                  errandName={this.state.newRequests[0].errandName}
-                  requesterName={this.state.newRequests[0].requesterName}
-                />
+                {
+                  newRequests.length >= 1
+                  && (
+                    <Errand
+                      type="NewRequest"
+                      errandObj={newRequests[0]}
+                      onRequestAccept={this.onRequestAccept.bind(this)}
+                    />
+                  )
+                }
               </Grid>
             </Box>
             <Box
@@ -112,24 +163,28 @@ class RunnerStatus extends React.Component {
               <Box
                 container
                 minHeight="30vh"
+                maxHeight="30vh"
                 sx={{
                   border: 1,
                   borderRadius: 4,
                   borderColor: '#F88202',
-                  width: '100%'
+                  width: '100%',
+                  overflow: 'scroll',
+                  padding: '1vh'
                 }}
+                justifyContent="space-around"
                 item
               >
                 {
-                  this.state.acceptedErrands.map((req) => {
-                    return (
+                  acceptedErrands.length >= 1
+                  && (
+                    acceptedErrands.map((req) => (
                       <Errand
                         type="AcceptedErrand"
-                        errandName={req.errandName}
-                        requesterName={req.requesterName}
+                        errandObj={req}
                       />
-                    )
-                  })
+                    ))
+                  )
                 }
               </Box>
             </Box>

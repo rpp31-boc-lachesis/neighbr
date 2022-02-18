@@ -1,12 +1,21 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
 
 export default function Errand(props) {
+  const {
+    type,
+    errandObj,
+    onRequestAccept,
+    onRequestDeny,
+    onErrandComplete
+  } = props;
+  const { category, req_items: reqItems } = errandObj;
+  const { requester } = reqItems;
+
   return (
     <Grid
       sx={{
@@ -46,14 +55,14 @@ export default function Errand(props) {
             item
             id="ErrandName"
           >
-            {props.errandName}
+            {category}
           </Typography>
           <Typography
             color="#898989"
             item
             id="RequesterName"
           >
-            {props.requesterName}
+            {requester}
           </Typography>
         </Grid>
         <Grid
@@ -89,33 +98,36 @@ export default function Errand(props) {
         height="100%"
       >
         {
-          props.type === 'NewRequest' &&
-          (
-          <>
-            <Button
-              sx={{ borderRadius: 4 }}
-              item
-              variant="contained"
-              color="info"
-            >
-              Accept
-            </Button>
-            <Button
-              sx={{ borderRadius: 4 }}
-              item
-              disableElevation
-              variant="contained"
-              color="info"
-            >
-              Deny
-            </Button>
-          </>
+          type === 'NewRequest'
+          && (
+            <>
+              <Button
+                onClick={() => onRequestAccept(errandObj)}
+                sx={{ borderRadius: 4 }}
+                item
+                variant="contained"
+                color="info"
+              >
+                Accept
+              </Button>
+              <Button
+                onClick={onRequestDeny}
+                sx={{ borderRadius: 4 }}
+                item
+                disableElevation
+                variant="contained"
+                color="info"
+              >
+                Deny
+              </Button>
+            </>
           )
         }
         {
-          props.type === 'AcceptedRequest' &&
-          (
+          type === 'AcceptedErrand'
+          && (
             <Button
+              onClick={onErrandComplete}
               sx={{ borderRadius: 4 }}
               item
               disableElevation
@@ -133,8 +145,8 @@ export default function Errand(props) {
 
 Errand.propTypes = {
   type: PropTypes.string.isRequired,
-  errandName: PropTypes.string.isRequired,
-  requesterName: PropTypes.string.isRequired,
-  // errandDetails: PropTypes.object.isRequired,
-  // timeDistanceDetails: PropTypes.object.isRequired,
+  errandObj: PropTypes.object.isRequired,
+  onRequestAccept: PropTypes.func.isRequired,
+  onRequestDeny: PropTypes.func.isRequired,
+  onErrandComplete: PropTypes.func.isRequired
 };
