@@ -30,8 +30,9 @@ app.post('/locations/search', locationSearch);
 
 app.get('/runs', getRuns);
 app.post('/runs', addRun);
+
 // Catch all route for redirect must be last so others can fire first! :)
-app.get('/*', (req, res) => {
+app.get('/*', passport.authenticate('jwt', { session: false }), (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 

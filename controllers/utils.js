@@ -3,7 +3,6 @@ const fs = require('fs');
 const jsonwebtoken = require('jsonwebtoken');
 
 const PRIV_KEY = fs.readFileSync(`${__dirname}/signature/priv_key.pem`);
-const PUB_KEY = fs.readFileSync(`${__dirname}/signature/pub_key.pem`);
 
 module.exports = {
   issueJWT: (user) => {
@@ -13,7 +12,6 @@ module.exports = {
       sub: _id,
       iat: Date.now()
     };
-
     const signedToken = jsonwebtoken.sign(payload, PRIV_KEY, { expiresIn, algorithm: 'RS256' });
     return {
       token: `Bearer ${signedToken}`,

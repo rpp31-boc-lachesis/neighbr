@@ -10,11 +10,10 @@ const options = {
   secretOrKey: PUB_KEY,
   algorithms: ['RS256']
 };
-
+// verify
 module.exports = (passport) => {
   passport.use(new Strategy(options, (jwtPayload, done) => {
     Users.findOne({ _id: jwtPayload.sub }, (err, user) => {
-      console.log(jwt_payload)
       if (err) {
         return done(err, false);
       }
