@@ -28,18 +28,69 @@ const theme = responsiveFontSizes(createTheme({
   },
   typography: {
     fontFamily: 'Roboto'
-  }
+  },
 }));
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: null,
       destinations: [],
-      isLoggedIn: false
+      isLoggedIn: false,
+      loaded: false,
+      locations: [],
+      runs: [],
+      users: [],
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  componentDidMount() {
+    const { locations, runs, users, errands } = this.state;
+    const fetches = [
+      fetch('/locations')
+        .then((res) => res.json)
+        .then(
+          (result) => {
+            let oldArr = [...locations];
+            this.setState({ locations: [...oldArr, ...result] });
+          },
+          (error) => { this.setState({ error }); }
+        ),
+      fetch('/runs')
+        .then((res) => res.json)
+        .then(
+          (result) => {
+            console.log(result)
+            let oldArr = [...runs];
+            this.setState({ runs: [...oldArr, ...result] });
+          },
+          (error) => { this.setState({ error }); }
+        ),
+      fetch('/users')
+        .then((res) => res.json)
+        .then(
+          (result) => {
+            let oldArr = [...users];
+            this.setState({ users: [...oldArr, ...result] });
+          },
+          (error) => { this.setState({ error }); }
+        ),
+      fetch('/errands')
+        .then((res) => res.json)
+        .then(
+          (result) => {
+            let oldArr = [...errands];
+            this.setState({ errands: [...oldArr, ...result] });
+          },
+          (error) => { this.setState({ error }); }
+        ),
+    ];
+
+    Promise.all(fetches)
+      .then(this.setState({ loaded: true }));
   }
 
   handlePostRun(run) {

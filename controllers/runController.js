@@ -12,6 +12,7 @@ const {
 
 module.exports.getRuns = async (req, res) => {
   await getAllRuns((err, data) => {
+    console.log(err, data);
     if (err) {
       res.status(500).send(err.message);
     } else {

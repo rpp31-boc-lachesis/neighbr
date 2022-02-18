@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
+const Errands = require('./errands.js');
 
 const runSchema = new Schema({
   locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
@@ -11,6 +12,4 @@ const runSchema = new Schema({
   acceptedErrands: [{ type: mongoose.Types.ObjectId, ref: 'Errands' }]
 });
 
-const Run = mongoose.model('Run', runSchema);
-
-module.exports = Run;
+module.exports = runSchema;
