@@ -8,9 +8,9 @@ const runSchema = new Schema({
   date: Date,
   time: Date,
   endTime: Date,
-  acceptedErrands: [{ type: mongoose.Types.ObjectId, ref: 'Errands' }]
+  acceptedErrands: [{ type: mongoose.Types.ObjectId, ref: 'Errand' }]
 });
 
-const Run = mongoose.model('Run', runSchema);
+// const Run = mongoose.model('Run', runSchema);
 
-module.exports = Run;
+module.exports = runSchema;
