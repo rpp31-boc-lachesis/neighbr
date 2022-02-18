@@ -5,7 +5,7 @@ const { Users } = require('../models/index.js');
 
 module.exports = {
   getAllUsers: () => (
-    Users.find().sort({ id: 1 })
+    Users.find({ username: { $exists: true } }).sort({ id: 1 })
   ),
   getUsers: (page, count) => {
     const pageNumber = Number(page) === 1 ? 0 : (page * 20 - 20);
