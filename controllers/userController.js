@@ -2,8 +2,9 @@ const { getAllUsers, getOneUser, createUser } = require('../db/services/userServ
 
 module.exports = {
   getAllUsers: async (req, res) => {
+    const { page, count } = req.query;
     try {
-      const getUsers = await getAllUsers();
+      const getUsers = await getAllUsers(page, count);
       if (getUsers) {
         res.status(200).send(getUsers);
       }
@@ -23,8 +24,9 @@ module.exports = {
     }
   },
   postUser: async (req, res) => {
-    console.log('REQ BODY:', JSON.stringify(req.body.data.results));
-    res.status(201).send('New User Created!');
+    // eslint-disable-next-line no-console
+    console.log('REQ BODY:', req.body);
+    res.status(201).send('Update for real user data!');
     try {
       const newUser = await createUser(username);
       if (newUser) {
