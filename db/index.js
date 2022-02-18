@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const { DB_URI } = process.env;
-console.log('DB URI:', DB_URI);
 
 async function main() {
   try {

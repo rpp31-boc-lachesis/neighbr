@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import axios from 'axios';
 import Splash from './components/Splash/Splash.jsx';
 import Header from './components/Home/Header.jsx';
 import Main from './components/Home/Main.jsx';
@@ -17,6 +18,7 @@ import ProfilePopover from './components/ProfilePopover.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
+
 const theme = responsiveFontSizes(createTheme({
   palette: {
     primary: {
@@ -28,18 +30,77 @@ const theme = responsiveFontSizes(createTheme({
   },
   typography: {
     fontFamily: 'Roboto'
-  }
+  },
 }));
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      error: null,
       destinations: [],
-      isLoggedIn: false
+      isLoggedIn: false,
+      isLoaded: false,
+      locations: [],
+      runs: [],
+      users: [],
+      errands: [],
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  componentDidMount() {
+    const { locations, runs, users, errands } = this.state;
+    const fetches = [
+      axios.get('/locations')
+        .then((res) => res.data)
+        .then(
+          (result) => {
+            if (Array.isArray(result)) {
+              const oldArr = [...locations];
+              this.setState({ locations: [...oldArr, ...result] });
+            }
+          },
+          (error) => { this.setState({ isLoaded: true, error }); }
+        ),
+      axios.get('/runs')
+        .then((res) => res.data)
+        .then(
+          (result) => {
+            if (Array.isArray(result)) {
+              const oldArr = [...runs];
+              this.setState({ runs: [...oldArr, ...result] });
+            }
+          },
+          (error) => { this.setState({ isLoaded: true, error }); }
+        ),
+      axios.get('/users')
+        .then((res) => res.data)
+        .then(
+          (result) => {
+            if (Array.isArray(result)) {
+              const oldArr = [...users];
+              this.setState({ users: [...oldArr, ...result] });
+            }
+          },
+          (error) => { this.setState({ isLoaded: true, error }); }
+        ),
+      axios.get('/errands')
+        .then((res) => res.data)
+        .then(
+          (result) => {
+            if (Array.isArray(result)) {
+              const oldArr = [...errands];
+              this.setState({ errands: [...oldArr, ...result] });
+            }
+          },
+          (error) => { this.setState({ isLoaded: true, error }); }
+        )
+    ];
+
+    Promise.all(fetches)
+      .then(this.setState({ isLoaded: true }));
   }
 
   handlePostRun(run) {
@@ -63,7 +124,15 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn } = this.state;
+    // eslint-disable-next-line object-curly-newline
+    const { error, isLoaded, isLoggedIn, destinations, locations, users, runs } = this.state;
+    if (error) {
+      return <Error />;
+    }
+
+    if (!isLoaded) {
+      return <div>Loading...</div>;
+    }
     return (
       <ThemeProvider theme={theme}>
         <Router>

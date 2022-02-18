@@ -20,19 +20,17 @@ export default function LocationAutoComplete() {
     searchLocation(inputValue, null)
       .then((response) => response.json())
       .then((results) => {
-        console.log('searchLocation', results, value);
         if (active) {
           let newOptions = [];
 
           if (results) {
-            console.log(newOptions)
             newOptions = [...newOptions, ...results.features];
           }
 
           setOptions(newOptions);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
 
     return () => {
       active = false;

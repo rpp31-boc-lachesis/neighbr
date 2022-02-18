@@ -13,9 +13,9 @@ const locationSchema = new Schema({
   coordinates: Array,
   region: String,
   runs: [{ type: mongoose.Types.ObjectId, ref: 'Run' }],
-  errands: [{ type: mongoose.Types.ObjectId, ref: 'Errands' }],
+  errands: [{ type: mongoose.Types.ObjectId, ref: 'Errand' }],
 });
 
-const Location = mongoose.model('Location', locationSchema);
+// const Location = mongoose.model('Location', locationSchema);
 
-module.exports = Location;
+module.exports = locationSchema;
