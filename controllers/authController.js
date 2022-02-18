@@ -8,7 +8,7 @@ module.exports = {
       if (!user) {
         res.status(401).json({ message: 'could not find user' });
       }
-      const isValid = utils.comparePassword(req.body.password, user.hash, user.salt);
+      const isValid = utils.comparePassword(req.body.password, user.password, user.salt);
       if (isValid) {
         const tokenObj = utils.issueJWT(user);
         res.status(200).json({

@@ -7,12 +7,12 @@ const userSchema = Schema(
     first_name: {
       type: String,
       index: true,
-      required: false
+      required: true
     },
     last_name: {
       type: String,
       index: true,
-      required: false
+      required: true
     },
     username: {
       type: String,
@@ -26,7 +26,7 @@ const userSchema = Schema(
       unique: true,
       required: true
     },
-    hash: {
+    password: {
       type: String,
       index: true,
       required: true
