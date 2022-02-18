@@ -1,7 +1,8 @@
 import moment from 'moment';
 
-export default {
+const authService = {
   setLocalStorage: (response) => {
+    console.log('hitting setLocalStorage')
     const expires = moment().add(response.expiresIn);
     localStorage.setItem('token', response.token);
     localStorage.setItem('expires', JSON.stringify(expires.valueOf()));
@@ -25,3 +26,5 @@ export default {
     !isLoggedIn();
   }
 };
+
+export default authService;

@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
+import setLocalStorage from '../../auth.js';
 
 // function Copyright(props) {
 //   return (
@@ -37,14 +38,18 @@ function Login(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // front-end validation
-    props.handleLogin();
     axios.request({
       url: '/login',
       method: 'post',
       data: loginData
     })
-      .then(user => setUser('user'))
-      .catch(e => setError('Uhhh, we couldn\'t find the id or password'));
+      .then((user) => {
+        console.log(user)
+        setLocalStorage(user.data);
+        // props.handleLogin();
+        setUser('user'); // set to username
+      })
+      .catch((e) => setError('Uhhh, we couldn\'t find the id or password'));
   };
 
   return (
