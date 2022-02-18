@@ -17,4 +17,4 @@ function genKeyPair() {
   fs.writeFileSync(`${__dirname}/priv_key.pem`, keyPair.privateKey);
 }
 
-// genKeyPair();
+genKeyPair();

@@ -2,8 +2,8 @@ const crypto = require('crypto');
 const fs = require('fs');
 const jsonwebtoken = require('jsonwebtoken');
 
-const PRIV_KEY = fs.readFileSync(`${__dirname}/priv_key.pem`);
-const PUB_KEY = fs.readFileSync(`${__dirname}/pub_key.pem`);
+const PRIV_KEY = fs.readFileSync(`${__dirname}/signature/priv_key.pem`);
+const PUB_KEY = fs.readFileSync(`${__dirname}/signature/pub_key.pem`);
 
 module.exports = {
   issueJWT: (user) => {
