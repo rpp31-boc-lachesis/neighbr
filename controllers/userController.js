@@ -23,14 +23,15 @@ module.exports = {
     }
   },
   postUser: async (req, res) => {
-    const { username } = req.body;
-    try {
-      const createUser = await services.createUser(username);
-      if (createUser) {
-        res.status(201).send(`New User ${username} Created!`);
-      }
-    } catch (err) {
-      res.status(500).send(err);
-    }
+    console.log('REQ BODY:', JSON.stringify(req.body.data.results));
+    res.status(201).send('New User Created!');
+    // try {
+    //   const createUser = await services.createUser(username);
+    //   if (createUser) {
+    //     res.status(201).send(`New User ${username} Created!`);
+    //   }
+    // } catch (err) {
+    //   res.status(500).send(err);
+    // }
   }
 };

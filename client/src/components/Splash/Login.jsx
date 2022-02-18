@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
 
 // function Copyright(props) {
 //   return (
@@ -24,19 +25,25 @@ import Typography from '@mui/material/Typography';
 // }
 
 function Login(props) {
+  const [loginData, setLoginData] = React.useState({ username: '', password: '' });
   const [user, setUser] = React.useState(null);
   const [error, setError] = React.useState(null);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLoginData({ ...loginData, [name]: value });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // fetch user from database
-    // if there's matched user
-    // redirect to main page
     props.handleLogin();
-    // set user with found one
-    setUser('Maxine453');
-    // otherwise display error message
-    setError('Uhhh, we couldn\'t find the id or password');
+    axios.request({
+      url: '/login',
+      method: 'post',
+      data: loginData
+    })
+      .then(user => setUser('user'))
+      .catch(e => setError('Uhhh, we couldn\'t find the id or password'));
   };
 
   return (
@@ -82,6 +89,7 @@ function Login(props) {
               name="username"
               autoComplete="username"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -92,6 +100,7 @@ function Login(props) {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
             />
             <Button
               type="submit"
