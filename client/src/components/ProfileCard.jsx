@@ -9,23 +9,13 @@ import {
   Avatar,
   Paper,
   Stack,
-  Box
+  Box,
+  Rating
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import StarIcon from '@mui/icons-material/Star';
-import StarHalfIcon from '@mui/icons-material/StarHalf';
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import CloseIcon from '@mui/icons-material/Close';
-// import { createMUITheme, ThemeProvider } from '@mui/material/styles';
-
-// const useStyles = makeStyles({
-//   profileCard: {
-//     width: '400px',
-//     height: '550px'
-//   }
-// });
 
 const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
@@ -34,18 +24,17 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ProfileCard(props) {
-  const { handleClose } = props;
+export default function ProfileCard({ handleClose, currentUser }) {
   // const classes = useStyles();
   return (
-    <div className="ProfileCard" style={{ height: '530px', width: '350px' }}>
+    <div className="ProfileCard" style={{ height: '530px', width: '325px' }}>
       <div className="ProfileCardHeader">
-        <Grid container>
+        <Grid container sx={{ height: '30px' }}>
           <Grid item sm={10}>
             <DialogTitle sx={{ padding: '5px' }}>
-              <Typography variant="h6" component="div" sx={{ padding: '5px' }}>
+              {/* <Typography variant="h6" component="div" sx={{ padding: '5px' }}>
                 Neighbr Profile
-              </Typography>
+              </Typography> */}
             </DialogTitle>
           </Grid>
           <Grid item sm={2} sx={{ display: 'flex', alignContent: 'center', padding: '0px' }}>
@@ -55,28 +44,58 @@ export default function ProfileCard(props) {
           </Grid>
         </Grid>
       </div>
-      <DialogContent dividers sx={{ height: '180px', width: 'auto', padding: '10px' }}>
-        <Grid container sx={{ maxHeight: '20%' }}>
-          <Grid item sm={6} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>
-            <Avatar alt="profile image" src="https://randomuser.me/api/portraits/men/6.jpg" sx={{ height: '115px', width: '115px', backgroundColor: 'coral' }} />
+      <DialogContent
+        sx={{
+          height: '200px',
+          width: 'auto',
+          padding: '8px'
+        }}
+      >
+        <Grid
+          container
+          sx={{
+            maxHeight: '20%'
+          }}
+        >
+          <Grid
+            item
+            sm={7}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}
+          >
+            <Avatar
+              alt="profile image"
+              src={currentUser.avatar_url}
+              sx={{ height: '142px', width: '142px' }}
+            />
             <Typography variant="h5" component="div">
-              Tiffany
+              {currentUser.first_name}
             </Typography>
             <Typography variant="h6" component="div" sx={{ opacity: 0.6 }}>
-              San Francisco
+              {currentUser.city}
             </Typography>
           </Grid>
-          <Grid item sm={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <StarIcon sx={{ color: '#5E4CFF' }} />
-            <StarIcon sx={{ color: '#5E4CFF' }} />
-            <StarIcon sx={{ color: '#5E4CFF' }} />
-            <StarHalfIcon sx={{ color: '#5E4CFF' }} />
-            <StarOutlineIcon sx={{ color: '#5E4CFF' }} />
+          <Grid item sm={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Rating
+              name="half-rating-read"
+              value={(currentUser.sum_rating / currentUser.rating_count)}
+              precision={0.5}
+              readOnly
+              sx={{
+                color: '#5E4CFF',
+                paddingTop: '10px',
+                paddingRight: '8px'
+              }}
+            />
           </Grid>
         </Grid>
       </DialogContent>
-      <DialogContent dividers sx={{ padding: '10px' }}>
+      <DialogContent sx={{ padding: '10px' }}>
         <Typography sx={{ fontSize: '16px' }}>
+          {/* {currentUser.bio} */}
           Hi there! I love building community and serving my fellow Neighbrs!
           See what I did there? I am always out and about, so if you have any items
           you need picked up, just holler! Thanks!
@@ -84,19 +103,19 @@ export default function ProfileCard(props) {
       </DialogContent>
       <Grid>
         <Box item sm={10} textAlign="center">
-          <Typography>
+          <Typography variant="h6">
             Previous Requests
           </Typography>
           <div style={{
             height: '100px',
-            width: '350px',
+            width: '325px',
             overflow: 'scroll'
           }}
           >
             <Stack sx={{
               display: 'flex',
               justifyContent: 'center',
-              width: '325px',
+              width: '300px',
               padding: '10px',
               gap: '5px'
             }}
@@ -166,5 +185,7 @@ export default function ProfileCard(props) {
 }
 
 ProfileCard.propTypes = {
-  handleClose: PropTypes.func.isRequired
+  handleClose: PropTypes.func.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  currentUser: PropTypes.object.isRequired
 };
