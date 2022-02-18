@@ -1,10 +1,9 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const authService = {
-  setLocalStorage: (response) => {
-    console.log('hitting setLocalStorage')
-    const expires = moment().add(response.expiresIn);
-    localStorage.setItem('token', response.token);
+  setLocalStorage: (res) => {
+    const expires = dayjs().add(res.expiresIn[0], res.expiresIn[1]);
+    localStorage.setItem('token', res.token);
     localStorage.setItem('expires', JSON.stringify(expires.valueOf()));
   },
   logout: () => {
@@ -12,17 +11,14 @@ const authService = {
     localStorage.removeItem('expires');
   },
   getExpiration: () => {
-    // TO DO
     const expiration = localStorage.getItem('expires');
     const expiresAt = JSON.parse(expiration);
-    return momnet(expiresAt);
+    return dayjs(expiresAt);
   },
   isLoggedIn: () => {
-    // TO DO
-    moment().isBefore(getExpiration());
+    dayjs().isBefore(getExpiration());
   },
   isLoggedOut: () => {
-    // TO DO
     !isLoggedIn();
   }
 };
