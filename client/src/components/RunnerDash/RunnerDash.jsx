@@ -15,8 +15,8 @@ import Destination from './Destination.jsx';
 import AddRunModal from './AddRunModal.jsx';
 
 export default function RunnerDash(props) {
-  const { destinations, handlePostRun } = props;
-  const Destinations = destinations.map((dest, index) => <Destination dest={dest} key={dest.id} />);
+  const { runs, handlePostRun } = props;
+  const Destinations = runs.map((dest, index) => <Destination dest={dest} key={dest.id} />);
   return (
     <Container maxwidth="sm">
       <Grid container sx={{flexGrow: 1, height: '100%'}} justifyContent="center" alignItems="center" spacing={2}>
@@ -45,16 +45,16 @@ export default function RunnerDash(props) {
     </Container>
   );
 }
-RunnerDash.propTypes = {
-  destinations: propTypes.arrayOf(
-    propTypes.shape(
-      {
-        destination: propTypes.string.isRequired,
-        date: propTypes.instanceOf(Date).isRequired,
-        startTime: propTypes.instanceOf(Date).isRequired,
-        endTime: propTypes.instanceOf(Date).isRequired,
-        transportation: propTypes.string.isRequired,
-      }
-    )
-  ).isRequired
-};
+// RunnerDash.propTypes = {
+//   runs: propTypes.arrayOf(
+//     propTypes.shape(
+//       {
+//         destination: propTypes.string.isRequired,
+//         date: propTypes.instanceOf(Date).isRequired,
+//         startTime: propTypes.instanceOf(Date).isRequired,
+//         endTime: propTypes.instanceOf(Date).isRequired,
+//         transportation: propTypes.string.isRequired,
+//       }
+//     )
+//   ).isRequired
+// };
