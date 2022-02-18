@@ -2,7 +2,12 @@ require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const compression = require('compression');
-const { getAllUsers, getOneUser, postUser } = require('../controllers/userController');
+const {
+  getAll,
+  getUsers,
+  getOneUser,
+  postUser
+} = require('../controllers/userController');
 const { getRuns, addRun } = require('../controllers/runController');
 const { locationSearch } = require('../controllers/locationSearch');
 
@@ -14,7 +19,8 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/users', getAllUsers);
+app.get('/allusers', getAll);
+app.get('/users', getUsers);
 app.get('/users/:username', getOneUser);
 app.post('/users', postUser);
 

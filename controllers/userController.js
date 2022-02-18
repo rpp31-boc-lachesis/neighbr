@@ -1,12 +1,27 @@
-const { getAllUsers, getOneUser, createUser } = require('../db/services/userService');
+const {
+  getAllUsers,
+  getUsers,
+  getOneUser,
+  createUser
+} = require('../db/services/userService');
 
 module.exports = {
-  getAllUsers: async (req, res) => {
+  getAll: async (req, res) => {
+    try {
+      const allUsers = await getAllUsers();
+      if (allUsers) {
+        res.status(200).send(allUsers);
+      }
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  getUsers: async (req, res) => {
     const { page, count } = req.query;
     try {
-      const getUsers = await getAllUsers(page, count);
+      const users = await getUsers(page, count);
       if (getUsers) {
-        res.status(200).send(getUsers);
+        res.status(200).send(users);
       }
     } catch (err) {
       res.status(500).send(err);
