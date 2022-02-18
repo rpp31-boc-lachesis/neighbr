@@ -125,7 +125,9 @@ class App extends React.Component {
 
   render() {
     // eslint-disable-next-line object-curly-newline
-    const { error, isLoaded, isLoggedIn, destinations, locations, users, runs } = this.state;
+    const { error, isLoaded, isLoggedIn,
+      destinations, errands, locations, users, runs
+    } = this.state;
     if (error) {
       return <Error />;
     }
@@ -145,7 +147,7 @@ class App extends React.Component {
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/requestDash" element={<RunnerList />} />
-            <Route path="/runnerDash" element={<RunnerDash destinations={destinations} runs={runs} users={users} locations={locations} handlePostRun={this.handlePostRun} />} />
+            <Route path="/runnerDash" element={<RunnerDash destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/profile" element={<ProfilePopover />} />
             <Route path="*" element={<Error />} />

@@ -34,6 +34,19 @@ export default function AddRunModal(props) {
   const [transportation, setTransportation] = React.useState('');
   const [proximity, setProximity] = React.useState(null)
   const { handlePostRun } = props;
+  let proximityValue;
+
+  React.useEffect(() => {
+    if (zip.length >= 5) {
+      searchLocation(zip, null)
+        .then((res) => res.json())
+        .then((result) => {
+          console.log(result.features[0].center);
+          setProximity(result.features[0].center);
+        })
+        .catch((err) => { console.log(err) });
+    }
+  }, [zip]);
 
   const handleOpen = () => setOpen(true);
 
@@ -56,14 +69,8 @@ export default function AddRunModal(props) {
     handlePostRun(run);
     handleClose();
   };
-  let proximityValue;
   const handleZipChange = (e) => {
-    setProximity(e.target.value);
-    if (zip.length >= 5) {
-      searchLocation(zip, null)
-        .then((result) => { proximityValue = features[0].center })
-        .catch((err) => { console.log(err) });
-    }
+    setZip(e.target.value);
   };
 
   return (
@@ -84,7 +91,7 @@ export default function AddRunModal(props) {
               id="zip"
               label="Zip code"
               value={zip}
-              onChange={(e) => setZip(e.target.value)}
+              onChange={handleZipChange}
             />
             <LocationAutocomplete proximity={proximity} />
             <TextField
