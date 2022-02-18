@@ -1,5 +1,6 @@
 const errands = [
   {
+    _id: Math.floor(Math.random() * 1000000),
     category: 'Groceries',
     req_items: {
       item: 'someItem',
@@ -33,6 +34,7 @@ const errands = [
     }
   },
   {
+    _id: Math.floor(Math.random() * 1000000),
     category: 'Groceries',
     req_items: {
       item: 'otherItem',
@@ -66,6 +68,7 @@ const errands = [
     }
   },
   {
+    _id: Math.floor(Math.random() * 1000000),
     category: 'Groceries',
     req_items: {
       item: 'anotherItem',

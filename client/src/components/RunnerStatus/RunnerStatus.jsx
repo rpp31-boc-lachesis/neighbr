@@ -15,7 +15,8 @@ class RunnerStatus extends React.Component {
     this.state = {
       map: undefined,
       newRequests: [],
-      acceptedErrands: []
+      acceptedErrands: [],
+      mapMarkers: {}
     };
   }
 
@@ -31,9 +32,16 @@ class RunnerStatus extends React.Component {
   }
 
   onRequestAccept(errandObj) {
-    const { dropoff } = errandObj;
+    const {
+      _id,
+      dropoff,
+      category,
+      requester,
+      req_items: reqItems,
+      start_time: startTime
+    } = errandObj;
     const { address } = dropoff;
-    const { newRequests, acceptedErrands } = this.state;
+    const { newRequests, acceptedErrands, mapMarkers } = this.state;
     const requestsArr = [...newRequests];
     const acceptedRequest = requestsArr.splice(0, 1);
 
@@ -60,12 +68,54 @@ class RunnerStatus extends React.Component {
         }
         const feature = response.body.features[0];
         const { map } = this.state;
-        new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+        const marker = new mapboxgl
+          .Marker()
+          .setLngLat(feature.center)
+          .setPopup(
+            new mapboxgl.Popup().setHTML(`<h2>${category}</h2>
+            <p><strong>${requester}</strong><br>
+            <strong>Address:</strong> ${address}<br>
+            <strong>Requested at:</strong> ${startTime}<br>
+            <strong>Item:</strong> ${reqItems.item}</p>
+            `)
+          )
+          .addTo(map);
+        map.flyTo({
+          center: feature.center,
+          speed: 1.5,
+          zoom: 10
+        });
+
+        const newMapMarkers = { ...mapMarkers, [_id]: marker };
+
+        this.setState({
+          newRequests: requestsArr,
+          acceptedErrands: newAcceptedErrands,
+          mapMarkers: newMapMarkers
+        });
       });
+  }
+
+  onRequestDeny() {
+    const { newRequests } = this.state;
+    const newRequestsCopy = [...newRequests];
+    newRequestsCopy.shift();
+
+    this.setState({ newRequests: newRequestsCopy });
+  }
+
+  onErrandComplete(errandID, stateIndex) {
+    const { acceptedErrands, mapMarkers } = this.state;
+    const newAcceptedErrands = [...acceptedErrands];
+    const newMapMarkers = { ...mapMarkers };
+
+    newAcceptedErrands.splice(stateIndex, 1);
+    newMapMarkers[errandID].remove();
+    newMapMarkers[errandID] = undefined;
 
     this.setState({
-      newRequests: requestsArr,
-      acceptedErrands: newAcceptedErrands
+      acceptedErrands: newAcceptedErrands,
+      mapMarkers: newMapMarkers
     });
   }
 
@@ -148,6 +198,7 @@ class RunnerStatus extends React.Component {
                       type="NewRequest"
                       errandObj={newRequests[0]}
                       onRequestAccept={this.onRequestAccept.bind(this)}
+                      onRequestDeny={this.onRequestDeny.bind(this)}
                     />
                   )
                 }
@@ -178,12 +229,18 @@ class RunnerStatus extends React.Component {
                 {
                   acceptedErrands.length >= 1
                   && (
-                    acceptedErrands.map((req) => (
-                      <Errand
-                        type="AcceptedErrand"
-                        errandObj={req}
-                      />
-                    ))
+                    acceptedErrands.map((req, i) => {
+                      const { _id: errandID } = req;
+                      return (
+                        <Errand
+                          key={errandID}
+                          type="AcceptedErrand"
+                          stateIndex={i}
+                          errandObj={req}
+                          onErrandComplete={this.onErrandComplete.bind(this)}
+                        />
+                      );
+                    })
                   )
                 }
               </Box>
