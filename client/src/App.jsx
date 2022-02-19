@@ -211,13 +211,13 @@ class App extends React.Component {
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             <Route path="/main" element={<Main />} />
-            {/* <Route path="/requestStatus" element={<RequestStatus />} />
+            <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/requestDash" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/other" element={<Other />} />
             <Route path="/profile" element={<ProfilePopover />} />
-            <Route path="*" element={<Error />} /> */}
+            <Route path="*" element={<Error />} />
           </Routes>
         </Router>
       </ThemeProvider>
