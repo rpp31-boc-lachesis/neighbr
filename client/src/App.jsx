@@ -46,6 +46,7 @@ class App extends React.Component {
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
     this.logout = this.logout.bind(this);
   }
 
@@ -86,12 +87,26 @@ class App extends React.Component {
       });
   }
 
+  handleSignUp(e, loginData) {
+    e.preventDefault();
+    // console.log('loginData', loginData);
+    // const { data } = res;
+    authService.setLocalStorage(loginData);
+    // const expire = authService.getExpiration();
+    // console.log(expire.$d)
+
+    this.setState({
+      user: loginData.username,
+      userPhoto: loginData.avatar_url
+    });
+  }
+
   logout() {
-    authService.logout();
     this.setState({
       user: '',
       userPhoto: ''
     });
+    authService.logout();
   }
 
   render() {
@@ -102,7 +117,8 @@ class App extends React.Component {
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
           <Routes>
             <Route path="/" element={<Splash />} />
-            <Route path="/signup" element={<Signup handleAuth={this.handleAuth} user={user} />} />
+            <Route path="/other" element={<Other />} />
+            <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
