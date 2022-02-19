@@ -13,6 +13,8 @@ const authService = {
     localStorage.removeItem('expires');
   },
   jwtInterceptor: (axios) => {
+    // it's only getting hit once when the page first loads'
+    console.log('hitting intercepter')
     axios.interceptors.request.use(
       (req) => {
         const expiresAt = JSON.parse(localStorage.getItem('expires'));
@@ -22,15 +24,20 @@ const authService = {
         || req.url.includes('requestDash')
         || req.url.includes('runnerStatus')
         || req.url.includes('runnerDash');
-        console.log(req.url, isApiUrl);
 
         if (isLoggedIn && isApiUrl) {
-          req.headers.Authorization = localStorage.getItem('token');
+          req.headers.common.Authorization = localStorage.getItem('token');
         }
         return req;
       },
       (err) => Promise.reject(err)
     );
+  },
+  isLoggedIn: (cb) => {
+    const loggedInUser = localStorage.getItem('user');
+    if (loggedInUser) {
+      cb(loggedInUser);
+    }
   }
 };
 
