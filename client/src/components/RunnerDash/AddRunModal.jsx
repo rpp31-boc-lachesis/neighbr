@@ -45,7 +45,7 @@ export default function AddRunModal(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('click');
+
     const run = {
       destination,
       date,
