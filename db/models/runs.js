@@ -8,6 +8,7 @@ const runSchema = new Schema({
   date: Date,
   time: Date,
   endTime: Date,
+  transportation: String,
   acceptedErrands: [{ type: mongoose.Types.ObjectId, ref: 'Errand' }]
 });
 

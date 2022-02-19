@@ -38,13 +38,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       error: null,
-      destinations: [],
       isLoggedIn: false,
       isLoaded: false,
       locations: [],
       runs: [],
       users: [],
       errands: [],
+      lastRun: {},
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -103,18 +103,17 @@ class App extends React.Component {
       .then(this.setState({ isLoaded: true }));
   }
 
-  handlePostRun(run) {
-    const { destinations } = this.state;
-    this.setState({
-      destinations: [...destinations, run]
-    });
-    fetch('/runs', {
+  handlePostRun(run, destination) {
+    const combined = { run, destination };
+    console.log(JSON.stringify(combined));
+    fetch('/runs/post', {
       method: 'POST',
-      body: JSON.stringify(run),
+      body: JSON.stringify(combined),
       headers: { 'Content-Type': 'application/json' },
     })
+      .then((r) => r.json())
       .then((response) => {
-        console.log(response);
+        this.setState({ lastRun: response });
       })
       .catch((err) => console.log(err));
   }
@@ -125,7 +124,7 @@ class App extends React.Component {
 
   render() {
     // eslint-disable-next-line object-curly-newline
-    const { error, isLoaded, isLoggedIn,
+    const { error, isLoaded, isLoggedIn, lastRun,
       destinations, errands, locations, users, runs
     } = this.state;
     if (error) {
@@ -147,7 +146,7 @@ class App extends React.Component {
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/requestDash" element={<RunnerList />} />
-            <Route path="/runnerDash" element={<RunnerDash destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />
+            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/profile" element={<ProfilePopover />} />
             <Route path="*" element={<Error />} />

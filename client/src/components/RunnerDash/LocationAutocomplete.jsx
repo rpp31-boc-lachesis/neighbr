@@ -19,6 +19,7 @@ export default function LocationAutoComplete(props) {
       return undefined;
     }
 
+    console.log(value, inputValue);
     searchLocation(inputValue, proximity)
       .then((response) => response.json())
       .then((results) => {
@@ -33,7 +34,7 @@ export default function LocationAutoComplete(props) {
         }
       })
       .catch((err) => console.error(err));
-
+    props.handleDestChange(value);
     return () => {
       active = false;
     };
@@ -58,7 +59,7 @@ export default function LocationAutoComplete(props) {
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      isOptionEqualToValue={(option, value) => option.features.place_name === value.features.place_name}
+      isOptionEqualToValue={(option, value) => option._id === value._id}
       renderInput={(params) => (
         <TextField {...params} label="Add a location" fullWidth />
       )}

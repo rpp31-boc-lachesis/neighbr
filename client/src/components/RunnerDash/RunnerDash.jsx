@@ -16,22 +16,18 @@ import AddRunModal from './AddRunModal.jsx';
 
 export default function RunnerDash(props) {
   const { runs, handlePostRun } = props;
-  const Destinations = runs.map((dest, index) => <Destination dest={dest} key={dest.id} />);
+  const Runs = runs.map((dest) => <Destination dest={dest} key={dest.id} />);
   return (
     <Container maxwidth="sm">
       <Grid container sx={{flexGrow: 1, height: '100%'}} justifyContent="center" alignItems="center" spacing={2}>
         <Grid container item direction="column" sx={{ minHeight: '100%' }} xs={3}>
-          {/* <Container
-            maxwidth="sm"
-          > */}
           <AddRunModal handlePostRun={handlePostRun} />
           <img src={wavyBuddyPoint} alt="" />
-          {/* </Container> */}
         </Grid>
         <Grid item xs={4} sx={{overflow: 'scroll'}}>
           <Typography variant="h5">Current Runs</Typography>
           <Stack spacing={2}>
-            {Destinations}
+            {Runs}
           </Stack>
         </Grid>
         <Grid item xs={5} sx={{ height: '100%' }}>

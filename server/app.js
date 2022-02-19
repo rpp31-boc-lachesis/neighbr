@@ -3,10 +3,10 @@ const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const { getAllUsers, getOneUser, postUser } = require('../controllers/userController');
-const { getRuns, addRun } = require('../controllers/runController');
+const { getRuns, addRun, buildRun } = require('../controllers/runController');
 const { getAllErrands } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
-const { getLocations } = require('../controllers/locationController');
+const { getLocations, getOrAddLocation } = require('../controllers/locationController');
 
 const app = express();
 
@@ -22,9 +22,11 @@ app.post('/users', postUser);
 
 app.get('/locations', getLocations);
 app.post('/locations/search', locationSearch);
+app.post('/locations/getOrAdd', getOrAddLocation);
 
 app.get('/runs', getRuns);
 app.post('/runs', addRun);
+app.post('/runs/post', buildRun);
 
 app.get('/errands', getAllErrands);
 // Catch all route for redirect must be last so others can fire first! :)

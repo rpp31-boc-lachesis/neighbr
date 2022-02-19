@@ -52,21 +52,20 @@ export default function AddRunModal(props) {
 
   const handleClose = () => setOpen(false);
 
-  const handleDestChange = (event) => {
-    setDestination(event.target.value);
+  const handleDestChange = (value) => {
+    setDestination(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const run = {
-      destination,
       date,
       startTime,
       stopTime,
       transportation,
     };
-    handlePostRun(run);
+    handlePostRun(run, destination);
     handleClose();
   };
   const handleZipChange = (e) => {
@@ -93,16 +92,7 @@ export default function AddRunModal(props) {
               value={zip}
               onChange={handleZipChange}
             />
-            <LocationAutocomplete proximity={proximity} />
-            <TextField
-              required
-              fullWidth
-              id="destination"
-              label="Destination"
-              value={destination}
-              autoComplete="off"
-              onChange={handleDestChange}
-            />
+            <LocationAutocomplete proximity={proximity} handleDestChange={handleDestChange} />
             <DatePicker
               label="Date"
               value={date}

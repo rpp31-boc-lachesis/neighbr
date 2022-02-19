@@ -30,9 +30,30 @@ const getLocationById = (id, callback) => {
     .catch((err) => { callback(err, null); });
 };
 
+const getOrCreateLocation = (location, callback) => {
+  Location.findOne(location)
+    .then((resp) => {
+      if (resp !== null) {
+        callback(null, resp);
+      } else {
+        return Location.create(location);
+      }
+    })
+    .then((resp) => { callback(null, resp); })
+    .catch((err) => { callback(err, null); });
+};
+
+const addRunToLocation = (runId, locationId, callback) => {
+  Location.findByIdAndUpdate(locationId, { $push: { runs: runId } })
+    .then((resp) => { callback(null, resp); })
+    .catch((err) => { callback(err, null); });
+};
+
 module.exports = {
   createLocation,
   getAllLocations,
   getLocation,
   getLocationById,
+  getOrCreateLocation,
+  addRunToLocation,
 };
