@@ -23,7 +23,6 @@ const authService = {
       if (isLoggedIn) {
         req.headers.Authorization = localStorage.getItem('token');
       }
-      console.log('jwtInterceptor', req)
       return req;
     });
   }

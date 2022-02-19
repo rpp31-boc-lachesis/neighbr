@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
@@ -11,8 +11,9 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
+import Input from '@mui/material/Input';
 
-function Signup({ user, handleAuth }) {
+function Signup({ user, handleSignUp }) {
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -32,7 +33,7 @@ function Signup({ user, handleAuth }) {
     }
   );
 
-  const [loginData, setLoginData] = useState({ username: '', password: '' });
+  const [loginData, setLoginData] = useState({ username: '', password: '', avatar_url: '' });
 
   // const validate = () => {
   //   const temp = {};
@@ -42,7 +43,7 @@ function Signup({ user, handleAuth }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { formInput };
-
+    // console.log(data.formInput);
     axios.post('/signup', data.formInput)
       .then((response) => {
         console.log(response.data);
@@ -61,6 +62,30 @@ function Signup({ user, handleAuth }) {
     const { name, value } = event.target;
     setFormInput({ [name]: value });
   };
+
+  const uploadImage = (e) => {
+    const file = e.target.files;
+    const data = new FormData();
+    data.append('file', file[0]);
+    data.append('upload_preset', 'q0ubw64h');
+    // specific to cloudinary
+
+    // setLoading(true);
+    const res = fetch(
+      'https://api.cloudinary.com/v1_1/dkztds7yn/image/upload',
+      {
+        method: 'Post',
+        body: data
+      }
+    ).then((response) => response.json()).then((resData) => {
+      const name = 'avatar_url';
+      const value = resData.secure_url;
+      setFormInput({ [name]: value });
+      setLoginData({ ...loginData, [name]: value });
+    });
+  };
+  useEffect(() => {
+  }, [loginData]);
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -95,7 +120,7 @@ function Signup({ user, handleAuth }) {
             Sign Up
           </Typography>
           { user && (<Navigate to="/main" replace />)}
-          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleAuth(e, loginData); }} sx={{ mt: 1 }}>
+          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleSignUp(e, loginData); }} sx={{ mt: 1 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -252,7 +277,26 @@ function Signup({ user, handleAuth }) {
                 />
               </Grid>
             </Grid>
-            {/* <RouterLink to="/main"> */}
+            <br />
+            Profile Photo&nbsp;&nbsp;
+            <Input
+              // style={{ display: 'none' }}
+              id="upload-photo"
+              name="upload-photo"
+              type="file"
+              accept="image/*"
+              label="Your profile photo..."
+              onChange={uploadImage}
+            />
+            {/* <Fab
+              color="secondary"
+              size="small"
+              component="span"
+              aria-label="add"
+              variant="extended"
+            >
+              <AddIcon />
+            </Fab> */}
             <Button
               type="submit"
               fullWidth
@@ -282,5 +326,5 @@ export default Signup;
 
 Signup.propTypes = {
   user: PropTypes.string.isRequired,
-  handleAuth: PropTypes.func.isRequired
+  handleSignUp: PropTypes.func.isRequired
 };
