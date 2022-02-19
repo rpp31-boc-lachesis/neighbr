@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import axios from 'axios';
@@ -20,10 +20,7 @@ import ProfilePopover from './components/ProfilePopover.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
-
-
 authService.jwtInterceptor(axios);
-
 
 const theme = responsiveFontSizes(createTheme({
   palette: {
@@ -155,10 +152,11 @@ class App extends React.Component {
     e.preventDefault();
     // console.log('loginData', loginData);
     // const { data } = res;
-    authService.setLocalStorage(loginData);
+    // authService.setLocalStorage(loginData);
     // const expire = authService.getExpiration();
     // console.log(expire.$d)
-    window.localStorage.setItem('avatar_url', JSON.stringify(loginData.avatar_url));
+    window.localStorage.setItem('username', loginData.username);
+    window.localStorage.setItem('avatar_url', loginData.avatar_url);
     this.setState({
       user: loginData.username,
       userPhoto: loginData.avatar_url
@@ -190,17 +188,17 @@ class App extends React.Component {
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
           <Routes>
             <Route path="/" element={<Splash />} />
-            <Route path="/other" element={<Other />} />
+            {/* <Route path="/other" element={<Other />} /> */}
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             <Route path="/main" element={<Main />} />
-            <Route path="/requestStatus" element={<RequestStatus />} />
+            {/* <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/requestDash" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/other" element={<Other />} />
             <Route path="/profile" element={<ProfilePopover />} />
-            <Route path="*" element={<Error />} />
+            <Route path="*" element={<Error />} /> */}
           </Routes>
         </Router>
       </ThemeProvider>

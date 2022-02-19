@@ -14,7 +14,7 @@ const authService = {
   },
   jwtInterceptor: (axios) => {
     // it's only getting hit once when the page first loads'
-    console.log('hitting intercepter')
+    // console.log('hitting intercepter');
     axios.interceptors.request.use(
       (req) => {
         const expiresAt = JSON.parse(localStorage.getItem('expires'));
