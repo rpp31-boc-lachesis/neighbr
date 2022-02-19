@@ -5,7 +5,6 @@ import axios from 'axios';
 import Splash from './components/Splash/Splash.jsx';
 import Header from './components/Home/Header.jsx';
 import Main from './components/Home/Main.jsx';
-import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
@@ -15,6 +14,7 @@ import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
 import ProfilePopover from './components/ProfilePopover.jsx';
+import ProfileMain from './components/ProfileMain.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
@@ -158,7 +158,6 @@ class App extends React.Component {
           {(isLoggedIn) ? <Header /> : null }
           <Routes>
             <Route path="/" element={<Splash />} />
-            <Route path="/other" element={<Other />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login handleLogin={this.handleLogin} />} />
             <Route path="/main" element={<Main />} />
@@ -167,6 +166,7 @@ class App extends React.Component {
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/profile" element={<ProfilePopover />} />
+            <Route path="/profilemain" element={<ProfileMain />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>

@@ -9,7 +9,7 @@ export default function Error() {
       container
       sx={{
         minHeight: '100vh',
-        minWidgth: '100vh',
+        minWidth: '100vh',
         flexDirection: 'column',
         alignContent: 'center',
         justifyContent: 'center'

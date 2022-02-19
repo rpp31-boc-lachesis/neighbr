@@ -25,7 +25,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ProfileCard({ handleClose, currentUser }) {
-  // const classes = useStyles();
   return (
     <div className="ProfileCard" style={{ height: '530px', width: '325px' }}>
       <div className="ProfileCardHeader">
