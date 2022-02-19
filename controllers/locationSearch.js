@@ -15,7 +15,7 @@ module.exports.locationSearch = (req, res) => {
       res.send(response.data);
     })
     .catch((err) => {
-      console.log(err.request);
+      console.error(err.request);
       res.status(500).send(err.toJSON());
     });
 };

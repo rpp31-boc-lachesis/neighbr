@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
-const locationSchema = new mongoose.Schema({
+const locationSchema = new Schema({
   mapboxId: String,
   placeText: String,
   placeName: String,
@@ -13,9 +13,9 @@ const locationSchema = new mongoose.Schema({
   coordinates: Array,
   region: String,
   runs: [{ type: mongoose.Types.ObjectId, ref: 'Run' }],
-  errands: [{ type: mongoose.Types.ObjectId, ref: 'Errands' }],
+  errands: [{ type: mongoose.Types.ObjectId, ref: 'Errand' }],
 });
 
-const Location = mongoose.model('Location', locationSchema);
+// const Location = mongoose.model('Location', locationSchema);
 
-module.exports = Location;
+module.exports = locationSchema;
