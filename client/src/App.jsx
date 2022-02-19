@@ -14,10 +14,13 @@ import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
+import authService from './auth.js';
+// import ProfilePopup from './components/ProfilePopup.jsx';
 import ProfilePopover from './components/ProfilePopover.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
+authService.jwtInterceptor(axios);
 
 const theme = responsiveFontSizes(createTheme({
   palette: {
@@ -39,6 +42,8 @@ class App extends React.Component {
     this.state = {
       error: null,
       destinations: [],
+      user: window.localStorage.getItem('user') || '',
+      userPhoto: window.localStorage.getItem('avatar_url') || '',
       isLoggedIn: false,
       isLoaded: false,
       locations: [],
@@ -47,7 +52,9 @@ class App extends React.Component {
       errands: [],
     };
     this.handlePostRun = this.handlePostRun.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
+    this.handleAuth = this.handleAuth.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -130,11 +137,53 @@ class App extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  handleLogin() {
-    this.setState({ isLoggedIn: true });
+  handleAuth(e, loginData) {
+    e.preventDefault();
+    axios.request({
+      url: '/login',
+      method: 'post',
+      data: loginData
+    })
+      .then((res) => {
+        const { data } = res;
+        authService.setLocalStorage(data);
+        window.localStorage.setItem('avatar_url', data.avatar_url);
+        this.setState({
+          user: data.username,
+          userPhoto: data.avatar_url
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+        // setError('Uhhh, we couldn\'t find the id or password');
+      });
+  }
+
+  handleSignUp(e, loginData) {
+    e.preventDefault();
+    // console.log('loginData', loginData);
+    // const { data } = res;
+    // authService.setLocalStorage(loginData);
+    // const expire = authService.getExpiration();
+    // console.log(expire.$d)
+    window.localStorage.setItem('user', loginData.username);
+    window.localStorage.setItem('avatar_url', loginData.avatar_url);
+    this.setState({
+      user: loginData.username,
+      userPhoto: loginData.avatar_url
+    });
+  }
+
+  logout() {
+    this.setState({
+      user: '',
+      userPhoto: ''
+    });
+    authService.logout();
   }
 
   render() {
+    const { user, userPhoto } = this.state;
     // eslint-disable-next-line object-curly-newline
     const {
       error,
@@ -155,17 +204,18 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          {(isLoggedIn) ? <Header /> : null }
+          {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
           <Routes>
             <Route path="/" element={<Splash />} />
-            <Route path="/other" element={<Other />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login handleLogin={this.handleLogin} />} />
+            {/* <Route path="/other" element={<Other />} /> */}
+            <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
+            <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/requestDash" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
+            <Route path="/other" element={<Other />} />
             <Route path="/profile" element={<ProfilePopover />} />
             <Route path="*" element={<Error />} />
           </Routes>
