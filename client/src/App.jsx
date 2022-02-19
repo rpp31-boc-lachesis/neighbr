@@ -91,12 +91,11 @@ class App extends React.Component {
 
   handleSignUp(e, loginData) {
     e.preventDefault();
-    console.log('loginData', loginData);
+    // console.log('loginData', loginData);
     // const { data } = res;
-    // authService.setLocalStorage(loginData);
+    authService.setLocalStorage(loginData);
     // const expire = authService.getExpiration();
     // console.log(expire.$d)
-    console.log(loginData.username);
 
     this.setState({
       user: loginData.username,
