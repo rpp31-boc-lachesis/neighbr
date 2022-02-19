@@ -11,6 +11,7 @@ const { getRuns, addRun } = require('../controllers/runController');
 const { locationSearch } = require('../controllers/locationSearch');
 require('../db/auth/passport')(passport);
 
+const router = express.Router();
 // middleware
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -43,7 +44,11 @@ app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
-app.get('/*', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/protected', passport.authenticate('jwt', { session: false }), (req, res, next) => {
+  res.status(200).json({ success: true, msg: 'You are successfully authenticated to this route!'});
+});
+// passport.authenticate('jwt', { session: false }),
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 

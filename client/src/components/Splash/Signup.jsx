@@ -22,7 +22,7 @@ function Signup({ user, handleSignUp }) {
       username: '',
       email: '',
       password: '',
-      avatar_url: 'https://i.ibb.co/9H7KLLs/image5.png',
+      avatar_url: '',
       street_address: '',
       city: '',
       state: '',

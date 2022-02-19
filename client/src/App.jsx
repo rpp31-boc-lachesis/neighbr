@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import axios from 'axios';
@@ -41,8 +41,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       destinations: [],
-      user: '',
-      userPhoto: '',
+      user: window.localStorage.getItem('user') || '',
+      userPhoto: window.localStorage.getItem('avatar_url') || '',
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
@@ -76,6 +76,7 @@ class App extends React.Component {
       .then((res) => {
         const { data } = res;
         authService.setLocalStorage(data);
+        window.localStorage.setItem('avatar_url', data.avatar_url);
         this.setState({
           user: data.username,
           userPhoto: data.avatar_url
@@ -94,7 +95,7 @@ class App extends React.Component {
     authService.setLocalStorage(loginData);
     // const expire = authService.getExpiration();
     // console.log(expire.$d)
-
+    window.localStorage.setItem('avatar_url', JSON.stringify(loginData.avatar_url));
     this.setState({
       user: loginData.username,
       userPhoto: loginData.avatar_url
