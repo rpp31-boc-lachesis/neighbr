@@ -4,7 +4,7 @@
   "description": "a service-oriented application with a focus on building community",
   "main": "index.js",
   "scripts": {
-    "start": "node ./server/index.js",
+    "start": "node ./controllers/signature/createKeypair.js  && node ./server/index.js",
     "build": "webpack --mode production",
     "start:dev": "nodemon ./server/index.js",
     "build:dev": "webpack --mode development -w",

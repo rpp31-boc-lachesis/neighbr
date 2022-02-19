@@ -1,4 +1,4 @@
-const Run = require('../models/runs.js');
+const { Run } = require('../models/index.js');
 
 const createRun = (runObject, callback) => {
   Run.create(runObject)
@@ -7,7 +7,7 @@ const createRun = (runObject, callback) => {
 };
 
 const getAllRuns = (callback) => {
-  Run.find()
+  Run.find({})
     .populate({ path: 'acceptedErrands' })
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
