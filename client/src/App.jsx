@@ -58,7 +58,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const { locations, runs, users, errands } = this.state;
+    const {
+      locations,
+      runs,
+      users,
+      errands
+    } = this.state;
     const fetches = [
       axios.get('/locations')
         .then((res) => res.data)
@@ -82,13 +87,19 @@ class App extends React.Component {
           },
           (error) => { this.setState({ isLoaded: true, error }); }
         ),
-      axios.get('/users')
+      axios.get('/allusers')
         .then((res) => res.data)
         .then(
           (result) => {
             if (Array.isArray(result)) {
               const oldArr = [...users];
-              this.setState({ users: [...oldArr, ...result] });
+              this.setState(
+                { users: [...oldArr, ...result] },
+                () => {
+                  // eslint-disable-next-line no-console
+                  console.log('USERS:', result);
+                }
+              );
             }
           },
           (error) => { this.setState({ isLoaded: true, error }); }
@@ -174,7 +185,15 @@ class App extends React.Component {
   render() {
     const { user, userPhoto } = this.state;
     // eslint-disable-next-line object-curly-newline
-    const { error, isLoaded, isLoggedIn, destinations, locations, users, runs } = this.state;
+    const {
+      error,
+      isLoaded,
+      isLoggedIn,
+      destinations,
+      locations,
+      users,
+      runs
+    } = this.state;
     if (error) {
       return <Error />;
     }

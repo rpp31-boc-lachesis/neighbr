@@ -7,7 +7,12 @@ const compression = require('compression');
 const passport = require('passport');
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
-const { getAllUsers, getOneUser, postUser } = require('../controllers/userController');
+const {
+  getAll,
+  getUsers,
+  getOneUser,
+  postUser
+} = require('../controllers/userController');
 const { getRuns, addRun } = require('../controllers/runController');
 const { getAllErrands } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
@@ -21,12 +26,15 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 app.post('/login', authController.login);
 app.post('/signup', authController.signup);
 
-app.get('/users', userController.getAllUsers);
-app.get('/users/:username', userController.getOneUser);
-app.post('/users', userController.postUser);
+app.get('/allusers', getAll);
+app.get('/users', getUsers);
+app.get('/users/:username', getOneUser);
+app.post('/users', postUser);
+
 
 app.get('/locations', getLocations);
 app.post('/locations/search', locationSearch);
