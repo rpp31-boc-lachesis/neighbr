@@ -14,8 +14,6 @@ const { locationSearch } = require('../controllers/locationSearch');
 require('../db/auth/passport')(passport);
 const { getLocations } = require('../controllers/locationController');
 
-const app = express();
-
 // middleware
 app.use(passport.initialize());
 app.use(express.static(path.join(__dirname, '../client/dist')));
