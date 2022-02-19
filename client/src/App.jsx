@@ -46,6 +46,7 @@ class App extends React.Component {
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   handlePostRun(run) {
@@ -66,7 +67,6 @@ class App extends React.Component {
 
   handleAuth(e, loginData) {
     e.preventDefault();
-
     axios.request({
       url: '/login',
       method: 'post',
@@ -75,8 +75,6 @@ class App extends React.Component {
       .then((res) => {
         const { data } = res;
         authService.setLocalStorage(data);
-        // const expire = authService.getExpiration();
-        // console.log(expire.$d)
         this.setState({
           user: data.username,
           userPhoto: data.avatar_url
@@ -84,8 +82,16 @@ class App extends React.Component {
       })
       .catch((e) => {
         console.log(e);
-        setError('Uhhh, we couldn\'t find the id or password');
+        // setError('Uhhh, we couldn\'t find the id or password');
       });
+  }
+
+  logout() {
+    authService.logout();
+    this.setState({
+      user: '',
+      userPhoto: ''
+    });
   }
 
   render() {
@@ -93,10 +99,9 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          {user ? <Header userPhoto={userPhoto} user={user} /> : null }
+          {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
           <Routes>
             <Route path="/" element={<Splash />} />
-            <Route path="/other" element={<Other />} />
             <Route path="/signup" element={<Signup handleAuth={this.handleAuth} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             <Route path="/main" element={<Main />} />
@@ -104,6 +109,7 @@ class App extends React.Component {
             <Route path="/requestDash" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
+            <Route path="/other" element={<Other />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>
