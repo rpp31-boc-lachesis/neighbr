@@ -166,7 +166,7 @@ class App extends React.Component {
     // authService.setLocalStorage(loginData);
     // const expire = authService.getExpiration();
     // console.log(expire.$d)
-    window.localStorage.setItem('username', loginData.username);
+    window.localStorage.setItem('user', loginData.username);
     window.localStorage.setItem('avatar_url', loginData.avatar_url);
     this.setState({
       user: loginData.username,
