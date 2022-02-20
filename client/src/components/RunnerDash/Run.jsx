@@ -8,9 +8,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
-export default function Destination(props) {
-  const { dest } = props;
-  const { destination, date, startTime, endTime, transportation } = dest;
+export default function Run(props) {
+  const { run } = props;
+  const { location, date, startTime, endTime, transportation } = run;
   return (
     <Card
       elevation={4}
@@ -24,7 +24,7 @@ export default function Destination(props) {
     >
       <CardContent>
         <Grid>
-          <Typography variant="h5">{`${destination} by: ${transportation}`}</Typography>
+          <Typography variant="h5">{`${location} by: ${transportation}`}</Typography>
           <Typography variant="body2">{`Start: ${startTime} End: ${endTime}`}</Typography>
           <Typography variant="body2">{`Date: ${date}`}</Typography>
         </Grid>
@@ -36,9 +36,9 @@ export default function Destination(props) {
   );
 }
 
-Destination.propTypes = {
-  dest: propTypes.shape({
-    destination: propTypes.string.isRequired,
+Run.propTypes = {
+  run: propTypes.shape({
+    location: propTypes.string.isRequired,
     date: propTypes.instanceOf(Date).isRequired,
     startTime: propTypes.instanceOf(Date).isRequired,
     endTime: propTypes.instanceOf(Date).isRequired,

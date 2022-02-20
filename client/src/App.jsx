@@ -62,7 +62,10 @@ class App extends React.Component {
               this.setState({ locations: [...oldArr, ...result] });
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/runs')
         .then((res) => res.data)
@@ -73,7 +76,10 @@ class App extends React.Component {
               this.setState({ runs: [...oldArr, ...result] });
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/users')
         .then((res) => res.data)
@@ -84,7 +90,10 @@ class App extends React.Component {
               this.setState({ users: [...oldArr, ...result] });
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/errands')
         .then((res) => res.data)
@@ -95,7 +104,10 @@ class App extends React.Component {
               this.setState({ errands: [...oldArr, ...result] });
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         )
     ];
 
@@ -103,19 +115,21 @@ class App extends React.Component {
       .then(this.setState({ isLoaded: true }));
   }
 
-  handlePostRun(run, destination) {
-    const combined = { run, destination };
-    console.log(JSON.stringify(combined));
-    fetch('/runs/post', {
-      method: 'POST',
-      body: JSON.stringify(combined),
-      headers: { 'Content-Type': 'application/json' },
+  handlePostRun(run, location) {
+    const combined = { run, location };
+    axios.post('/runs/post', {
+      data: combined,
+      // headers: { 'Content-Type': 'application/json' },
     })
-      .then((r) => r.json())
+      .then((r) => {
+        // r.text().then((t) => {console.log(t)})
+        console.log(r.data.data);
+        return r.data.data;
+      })
       .then((response) => {
         this.setState({ lastRun: response });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err))//this.setState({ error: err }));
   }
 
   handleLogin() {
@@ -128,7 +142,7 @@ class App extends React.Component {
       destinations, errands, locations, users, runs
     } = this.state;
     if (error) {
-      return <Error />;
+      return <Error error={error} />;
     }
 
     if (!isLoaded) {

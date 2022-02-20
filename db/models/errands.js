@@ -11,8 +11,8 @@ const errandSchema = Schema({
     size: String,
     notes: String,
     status: String,
-    requester: mongoose.Types.ObjectId,
-    runner: mongoose.Types.ObjectId,
+    requester: { type: mongoose.Types.ObjectId, ref: 'User' },
+    runner: { type: mongoose.Types.ObjectId, ref: 'User' },
     transportation: String
   },
   message: {
@@ -24,14 +24,14 @@ const errandSchema = Schema({
     address: String
   },
   dropoff: {
-    requester: mongoose.Types.ObjectId,
+    requester: { type: mongoose.Types.ObjectId, ref: 'User' },
     address: String
   },
   date: Date,
   start_time: Date,
   end_time: Date,
   received_rating: {
-    requester: mongoose.Types.ObjectId,
+    requester: { type: mongoose.Types.ObjectId, ref: 'User' },
     rating: Number
   }
 });

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const locationSchema = new Schema({
-  mapboxId: String,
+  mapboxId: { type: String, index: true },
   placeText: String,
   placeName: String,
   address: String,

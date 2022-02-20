@@ -1,6 +1,7 @@
 const { Run } = require('../models/index.js');
 
 const createRun = (runObject, callback) => {
+  console.log(runObject);
   Run.create(runObject)
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
@@ -8,21 +9,30 @@ const createRun = (runObject, callback) => {
 
 const getAllRuns = (callback) => {
   Run.find({})
-    .populate({ path: 'acceptedErrands' })
+    .lean()
+    .populate('acceptedErrands')
+    .populate('location')
+    .populate('user')
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
 
 const getRun = (filter, callback) => {
   Run.find(filter)
-    .populate({ path: 'acceptedErrands' })
+    .lean()
+    .populate('acceptedErrands')
+    .populate('location')
+    .populate('user')
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
 
 const getRunById = (id, callback) => {
-  Run.find(id)
-    .populate({ path: 'acceptedErrands' })
+  Run.findById(id)
+    .lean()
+    .populate('acceptedErrands')
+    .populate('location')
+    .populate('user')
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };

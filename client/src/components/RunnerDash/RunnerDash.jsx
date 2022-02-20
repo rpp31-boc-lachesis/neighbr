@@ -11,15 +11,16 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import wavyBuddyPoint from '../../assets/wavyBuddiesStanding.png';
-import Destination from './Destination.jsx';
+import Run from './Run.jsx';
 import AddRunModal from './AddRunModal.jsx';
 
 export default function RunnerDash(props) {
   const { runs, handlePostRun } = props;
-  const Runs = runs.map((dest) => <Destination dest={dest} key={dest.id} />);
+  console.log(runs);
+  const Runs = runs.map((run) => <Run run={run} key={run._id} />);
   return (
     <Container maxwidth="sm">
-      <Grid container sx={{flexGrow: 1, height: '100%'}} justifyContent="center" alignItems="center" spacing={2}>
+      <Grid container sx={{ flexGrow: 1, height: '100%' }} justifyContent="center" alignItems="center" spacing={2}>
         <Grid container item direction="column" sx={{ minHeight: '100%' }} xs={3}>
           <AddRunModal handlePostRun={handlePostRun} />
           <img src={wavyBuddyPoint} alt="" />

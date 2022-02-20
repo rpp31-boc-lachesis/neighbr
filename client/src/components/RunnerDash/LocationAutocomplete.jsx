@@ -34,7 +34,7 @@ export default function LocationAutoComplete(props) {
         }
       })
       .catch((err) => console.error(err));
-    props.handleDestChange(value);
+    props.handleLocChange(value);
     return () => {
       active = false;
     };

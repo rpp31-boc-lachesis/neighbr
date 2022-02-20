@@ -2,49 +2,58 @@ const { Location } = require('../models/index.js');
 
 const createLocation = (locationObject, callback) => {
   Location.create(locationObject)
+    .lean()
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
 
 const getAllLocations = (callback) => {
   Location.find()
-    .populate({ path: 'runs' })
-    .populate({ path: 'errands' })
+    .lean()
+    .populate('runs')
+    .populate('errands')
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
 
 const getLocation = (filter, callback) => {
   Location.find(filter)
-    .populate({ path: 'runs' })
-    .populate({ path: 'errands' })
+    .lean()
+    .populate('runs')
+    .populate('errands')
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
 
 const getLocationById = (id, callback) => {
   Location.findById(id)
-    .populate({ path: 'runs' })
-    .populate({ path: 'errands' })
+    .lean()
+    .populate('runs')
+    .populate('errands')
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
 
 const getOrCreateLocation = (location, callback) => {
   Location.findOne(location)
+    .lean()
+    // .populate({ path: 'runs', model: 'User', populate: { path: 'user', model: 'User'}, populate: { path: location, model: 'Loation' } })
+    .populate('runs')
     .then((resp) => {
       if (resp !== null) {
         callback(null, resp);
       } else {
-        return Location.create(location);
+        Location.create(location)
+          .then((resp) => { callback(null, resp); })
+          .catch((err) => { callback(err, null); });
       }
     })
-    .then((resp) => { callback(null, resp); })
     .catch((err) => { callback(err, null); });
 };
 
 const addRunToLocation = (runId, locationId, callback) => {
   Location.findByIdAndUpdate(locationId, { $push: { runs: runId } })
+    .lean()
     .then((resp) => { callback(null, resp); })
     .catch((err) => { callback(err, null); });
 };

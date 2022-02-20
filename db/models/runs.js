@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const runSchema = new Schema({
-  locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
-  userId: mongoose.Types.ObjectId,
+  location: { type: mongoose.Types.ObjectId, ref: 'Location' },
+  user: { type: mongoose.Types.ObjectId, ref: 'User' },
   date: Date,
   time: Date,
   endTime: Date,

@@ -27,24 +27,23 @@ const style = {
 export default function AddRunModal(props) {
   const [zip, setZip] = React.useState('');
   const [open, setOpen] = React.useState(false);
-  const [destination, setDestination] = React.useState('');
+  const [location, setLocation] = React.useState('');
   const [date, setDate] = React.useState(new Date());
   const [startTime, setStart] = React.useState(new Date());
   const [stopTime, setStop] = React.useState(new Date());
   const [transportation, setTransportation] = React.useState('');
-  const [proximity, setProximity] = React.useState(null)
+  const [proximity, setProximity] = React.useState(null);
   const { handlePostRun } = props;
-  let proximityValue;
+  let Value;
 
   React.useEffect(() => {
     if (zip.length >= 5) {
-      searchLocation(zip, null)
+      searchLocation(zip, null, )
         .then((res) => res.json())
         .then((result) => {
-          console.log(result.features[0].center);
           setProximity(result.features[0].center);
         })
-        .catch((err) => { console.log(err) });
+        .catch((err) => { console.log(err); });
     }
   }, [zip]);
 
@@ -52,8 +51,8 @@ export default function AddRunModal(props) {
 
   const handleClose = () => setOpen(false);
 
-  const handleDestChange = (value) => {
-    setDestination(value);
+  const handleLocChange = (value) => {
+    setLocation(value);
   };
 
   const handleSubmit = (e) => {
@@ -65,7 +64,7 @@ export default function AddRunModal(props) {
       stopTime,
       transportation,
     };
-    handlePostRun(run, destination);
+    handlePostRun(run, location);
     handleClose();
   };
   const handleZipChange = (e) => {
@@ -92,7 +91,7 @@ export default function AddRunModal(props) {
               value={zip}
               onChange={handleZipChange}
             />
-            <LocationAutocomplete proximity={proximity} handleDestChange={handleDestChange} />
+            <LocationAutocomplete proximity={proximity} handleLocChange={handleLocChange} />
             <DatePicker
               label="Date"
               value={date}
