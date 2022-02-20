@@ -206,11 +206,11 @@ class App extends React.Component {
         <Router>
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
           <Routes>
-            <Route path="/" element={<Splash />} />
+            <Route path="/" element={<Splash user={user} />} />
             {/* <Route path="/other" element={<Other />} /> */}
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
-            <Route path="/main" element={<Main />} />
+            {user ? <Route path="/main" element={<Main />} /> : null }
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/requestDash" element={<RunnerList />} />
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
