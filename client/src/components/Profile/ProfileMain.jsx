@@ -16,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'left',
-  width: '400px',
+  width: 'auto',
   font: 'Roboto',
   color: theme.palette.text.secondary,
 }));
@@ -24,13 +24,33 @@ const Item = styled(Paper)(({ theme }) => ({
 export function BasicStack() {
   return (
     <div>
-      <Stack spacing={1}>
-        <Item>First Name:</Item>
-        <Item>Last Name</Item>
-        <Item>Email:</Item>
-        <Item>Date of Birth:</Item>
-        <Item>Rating:</Item>
-        <Item>Bio:</Item>
+      <Stack
+        spacing={1}
+      >
+        <Item>
+          <strong>First Name:</strong>
+          {' Some'}
+        </Item>
+        <Item>
+          <strong>Last Name:</strong>
+          {' RandomUser'}
+        </Item>
+        <Item>
+          <strong>Email:</strong>
+          {' random@test.com'}
+        </Item>
+        <Item>
+          <strong>Date of Birth:</strong>
+          {' 05-16-1990'}
+        </Item>
+        <Item>
+          <strong>Rating:</strong>
+          {' 4.5'}
+        </Item>
+        <Item>
+          <strong>Bio:</strong>
+          {" What's up everyone?! I'm always out running around so please let me know what I can pick up for you."}
+        </Item>
       </Stack>
     </div>
   );
@@ -55,7 +75,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography variant="h4">{children}</Typography>
+          <Typography>{children}</Typography>
         </Box>
       )}
     </div>
@@ -84,108 +104,145 @@ export default function VerticalTabs() {
   };
 
   return (
-    <Grid
+    <Box
       sx={{
+        flexGrow: 1,
         minHeight: '100vh',
         minWidth: '100vh',
+        bgcolor: 'background.paper',
         display: 'flex',
-        alignItems: 'center',
+        border: '2px solid red'
       }}
     >
-      <Box
+      <Tabs
+        orientation="vertical"
+        value={value}
+        onChange={handleChange}
+        aria-label="Vertical tabs example"
         sx={{
-          flexGrow: 1,
-          bgcolor: 'background.paper',
           display: 'flex',
-          height: '700px',
-          width: '900px',
-          border: '2px solid red'
+          borderRight: 1,
+          borderColor: 'divider',
+          width: '15%',
+          backgroundColor: '#88C4FB',
+          paddingTop: '2%'
         }}
       >
-        <Tabs
-          orientation="vertical"
-          value={value}
-          onChange={handleChange}
-          aria-label="Vertical tabs example"
+        <Grid
           sx={{
             display: 'flex',
-            borderRight: 1,
-            borderColor: 'divider',
-            width: '250px',
-            backgroundColor: '#88C4FB',
-            paddingTop: '30px'
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: 'auto'
           }}
         >
-          <img alt="house in neighborhood" src="https://drive.google.com/uc?export=view&id=1N5btun98vI2V7vJoTN_mFkh32oEWUZDl" style={{ width: '200px' }} />
-          <Tab label="Profile" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(0)} />
-          <Tab label="Location" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(1)} />
-          <Tab label="Runs" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(2)} />
-          <Tab label="Requests" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(3)} />
-        </Tabs>
-        <TabPanel value={value} index={1} sx={{ width: '300px' }}>
+          <img alt="house in neighborhood" src="https://drive.google.com/uc?export=view&id=1N5btun98vI2V7vJoTN_mFkh32oEWUZDl" style={{ width: '100%', height: '100%' }} />
+        </Grid>
+        <Tab label="Profile" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(0)} />
+        <Tab label="Location" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(1)} />
+        <Tab label="Runs" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(2)} />
+        <Tab label="Requests" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(3)} />
+      </Tabs>
+      <TabPanel value={value} index={0}>
+        <Grid
+          container
+        >
           <Grid
-            container
+            item
+            sm={3}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
           >
-            <Grid
-              item
-              sm={3}
+            <Avatar
+              src="https://randomuser.me/api/portraits/men/52.jpg"
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
+                height: '75%',
+                width: '75%'
+              }}
+            />
+            <Typography variant="h4" color="primary">
+              @username
+            </Typography>
+            <Typography
+              sx={{
+                opacity: 0.5
               }}
             >
-              <Avatar sx={{ height: '150px', width: '150px' }} />
-              <Typography variant="h4" color="primary">
-                @username
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: '50%',
-                  opacity: 0.5
-                }}
-              >
-                Member since 02-15-2022
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              sm={9}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                fontSize: '75%',
-                paddingTop: '30px',
-                paddingLeft: '25px'
-              }}
-            >
-              <BasicStack />
-              <Grid
-                item
-                sx={{
-                  // backgroundImage: 'url(https://i.ibb.co/ZmMGMGq/Screen-Shot-2022-02-11-at-12-43-26-PM.png)',
-                  // backgroundRepeat: 'no-repeat',
-                  // backgroundSize: 'cover',
-                  // backgroundPosition: 'center',
-                  // width: '100vh',
-                  // height: '100vh'
-                }}
-              >
-                <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=1kkKcSb1nXsnBaBPYV83IwauRRhqGaonu" />
-              </Grid>
-            </Grid>
+              Member since 02-15-2022
+            </Typography>
           </Grid>
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          Location
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          Runs
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          Requests
-        </TabPanel>
-      </Box>
-    </Grid>
+          <Grid
+            item
+            sm={5}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              paddingTop: '5%',
+              paddingLeft: '2%'
+            }}
+          >
+            <BasicStack />
+          </Grid>
+          <Grid
+            item
+            sm={4}
+            sx={{
+              alignItems: 'right',
+              width: '33%'
+            }}
+          >
+            <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=1kkKcSb1nXsnBaBPYV83IwauRRhqGaonu" />
+          </Grid>
+        </Grid>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Grid
+          container
+        >
+          <Grid
+            item
+            sm={3}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            Info
+          </Grid>
+          <Grid
+            item
+            sm={5}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              paddingTop: '5%',
+              paddingLeft: '2%'
+            }}
+          >
+            <BasicStack />
+          </Grid>
+          <Grid
+            item
+            sm={4}
+            sx={{
+              alignItems: 'right',
+              width: '33%'
+            }}
+          >
+            <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB" />
+          </Grid>
+        </Grid>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        Runs
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Requests
+      </TabPanel>
+    </Box>
   );
 }
