@@ -149,12 +149,12 @@ class RequestStatus extends React.Component {
                 ))}
 
                 <TableRow>
-                  <TableCell>Transportation</TableCell>
+                  <TableCell rowSpan={3} />
+                  <TableCell colSpan={1}>Transportation</TableCell>
                   <TableCell align="right">{transportation}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell rowSpan={3} />
-                  <TableCell colSpan={1}>Total Weight</TableCell>
+                  <TableCell>Total Weight</TableCell>
                   <TableCell align="right">{weight}</TableCell>
                 </TableRow>
                 <TableRow>
