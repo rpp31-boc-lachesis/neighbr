@@ -20,11 +20,13 @@ const errandSchema = Schema({
   message: String,
   pickup: {
     store: String,
-    address: String
+    address: String,
+    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
   },
   dropoff: {
     address: String,
-    note: String
+    note: String,
+    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
   },
   date: Date,
   start_time: Date,

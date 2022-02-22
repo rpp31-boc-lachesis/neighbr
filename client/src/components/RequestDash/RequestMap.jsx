@@ -1,19 +1,33 @@
 import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+// import Directions from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 
 export default function RequestMap() {
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFyeW1peWFtb3RvIiwiYSI6ImNrempyOWg2bzBkYXgydnFvcWplZmJ1a2oifQ.oQ9QtYxKsabjCYJqjwmo0g';
     // process.env.MAPBOX_ACCESS_TOKEN;
+    // const map = new mapboxgl.Map({
+    //   container: 'mapContainer',
+    //   style: 'mapbox://styles/mapbox/streets-v11',
+    //   center: [-77.04, 38.907],
+    //   zoom: 11.15
+    // });
+
+    // map.addControl(new mapboxgl.NavigationControl());
     const map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-77.04, 38.907],
-      zoom: 11.15
+      center: [-79.4512, 43.6568],
+      zoom: 13
     });
 
-    map.addControl(new mapboxgl.NavigationControl());
+    map.addControl(
+      new MapboxDirections({
+        accessToken: mapboxgl.accessToken
+      }),
+      'top-left'
+    );
   });
 
   const style = {

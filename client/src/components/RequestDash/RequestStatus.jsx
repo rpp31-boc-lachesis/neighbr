@@ -10,6 +10,8 @@ import Button from '@mui/material/Button';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
+import Tooltip from '@mui/material/Tooltip';
+import CloseIcon from '@mui/icons-material/Close';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Table from '@mui/material/Table';
@@ -22,6 +24,8 @@ class RequestStatus extends React.Component {
     this.state = {
     };
   }
+
+  // set pickup/dropoff points using getLocationById (after a post request saves location in db)
 
   render() {
     const sx = {
@@ -49,8 +53,8 @@ class RequestStatus extends React.Component {
 
     return (
       <Container fixed>
-        <Typography display="block" align="justify" variant="h6">
-          Request:
+        <Typography display="block" align="left" variant="subtitle1">
+          Request: &nbsp;
           {shop}
         </Typography>
         <RequestMap />
@@ -96,6 +100,7 @@ class RequestStatus extends React.Component {
             </Typography>
             <Typography variant="overline">
               {shop}
+              &nbsp;
             </Typography>
             <Typography variant="caption">
               {pickup}
@@ -103,62 +108,66 @@ class RequestStatus extends React.Component {
           </Grid>
           <Grid item>
             <Typography variant="h5">
-              Drop-Off:
+              Drop-Off: &nbsp;
+            </Typography>
+            <Typography variant="caption">
               {dropoff}
-              Note:
+            </Typography>
+            <Typography variant="body2">
+              Note: &nbsp;
               {dropoffNote}
             </Typography>
             <Typography variant="body2">
-              Category:
+              Category: &nbsp;
               {category}
             </Typography>
-            <TableContainer component={Paper}>
-              <Typography align="center">
-                Cart:
-              </Typography>
-              <Table sx={{ margin: 'auto', minWidth: 450, maxWidth: 600 }} aria-label="cart items">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Item</TableCell>
-                    <TableCell align="right">Quantity</TableCell>
-                    <TableCell align="right">Status</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <TableRow
-                      key={row.item}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    >
-                      <TableCell component="th" scope="row">
-                        {row.item}
-                      </TableCell>
-                      <TableCell align="right">{row.quantity}</TableCell>
-                      <TableCell align="right">{row.status}</TableCell>
-                    </TableRow>
-                  ))}
-
-                  <TableRow>
-                    <TableCell rowSpan={3} />
-                    <TableCell colSpan={1}>Total Weight</TableCell>
-                    <TableCell align="right">{weight}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Total Size</TableCell>
-                    <TableCell align="right">{size}</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Transportation</TableCell>
-                    <TableCell align="right">{transportation}</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <Typography variant="body2">
-              Note:
-              {message}
-            </Typography>
           </Grid>
+          <TableContainer component={Paper}>
+            <Typography align="center">
+              Cart:
+            </Typography>
+            <Table sx={{ margin: 'auto', minWidth: 450, maxWidth: 600 }} aria-label="cart items">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Item</TableCell>
+                  <TableCell align="right">Quantity</TableCell>
+                  <TableCell align="right">Status</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow
+                    key={row.item}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {row.item}
+                    </TableCell>
+                    <TableCell align="right">{row.quantity}</TableCell>
+                    <TableCell align="right">{row.status === 'Declined' ? <Tooltip title="Declined"><CloseIcon /></Tooltip> : row.status}</TableCell>
+                  </TableRow>
+                ))}
+
+                <TableRow>
+                  <TableCell>Transportation</TableCell>
+                  <TableCell align="right">{transportation}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell rowSpan={3} />
+                  <TableCell colSpan={1}>Total Weight</TableCell>
+                  <TableCell align="right">{weight}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Total Size</TableCell>
+                  <TableCell align="right">{size}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Typography alignItems="right" variant="body2">
+            Message to Haylie: &nbsp;
+            {message}
+          </Typography>
         </Grid>
       </Container>
     );

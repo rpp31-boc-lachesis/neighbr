@@ -22,11 +22,13 @@ const errands = [
     message: 'You\'re the best! Thank you!',
     pickup: {
       store: 'Costco',
-      address: '1550 Mall of Georgia Blvd, Buford, GA 30519'
+      address: '1550 Mall of Georgia Blvd, Buford, GA 30519',
+      locationId: 12345
     },
     dropoff: {
       address: '4054 Summit Chase, Gainesville, GA 30506',
-      note: 'Please knock on the front door and leave on the porch.'
+      note: 'Please knock on the front door and leave on the porch.',
+      locationId: 12346
     },
     date: new Date(),
     start_time: new Date(),
