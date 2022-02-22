@@ -116,13 +116,13 @@ export default function VerticalTabs() {
             paddingTop: '30px'
           }}
         >
+          <img alt="house in neighborhood" src="https://drive.google.com/uc?export=view&id=1N5btun98vI2V7vJoTN_mFkh32oEWUZDl" style={{ width: '200px' }} />
           <Tab label="Profile" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(0)} />
           <Tab label="Location" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(1)} />
           <Tab label="Runs" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(2)} />
           <Tab label="Requests" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(3)} />
-          <img alt="house in neighborhood" src="https://drive.google.com/uc?export=view&id=1N5btun98vI2V7vJoTN_mFkh32oEWUZDl" />
         </Tabs>
-        <TabPanel value={value} index={0} sx={{ width: '300px' }}>
+        <TabPanel value={value} index={1} sx={{ width: '300px' }}>
           <Grid
             container
           >
@@ -176,13 +176,13 @@ export default function VerticalTabs() {
             </Grid>
           </Grid>
         </TabPanel>
-        <TabPanel value={value} index={1}>
+        <TabPanel value={value} index={2}>
           Location
         </TabPanel>
-        <TabPanel value={value} index={2}>
+        <TabPanel value={value} index={3}>
           Runs
         </TabPanel>
-        <TabPanel value={value} index={3}>
+        <TabPanel value={value} index={4}>
           Requests
         </TabPanel>
       </Box>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="6" failures="0" errors="0" time="8.662">
-  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-19T18:57:40" time="3.874" tests="1">
-    <testcase classname="&lt;ProfilePopover /&gt; Renders Profile Popover component" name="&lt;ProfilePopover /&gt; Renders Profile Popover component" time="0.081">
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="5.693">
+  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-22T02:17:41" time="2.269" tests="1">
+    <testcase classname="&lt;ProfilePopover /&gt; Renders Profile Popover component" name="&lt;ProfilePopover /&gt; Renders Profile Popover component" time="0.073">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-19T18:57:44" time="2.4" tests="1">
-    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.197">
+  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-22T02:17:43" time="1.763" tests="1">
+    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.157">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;ProfileButton /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-19T18:57:46" time="1.048" tests="4">
-    <testcase classname="&lt;ProfileButton /&gt; Renders Profile Button component" name="&lt;ProfileButton /&gt; Renders Profile Button component" time="0.06">
+  <testsuite name="&lt;ProfileButton /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-22T02:17:45" time="0.945" tests="4">
+    <testcase classname="&lt;ProfileButton /&gt; Renders Profile Button component" name="&lt;ProfileButton /&gt; Renders Profile Button component" time="0.062">
     </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Should be enabled" name="&lt;ProfileButton /&gt; Should be enabled" time="0.086">
+    <testcase classname="&lt;ProfileButton /&gt; Should be enabled" name="&lt;ProfileButton /&gt; Should be enabled" time="0.088">
     </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct text to view profile" name="&lt;ProfileButton /&gt; Has correct text to view profile" time="0.035">
+    <testcase classname="&lt;ProfileButton /&gt; Has correct text to view profile" name="&lt;ProfileButton /&gt; Has correct text to view profile" time="0.036">
     </testcase>
     <testcase classname="&lt;ProfileButton /&gt; Has correct theme color" name="&lt;ProfileButton /&gt; Has correct theme color" time="0.028">
     </testcase>

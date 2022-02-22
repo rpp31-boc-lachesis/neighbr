@@ -13,8 +13,8 @@ import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
-import ProfilePopover from './components/ProfilePopover.jsx';
-import ProfileMain from './components/ProfileMain.jsx';
+import ProfilePopover from './components/Profile/ProfilePopover.jsx';
+import ProfileMain from './components/Profile/ProfileMain.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
