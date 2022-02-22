@@ -11,7 +11,7 @@ const errandSchema = Schema({
     {
       item: String,
       quantity: Number,
-      status: String // ['Declined', 'Active', 'In-Progress', 'Completed']
+      status: String // ['Cancelled', 'In-Progress', 'Completed']
     },
   ],
   weight: String,
