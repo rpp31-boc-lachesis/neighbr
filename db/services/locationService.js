@@ -1,4 +1,4 @@
-const Location = require('../models/locations.js');
+const { Location } = require('../models/index.js');
 
 const createLocation = (locationObject, callback) => {
   Location.create(locationObject)

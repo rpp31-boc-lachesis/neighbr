@@ -6,6 +6,8 @@ services:
       - PORT
       - NODE_ENV
       - DB_URI=mongodb://mongo:27017
+      - MAPBOX_API_KEY
+      - jwtSecret
     build: .
     # ports:
     #   - 3000:3000
