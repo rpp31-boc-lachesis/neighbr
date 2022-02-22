@@ -8,12 +8,17 @@ const errands = [
       {
         item: 'Pizza',
         quantity: 3,
-        status: 'Active'
+        status: 'In-Progress'
+      },
+      {
+        item: 'Cherry tomatoes',
+        quantity: 1,
+        status: 'Completed'
       },
       {
         item: '12-pack Toilet Paper',
         quantity: 1,
-        status: 'Declined'
+        status: 'Cancelled'
       }
     ],
     weight: '2lbs',
