@@ -5,8 +5,9 @@ const path = require('path');
 const PUB_KEY = fs.readFileSync(path.join(__dirname, '../..', 'controllers/signature/pub_key.pem'), 'utf8');
 
 function authMiddleware(req, res, next) {
-  console.log('hitting middleware')
-  if (!req.cookies) {
+  console.log('ACCESSING STRICTED ROUTES :::: hitting middleware');
+
+  if (req.cookies.token !== undefined) {
     const token = req.cookies.token.split(' ');
     if (token[0] === 'Bearer' && token[1].match(/\S+\.\S+\.\S+/) !== null) {
       try {
@@ -18,8 +19,7 @@ function authMiddleware(req, res, next) {
       }
     }
   } else {
-    // i could redirect the user to login
-    res.status(401).json({ success: false, msg: 'You are not authorized to visit this route' });
+    res.redirect('/');
   }
 }
 module.exports.authMiddleware = authMiddleware;
