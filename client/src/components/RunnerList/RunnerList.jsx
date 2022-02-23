@@ -19,12 +19,12 @@ import DestinationDetail from './DestinationDetail.jsx';
 import Footer from '../Home/Footer.jsx';
 import css from './RunnerList.css';
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
 
 function DestinationList() {
   //variation of componentDidMount for hooks
   useEffect(() => {
     //stuff
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
     const map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
