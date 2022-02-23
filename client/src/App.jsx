@@ -75,7 +75,13 @@ class App extends React.Component {
           (result) => {
             if (Array.isArray(result)) {
               const oldArr = [...locations];
-              this.setState({ locations: [...oldArr, ...result] });
+              this.setState(
+                { locations: [...oldArr, ...result] },
+                () => {
+                  // eslint-disable-next-line no-console
+                  console.log('LOCATIONS:', result);
+                }
+              );
             }
           },
           (error) => {
@@ -89,7 +95,13 @@ class App extends React.Component {
           (result) => {
             if (Array.isArray(result)) {
               const oldArr = [...runs];
-              this.setState({ runs: [...oldArr, ...result] });
+              this.setState(
+                { runs: [...oldArr, ...result] },
+                () => {
+                  // eslint-disable-next-line no-console
+                  console.log('RUNS:', result);
+                }
+              );
             }
           },
           (error) => {
@@ -123,7 +135,13 @@ class App extends React.Component {
           (result) => {
             if (Array.isArray(result)) {
               const oldArr = [...errands];
-              this.setState({ errands: [...oldArr, ...result] });
+              this.setState(
+                { errands: [...oldArr, ...result] },
+                () => {
+                  // eslint-disable-next-line no-console
+                  console.log('ERRANDS:', result);
+                }
+              );
             }
           },
           (error) => {
@@ -229,7 +247,6 @@ class App extends React.Component {
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null } */}
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
-            {/* <Route path="/other" element={<Other />} /> */}
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             {user ? <Route path="/main" element={<Main />} /> : null }

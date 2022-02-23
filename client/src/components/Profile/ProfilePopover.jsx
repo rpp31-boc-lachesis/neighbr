@@ -46,6 +46,11 @@ export default function ProfilePopover() {
           vertical: 'top',
           horizontal: 'center',
         }}
+        sx={{
+          maxWidth: '25%',
+          minWidth: '15%',
+          height: 'auto'
+        }}
       >
         <ProfileCard handleClose={handleClose} currentUser={currentUser} />
       </Popover>
