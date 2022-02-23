@@ -19,6 +19,8 @@ import ProfilePopover from './components/ProfilePopover.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
+import TestingMenu from './TestingMenu.jsx';
+
 authService.jwtInterceptor(axios);
 
 const theme = responsiveFontSizes(createTheme({
@@ -204,6 +206,7 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Router>
+          <TestingMenu />
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
@@ -215,10 +218,9 @@ class App extends React.Component {
             <Route path="/runnerList" element={<RunnerList />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
-            <Route path="/runnerStatus" element={<RunnerStatus />} />
+            {/* <Route path="/runnerStatus" element={<RunnerStatus />} /> */}
             <Route path="/other" element={<Other />} />
             <Route path="/profile" element={<ProfilePopover />} />
->>>>>>> master
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>

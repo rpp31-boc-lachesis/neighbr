@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable spaced-comment */
 /* eslint-disable react/jsx-indent */
 import React, {useEffect, useState} from 'react';
 import propTypes from 'prop-types';
@@ -17,9 +19,36 @@ import DestinationDetail from './DestinationDetail.jsx';
 import Footer from '../Home/Footer.jsx';
 import css from './RunnerList.css';
 
+mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
+
 function DestinationList() {
+  //variation of componentDidMount for hooks
+  useEffect(() => {
+    //stuff
+    const map = new mapboxgl.Map({
+      container: 'mapContainer',
+      style: 'mapbox://styles/mapbox/streets-v11',
+    });
+    // this.setState({
+    //   map,
+    //   newRequests: errands
+    // });
+  }, []);
+
+  //? reference from runnerStatus
+  // componentDidMount() {
+  //   const map = new mapboxgl.Map({
+  //     container: 'mapContainer',
+  //     style: 'mapbox://styles/mapbox/streets-v11',
+  //   });
+  //   this.setState({
+  //     map,
+  //     newRequests: errands
+  //   });
+  // }
+
   return (
-    <Container maxwidth="sm" sx={{border: '1px dashed red'}}>
+    <Container maxwidth="sm" sx={{border: '1px dashed red' }}>
       <Grid container sx={{ flexGrow: 1, height: '600px', border: '1px solid  green', marginTop: '20px' }} justifyContent="center" alignItems="center" spacing={2}>
 {/* left column */}
         <Grid container item direction="column" sx={{ minHeight: '100%', border: '1px solid orange' }} xs={2}>
@@ -31,18 +60,29 @@ function DestinationList() {
           {/* </Container> */}
           <center>
 
-          Filter by:<br/>
-          Time<br/>
-          morning<br/>
-          midday<br/>
-          afternoon<br/>
-          evening<br/>
-          <br/>
-          Type<br/>
-          groceries<br/>
-          food<br/>
-          etc<br/>
-          etc<br/>
+          Filter by:
+<br />
+          Time
+<br />
+          morning
+<br />
+          midday
+<br />
+          afternoon
+<br />
+          evening
+<br />
+          <br />
+          Type
+<br />
+          groceries
+<br />
+          food
+<br />
+          etc
+<br />
+          etc
+<br />
           </center>
         </Grid>
 {/* middle column */}
@@ -59,21 +99,34 @@ function DestinationList() {
 {/* right column */}
         <Grid item xs={6} sx={{ minHeight: '100%', border: '1px solid orange' }}>
         <Stack spacing={2} sx={{ minHeight: '100%', border: '1px solid blue' }}>
-          <Box sx={{ height: '40vh', maxWidth: '564px', border: '1px solid black', borderRadius: '2px' }}>
+          {/* <Box sx={{ height: '40vh', maxWidth: '564px', border: '1px solid black', borderRadius: '2px' }}>
             <div style={{width: '100%', height: '100%'}}>
             <img className='mapImage' src="https://www.evernote.com/l/AAUb4rYWCdJDBaV76K7JnS7CHkR1LNFYPm8B/image.png" alt='a map'></img>
             </div>
+          </Box> */}
+          <Box
+            id="mapContainer"
+            container
+            sx={{
+              border: 1,
+              borderRadius: 4,
+              borderColor: '#F88202',
+              height: '50vh',
+              width: '100%'
+            }}
+            item
+          >
+                <Typography>Map</Typography>
           </Box>
           <Box sx={{ height: '35vh', minWidth: '100%', border: '1px solid black', borderRadius: '2px', backgroundColor: '#de9de9' }}>
             detail
             <DestinationDetail />
           </Box>
-          </Stack>
+        </Stack>
         </Grid>
       </Grid>
       <Footer />
     </Container>
-
   );
 }
 
