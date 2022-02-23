@@ -203,7 +203,8 @@ export default function VerticalTabs() {
             sm={4}
             sx={{
               alignItems: 'right',
-              width: '33%'
+              width: '33%',
+              height: 'auto'
             }}
           >
             <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=1kkKcSb1nXsnBaBPYV83IwauRRhqGaonu" />
@@ -266,7 +267,8 @@ export default function VerticalTabs() {
             sm={4}
             sx={{
               alignItems: 'right',
-              width: '33%'
+              width: '33%',
+              height: 'auto'
             }}
           >
             <img alt="person shopping on phone" src="https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB" />
@@ -342,8 +344,9 @@ export default function VerticalTabs() {
             item
             sm={4}
             sx={{
-              alignItems: 'right',
-              width: '33%'
+              // alignItems: 'right',
+              width: '33%',
+              height: 'auto'
             }}
           >
             <img alt="handbag on digital screen" src="https://drive.google.com/uc?export=view&id=16KBYVdQ8dskg6YngwBP7iX9XQT7s6120" />
@@ -419,8 +422,9 @@ export default function VerticalTabs() {
             item
             sm={4}
             sx={{
-              alignItems: 'right',
-              width: '33%'
+              // alignItems: 'right',
+              width: '33%',
+              height: 'auto'
             }}
           >
             <img alt="package on digital screen" src="https://drive.google.com/uc?export=view&id=1UUHGQ_IUl6brPzZoSRiWEAPfSMThATGR" />
