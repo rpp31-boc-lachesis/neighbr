@@ -13,7 +13,7 @@ module.exports = {
         const tokenObj = utils.issueJWT(user);
         res.cookie('token', tokenObj.token, {
           httpOnly: true,
-          maxAge: 60 * 60 * 60
+          maxAge: 1000 * 60 * 60
         });
         res.status(200).send({ avatar_url: user.avatar_url, username: user.username });
       } else {
