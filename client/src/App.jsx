@@ -9,6 +9,7 @@ import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
 import RequestStatus from './components/RequestDash/RequestStatus.jsx';
+import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
@@ -218,7 +219,7 @@ class App extends React.Component {
             <Route path="/runnerList" element={<RunnerList />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
-            {/* <Route path="/runnerStatus" element={<RunnerStatus />} /> */}
+            <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/other" element={<Other />} />
             <Route path="/profile" element={<ProfilePopover />} />
             <Route path="*" element={<Error />} />
