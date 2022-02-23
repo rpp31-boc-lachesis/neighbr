@@ -4,8 +4,6 @@ const locationSchema = require('./locations.js');
 const runSchema = require('./runs.js');
 const userSchema = require('./users.js');
 
-mongoose.set('toJSON', { virtuals: true });
-
 module.exports.Errand = mongoose.model('Errand', errandSchema);
 module.exports.Location = mongoose.model('Location', locationSchema);
 module.exports.Run = mongoose.model('Run', runSchema);

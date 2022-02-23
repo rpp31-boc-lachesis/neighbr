@@ -36,12 +36,12 @@ export default function Run(props) {
   );
 }
 
-Run.propTypes = {
-  run: propTypes.shape({
-    location: propTypes.string.isRequired,
-    date: propTypes.instanceOf(Date).isRequired,
-    startTime: propTypes.instanceOf(Date).isRequired,
-    endTime: propTypes.instanceOf(Date).isRequired,
-    transportation: propTypes.string.isRequired,
-  }).isRequired,
-};
+// Run.propTypes = {
+//   run: propTypes.shape({
+//     location: propTypes.string.isRequired,
+//     date: propTypes.instanceOf(Date).isRequired,
+//     startTime: propTypes.instanceOf(Date).isRequired,
+//     endTime: propTypes.instanceOf(Date).isRequired,
+//     transportation: propTypes.string.isRequired,
+//   }).isRequired,
+// };

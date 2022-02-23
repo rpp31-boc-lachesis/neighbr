@@ -12,20 +12,4 @@ const runSchema = new Schema({
   acceptedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }]
 });
 
-// runSchema.virtual('user', {
-//   justOne: true,
-//   localField: 'userId',
-//   foreignField: '_id',
-//   ref: 'User',
-// });
-
-// runSchema.virtual('location', {
-//   justOne: true,
-//   localField: 'userId',
-//   foreignField: '_id',
-//   ref: 'Location',
-// });
-
-// const Run = mongoose.model('Run', runSchema);
-
 module.exports = runSchema;

@@ -27,10 +27,10 @@ const createRun = (runObject, callback) => {
 
 const getAllRuns = (callback) => {
   Run.find()
-    // .lean()
-    // .populate('location')
-    // .populate('user')
-    // .populate('acceptedErrands')
+    .lean()
+    .populate('location')
+    .populate('user')
+    .populate('acceptedErrands')
     .then((result) => {
       console.log(result);
       callback(null, result);
@@ -84,11 +84,15 @@ const postRun = (body, callback) => {
       return result;
     })
     .then((result) => {
-      run.locationId = result._id;
+      run.location = result._id;
       return Run.create(run);
     })
     .then((newRun) => {
-      Location.updateOne({ mapboxId: locationObj.mapboxId}, { $push: { runIds: newRun._id}})
+      Location.findOne({ mapboxId: locationObj.mapboxId })
+        .then((loc) => {
+          loc.runs.push(newRun._id);
+          loc.save();
+        });
       callback(null, newRun);
     })
     .catch((err) => { callback(err, null); });

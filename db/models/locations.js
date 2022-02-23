@@ -19,18 +19,4 @@ const locationSchema = new Schema({
   errands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }],
 });
 
-// locationSchema.virtual('runs', {
-//   localField: 'runIds',
-//   foreignField: '_id',
-//   ref: 'Run',
-// });
-
-// locationSchema.virtual('errands', {
-//   localField: 'errandIds',
-//   foreignField: '_id',
-//   ref: 'Errand',
-// });
-
-// const Location = mongoose.model('Location', locationSchema);
-
 module.exports = locationSchema;

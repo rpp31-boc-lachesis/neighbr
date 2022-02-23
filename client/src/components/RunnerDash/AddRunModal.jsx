@@ -127,6 +127,6 @@ export default function AddRunModal(props) {
   );
 }
 
-AddRunModal.propTypes = {
-  handlePostRun: PropTypes.func.isRequired,
-};
+// AddRunModal.propTypes = {
+//   handlePostRun: PropTypes.func.isRequired,
+// };
