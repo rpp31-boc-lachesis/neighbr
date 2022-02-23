@@ -8,13 +8,6 @@ const {
   getRunById,
   postRun,
 } = require('../db/services/runService.js');
-const {
-  getLocation,
-  createLocation,
-  getOrCreateLocation,
-  addRunToLocation
-} = require('../db/services/locationService.js');
-const { getOneUser } = require('../db/services/userService');
 
 const returnCallback = (err, data) => {
   if (err) {
