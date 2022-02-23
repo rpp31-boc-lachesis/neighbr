@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="2" failures="0" errors="0" time="4.738">
-  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-18T20:35:24" time="3.28" tests="1">
-    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.136">
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="5.61">
+  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-23T01:22:51" time="3.324" tests="1">
+    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.175">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-18T20:35:28" time="0.582" tests="1">
-    <testcase classname="&lt;ProfilePopover /&gt; Renders Profile Popover component" name="&lt;ProfilePopover /&gt; Renders Profile Popover component" time="0.055">
+  <testsuite name="&lt;ProfileButton /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-23T01:22:54" time="0.725" tests="4">
+    <testcase classname="&lt;ProfileButton /&gt; Renders Profile Button component" name="&lt;ProfileButton /&gt; Renders Profile Button component" time="0.048">
+    </testcase>
+    <testcase classname="&lt;ProfileButton /&gt; Should be enabled" name="&lt;ProfileButton /&gt; Should be enabled" time="0.06">
+    </testcase>
+    <testcase classname="&lt;ProfileButton /&gt; Has correct text to view profile" name="&lt;ProfileButton /&gt; Has correct text to view profile" time="0.03">
+    </testcase>
+    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color" name="&lt;ProfileButton /&gt; Has correct theme color" time="0.024">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-23T01:22:55" time="0.601" tests="1">
+    <testcase classname="&lt;ProfilePopover /&gt; Renders Profile Popover component" name="&lt;ProfilePopover /&gt; Renders Profile Popover component" time="0.044">
     </testcase>
   </testsuite>
 </testsuites>

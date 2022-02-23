@@ -2,14 +2,13 @@ const { Location } = require('../models/index.js');
 
 const createLocation = (locationObject, callback) => {
   Location.create(locationObject)
-    .lean()
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
 
 const getAllLocations = (callback) => {
   Location.find()
-    .lean()
+    // .lean()
     .populate('runs')
     .populate('errands')
     .then((result) => { callback(null, result); })
@@ -18,7 +17,7 @@ const getAllLocations = (callback) => {
 
 const getLocation = (filter, callback) => {
   Location.find(filter)
-    .lean()
+    // .lean()
     .populate('runs')
     .populate('errands')
     .then((result) => { callback(null, result); })
@@ -27,7 +26,7 @@ const getLocation = (filter, callback) => {
 
 const getLocationById = (id, callback) => {
   Location.findById(id)
-    .lean()
+    // .lean()
     .populate('runs')
     .populate('errands')
     .then((result) => { callback(null, result); })
@@ -35,9 +34,9 @@ const getLocationById = (id, callback) => {
 };
 
 const getOrCreateLocation = (location, callback) => {
-  Location.findOne(location)
+  const { mapboxId } = location;
+  Location.findOne({ mapboxId })
     .lean()
-    // .populate({ path: 'runs', model: 'User', populate: { path: 'user', model: 'User'}, populate: { path: location, model: 'Loation' } })
     .populate('runs')
     .then((resp) => {
       if (resp !== null) {

@@ -19,7 +19,7 @@ export default function LocationAutoComplete(props) {
       return undefined;
     }
 
-    console.log(value, inputValue);
+    // console.log(value, inputValue);
     searchLocation(inputValue, proximity)
       .then((response) => response.json())
       .then((results) => {

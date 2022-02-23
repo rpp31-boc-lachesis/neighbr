@@ -12,9 +12,24 @@ const locationSchema = new Schema({
   postcode: String,
   coordinates: Array,
   region: String,
-  runs: [{ type: mongoose.Types.ObjectId, ref: 'Run' }],
-  errands: [{ type: mongoose.Types.ObjectId, ref: 'Errand' }],
+  district: String,
+  country: String,
+  place: String,
+  runs: [{ type: Schema.Types.ObjectId, ref: 'Run' }],
+  errands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }],
 });
+
+// locationSchema.virtual('runs', {
+//   localField: 'runIds',
+//   foreignField: '_id',
+//   ref: 'Run',
+// });
+
+// locationSchema.virtual('errands', {
+//   localField: 'errandIds',
+//   foreignField: '_id',
+//   ref: 'Errand',
+// });
 
 // const Location = mongoose.model('Location', locationSchema);
 

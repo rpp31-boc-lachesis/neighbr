@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { Schema } = mongoose;
 
 const userSchema = Schema(
@@ -30,28 +31,33 @@ const userSchema = Schema(
       index: true,
       required: true
     },
+    salt: {
+      type: String,
+      index: true,
+      required: true
+    },
     avatar_url: {
       type: String
     },
     street_address: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     city: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     state: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     zip: {
       type: String,
       index: true,
-      required: true
+      required: false
     },
     country: {
       type: String
@@ -74,20 +80,18 @@ const userSchema = Schema(
     created_at: String,
     req_history: [
       {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Errand'
       }
     ],
     run_history: [
       {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Run'
       }
     ],
   }
   // { collection: 'users' }
 );
-
-// const Users = mongoose.model('User', userSchema);
 
 module.exports = userSchema;

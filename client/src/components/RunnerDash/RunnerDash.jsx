@@ -16,8 +16,7 @@ import AddRunModal from './AddRunModal.jsx';
 
 export default function RunnerDash(props) {
   const { runs, handlePostRun } = props;
-  console.log(runs);
-  const Runs = runs.map((run) => <Run run={run} key={run._id} />);
+  const Runs = runs.map((run) => <Run run={run} key={run.id} />);
   return (
     <Container maxwidth="sm">
       <Grid container sx={{ flexGrow: 1, height: '100%' }} justifyContent="center" alignItems="center" spacing={2}>
