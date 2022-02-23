@@ -1,5 +1,6 @@
 {
   "name": "neighbr",
+  "sideEffects": "false",
   "version": "1.0.0",
   "description": "a service-oriented application with a focus on building community",
   "main": "index.js",

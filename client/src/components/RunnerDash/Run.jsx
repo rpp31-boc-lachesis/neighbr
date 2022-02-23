@@ -19,12 +19,12 @@ export default function Run(props) {
         color: 'white',
         '&:hover': {
           bgcolor: 'secondary.light'
-        }
+        },
       }}
     >
       <CardContent>
         <Grid>
-          <Typography variant="h5">{`${location.placeText} by: ${transportation}`}</Typography>
+          <Typography variant="h5">{`${location.placeText}`}</Typography> <Typography variant="h5">{`by: ${transportation}`}</Typography>
           <Typography variant="body2">{`Start: ${new Date(startTime).toLocaleTimeString()} End: ${new Date(endTime).toLocaleTimeString()}`}</Typography>
           <Typography variant="body2">{`Date: ${new Date(date).toLocaleDateString()}`}</Typography>
         </Grid>

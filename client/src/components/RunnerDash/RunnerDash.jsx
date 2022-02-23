@@ -20,11 +20,11 @@ export default function RunnerDash(props) {
   return (
     <Container maxwidth="sm">
       <Grid container sx={{ flexGrow: 1, height: '100%' }} justifyContent="center" alignItems="center" spacing={2}>
-        <Grid container item direction="column" sx={{ minHeight: '100%' }} xs={3}>
+        <Grid container item direction="column" sx={{ minHeight: '100%'}} xs={3}>
           <AddRunModal handlePostRun={handlePostRun} />
           <img src={wavyBuddyPoint} alt="" />
         </Grid>
-        <Grid item xs={4} sx={{overflow: 'scroll'}}>
+        <Grid item sx={{ overflow: 'scroll' }} xs={4}>
           <Typography variant="h5">Current Runs</Typography>
           <Stack spacing={2}>
             {Runs}
