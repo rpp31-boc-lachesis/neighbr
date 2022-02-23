@@ -75,7 +75,11 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography
+            component="span"
+          >
+            {children}
+          </Typography>
         </Box>
       )}
     </div>
@@ -128,7 +132,11 @@ export default function VerticalTabs() {
           paddingTop: '2%'
         }}
       >
-        <Grid
+        <Tab label="Profile" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(0)} />
+        <Tab label="Location" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(1)} />
+        <Tab label="Runs" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(2)} />
+        <Tab label="Requests" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(3)} />
+        <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
@@ -137,15 +145,12 @@ export default function VerticalTabs() {
           }}
         >
           <img alt="house in neighborhood" src="https://drive.google.com/uc?export=view&id=1N5btun98vI2V7vJoTN_mFkh32oEWUZDl" style={{ width: '100%', height: '100%' }} />
-        </Grid>
-        <Tab label="Profile" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(0)} />
-        <Tab label="Location" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(1)} />
-        <Tab label="Runs" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(2)} />
-        <Tab label="Requests" sx={{ fontSize: '1.2rem', color: 'white' }} {...a11yProps(3)} />
+        </Box>
       </Tabs>
       <TabPanel value={value} index={0}>
         <Grid
           container
+          spacing={2}
         >
           <Grid
             item
@@ -163,10 +168,17 @@ export default function VerticalTabs() {
                 width: '75%'
               }}
             />
-            <Typography variant="h4" color="primary">
+            <Typography
+              color="primary"
+              component="span"
+              sx={{
+                fontSize: '1.8rem'
+              }}
+            >
               @username
             </Typography>
             <Typography
+              component="span"
               sx={{
                 opacity: 0.5
               }}
@@ -201,6 +213,7 @@ export default function VerticalTabs() {
       <TabPanel value={value} index={1}>
         <Grid
           container
+          spacing={2}
         >
           <Grid
             item
@@ -208,10 +221,30 @@ export default function VerticalTabs() {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
+              // justifyContent: 'center',
+              alignItems: 'left',
             }}
           >
-            Info
+            <Typography
+              component="span"
+              color="primary"
+              sx={{
+                fontSize: '1.8rem'
+              }}
+            >
+              My address:
+            </Typography>
+            <Stack spacing={1}>
+              <Item
+                sx={{
+                  fontSize: '1.2rem'
+                }}
+              >
+                1234 Main St
+                <br />
+                San Francisco, CA 94102
+              </Item>
+            </Stack>
           </Grid>
           <Grid
             item
@@ -223,7 +256,7 @@ export default function VerticalTabs() {
               paddingLeft: '2%'
             }}
           >
-            <BasicStack />
+            Map Box Here
           </Grid>
           <Grid
             item
@@ -238,10 +271,152 @@ export default function VerticalTabs() {
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Runs
+        <Grid
+          container
+          spacing={2}
+        >
+          <Grid
+            item
+            sm={3}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              // justifyContent: 'center',
+              alignItems: 'left',
+            }}
+          >
+            <Typography
+              component="span"
+              color="primary"
+              sx={{
+                fontSize: '1.8rem'
+              }}
+            >
+              My Run History:
+            </Typography>
+            <Stack spacing={1}>
+              <Item sx={{ fontSize: '1.2rem' }}>Most Frequent Category: Food</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>Average Run Time: 28min</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>Most Frequented Neighborhood: Mission District</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>Total Runs: 25</Item>
+            </Stack>
+          </Grid>
+          <Grid
+            item
+            sm={5}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: '5%',
+              paddingLeft: '2%'
+            }}
+          >
+            <Stack
+              spacing={2}
+              sx={{
+                width: '90%',
+                height: '75%',
+                overflow: 'scroll'
+              }}
+            >
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+            </Stack>
+          </Grid>
+          <Grid
+            item
+            sm={4}
+            sx={{
+              alignItems: 'right',
+              width: '33%'
+            }}
+          >
+            <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=16KBYVdQ8dskg6YngwBP7iX9XQT7s6120" />
+          </Grid>
+        </Grid>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Requests
+        <Grid
+          container
+          spacing={2}
+        >
+          <Grid
+            item
+            sm={3}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              // justifyContent: 'center',
+              alignItems: 'left',
+            }}
+          >
+            <Typography
+              component="span"
+              color="primary"
+              sx={{
+                fontSize: '1.8rem'
+              }}
+            >
+              My Request History:
+            </Typography>
+            <Stack spacing={1}>
+              <Item sx={{ fontSize: '1.2rem' }}>Most Frequent Category: Housewares</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>Average Request Time: 22min</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>Most Frequented Neighborhood: Union Square</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>Total Requests: 47</Item>
+            </Stack>
+          </Grid>
+          <Grid
+            item
+            sm={5}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingTop: '5%',
+              paddingLeft: '2%'
+            }}
+          >
+            <Stack
+              spacing={2}
+              sx={{
+                width: '90%',
+                height: '75%',
+                overflow: 'scroll'
+              }}
+            >
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+              <Item>Some Item</Item>
+            </Stack>
+          </Grid>
+          <Grid
+            item
+            sm={4}
+            sx={{
+              alignItems: 'right',
+              width: '33%'
+            }}
+          >
+            <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=1UUHGQ_IUl6brPzZoSRiWEAPfSMThATGR" />
+          </Grid>
+        </Grid>
       </TabPanel>
     </Box>
   );
