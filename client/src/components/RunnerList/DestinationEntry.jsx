@@ -64,7 +64,7 @@ function DestinationEntry() {
             <Box sx={{
               height: '100px',
               minWidth: '100%',
-              border: '0px solid black',
+              border: '1px solid black',
               borderRadius: '10px',
               background: '#5FC6C9',
               '&:hover': {
@@ -72,7 +72,7 @@ function DestinationEntry() {
                 opacity: [0.9, 0.8, 0.7],
               },
               }}>
-              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '0px dashed blue' }}>
+              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 <div className='entryColumn'>
                 <div className='lineItem topLineLeft'>
                   <div className='locationNumber'>1</div>
