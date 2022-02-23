@@ -114,8 +114,7 @@ export default function VerticalTabs() {
         minHeight: '100vh',
         minWidth: '100vh',
         bgcolor: 'background.paper',
-        display: 'flex',
-        border: '2px solid red'
+        display: 'flex'
       }}
     >
       <Tabs
@@ -127,7 +126,8 @@ export default function VerticalTabs() {
           display: 'flex',
           borderRight: 1,
           borderColor: 'divider',
-          width: '15%',
+          minWidth: '15%',
+          maxWidth: '17%',
           backgroundColor: '#88C4FB',
           paddingTop: '2%'
         }}
@@ -154,11 +154,14 @@ export default function VerticalTabs() {
         >
           <Grid
             item
-            sm={3}
+            sm={5}
+            lg={3}
             sx={{
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              minWidth: '15%',
+              maxWidth: '25%'
             }}
           >
             <Avatar
@@ -203,7 +206,8 @@ export default function VerticalTabs() {
             sm={4}
             sx={{
               alignItems: 'right',
-              width: '33%',
+              minWidth: '15%',
+              maxWidth: '40%',
               height: 'auto'
             }}
           >
@@ -222,11 +226,13 @@ export default function VerticalTabs() {
           <Grid
             item
             sm={3}
+            lg={3}
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              // justifyContent: 'center',
               alignItems: 'left',
+              minWidth: '15%',
+              maxWidth: '25%'
             }}
           >
             <Typography
@@ -252,7 +258,8 @@ export default function VerticalTabs() {
           </Grid>
           <Grid
             item
-            sm={5}
+            sm={7}
+            lg={5}
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -267,7 +274,8 @@ export default function VerticalTabs() {
             sm={4}
             sx={{
               alignItems: 'right',
-              width: '33%',
+              minWidth: '15%',
+              maxWidth: '40%',
               height: 'auto'
             }}
           >
@@ -285,7 +293,8 @@ export default function VerticalTabs() {
         >
           <Grid
             item
-            sm={3}
+            sm={5}
+            lg={3}
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -311,7 +320,8 @@ export default function VerticalTabs() {
           </Grid>
           <Grid
             item
-            sm={5}
+            sm={7}
+            lg={5}
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -363,7 +373,8 @@ export default function VerticalTabs() {
         >
           <Grid
             item
-            sm={3}
+            sm={5}
+            lg={3}
             sx={{
               display: 'flex',
               flexDirection: 'column',
@@ -389,7 +400,8 @@ export default function VerticalTabs() {
           </Grid>
           <Grid
             item
-            sm={5}
+            sm={7}
+            lg={5}
             sx={{
               display: 'flex',
               alignItems: 'center',
