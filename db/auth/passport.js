@@ -1,29 +1,25 @@
-const { Strategy, ExtractJwt } = require('passport-jwt');
+const JWT = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
-const Users = require('../models/users');
 
-const PUB_KEY = fs.readFileSync(path.join(__dirname, '../..', 'controllers/signature/pub_key.pem'));
+const PUB_KEY = fs.readFileSync(path.join(__dirname, '../..', 'controllers/signature/pub_key.pem'), 'utf8');
 
-const options = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: PUB_KEY,
-  algorithms: ['RS256']
-};
-// verify
-module.exports = (passport) => {
-  passport.use(new Strategy(options, (jwtPayload, done) => {
-    // Users.findOne({ _id: jwtPayload.sub }, (err, user) => {
-    //   if (err) {
-    //     console.log(err)
-    //     return done(err, false);
-    //   }
-    //   if (user) {
-    //     console.log(user);
-    //     return done(null, user);
-    //   }
-    //   console.log('passport')
-    //   return done(null, false);
-    // });
-  }));
-};
+function authMiddleware(req, res, next) {
+  console.log('hitting middleware')
+  if (!req.cookies) {
+    const token = req.cookies.token.split(' ');
+    if (token[0] === 'Bearer' && token[1].match(/\S+\.\S+\.\S+/) !== null) {
+      try {
+        const verification = JWT.verify(token[1], PUB_KEY, { algorithms: ['RS256'] });
+        req.user_id = verification.sub;
+        next();
+      } catch (err) {
+        res.redirect('/login');
+      }
+    }
+  } else {
+    // i could redirect the user to login
+    res.status(401).json({ success: false, msg: 'You are not authorized to visit this route' });
+  }
+}
+module.exports.authMiddleware = authMiddleware;
