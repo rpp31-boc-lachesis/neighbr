@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 export default function RequestMap() {
   useEffect(() => {
@@ -9,11 +11,18 @@ export default function RequestMap() {
     const map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-77.04, 38.907],
-      zoom: 11.15
+      center: [-79.4512, 43.6568],
+      zoom: 13
     });
 
     map.addControl(new mapboxgl.NavigationControl());
+
+    map.addControl(
+      new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl
+      })
+    );
   });
 
   const style = {

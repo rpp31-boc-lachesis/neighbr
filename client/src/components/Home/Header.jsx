@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link as RouterLink, Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -11,6 +12,8 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/CloseRounded';
 import HomeIcon from '@mui/icons-material/HomeRounded';
@@ -18,26 +21,34 @@ import SendIcon from '@mui/icons-material/SendRounded';
 import SearchIcon from '@mui/icons-material/SearchRounded';
 import DashboardIcon from '@mui/icons-material/DashboardRounded';
 
-export default function Header() {
+export default function Header({ user, userPhoto, logout }) {
   const [state, setOpen] = React.useState(false);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const open = Boolean(anchorElUser);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
-  const logo = (<RouterLink to="/main" style={{ color: '#FFFFFF' }}><Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography></RouterLink>);
+  const logo = (<Link to="/main" style={{ color: '#FFFFFF' }}><Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography></Link>);
   const list = (
     <List>
       {['', 'Home', 'Post Your Run', 'Find Your Runner', 'Runner Dashboard', 'Requester Dashboard'].map((text, i) => (
-        <RouterLink
+        <Link
           key={text}
           to={{
             0: '#',
             1: '/main',
             2: '/runnerDash',
-            3: '/requestDash',
+            3: '/runnerList',
             4: '/runnerDash',
             5: '/requestDash'
           }[i]}
@@ -58,7 +69,7 @@ export default function Header() {
             </ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
-        </RouterLink>
+        </Link>
       ))}
     </List>
   );
@@ -84,11 +95,33 @@ export default function Header() {
           </Box>
           {logo}
           <Box>
-            <Tooltip title="User">
-              <IconButton>
-                <Avatar size="small" alt="Hack Rector" src="https://ucarecdn.com/88f0c4ce-01b1-4771-8de4-fb2ce647dba9/" sx={{ backgroundColor: '#FFFFFF' }} />
+            <Tooltip title={user}>
+              <IconButton onClick={handleOpenUserMenu}>
+                <Avatar size="small" alt="Hack Rector" src={userPhoto} sx={{ backgroundColor: '#FFFFFF' }} />
               </IconButton>
             </Tooltip>
+            <Menu
+              sx={{ mt: '30px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={handleCloseUserMenu}
+            >
+              <Link to="/">
+                <MenuItem onClick={logout}>
+                  <Typography sx={{ color: '#EF5DA8' }}>Logout</Typography>
+                </MenuItem>
+              </Link>
+            </Menu>
           </Box>
         </Box>
       </AppBar>
@@ -111,3 +144,9 @@ export default function Header() {
     </>
   );
 }
+
+Header.propTypes = {
+  user: PropTypes.string.isRequired,
+  userPhoto: PropTypes.string.isRequired,
+  logout: PropTypes.func.isRequired
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -9,7 +10,6 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
-import axios from 'axios';
 
 // function Copyright(props) {
 //   return (
@@ -24,26 +24,12 @@ import axios from 'axios';
 //   );
 // }
 
-function Login(props) {
+function Login({ user, handleAuth }) {
   const [loginData, setLoginData] = React.useState({ username: '', password: '' });
-  const [user, setUser] = React.useState(null);
-  const [error, setError] = React.useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.handleLogin();
-    axios.request({
-      url: '/login',
-      method: 'post',
-      data: loginData
-    })
-      .then(user => setUser('user'))
-      .catch(e => setError('Uhhh, we couldn\'t find the id or password'));
   };
 
   return (
@@ -78,8 +64,8 @@ function Login(props) {
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
-          {user && (<Navigate to="/main" replace />)}
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+          { user && (<Navigate to="/main" replace />)}
+          <Box component="form" noValidate onSubmit={(e) => handleAuth(e, loginData)} sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -126,3 +112,8 @@ function Login(props) {
 }
 
 export default Login;
+
+Login.propTypes = {
+  user: PropTypes.string.isRequired,
+  handleAuth: PropTypes.func.isRequired
+};

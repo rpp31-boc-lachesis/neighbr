@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+/* eslint-disable spaced-comment */
 /* eslint-disable react/jsx-indent */
 import React, {useEffect, useState} from 'react';
 import propTypes from 'prop-types';
@@ -11,59 +13,45 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import DestinationEntry from './DestinationEntry.jsx'
-import DestinationDetail from './DestinationDetail.jsx'
-//temp
-import Header from '../Home/Header.jsx';
+import DestinationEntry from './DestinationEntry.jsx';
+import DestinationDetail from './DestinationDetail.jsx';
+
 import Footer from '../Home/Footer.jsx';
 import css from './runnerList.css';
 
-function RunnerList() {
-  // const tempNav = {
-  //   backgroundColor: "orange",
-  //   outline: "1px dashed black"
-  // };
 
-  // const containerNav = {
-  //   backgroundColor: "orange",
-  //   outline: "1px dashed black",
-  //   display: "flex",
-  //   flexDirection: "column"
-  // };
+function DestinationList() {
+  //variation of componentDidMount for hooks
+  useEffect(() => {
+    //stuff
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
+    const map = new mapboxgl.Map({
+      container: 'mapContainer',
+      style: 'mapbox://styles/mapbox/streets-v11',
+    });
+    // this.setState({
+    //   map,
+    //   newRequests: errands
+    // });
+  }, []);
 
-  // const EntryBox = styled(Box)(({ theme }) => ({
-  //   width: '100%',
-  //   height: '30%',
-  //   spacing: 1,
-  //   margin: '5px 0px 0px',
-  //   padding: '2px',
-  //   background: 'green',
-  //   border: '1px solid red'
-  // }));
-
-
-
+  //? reference from runnerStatus
+  // componentDidMount() {
+  //   const map = new mapboxgl.Map({
+  //     container: 'mapContainer',
+  //     style: 'mapbox://styles/mapbox/streets-v11',
+  //   });
+  //   this.setState({
+  //     map,
+  //     newRequests: errands
+  //   });
+  // }
 
   return (
-  // <div style={tempNav}>
-  //   My Page Two
-  //   <div style={containerNav}>
-  //     <div style={tempNav}>
-  //       one
-  //     </div>
-  //     <div style={tempNav}>
-  //       two
-  //     </div>
-  //     <div style={tempNav}>
-  //       three
-  //     </div>
-  //   </div>
-  // </div>
-  <>
-    <Container maxwidth="sm" sx={{border: '0px dashed red', margin: '0px'}}>
-      <Grid container sx={{ flexGrow: 1, height: '600px', border: '0px solid  green', margin: '60px' }} justifyContent="center" alignItems="center" spacing={2}>
+    <Container maxwidth="sm" sx={{border: '1px dashed red' }}>
+      <Grid container sx={{ flexGrow: 1, height: '600px', border: '1px solid  green', marginTop: '20px' }} justifyContent="center" alignItems="center" spacing={2}>
 {/* left column */}
-        <Grid container item direction="column" sx={{ minHeight: '100%', border: '0px solid orange' }} xs={2}>
+        <Grid container item direction="column" sx={{ minHeight: '100%', border: '1px solid orange' }} xs={2}>
           {/* <Container
           maxwidth="sm"
         > */}
@@ -72,24 +60,35 @@ function RunnerList() {
           {/* </Container> */}
           <center>
 
-          Filter by:<br/>
-          Time<br/>
-          morning<br/>
-          midday<br/>
-          afternoon<br/>
-          evening<br/>
-          <br/>
-          Type<br/>
-          groceries<br/>
-          food<br/>
-          etc<br/>
-          etc<br/>
+          Filter by:
+<br />
+          Time
+<br />
+          morning
+<br />
+          midday
+<br />
+          afternoon
+<br />
+          evening
+<br />
+          <br />
+          Type
+<br />
+          groceries
+<br />
+          food
+<br />
+          etc
+<br />
+          etc
+<br />
           </center>
         </Grid>
 {/* middle column */}
-        <Grid item xs={4} sx={{ minHeight: '100%', border: '0px solid orange' }}>
+        <Grid item xs={4} sx={{ minHeight: '100%', border: '1px solid orange' }}>
           {/* <Typography variant='h5'>Current Runs</Typography> */}
-          <Stack spacing={2} sx={{ minHeight: '100%', border: '0px solid blue'}}>
+          <Stack spacing={2} sx={{ minHeight: '100%', border: '1px solid blue'}}>
       -- sort by: distance
           <DestinationEntry />
           <DestinationEntry />
@@ -98,24 +97,37 @@ function RunnerList() {
           </Stack>
         </Grid>
 {/* right column */}
-        <Grid item xs={6} sx={{ minHeight: '100%', border: '0px solid orange' }}>
-        <Stack spacing={2} sx={{ minHeight: '100%', border: '0px solid blue' }}>
-          <Box sx={{ height: '40vh', maxWidth: '564px', border: '0px solid black', borderRadius: '2px' }}>
+        <Grid item xs={6} sx={{ minHeight: '100%', border: '1px solid orange' }}>
+        <Stack spacing={2} sx={{ minHeight: '100%', border: '1px solid blue' }}>
+          {/* <Box sx={{ height: '40vh', maxWidth: '564px', border: '1px solid black', borderRadius: '2px' }}>
             <div style={{width: '100%', height: '100%'}}>
             <img className='mapImage' src="https://www.evernote.com/l/AAUb4rYWCdJDBaV76K7JnS7CHkR1LNFYPm8B/image.png" alt='a map'></img>
             </div>
+          </Box> */}
+          <Box
+            id="mapContainer"
+            container
+            sx={{
+              border: 1,
+              borderRadius: 4,
+              borderColor: '#F88202',
+              height: '50vh',
+              width: '100%'
+            }}
+            item
+          >
+                <Typography>Map</Typography>
           </Box>
-          <Box sx={{ height: '35vh', minWidth: '100%', border: '0px solid black', borderRadius: '2px', backgroundColor: '#de9de9' }}>
+          <Box sx={{ height: '35vh', minWidth: '100%', border: '1px solid black', borderRadius: '2px', backgroundColor: '#de9de9' }}>
             detail
             <DestinationDetail />
           </Box>
-          </Stack>
+        </Stack>
         </Grid>
       </Grid>
+      <Footer />
     </Container>
-    <Footer />
-  </>
   );
 }
 
-export default RunnerList;
+export default DestinationList;

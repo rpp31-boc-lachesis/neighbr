@@ -3,37 +3,38 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const errandSchema = Schema({
+  id: Number,
   category: String,
-  req_items: {
-    item: String,
-    quantity: Number,
-    weight: String,
-    size: String,
-    notes: String,
-    status: String,
-    requester: mongoose.Types.ObjectId,
-    runner: mongoose.Types.ObjectId,
-    transportation: String
-  },
-  message: {
-    requester: mongoose.Types.ObjectId,
-    notes: String
-  },
+  requester: mongoose.Types.ObjectId,
+  runner: mongoose.Types.ObjectId,
+  req_items: [
+    {
+      item: String,
+      quantity: Number,
+      status: String // ['Cancelled', 'In-Progress', 'Completed']
+    },
+  ],
+  weight: String,
+  size: String,
+  transportation: String,
+  message: String,
   pickup: {
     store: String,
-    address: String
+    address: String,
+    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
   },
   dropoff: {
-    requester: mongoose.Types.ObjectId,
-    address: String
+    address: String,
+    note: String,
+    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
   },
   date: Date,
   start_time: Date,
   end_time: Date,
-  received_rating: {
-    requester: mongoose.Types.ObjectId,
+  given_rating: {
+    runner: mongoose.Types.ObjectId,
     rating: Number
-  }
+  },
 });
 
 // const Errand = mongoose.model('Errand', errandSchema);

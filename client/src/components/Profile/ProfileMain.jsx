@@ -27,27 +27,27 @@ export function BasicStack() {
       <Stack
         spacing={1}
       >
-        <Item>
+        <Item sx={{ fontSize: '1.0rem' }}>
           <strong>First Name:</strong>
           {' Some'}
         </Item>
-        <Item>
+        <Item sx={{ fontSize: '1.0rem' }}>
           <strong>Last Name:</strong>
           {' RandomUser'}
         </Item>
-        <Item>
+        <Item sx={{ fontSize: '1.0rem' }}>
           <strong>Email:</strong>
           {' random@test.com'}
         </Item>
-        <Item>
+        <Item sx={{ fontSize: '1.0rem' }}>
           <strong>Date of Birth:</strong>
           {' 05-16-1990'}
         </Item>
-        <Item>
+        <Item sx={{ fontSize: '1.0rem' }}>
           <strong>Rating:</strong>
           {' 4.5'}
         </Item>
-        <Item>
+        <Item sx={{ fontSize: '1.0rem' }}>
           <strong>Bio:</strong>
           {" What's up everyone?! I'm always out running around so please let me know what I can pick up for you."}
         </Item>
@@ -164,7 +164,7 @@ export default function VerticalTabs() {
             <Avatar
               src="https://randomuser.me/api/portraits/men/52.jpg"
               sx={{
-                height: '75%',
+                height: 'auto',
                 width: '75%'
               }}
             />
@@ -208,6 +208,9 @@ export default function VerticalTabs() {
           >
             <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=1kkKcSb1nXsnBaBPYV83IwauRRhqGaonu" />
           </Grid>
+        </Grid>
+        <Grid>
+          <img alt="illustration of clouds" src="https://drive.google.com/uc?export=view&id=1VLWnSpPvlecNhF81Sp8NKSX5iomOpnAy" style={{ width: '50%', height: 'auto' }} />
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -266,8 +269,11 @@ export default function VerticalTabs() {
               width: '33%'
             }}
           >
-            <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB" />
+            <img alt="person shopping on phone" src="https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB" />
           </Grid>
+        </Grid>
+        <Grid>
+          <img alt="illustration of clouds" src="https://drive.google.com/uc?export=view&id=1VLWnSpPvlecNhF81Sp8NKSX5iomOpnAy" style={{ width: '50%', height: 'auto' }} />
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -316,7 +322,7 @@ export default function VerticalTabs() {
               spacing={2}
               sx={{
                 width: '90%',
-                height: '75%',
+                height: '72%',
                 overflow: 'scroll'
               }}
             >
@@ -340,8 +346,11 @@ export default function VerticalTabs() {
               width: '33%'
             }}
           >
-            <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=16KBYVdQ8dskg6YngwBP7iX9XQT7s6120" />
+            <img alt="handbag on digital screen" src="https://drive.google.com/uc?export=view&id=16KBYVdQ8dskg6YngwBP7iX9XQT7s6120" />
           </Grid>
+        </Grid>
+        <Grid>
+          <img alt="illustration of clouds" src="https://drive.google.com/uc?export=view&id=1VLWnSpPvlecNhF81Sp8NKSX5iomOpnAy" style={{ width: '50%', height: 'auto' }} />
         </Grid>
       </TabPanel>
       <TabPanel value={value} index={3}>
@@ -390,7 +399,7 @@ export default function VerticalTabs() {
               spacing={2}
               sx={{
                 width: '90%',
-                height: '75%',
+                height: '72%',
                 overflow: 'scroll'
               }}
             >
@@ -414,8 +423,11 @@ export default function VerticalTabs() {
               width: '33%'
             }}
           >
-            <img alt="neighbrs running" src="https://drive.google.com/uc?export=view&id=1UUHGQ_IUl6brPzZoSRiWEAPfSMThATGR" />
+            <img alt="package on digital screen" src="https://drive.google.com/uc?export=view&id=1UUHGQ_IUl6brPzZoSRiWEAPfSMThATGR" />
           </Grid>
+        </Grid>
+        <Grid>
+          <img alt="illustration of clouds" src="https://drive.google.com/uc?export=view&id=1VLWnSpPvlecNhF81Sp8NKSX5iomOpnAy" style={{ width: '50%', height: 'auto' }} />
         </Grid>
       </TabPanel>
     </Box>
