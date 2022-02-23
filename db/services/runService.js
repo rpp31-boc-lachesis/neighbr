@@ -2,29 +2,6 @@ const mongoose = require('mongoose')
 const { Run } = require('../models/index.js');
 const { Location } = require('../models/index.js');
 
-const createRun = (runObject, callback) => {
-  const {
-    location,
-    user,
-    date,
-    startTime,
-    endTime,
-    transportation,
-  } = runObject;
-  const newRun = new Run({
-    location,
-    user,
-    date,
-    startTime,
-    endTime,
-    transportation,
-  });
-  console.log('createRun newRun', newRun);
-  newRun.save()
-    .then((result) => { callback(null, result); })
-    .catch((err) => { callback(err, null); });
-};
-
 const getAllRuns = (callback) => {
   Run.find()
     .lean()
@@ -99,7 +76,6 @@ const postRun = (body, callback) => {
 };
 
 module.exports = {
-  createRun,
   getAllRuns,
   getRun,
   getRunById,

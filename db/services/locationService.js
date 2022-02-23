@@ -50,18 +50,10 @@ const getOrCreateLocation = (location, callback) => {
     .catch((err) => { callback(err, null); });
 };
 
-const addRunToLocation = (runId, locationId, callback) => {
-  Location.findByIdAndUpdate(locationId, { $push: { runs: runId } })
-    .lean()
-    .then((resp) => { callback(null, resp); })
-    .catch((err) => { callback(err, null); });
-};
-
 module.exports = {
   createLocation,
   getAllLocations,
   getLocation,
   getLocationById,
   getOrCreateLocation,
-  addRunToLocation,
 };
