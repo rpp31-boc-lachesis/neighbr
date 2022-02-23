@@ -147,17 +147,15 @@ class App extends React.Component {
     combined.run.userName = user;
     axios.post('/runs/post', {
       data: combined,
-      // headers: { 'Content-Type': 'application/json' },
+
     })
       .then((r) => {
-        // r.text().then((t) => {console.log(t)})
-        console.log(r.data.data);
         return r.data.data;
       })
       .then((response) => {
         this.setState({ lastRun: response });
       })
-      .catch((err) => console.error(err))//this.setState({ error: err }));
+      .catch((err) => console.error(err));
   }
 
   handleAuth(e, loginData) {
@@ -207,7 +205,6 @@ class App extends React.Component {
 
   render() {
     const { user, userPhoto } = this.state;
-    // eslint-disable-next-line object-curly-newline
     const {
       errands,
       error,

@@ -9,7 +9,6 @@ const getAllRuns = (callback) => {
     .populate('user')
     .populate('acceptedErrands')
     .then((result) => {
-      console.log(result);
       callback(null, result);
     })
     .catch((err) => { callback(err, null); });
@@ -22,7 +21,6 @@ const getRun = (filter, callback) => {
     .populate('location')
     .populate('user')
     .then((result) => {
-      console.log('single run ', result);
       callback(null, result);
     })
     .catch((err) => { callback(err, null); });

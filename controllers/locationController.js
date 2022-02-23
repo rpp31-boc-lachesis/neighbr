@@ -3,7 +3,6 @@ const {
   getOrCreateLocation
 } = require('../db/services/locationService.js');
 
-
 module.exports.getOrAddLocation = (req, res) => {
   getOrCreateLocation(req.location, (err, data) => {
     if (err) {

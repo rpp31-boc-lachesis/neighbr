@@ -24,9 +24,9 @@ export default function Run(props) {
     >
       <CardContent>
         <Grid>
-          <Typography variant="h5">{`${location} by: ${transportation}`}</Typography>
-          <Typography variant="body2">{`Start: ${startTime} End: ${endTime}`}</Typography>
-          <Typography variant="body2">{`Date: ${date}`}</Typography>
+          <Typography variant="h5">{`${location.placeText} by: ${transportation}`}</Typography>
+          <Typography variant="body2">{`Start: ${new Date(startTime).toLocaleTimeString()} End: ${new Date(endTime).toLocaleTimeString()}`}</Typography>
+          <Typography variant="body2">{`Date: ${new Date(date).toLocaleDateString()}`}</Typography>
         </Grid>
       </CardContent>
       <CardActions>

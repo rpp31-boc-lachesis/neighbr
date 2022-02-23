@@ -61,7 +61,7 @@ export default function AddRunModal(props) {
     const run = {
       date,
       startTime,
-      stopTime,
+      endTime: stopTime,
       transportation,
     };
     handlePostRun(run, location);
