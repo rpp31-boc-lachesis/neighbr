@@ -52,6 +52,7 @@ class App extends React.Component {
       runs: [],
       users: [],
       errands: [],
+      lastRun: {},
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleAuth = this.handleAuth.bind(this);
@@ -64,7 +65,8 @@ class App extends React.Component {
       locations,
       runs,
       users,
-      errands
+      errands,
+      user,
     } = this.state;
     const fetches = [
       axios.get('/locations')
@@ -76,7 +78,10 @@ class App extends React.Component {
               this.setState({ locations: [...oldArr, ...result] });
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/runs')
         .then((res) => res.data)
@@ -87,7 +92,10 @@ class App extends React.Component {
               this.setState({ runs: [...oldArr, ...result] });
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/allusers')
         .then((res) => res.data)
@@ -104,7 +112,10 @@ class App extends React.Component {
               );
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/errands')
         .then((res) => res.data)
@@ -115,28 +126,35 @@ class App extends React.Component {
               this.setState({ errands: [...oldArr, ...result] });
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         )
     ];
 
     Promise.all(fetches)
-      .then(this.setState({ isLoaded: true }));
+      .then(this.setState({ isLoaded: true }))
+      .catch((err) => {
+        this.setState(err);
+      });
   }
 
-  handlePostRun(run) {
-    const { destinations } = this.state;
-    this.setState({
-      destinations: [...destinations, run]
-    });
-    fetch('/runs', {
-      method: 'POST',
-      body: JSON.stringify(run),
-      headers: { 'Content-Type': 'application/json' },
+  handlePostRun(run, location) {
+    const { user } = this.state;
+    const combined = { run, location };
+    combined.run.userName = user;
+    axios.post('/runs/post', {
+      data: combined,
+
     })
-      .then((response) => {
-        console.log(response);
+      .then((r) => {
+        return r.data.data;
       })
-      .catch((err) => console.log(err));
+      .then((response) => {
+        this.setState({ lastRun: response });
+      })
+      .catch((err) => console.error(err));
   }
 
   handleAuth(e, loginData) {
@@ -186,18 +204,19 @@ class App extends React.Component {
 
   render() {
     const { user, userPhoto } = this.state;
-    // eslint-disable-next-line object-curly-newline
     const {
+      errands,
       error,
       isLoaded,
       isLoggedIn,
+      lastRun,
       destinations,
       locations,
       users,
       runs
     } = this.state;
     if (error) {
-      return <Error />;
+      return <Error error={error} />;
     }
 
     if (!isLoaded) {
@@ -217,7 +236,7 @@ class App extends React.Component {
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/runnerList" element={<RunnerList />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
-            <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
+            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/profile" element={<ProfilePopover />} />
             <Route path="/profilemain" element={<ProfileMain />} />

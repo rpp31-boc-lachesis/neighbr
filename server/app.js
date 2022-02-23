@@ -12,11 +12,11 @@ const {
   getOneUser,
   postUser
 } = require('../controllers/userController');
-const { getRuns, addRun } = require('../controllers/runController');
+const { getRuns, addRun, buildRun } = require('../controllers/runController');
 const { getAllErrands, getErrandById } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
 require('../db/auth/passport')(passport);
-const { getLocations } = require('../controllers/locationController');
+const { getLocations, getOrAddLocation } = require('../controllers/locationController');
 
 // middleware
 app.use(passport.initialize());
@@ -35,9 +35,11 @@ app.post('/users', postUser);
 
 app.get('/locations', getLocations);
 app.post('/locations/search', locationSearch);
+app.post('/locations/getOrAdd', getOrAddLocation);
 
 app.get('/runs', getRuns);
-app.post('/runs', addRun);
+app.post('/runs/add', addRun);
+app.post('/runs/post', buildRun);
 
 app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
