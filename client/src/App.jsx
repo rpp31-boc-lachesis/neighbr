@@ -7,9 +7,9 @@ import Header from './components/Home/Header.jsx';
 import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
-import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
 import RequestStatus from './components/RequestDash/RequestStatus.jsx';
+import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
@@ -20,6 +20,8 @@ import ProfilePopover from './components/ProfilePopover.jsx';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 // import Box from '@mui/material/Box';
+import TestingMenu from './TestingMenu.jsx';
+
 authService.jwtInterceptor(axios);
 
 const theme = responsiveFontSizes(createTheme({
@@ -29,7 +31,7 @@ const theme = responsiveFontSizes(createTheme({
     },
     secondary: {
       main: '#5FC6C9',
-    }
+    },
   },
   typography: {
     fontFamily: 'Roboto'
@@ -45,6 +47,7 @@ class App extends React.Component {
       user: window.localStorage.getItem('user') || '',
       userPhoto: window.localStorage.getItem('avatar_url') || '',
       isLoggedIn: false,
+      // isLoggedIn: true, //test setting
       isLoaded: false,
       locations: [],
       runs: [],
@@ -226,15 +229,17 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Router>
+          <TestingMenu />
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
           <Routes>
-            <Route path="/" element={<Splash />} />
+            <Route path="/" element={<Splash user={user} />} />
             {/* <Route path="/other" element={<Other />} /> */}
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
-            <Route path="/main" element={<Main />} />
+            {user ? <Route path="/main" element={<Main />} /> : null }
             <Route path="/requestStatus" element={<RequestStatus />} />
-            <Route path="/requestDash" element={<RunnerList />} />
+            <Route path="/runnerList" element={<RunnerList />} />
+            {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/other" element={<Other />} />

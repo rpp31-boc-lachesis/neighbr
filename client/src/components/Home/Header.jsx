@@ -48,7 +48,7 @@ export default function Header({ user, userPhoto, logout }) {
             0: '#',
             1: '/main',
             2: '/runnerDash',
-            3: '/requestDash',
+            3: '/runnerList',
             4: '/runnerDash',
             5: '/requestDash'
           }[i]}

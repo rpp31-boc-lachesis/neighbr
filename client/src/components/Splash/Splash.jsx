@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar.jsx';
 
-function Splash() {
+function Splash({ user }) {
   const overall = {
     fontFamily: 'Optima',
     fontSize: '60px'
@@ -41,7 +41,7 @@ function Splash() {
 
   return (
     <div>
-      <Navbar />
+      { user ? null : <Navbar /> }
       <div style={overall}>
         <span style={p1}>Your Favorite</span>
         <div style={logo}>

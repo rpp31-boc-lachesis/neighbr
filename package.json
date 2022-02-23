@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./controllers/signature/createKeypair.js  && node ./server/index.js",
     "build": "webpack --mode production",
-    "start:dev": "node ./controllers/signature/createKeypair.js  && nodemon ./server/index.js",
+    "start:dev": "node ./controllers/signature/createKeypair.js && nodemon ./server/index.js",
     "build:dev": "webpack --mode development -w",
     "test": "jest --coverage --runInBand --detectOpenHandles",
     "test:ci": "jest --coverage --ci --runInBand --detectOpenHandles --reporters=default --reporters=jest-junit"
