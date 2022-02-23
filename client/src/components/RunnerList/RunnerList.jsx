@@ -17,7 +17,7 @@ import DestinationEntry from './DestinationEntry.jsx';
 import DestinationDetail from './DestinationDetail.jsx';
 
 import Footer from '../Home/Footer.jsx';
-import css from './RunnerList.css';
+import css from './runnerList.css';
 
 
 function DestinationList() {
