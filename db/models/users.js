@@ -80,13 +80,13 @@ const userSchema = Schema(
     created_at: String,
     req_history: [
       {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Errand'
       }
     ],
     run_history: [
       {
-        type: mongoose.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Run'
       }
     ],

@@ -3,14 +3,13 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const runSchema = new Schema({
-  locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
-  userId: mongoose.Types.ObjectId,
-  date: Date,
-  time: Date,
-  endTime: Date,
-  acceptedErrands: [{ type: mongoose.Types.ObjectId, ref: 'Errand' }]
+  location: { type: Schema.Types.ObjectId, ref: 'Location' },
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  date: String,
+  startTime: String,
+  endTime: String,
+  transportation: String,
+  acceptedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }]
 });
-
-// const Run = mongoose.model('Run', runSchema);
 
 module.exports = runSchema;

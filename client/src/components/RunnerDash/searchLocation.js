@@ -1,7 +1,9 @@
-function searchLocation(text, proximity) {
+function searchLocation(text, proximity, type) {
   const body = JSON.stringify({
     text,
     proximity,
+    type,
+    country: 'US',
   });
   return fetch('/locations/search', {
     method: 'POST',

@@ -11,27 +11,23 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import wavyBuddyPoint from '../../assets/wavyBuddiesStanding.png';
-import Destination from './Destination.jsx';
+import Run from './Run.jsx';
 import AddRunModal from './AddRunModal.jsx';
 
 export default function RunnerDash(props) {
-  const { destinations, handlePostRun } = props;
-  const Destinations = destinations.map((dest, index) => <Destination dest={dest} key={dest.id} />);
+  const { runs, handlePostRun } = props;
+  const Runs = runs.map((run) => <Run run={run} key={run.id} />);
   return (
     <Container maxwidth="sm">
-      <Grid container sx={{flexGrow: 1, height: '100%'}} justifyContent="center" alignItems="center" spacing={2}>
+      <Grid container sx={{ flexGrow: 1, height: '100%' }} justifyContent="center" alignItems="center" spacing={2}>
         <Grid container item direction="column" sx={{ minHeight: '100%' }} xs={3}>
-          {/* <Container
-            maxwidth="sm"
-          > */}
           <AddRunModal handlePostRun={handlePostRun} />
           <img src={wavyBuddyPoint} alt="" />
-          {/* </Container> */}
         </Grid>
         <Grid item xs={4} sx={{overflow: 'scroll'}}>
           <Typography variant="h5">Current Runs</Typography>
           <Stack spacing={2}>
-            {Destinations}
+            {Runs}
           </Stack>
         </Grid>
         <Grid item xs={5} sx={{ height: '100%' }}>
@@ -45,16 +41,16 @@ export default function RunnerDash(props) {
     </Container>
   );
 }
-RunnerDash.propTypes = {
-  destinations: propTypes.arrayOf(
-    propTypes.shape(
-      {
-        destination: propTypes.string.isRequired,
-        date: propTypes.instanceOf(Date).isRequired,
-        startTime: propTypes.instanceOf(Date).isRequired,
-        endTime: propTypes.instanceOf(Date).isRequired,
-        transportation: propTypes.string.isRequired,
-      }
-    )
-  ).isRequired
-};
+// RunnerDash.propTypes = {
+//   runs: propTypes.arrayOf(
+//     propTypes.shape(
+//       {
+//         destination: propTypes.string.isRequired,
+//         date: propTypes.instanceOf(Date).isRequired,
+//         startTime: propTypes.instanceOf(Date).isRequired,
+//         endTime: propTypes.instanceOf(Date).isRequired,
+//         transportation: propTypes.string.isRequired,
+//       }
+//     )
+//   ).isRequired
+// };
