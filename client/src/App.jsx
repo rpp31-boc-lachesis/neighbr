@@ -4,6 +4,7 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 import axios from 'axios';
 import Splash from './components/Splash/Splash.jsx';
 import Header from './components/Home/Header.jsx';
+import Footer from './components/Home/Footer.jsx'
 import Main from './components/Home/Main.jsx';
 import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
@@ -243,6 +244,7 @@ class App extends React.Component {
             <Route path="/profile" element={<ProfilePopover />} />
             <Route path="*" element={<Error />} />
           </Routes>
+          <Footer />
         </Router>
       </ThemeProvider>
     );

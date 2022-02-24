@@ -9,10 +9,11 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 
 export default function Run(props) {
-  const { run } = props;
+  const { run, setRun } = props;
   const { location, date, startTime, endTime, transportation } = run;
   return (
     <Card
+      onClick={() => setRun(run)}
       elevation={4}
       sx={{
         bgcolor: 'secondary.main',
@@ -23,8 +24,11 @@ export default function Run(props) {
       }}
     >
       <CardContent>
-        <Grid>
-          <Typography variant="h5">{`${location.placeText}`}</Typography> <Typography variant="h5">{`by: ${transportation}`}</Typography>
+        <Grid container direction="column">
+          <Grid item container direction="row" justifyContent="space-between" spacing="2">
+            <Typography width="50%" variant="h5">{`${location.placeText}`}</Typography>
+            <Typography variant="h5">{`by: ${transportation}`}</Typography>
+          </Grid>
           <Typography variant="body2">{`Start: ${new Date(startTime).toLocaleTimeString()} End: ${new Date(endTime).toLocaleTimeString()}`}</Typography>
           <Typography variant="body2">{`Date: ${new Date(date).toLocaleDateString()}`}</Typography>
         </Grid>

@@ -13,7 +13,7 @@ const {
   postUser
 } = require('../controllers/userController');
 const { getRuns, addRun, buildRun } = require('../controllers/runController');
-const { getAllErrands, getErrandById } = require('../controllers/errandController');
+const { getAllErrands, getErrandById, addErrand } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
 require('../db/auth/passport')(passport);
 const { getLocations, getOrAddLocation } = require('../controllers/locationController');
@@ -43,6 +43,7 @@ app.post('/runs/post', buildRun);
 
 app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
+app.post('/errands/create', addErrand);
 
 // Catch all route for redirect must be last so others can fire first! :)
 // passport.authenticate('jwt', { session: false })

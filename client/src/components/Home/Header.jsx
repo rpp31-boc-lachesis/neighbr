@@ -38,7 +38,7 @@ export default function Header({ user, userPhoto, logout }) {
     setAnchorElUser(null);
   };
 
-  const logo = (<Link to="/main" style={{ color: '#FFFFFF' }}><Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography></Link>);
+  const logo = (<Link to="/main" style={{ color: '#FFFFFF', textDecoration: 'none' }}><Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography></Link>);
   const list = (
     <List>
       {['', 'Home', 'Post Your Run', 'Find Your Runner', 'Runner Dashboard', 'Requester Dashboard'].map((text, i) => (
