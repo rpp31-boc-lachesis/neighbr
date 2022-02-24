@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import {
   DialogContent,
@@ -23,7 +24,21 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ProfileCard({ handleClose, currentUser }) {
+export default function ProfileCard({ handleClose, user }) {
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    axios.get(`/users/${user}`)
+      .then((results) => {
+        const oneUser = results.data[0];
+        console.log(oneUser);
+        setCurrentUser(oneUser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user]);
+
   return (
     <Grid
       container
@@ -229,6 +244,5 @@ export default function ProfileCard({ handleClose, currentUser }) {
 
 ProfileCard.propTypes = {
   handleClose: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  currentUser: PropTypes.object.isRequired
+  user: PropTypes.string.isRequired
 };
