@@ -19,7 +19,7 @@ const getLocation = (filter, callback) => {
   Location.find(filter)
     // .lean()
     .populate('runs')
-    .populate('errands')
+    .populate({ path: 'errands', populate: { path: 'requester' } })
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
