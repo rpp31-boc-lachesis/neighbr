@@ -244,7 +244,7 @@ class App extends React.Component {
             <Route path="/profile" element={<ProfilePopover />} />
             <Route path="*" element={<Error />} />
           </Routes>
-          <Footer />
+          {user ? <Footer /> : null}
         </Router>
       </ThemeProvider>
     );
