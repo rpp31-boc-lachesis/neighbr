@@ -73,6 +73,7 @@ export default function ProfileMain(props) {
   const [currentUser, setCurrentUser] = useState({});
 
   const { user } = props;
+  const tempUser = 'brownkoala609';
 
   useEffect(() => {
     axios.get(`/users/${user}`)
@@ -91,6 +92,8 @@ export default function ProfileMain(props) {
   };
 
   return (
+    Object.keys(currentUser).length > 0
+    && (
     <Box
       sx={{
         flexGrow: 1,
@@ -137,7 +140,7 @@ export default function ProfileMain(props) {
         >
           <Grid
             item
-            sm={5}
+            sm={6}
             lg={3}
             sx={{
               display: 'flex',
@@ -148,7 +151,7 @@ export default function ProfileMain(props) {
             }}
           >
             <Avatar
-              src="https://randomuser.me/api/portraits/men/52.jpg"
+              src={currentUser.avatar_url}
               sx={{
                 height: 'auto',
                 width: '75%'
@@ -169,17 +172,19 @@ export default function ProfileMain(props) {
                 opacity: 0.5
               }}
             >
-              {currentUser.created_at}
+              {currentUser.created_at.slice(0, 10)}
             </Typography>
           </Grid>
           <Grid
             item
-            sm={5}
+            sm={7}
+            lg={5}
             sx={{
               display: 'flex',
-              alignItems: 'center',
-              paddingTop: '5%',
-              paddingLeft: '2%'
+              flexDirection: 'column',
+              justifyContent: 'center',
+              // alignItems: 'center',
+              paddingTop: '5%'
             }}
           >
             <Stack
@@ -203,7 +208,7 @@ export default function ProfileMain(props) {
               </Item>
               <Item sx={{ fontSize: '1.0rem' }}>
                 <strong>Date of Birth:</strong>
-                {` ${currentUser.dob}`}
+                {` ${currentUser.dob.slice(0, 10)}`}
               </Item>
               <Item sx={{ fontSize: '1.0rem' }}>
                 <strong>Rating:</strong>
@@ -217,7 +222,8 @@ export default function ProfileMain(props) {
           </Grid>
           <Grid
             item
-            sm={4}
+            sm={6}
+            lg={4}
             sx={{
               alignItems: 'right',
               minWidth: '15%',
@@ -461,6 +467,7 @@ export default function ProfileMain(props) {
         </Grid>
       </TabPanel>
     </Box>
+    )
   );
 }
 
