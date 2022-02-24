@@ -121,7 +121,7 @@ export default function Header({ user, userPhoto, logout }) {
                   <Typography sx={{ color: '#EF5DA8' }}>Logout</Typography>
                 </MenuItem>
               </Link>
-              <Link to="/ProfileMain">
+              <Link to="/profilemain">
                 <MenuItem>
                   <Typography sx={{ color: '#EF5DA8' }}>Profile</Typography>
                 </MenuItem>
