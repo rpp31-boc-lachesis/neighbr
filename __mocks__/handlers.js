@@ -4,6 +4,16 @@ import { rest } from 'msw';
 
 // eslint-disable-next-line import/prefer-default-export
 export const handlers = [
+  rest.get('/locations', (req, res, ctx) => (
+    res(
+      ctx.json([{}])
+    )
+  )),
+  rest.get('/runs', (req, res, ctx) => (
+    res(
+      ctx.json([{}])
+    )
+  )),
   rest.get('/allusers', (req, res, ctx) => (
     res(
       ctx.json([
@@ -89,6 +99,11 @@ export const handlers = [
           __v: 0
         }
       ])
+    )
+  )),
+  rest.get('/errands', (req, res, ctx) => (
+    res(
+      ctx.json([{}])
     )
   ))
 ];
