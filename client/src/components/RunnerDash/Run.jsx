@@ -11,6 +11,8 @@ import Grid from '@mui/material/Grid';
 export default function Run(props) {
   const { run } = props;
   const { location, date, startTime, endTime, transportation } = run;
+  console.log('props', props)
+  console.log('run', run)
   return (
     <Card
       elevation={4}
