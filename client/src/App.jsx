@@ -22,8 +22,6 @@ import ProfilePopover from './components/ProfilePopover.jsx';
 // import Box from '@mui/material/Box';
 import TestingMenu from './TestingMenu.jsx';
 
-authService.jwtInterceptor(axios);
-
 const theme = responsiveFontSizes(createTheme({
   palette: {
     primary: {
@@ -149,16 +147,13 @@ class App extends React.Component {
     })
       .then((res) => {
         const { data } = res;
-        authService.setLocalStorage(data);
-        window.localStorage.setItem('avatar_url', data.avatar_url);
         this.setState({
           user: data.username,
           userPhoto: data.avatar_url
         });
       })
-      .catch((e) => {
-        console.log(e);
-        // setError('Uhhh, we couldn\'t find the id or password');
+      .catch((err) => {
+        console.log(err);
       });
   }
 
@@ -214,7 +209,8 @@ class App extends React.Component {
             {/* <Route path="/other" element={<Other />} /> */}
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
-            {user ? <Route path="/main" element={<Main />} /> : null }
+            {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
+            <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/runnerList" element={<RunnerList />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
