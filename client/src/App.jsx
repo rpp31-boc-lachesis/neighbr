@@ -256,7 +256,7 @@ class App extends React.Component {
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
             <Route path="/profile" element={<ProfilePopover />} />
-            <Route path="/profilemain" element={<ProfileMain />} />
+            <Route path="/profilemain" element={<ProfileMain user={user} />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Router>

@@ -1,5 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
 import * as React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -10,51 +13,6 @@ import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'left',
-  width: 'auto',
-  font: 'Roboto',
-  color: theme.palette.text.secondary,
-}));
-
-export function BasicStack() {
-  return (
-    <div>
-      <Stack
-        spacing={1}
-      >
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>First Name:</strong>
-          {' Some'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Last Name:</strong>
-          {' RandomUser'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Email:</strong>
-          {' random@test.com'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Date of Birth:</strong>
-          {' 05-16-1990'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Rating:</strong>
-          {' 4.5'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Bio:</strong>
-          {" What's up everyone?! I'm always out running around so please let me know what I can pick up for you."}
-        </Item>
-      </Stack>
-    </div>
-  );
-}
 
 function TabPanel(props) {
   const {
@@ -100,8 +58,33 @@ function a11yProps(index) {
   };
 }
 
-export default function VerticalTabs() {
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'left',
+  width: 'auto',
+  font: 'Roboto',
+  color: theme.palette.text.secondary,
+}));
+
+export default function ProfileMain(props) {
   const [value, setValue] = React.useState(0);
+  const [currentUser, setCurrentUser] = useState({});
+
+  const { user } = props;
+
+  useEffect(() => {
+    axios.get(`/users/${user}`)
+      .then((results) => {
+        const oneUser = results.data[0];
+        console.log('CURRENT USER:', oneUser);
+        setCurrentUser(oneUser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -178,7 +161,7 @@ export default function VerticalTabs() {
                 fontSize: '1.8rem'
               }}
             >
-              @username
+              {`@${currentUser.username}`}
             </Typography>
             <Typography
               component="span"
@@ -186,7 +169,7 @@ export default function VerticalTabs() {
                 opacity: 0.5
               }}
             >
-              Member since 02-15-2022
+              {currentUser.created_at}
             </Typography>
           </Grid>
           <Grid
@@ -199,7 +182,38 @@ export default function VerticalTabs() {
               paddingLeft: '2%'
             }}
           >
-            <BasicStack />
+            <Stack
+              spacing={1}
+            >
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Account #:</strong>
+                {` ${currentUser._id}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>First Name:</strong>
+                {` ${currentUser.first_name}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Last Name:</strong>
+                {` ${currentUser.last_name}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Email:</strong>
+                {` ${currentUser.email}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Date of Birth:</strong>
+                {` ${currentUser.dob}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Rating:</strong>
+                {` ${currentUser.sum_rating / currentUser.rating_count}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Bio:</strong>
+                {` ${currentUser.bio}`}
+              </Item>
+            </Stack>
           </Grid>
           <Grid
             item
@@ -250,9 +264,9 @@ export default function VerticalTabs() {
                   fontSize: '1.2rem'
                 }}
               >
-                1234 Main St
+                {currentUser.street_address}
                 <br />
-                San Francisco, CA 94102
+                {`${currentUser.city}, ${currentUser.state} ${currentUser.zip}`}
               </Item>
             </Stack>
           </Grid>
@@ -449,3 +463,56 @@ export default function VerticalTabs() {
     </Box>
   );
 }
+
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+//   ...theme.typography.body2,
+//   padding: theme.spacing(1),
+//   textAlign: 'left',
+//   width: 'auto',
+//   font: 'Roboto',
+//   color: theme.palette.text.secondary,
+// }));
+
+// export function BasicStack() {
+//   return (
+//     <div>
+//       <Stack
+//         spacing={1}
+//       >
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Account #:</strong>
+//           {currentUser._id}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>First Name:</strong>
+//           {currentUser.first_name}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Last Name:</strong>
+//           {currentUser.last_name}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Email:</strong>
+//           {currentUser.email}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Date of Birth:</strong>
+//           {currentUser.dob}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Rating:</strong>
+//           {currentUser.sum_rating / currentUser.rating_count}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Bio:</strong>
+//           {currentUser.bio}
+//         </Item>
+//       </Stack>
+//     </div>
+//   );
+// }
+
+ProfileMain.propTypes = {
+  user: PropTypes.string.isRequired
+};

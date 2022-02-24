@@ -116,14 +116,14 @@ export default function Header({ user, userPhoto, logout }) {
               open={open}
               onClose={handleCloseUserMenu}
             >
-              <Link to="/">
-                <MenuItem onClick={logout}>
-                  <Typography sx={{ color: '#EF5DA8' }}>Logout</Typography>
-                </MenuItem>
-              </Link>
               <Link to="/profilemain">
                 <MenuItem>
                   <Typography sx={{ color: '#EF5DA8' }}>Profile</Typography>
+                </MenuItem>
+              </Link>
+              <Link to="/">
+                <MenuItem onClick={logout}>
+                  <Typography sx={{ color: '#EF5DA8' }}>Logout</Typography>
                 </MenuItem>
               </Link>
             </Menu>
