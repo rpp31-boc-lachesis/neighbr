@@ -243,8 +243,8 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          {/* <TestingMenu />
-          {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null } */}
+          <TestingMenu />
+          {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />

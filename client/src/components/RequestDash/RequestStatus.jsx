@@ -25,6 +25,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import RequestMap from './RequestMap.jsx';
 import testData from './requestTestData.js';
+// import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
 function LinearProgressWithLabel(percentage) {
   return (
@@ -184,6 +185,7 @@ export default function RequestStatus() {
             <Typography variant="subtitle2">
               Haylie Schleifer
             </Typography>
+            {/* <ProfilePopover /> */}
             <Button variant="outlined">View Profile</Button>
             <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
             <Modal

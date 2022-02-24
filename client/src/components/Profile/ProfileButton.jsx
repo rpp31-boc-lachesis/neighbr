@@ -11,13 +11,13 @@ export default function ProfileButton(props) {
       variant="contained"
       startIcon={<AccountCircleIcon />}
       onClick={handleClick}
-      sx={{
-        boxSizing: 'unset',
-        width: '130px',
-        height: '18px',
-        padding: '2px',
-        borderRadius: '8px'
-      }}
+      // sx={{
+      //   boxSizing: 'unset',
+      //   width: '130px',
+      //   height: '18px',
+      //   padding: '2px',
+      //   borderRadius: '8px'
+      // }}
     >
       View Profile
     </Button>
