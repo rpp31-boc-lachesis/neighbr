@@ -8,7 +8,7 @@ const compression = require('compression');
 
 const { login, logout, signup } = require('../controllers/authController');
 const { getAll, getUsers, getOneUser, postUser } = require('../controllers/userController');
-const { getRuns, addRun, buildRun } = require('../controllers/runController');
+const { getRuns, addRun, buildRun, updateRun } = require('../controllers/runController');
 const { getAllErrands, getErrandById, addErrand } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
 const { authMiddleware } = require('../db/auth/passport');
@@ -37,6 +37,7 @@ app.post('/locations/getOrAdd', getOrAddLocation);
 app.get('/runs', getRuns);
 app.post('/runs/add', addRun);
 app.post('/runs/post', buildRun);
+app.post('/runs/update', updateRun);
 
 app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
