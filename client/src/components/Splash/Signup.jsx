@@ -68,7 +68,7 @@ function Signup({ user, handleSignUp }) {
       const value = 'please enter valid first name';
       setError({ [name]: value });
     } else {
-      console.log(data.formInput);
+      // console.log(data.formInput);
       axios.post('/signup', data.formInput)
         .then((response) => {
           console.log(response.data);
@@ -153,8 +153,8 @@ function Signup({ user, handleSignUp }) {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          { user && (<Navigate to="/main" replace />)}
-          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleSignUp(e, loginData); }} sx={{ mt: 1 }}>
+          {/* { user && (<Navigate to="/main" replace />)} */}
+          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleSignUp(e, loginData); }} sx={{ mt: 1 }} data-testid="form">
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -170,6 +170,7 @@ function Signup({ user, handleSignUp }) {
                   onChange={handleInput}
                   helperText={error.first_name}
                   error={!!error.first_name}
+                  inputProps={{ 'data-testid': 'first-name' }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -197,6 +198,9 @@ function Signup({ user, handleSignUp }) {
                   fullWidth
                   defaultValue={formInput.username}
                   onChange={(e) => { handleInput(e); handleLogin(e); }}
+                  inputProps={{
+                    'data-testid': 'username'
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -309,6 +313,9 @@ function Signup({ user, handleSignUp }) {
                     color="secondary"
                     value={formInput.password}
                     onChange={(e) => { handleInput(e); handleLogin(e); }}
+                    inputProps={{
+                      'data-testid': 'password'
+                    }}
                   />
                 </FormControl>
               </Grid>
@@ -354,6 +361,7 @@ function Signup({ user, handleSignUp }) {
               variant="contained"
               color="secondary"
               sx={{ mt: 3, mb: 2 }}
+              data-testid="submit-button"
             >
               Sign Up
             </Button>
