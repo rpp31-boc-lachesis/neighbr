@@ -12,7 +12,7 @@ const { getRuns, addRun, buildRun, updateRun } = require('../controllers/runCont
 const { getAllErrands, getErrandById, addErrand } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
 const { authMiddleware } = require('../db/auth/passport');
-const { getLocations, getOrAddLocation } = require('../controllers/locationController');
+const { getLocations, getOrAddLocation, getLocationById } = require('../controllers/locationController');
 
 // middleware
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -31,6 +31,7 @@ app.get('/users/:username', getOneUser);
 app.post('/users', postUser);
 
 app.get('/locations', getLocations);
+app.get('/locations/:id', getLocationById);
 app.post('/locations/search', locationSearch);
 app.post('/locations/getOrAdd', getOrAddLocation);
 

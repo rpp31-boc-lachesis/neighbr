@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import axios from 'axios';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -43,7 +44,16 @@ function LinearProgressWithLabel(percentage) {
   );
 }
 
-export default function RequestStatus() {
+export default function RequestStatus(props) {
+  const [promisedBy, setPromisedBy] = React.useState(null);
+  const [pickup, setPickup] = React.useState({});
+  const [transportation, setTransportation] = React.useState(null);
+  const [weight, setWeight] = React.useState(null);
+  const [size, setSize] = React.useState(null);
+  const [message, setMessage] = React.useState(null);
+  const [category, setCategory] = React.useState(null);
+  const [cart, setCart] = React.useState([]);
+  const [runner, setRunner] = React.useState({});
   const [progress, setProgress] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(null);
@@ -51,26 +61,58 @@ export default function RequestStatus() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const { errands, users, locations } = props;
+
   React.useEffect(() => {
-    const initialValue = 0;
-    const total = testData[0].reqItems.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, initialValue) * 100;
-    let accum = 0;
+    const testID = '6216bf01b510771e3d97e55a';
+    // `/requestStatus/${ [selected errand id] }`
+    axios.get(`/requestStatus/${testID}`)
+      .then((results) => {
+        console.log('data: ', results.data);
 
-    for (let i = 0; i < testData[0].reqItems.length; i += 1) {
-      if (testData[0].reqItems[i].status === 'Cancelled') {
-        accum += 0;
-      } else if (testData[0].reqItems[i].status === 'In-Progress') {
-        accum += 50;
-      } else if (testData[0].reqItems[i].status === 'Completed') {
-        accum += 100;
-      }
-    }
+        const progressTotal = results.data.req_items.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
 
-    const result = (accum / total) * 100;
-    setProgress(result);
+        let accum = 0;
+
+        for (let i = 0; i < results.data.req_items.length; i += 1) {
+          if (results.data.req_items[i].status === 'Cancelled') {
+            accum += 0;
+          } else if (results.data.req_items[i].status === 'In-Progress') {
+            accum += 50;
+          } else if (results.data.req_items[i].status === 'Completed') {
+            accum += 100;
+          }
+        }
+
+        const result = (accum / progressTotal) * 100;
+        setProgress(result);
+
+        const endTime = `${new Date(results.data.end_time)}`;
+        setPromisedBy(endTime);
+        setCart(results.data.req_items);
+        setTransportation(results.data.transportation);
+        setWeight(results.data.weight);
+        setSize(results.data.size);
+        setCategory(results.data.category);
+        setMessage(results.data.message);
+        setRunner(results.data.runner);
+
+        return results.data.pickup.locationId;
+      })
+      .then((locationID) => {
+        axios.get(`/locations/${locationID}`)
+          .then((results) => {
+            setPickup(results.data);
+            console.log('pickup: ', results.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
-
-  // set pickup/dropoff points using getLocationById (after a post request saves location in db)
 
   const modalsx = {
     position: 'absolute',
@@ -102,12 +144,6 @@ export default function RequestStatus() {
     borderRadius: '10px'
   };
 
-  function createData(item, quantity, status) {
-    return {
-      item, quantity, status
-    };
-  }
-
   function statusIcon(status) {
     if (status === 'Cancelled') {
       return (
@@ -130,25 +166,17 @@ export default function RequestStatus() {
     );
   }
 
-  const {
-    category, weight, size, transportation, message, reqItems
-  } = testData[0];
-
   const shop = testData[0].pickup.store;
-  const endTime = testData[0].end_time.toString();
-  const pickup = testData[0].pickup.address;
   const dropoff = testData[0].dropoff.address;
   const dropoffNote = testData[0].dropoff.note;
-
-  const rows = reqItems.map((cart) => createData(cart.item, cart.quantity, cart.status));
 
   return (
     <Container fixed sx={{ pb: 10 }}>
       <Typography display="block" align="left" variant="subtitle1">
         Request: &nbsp;
-        {shop}
+        {pickup.placeText}
       </Typography>
-      <RequestMap />
+      {/* <RequestMap /> */}
       <Grid
         container
         sx={sx}
@@ -161,9 +189,12 @@ export default function RequestStatus() {
         </Grid>
         <Grid item sx={{ m: 1 }}>Promised by:</Grid>
         <Grid item xs={1} />
-        <Grid item sx={{ m: 1 }}>{endTime}</Grid>
+        <Grid item sx={{ m: 1 }}>{promisedBy}</Grid>
       </Grid>
       <Typography display="block" align="justify" variant="h6">Errand Details</Typography>
+      {runner === {} ? 'Errand not accepted yet' : (
+
+      )}
       <Grid
         container
         sx={{
@@ -222,11 +253,11 @@ export default function RequestStatus() {
             Pick-Up:
           </Typography>
           <Typography variant="overline">
-            {shop}
+            {pickup.placeText}
             &nbsp;
           </Typography>
           <Typography variant="caption">
-            {pickup}
+            {pickup.address}
           </Typography>
         </Grid>
         <Grid item>
@@ -242,7 +273,7 @@ export default function RequestStatus() {
           </Typography>
           <Typography variant="body2">
             Category: &nbsp;
-            {category}
+            {category === undefined ? 'Not Specified' : category}
           </Typography>
         </Grid>
         <TableContainer component={Paper}>
@@ -258,23 +289,22 @@ export default function RequestStatus() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {cart.map((items) => (
                 <TableRow
-                  key={row.item}
+                  key={items.item}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.item}
+                    {items.item}
                   </TableCell>
-                  <TableCell align="right">{row.quantity}</TableCell>
-                  <TableCell align="right">{statusIcon(row.status)}</TableCell>
+                  <TableCell align="right">{items.quantity}</TableCell>
+                  <TableCell align="right">{statusIcon(items.status)}</TableCell>
                 </TableRow>
               ))}
-
               <TableRow>
                 <TableCell rowSpan={3} />
                 <TableCell colSpan={1}>Transportation</TableCell>
-                <TableCell align="right">{transportation}</TableCell>
+                <TableCell align="right">{transportation === undefined ? 'Not Specified' : transportation}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Total Weight</TableCell>

@@ -26,12 +26,13 @@ module.exports.addErrand = (req, res) => {
 };
 
 module.exports.getErrandById = async (req, res) => {
-  const { errandId } = req.params;
+  const errandId = req.params.id;
+
   await getErrandById(errandId, (err, data) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
-      res.send(data);
+      res.status(200).send(data);
     }
   });
 };
