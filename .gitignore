@@ -104,7 +104,9 @@ typings/
 
 # Distribution files
 client/dist/*
+!client/dist/favicon.ico
 !client/dist/index.html
+
 
 # DS_STORE
 **.DS_Store
