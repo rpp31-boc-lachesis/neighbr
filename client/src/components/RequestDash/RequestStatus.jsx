@@ -78,11 +78,10 @@ export default function RequestStatus(props) {
 
     axios.get(`/requestStatus/${testID}`)
       .then((results) => {
-        console.log('data: ', results.data);
-
-        axios.get(`/users/${results.data.runner}`)
+        axios.get(`/user/${results.data.runner}`)
           .then((result) => {
-            console.log('runner\'s data: ', result);
+            console.log('runner: ', result.data);
+            setRunner(result.data[0]);
           })
           .catch((err) => {
             console.error(err);
@@ -239,10 +238,11 @@ export default function RequestStatus(props) {
           >
             <Avatar variant="contained" alt="Haylie Schleifer" src="https://s3-alpha-sig.figma.com/img/3af9/cdaf/deb44c5856c64700478bf852a42f0b39?Expires=1646611200&Signature=Mkz~SUB643eX761qAVY5r6pA5gFF9RODGQtquTaR4P5q4ECxMXVSlHLmJfYRJ1qmnnDsl6Uf6273iyds5GPfNQUMyNF6k52Sfnr1mPbjCteQkmsfz3iTc4zNO5iCCQTANNDDLifTdLWbrUZH4Jl-43hiiUtjrwLLZt-eSK-zTb302ABjt3Pjxd9GL1egctfIz8iNAkHX0dYoe-gpdlspFg-8zDobFdft7KTVPYy0XtmS-pSSAXUKIf8fqt-2Q~1v0ROIOv7zoZo1jjYvcIlfkRnJmZZOlJlS-B4ooqFgH1EetTW52xcXtRB3xhX54XiX~cj9jWfkge1s8~CkXNrD4w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" sx={{ width: '80px', height: '80px' }} />
             <Typography variant="subtitle2">
-              Haylie Schleifer
+              {runner.first_name}
+              &nbsp;
+              {runner.last_name}
             </Typography>
-            <ProfilePopover />
-            {/* <Button variant="outlined">View Profile</Button> */}
+            <ProfilePopover users={runner.username} />
             <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
             <Modal
               open={open}
@@ -350,7 +350,9 @@ export default function RequestStatus(props) {
           </Box>
         </TableContainer>
         <Typography alignItems="right" variant="body1">
-          Message to Haylie: &nbsp;
+          Message to&nbsp;
+          {runner.first_name}
+          : &nbsp;
           {message}
         </Typography>
       </Grid>
