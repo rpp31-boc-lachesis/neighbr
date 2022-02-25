@@ -4,10 +4,12 @@ import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import searchLocation from './searchLocation.js';
 
-export default function LocationAutoComplete() {
+export default function LocationAutoComplete(props) {
   const [value, setValue] = React.useState(null);
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
+
+  const { proximity } = props;
 
   React.useEffect(() => {
     let active = true;
@@ -17,7 +19,8 @@ export default function LocationAutoComplete() {
       return undefined;
     }
 
-    searchLocation(inputValue, null)
+    // console.log(value, inputValue);
+    searchLocation(inputValue, proximity)
       .then((response) => response.json())
       .then((results) => {
         if (active) {
@@ -31,7 +34,7 @@ export default function LocationAutoComplete() {
         }
       })
       .catch((err) => console.error(err));
-
+    props.handleLocChange(value);
     return () => {
       active = false;
     };
@@ -56,7 +59,7 @@ export default function LocationAutoComplete() {
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
       }}
-      isOptionEqualToValue={(option, value) => option.place_name === value.place_name}
+      isOptionEqualToValue={(option, value) => option._id === value._id}
       renderInput={(params) => (
         <TextField {...params} label="Add a location" fullWidth />
       )}

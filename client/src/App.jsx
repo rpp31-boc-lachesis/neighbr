@@ -5,8 +5,8 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 import axios from 'axios';
 import Splash from './components/Splash/Splash.jsx';
 import Header from './components/Home/Header.jsx';
+import Footer from './components/Home/Footer.jsx'
 import Main from './components/Home/Main.jsx';
-import Other from './components/Other.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
 import RequestStatus from './components/RequestDash/RequestStatus.jsx';
@@ -15,8 +15,12 @@ import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
-// import ProfilePopup from './components/ProfilePopup.jsx';
-import ProfilePopover from './components/ProfilePopover.jsx';
+import authService from './auth.js';
+import ProfilePopover from './components/Profile/ProfilePopover.jsx';
+import ProfileMain from './components/Profile/ProfileMain.jsx';
+// import Typography from '@mui/material/Typography';
+// import Button from '@mui/material/Button';
+// import Box from '@mui/material/Box';
 import TestingMenu from './TestingMenu.jsx';
 
 const theme = responsiveFontSizes(createTheme({
@@ -48,6 +52,7 @@ class App extends React.Component {
       runs: [],
       users: [],
       errands: [],
+      lastRun: {},
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
@@ -60,7 +65,8 @@ class App extends React.Component {
       locations,
       runs,
       users,
-      errands
+      errands,
+      user,
     } = this.state;
     const fetches = [
       axios.get('/locations')
@@ -69,10 +75,19 @@ class App extends React.Component {
           (result) => {
             if (Array.isArray(result)) {
               const oldArr = [...locations];
-              this.setState({ locations: [...oldArr, ...result] });
+              this.setState(
+                { locations: [...oldArr, ...result] },
+                () => {
+                  // eslint-disable-next-line no-console
+                  console.log('LOCATIONS:', result);
+                }
+              );
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/runs')
         .then((res) => res.data)
@@ -80,10 +95,19 @@ class App extends React.Component {
           (result) => {
             if (Array.isArray(result)) {
               const oldArr = [...runs];
-              this.setState({ runs: [...oldArr, ...result] });
+              this.setState(
+                { runs: [...oldArr, ...result] },
+                () => {
+                  // eslint-disable-next-line no-console
+                  console.log('RUNS:', result);
+                }
+              );
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/allusers')
         .then((res) => res.data)
@@ -100,7 +124,10 @@ class App extends React.Component {
               );
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         ),
       axios.get('/errands')
         .then((res) => res.data)
@@ -108,35 +135,49 @@ class App extends React.Component {
           (result) => {
             if (Array.isArray(result)) {
               const oldArr = [...errands];
-              this.setState({ errands: [...oldArr, ...result] });
+              this.setState(
+                { errands: [...oldArr, ...result] },
+                () => {
+                  // eslint-disable-next-line no-console
+                  console.log('ERRANDS:', result);
+                }
+              );
             }
           },
-          (error) => { this.setState({ isLoaded: true, error }); }
+          (error) => {
+            this.setState({ isLoaded: true });
+            console.error(error);
+          }
         )
     ];
 
     Promise.all(fetches)
       .then(this.setState({ isLoaded: true }));
+      .catch((err) => {
+        this.setState(err);
+      });
+    
     this.setState({
       user: localStorage.getItem('user'),
       userPhoto: localStorage.getItem('userphoto')
     });
   }
 
-  handlePostRun(run) {
-    const { destinations } = this.state;
-    this.setState({
-      destinations: [...destinations, run]
-    });
-    fetch('/runs', {
-      method: 'POST',
-      body: JSON.stringify(run),
-      headers: { 'Content-Type': 'application/json' },
+  handlePostRun(run, location) {
+    const { user } = this.state;
+    const combined = { run, location };
+    combined.run.userName = user;
+    axios.post('/runs/post', {
+      data: combined,
+
     })
-      .then((response) => {
-        console.log(response);
+      .then((r) => {
+        return r.data.data;
       })
-      .catch((err) => console.log(err));
+      .then((response) => {
+        this.setState({ lastRun: response });
+      })
+      .catch((err) => console.error(err));
   }
 
   async handleSignin(loginData) {
@@ -182,9 +223,11 @@ class App extends React.Component {
   render() {
     const { user, userPhoto } = this.state;
     const {
+      errands,
       error,
       isLoaded,
       isLoggedIn,
+      lastRun,
       destinations,
       locations,
       users,
@@ -192,7 +235,7 @@ class App extends React.Component {
     } = this.state;
 
     if (error) {
-      return <Error />;
+      return <Error error={error} />;
     }
 
     if (!isLoaded) {
@@ -205,7 +248,6 @@ class App extends React.Component {
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
-            {/* <Route path="/other" element={<Other />} /> */}
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
@@ -213,12 +255,13 @@ class App extends React.Component {
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/runnerList" element={<RunnerList />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
-            <Route path="/runnerDash" element={<RunnerDash destinations={testData} handlePostRun={this.handlePostRun} />} />
+            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />
             <Route path="/runnerStatus" element={<RunnerStatus />} />
-            <Route path="/other" element={<Other />} />
             <Route path="/profile" element={<ProfilePopover />} />
+            <Route path="/profilemain" element={<ProfileMain />} />
             <Route path="*" element={<Error />} />
           </Routes>
+          {user ? <Footer /> : null}
         </Router>
       </ThemeProvider>
     );
