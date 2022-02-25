@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Run, Location, Users } = require('../models/index.js');
+const { addRunToUserHist } = require('./userService.js')
 
 const getAllRuns = (callback) => {
   Run.find()
@@ -7,6 +8,8 @@ const getAllRuns = (callback) => {
     .populate({ path: 'location', populate: { path: 'errands', populate: { path: 'requester', select: '-password -salt' } } })
     .populate({ path: 'user', select: '-password -salt' })
     .populate('acceptedErrands')
+    // .populate('declinedErrands')
+    // .populate('completedErrands')
     .then((result) => {
       callback(null, result);
     })
@@ -71,8 +74,26 @@ const postRun = (body, callback) => {
         .then((loc) => {
           loc.runs.push(newRun._id);
           loc.save();
-        });
-      callback(null, newRun);
+        })
+      return newRun;
+    })
+    .then((newRun) => {
+      console.log(run.user)
+      console.log('newRun at addruntouserhist', newRun._id)
+      Users.findOneAndUpdate(
+        { _id: run.user},
+        { $push: { run_history: newRun._id } }
+      )
+        .then((resp) => {
+          console.log(resp);
+          return newRun;
+        })
+        .then((newRun) => {
+          callback(null, newRun);
+        })
+        .catch((err) => { console.log(err) })
+      // addRunToUserHist(newRun._id, run.user);
+      return newRun;
     })
     .catch((err) => { callback(err, null); });
 };

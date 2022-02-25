@@ -2,7 +2,8 @@ const {
   getAllUsers,
   getUsers,
   getOneUser,
-  createUser
+  createUser,
+  addRunToUser,
 } = require('../db/services/userService');
 
 module.exports = {
@@ -47,6 +48,14 @@ module.exports = {
       if (newUser) {
         res.status(201).send(`New User ${username} Created!`);
       }
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  addRunToUser: async (req, res) => {
+    try {
+      const result = await addRunToUser(req.body.runId, req.body.userId);
+      res.status(201).send(result);
     } catch (err) {
       res.status(500).send(err);
     }

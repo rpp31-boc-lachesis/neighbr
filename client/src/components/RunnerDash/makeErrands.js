@@ -66,15 +66,23 @@ const items = JSON.parse(`[{
 }]`);
 
 const locations = [
-  '6215b1edc9e1388f59d55461',
-  '6215b4a4197cf88d2bec9503',
-  '6215b4b9197cf88d2bec950a',
-  '6215b509197cf88d2bec9517',
-  '6215b536197cf88d2bec9524',
-  '6215b545197cf88d2bec952b',
-  '6216936ce9e6d066e501a1cf',
-  '62169385e9e6d066e501a1d6',
-  '6216939ce9e6d066e501a1dd',
+  "6215b1edc9e1388f59d55461",
+  "6215b4a4197cf88d2bec9503",
+  "6215b4b9197cf88d2bec950a",
+  "6215b509197cf88d2bec9517",
+  "6215b536197cf88d2bec9524",
+  "6215b545197cf88d2bec952b",
+  "6216936ce9e6d066e501a1cf",
+  "62169385e9e6d066e501a1d6",
+  "6216939ce9e6d066e501a1dd",
+  "62186ebf0757c7e9d16a1976",
+  "6218704a92babd6846805bdb",
+  "6218709dc3b89f3877458991",
+  "621870e74e15cc32b9b6361f",
+  "62187306eb7bcd9c52235888",
+  "62191e6b33ab7e9e27218f23",
+  "621936b33005a44ebc20ddc6",
+  "621936e83005a44ebc20de6c"
 ]
 
 const getRandomIndex = (n) => Math.floor(Math.random() * n);
@@ -104,7 +112,7 @@ const makeErrands = function(num) {
     axios.get('https://baconipsum.com/api', {
       params: {
         type: 'meat-and-filler',
-        sentences: getRandomIndex(20) + 3,
+        sentences: getRandomIndex(10) + 3,
       }
     })
       .then((response) => {
@@ -118,7 +126,7 @@ const makeErrands = function(num) {
             console.log(response.statusText, response.status);
 
           })
-          .catch((err) => { console.log(err) });
+          .catch((err) => { console.log(err)});
       });
   }
 };
