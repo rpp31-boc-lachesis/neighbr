@@ -37,7 +37,7 @@ export default function RunnerDash(props) {
           <img src={wavyBuddyPoint} height="465" width="234" alt="" />
           </Grid>
         </Grid>
-        <Grid item container direction="column" sx={{ paddingBottom: '45px', maxHeight: '88vh', height: '100%' }}>
+        <Grid item container sx={{ paddingBottom: '45px', maxHeight: '88vh', height: '100%' }}>
           <Grid item sx={{ overflow: 'auto'}} xs={4}>
             <Typography variant="h5">Current Runs</Typography>
               <Stack spacing={2}>
