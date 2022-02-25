@@ -6,7 +6,7 @@ export default function Main() {
   return (
     <>
       <Picker />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

@@ -5,7 +5,7 @@ const { Location } = require('../models/index.js');
 const getAllRuns = (callback) => {
   Run.find()
     .lean()
-    .populate('location')
+    .populate({ path: 'location', populate: { path: 'errands', populate: { path: 'requester' } } })
     .populate('user')
     .populate('acceptedErrands')
     .then((result) => {

@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const errandSchema = Schema({
-  id: Number,
   category: String,
+  accepted: { type: Boolean, default: false },
   requester: { type: Schema.Types.ObjectId, ref: 'User' },
   runner: { type: Schema.Types.ObjectId, ref: 'User' },
+  run: { type: Schema.Types.ObjectId, ref: 'Run' },
   req_items: [
     {
       item: String,
