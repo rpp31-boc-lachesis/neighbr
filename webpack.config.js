@@ -6,7 +6,7 @@ const entryDir = path.join(__dirname, 'client/src/index.jsx');
 const outputDir = path.join(__dirname, 'client/dist');
 
 module.exports = {
-  entry: entryDir,
+  entry: ['regenerator-runtime/runtime.js', entryDir],
   output: {
     filename: 'bundle.js',
     path: outputDir,
