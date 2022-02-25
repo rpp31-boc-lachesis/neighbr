@@ -5,7 +5,7 @@ import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/s
 import axios from 'axios';
 import Splash from './components/Splash/Splash.jsx';
 import Header from './components/Home/Header.jsx';
-import Footer from './components/Home/Footer.jsx'
+import Footer from './components/Home/Footer.jsx';
 import Main from './components/Home/Main.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
