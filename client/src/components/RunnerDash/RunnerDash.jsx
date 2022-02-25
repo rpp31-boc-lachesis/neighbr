@@ -20,7 +20,11 @@ export default function RunnerDash(props) {
 
   const [currentRun, setRun] = React.useState(null);
 
-  const Runs = runs.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
+  const CurrentRuns = runs.map((run) => {
+    if (!run.accepted) {
+      return <Run setRun={setRun} run={run} key={run._id} />;
+    }
+  });
 
   return (
     <Container sx={{ height: '100%' }} maxwidth="sm">
@@ -33,13 +37,19 @@ export default function RunnerDash(props) {
           <img src={wavyBuddyPoint} height="465" width="234" alt="" />
           </Grid>
         </Grid>
-        <Grid item sx={{ paddingBottom: '45px', maxHeight: '88vh', overflow: 'auto', height: '100%' }} xs={4}>
-          <Typography variant="h5">Current Runs</Typography>
-          {/* <Box sx={{ overflow: 'auto' }}> */}
-            <Stack spacing={2}>
-              {Runs}
-            </Stack>
-          {/* </Box> */}
+        <Grid item container direction="column" sx={{ paddingBottom: '45px', maxHeight: '88vh', height: '100%' }}>
+          <Grid item sx={{ overflow: 'auto'}} xs={4}>
+            <Typography variant="h5">Current Runs</Typography>
+              <Stack spacing={2}>
+                {CurrentRuns}
+              </Stack>
+          </Grid>
+          <Grid item sx={{ overflow: 'auto' }} xs={4}>
+          <Typography variant="h5">Completed Runs</Typography>
+              <Stack spacing={2}>
+                {/* {CompleteRuns} */}
+              </Stack>
+          </Grid>
         </Grid>
         <Grid item container xs={5} sx={{ paddingBottom: '45px', minHeight: '100%', overflow: 'auto' }} alignItems="flex-start">
           <Grid container item sx={{ minHeight: '50%', border: '2px solid', borderColor: 'secondary.main'}} flexGrow={1} marginTop="10px" borderRadius="4px" spacing={2}>
