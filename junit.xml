@@ -1,39 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="13" failures="0" errors="0" time="13.271">
-  <testsuite name="&lt;Signup /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:10:13" time="5.039" tests="6">
-    <testcase classname="&lt;Signup /&gt; Renders Signup component" name="&lt;Signup /&gt; Renders Signup component" time="0.804">
+<testsuites name="jest tests" tests="13" failures="0" errors="0" time="14.685">
+  <testsuite name="&lt;Signup /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:14:42" time="6.372" tests="6">
+    <testcase classname="&lt;Signup /&gt; Renders Signup component" name="&lt;Signup /&gt; Renders Signup component" time="0.642">
     </testcase>
-    <testcase classname="&lt;Signup /&gt; Submission works" name="&lt;Signup /&gt; Submission works" time="0.423">
+    <testcase classname="&lt;Signup /&gt; Submission works" name="&lt;Signup /&gt; Submission works" time="0.296">
     </testcase>
-    <testcase classname="&lt;Signup /&gt; Rendered default state" name="&lt;Signup /&gt; Rendered default state" time="0.301">
+    <testcase classname="&lt;Signup /&gt; Rendered default state" name="&lt;Signup /&gt; Rendered default state" time="0.241">
     </testcase>
-    <testcase classname="&lt;Signup /&gt; Rendered all textbox" name="&lt;Signup /&gt; Rendered all textbox" time="0.77">
+    <testcase classname="&lt;Signup /&gt; Rendered all textbox" name="&lt;Signup /&gt; Rendered all textbox" time="0.74">
     </testcase>
-    <testcase classname="&lt;Signup /&gt; Rendered username state" name="&lt;Signup /&gt; Rendered username state" time="0.287">
+    <testcase classname="&lt;Signup /&gt; Rendered username state" name="&lt;Signup /&gt; Rendered username state" time="0.277">
     </testcase>
-    <testcase classname="&lt;Signup /&gt; Rendered password state" name="&lt;Signup /&gt; Rendered password state" time="0.246">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:10:18" time="3.047" tests="1">
-    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.249">
+    <testcase classname="&lt;Signup /&gt; Rendered password state" name="&lt;Signup /&gt; Rendered password state" time="0.34">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;ProfileButton /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:10:22" time="1.089" tests="4">
-    <testcase classname="&lt;ProfileButton /&gt; Renders Profile Button component" name="&lt;ProfileButton /&gt; Renders Profile Button component" time="0.097">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Should be enabled" name="&lt;ProfileButton /&gt; Should be enabled" time="0.124">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct text to view profile" name="&lt;ProfileButton /&gt; Has correct text to view profile" time="0.064">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color" name="&lt;ProfileButton /&gt; Has correct theme color" time="0.057">
+  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:14:48" time="3.46" tests="1">
+    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.244">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;Login /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:10:23" time="0.911" tests="1">
-    <testcase classname="&lt;Login /&gt; Renders Login Form component" name="&lt;Login /&gt; Renders Login Form component" time="0.319">
+  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:14:52" time="0.712" tests="1">
+    <testcase classname="&lt;ProfilePopover /&gt; Renders Profile Popover component" name="&lt;ProfilePopover /&gt; Renders Profile Popover component" time="0.039">
     </testcase>
   </testsuite>
-  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:10:24" time="1.656" tests="1">
-    <testcase classname="&lt;ProfilePopover /&gt; Renders Profile Popover component" name="&lt;ProfilePopover /&gt; Renders Profile Popover component" time="0.073">
+  <testsuite name="&lt;ProfileButton /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:14:53" time="1.081" tests="4">
+    <testcase classname="&lt;ProfileButton /&gt; Renders Profile Button component" name="&lt;ProfileButton /&gt; Renders Profile Button component" time="0.055">
+    </testcase>
+    <testcase classname="&lt;ProfileButton /&gt; Should be enabled" name="&lt;ProfileButton /&gt; Should be enabled" time="0.133">
+    </testcase>
+    <testcase classname="&lt;ProfileButton /&gt; Has correct text to view profile" name="&lt;ProfileButton /&gt; Has correct text to view profile" time="0.047">
+    </testcase>
+    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color" name="&lt;ProfileButton /&gt; Has correct theme color" time="0.045">
+    </testcase>
+  </testsuite>
+  <testsuite name="&lt;Login /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T02:14:54" time="0.541" tests="1">
+    <testcase classname="&lt;Login /&gt; Renders Login Form component" name="&lt;Login /&gt; Renders Login Form component" time="0.181">
     </testcase>
   </testsuite>
 </testsuites>
