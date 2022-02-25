@@ -152,11 +152,11 @@ class App extends React.Component {
     ];
 
     Promise.all(fetches)
-      .then(this.setState({ isLoaded: true }));
+      .then(this.setState({ isLoaded: true }))
       .catch((err) => {
         this.setState(err);
       });
-    
+
     this.setState({
       user: localStorage.getItem('user'),
       userPhoto: localStorage.getItem('userphoto')
