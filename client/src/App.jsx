@@ -57,9 +57,71 @@ class App extends React.Component {
     this.handleSignin = this.handleSignin.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handlelogout = this.handlelogout.bind(this);
+    this.refreshData = this.refreshData.bind(this);
   }
 
   componentDidMount() {
+    this.refreshData();
+  }
+
+  handlePostRun(run, location) {
+    const { user } = this.state;
+    const combined = { run, location };
+    combined.run.userName = user;
+    axios.post('/runs/post', {
+      data: combined,
+
+    })
+      .then((r) => {
+        return r.data.data;
+      })
+      .then((response) => {
+        this.setState({ lastRun: response });
+      })
+      .catch((err) => console.error(err));
+  }
+
+  async handleSignin(loginData) {
+    try {
+      const res = await axios.post('/login', loginData);
+      const { data } = res;
+      this.setState({
+        user: data.username,
+        userPhoto: data.avatar_url
+      });
+      localStorage.setItem('user', data.username);
+      localStorage.setItem('userphoto', data.avatar_url);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  handleSignUp(e, loginData) {
+    e.preventDefault();
+    // console.log('loginData', loginData);
+    // const { data } = res;
+    // authService.setLocalStorage(loginData);
+    // const expire = authService.getExpiration();
+    // console.log(expire.$d)
+    localStorage.setItem('user', loginData.username);
+    localStorage.setItem('userphoto', loginData.avatar_url);
+    this.setState({
+      user: loginData.username,
+      userPhoto: loginData.avatar_url
+    });
+  }
+
+  async handlelogout() {
+    await axios.get('/logout');
+    this.setState({
+      user: '',
+      userPhoto: ''
+    });
+    localStorage.removeItem('user');
+    localStorage.removeItem('userphoto');
+  }
+
+  refreshData() {
     const {
       locations,
       runs,
@@ -162,63 +224,6 @@ class App extends React.Component {
     });
   }
 
-  handlePostRun(run, location) {
-    const { user } = this.state;
-    const combined = { run, location };
-    combined.run.userName = user;
-    axios.post('/runs/post', {
-      data: combined,
-
-    })
-      .then((r) => {
-        return r.data.data;
-      })
-      .then((response) => {
-        this.setState({ lastRun: response });
-      })
-      .catch((err) => console.error(err));
-  }
-
-  async handleSignin(loginData) {
-    try {
-      const res = await axios.post('/login', loginData);
-      const { data } = res;
-      this.setState({
-        user: data.username,
-        userPhoto: data.avatar_url
-      });
-      localStorage.setItem('user', data.username);
-      localStorage.setItem('userphoto', data.avatar_url);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  handleSignUp(e, loginData) {
-    e.preventDefault();
-    // console.log('loginData', loginData);
-    // const { data } = res;
-    // authService.setLocalStorage(loginData);
-    // const expire = authService.getExpiration();
-    // console.log(expire.$d)
-    localStorage.setItem('user', loginData.username);
-    localStorage.setItem('userphoto', loginData.avatar_url);
-    this.setState({
-      user: loginData.username,
-      userPhoto: loginData.avatar_url
-    });
-  }
-
-  async handlelogout() {
-    await axios.get('/logout');
-    this.setState({
-      user: '',
-      userPhoto: ''
-    });
-    localStorage.removeItem('user');
-    localStorage.removeItem('userphoto');
-  }
-
   render() {
     const { user, userPhoto } = this.state;
     const {
@@ -254,7 +259,7 @@ class App extends React.Component {
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/runnerList" element={<RunnerList />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
-            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />
+            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
             <Route path="/profile" element={<ProfilePopover />} />
             <Route path="/profilemain" element={<ProfileMain />} />

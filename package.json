@@ -84,7 +84,8 @@
     "rules": {
       "no-undef": "off",
       "import/extensions": "off",
-      "comma-dangle": "off"
+      "comma-dangle": "off",
+      "no-underscore-dangle": "off"
     }
   },
   "browserslist": [">0.2%, not dead, not ie 11, not chrome < 51, not safari < 10"]

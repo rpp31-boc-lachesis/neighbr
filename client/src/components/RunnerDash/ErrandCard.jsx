@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardHeader from '@mui/material/CardHeader';
@@ -9,21 +10,44 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
 const ErrandCard = function(props) {
-  const { errand } = props;
-  const user = errand.requester.hasOwnProperty('username')
+  const { errand, declined, user } = props;
+  const requestUser = errand.requester.hasOwnProperty('username')
     ? errand.requester.username
     : errand.requester.email;
-  console.log(user);
+
+  const [isDeclined, setIsDeclined] = React.useState(declined);
+
+  const cardStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    borderColor: 'secondary.main',
+    flexShrink: 0,
+    width: '35%',
+    margin: '0.5em',
+  };
+
+  cardStyle.border = accepted === true ? '2px solid' : '2px dashed';
+
+  const handleAccept = () => {
+    console.log(errand);
+    axios.post('/errands/accept', { data: { errandId: errand._id, user } })
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
-    <Card variant="outlined" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', border: '2px dashed', borderColor: 'secondary.main', flexShrink: 0, width: '35%', margin: '0.5em', zIndex: '-1' }}>
+    <Card variant="outlined" sx={cardStyle}>
       <CardHeader avatar={
         <Avatar sx={{ height: '5rem', width: '5rem'}} alt={errand.requester.email} src={errand.requester.avatar_url} />
       }
       />
       <CardContent>
         <Typography variant="body1" color="primary.dark">
-          {user}
+          {requestUser}
         </Typography>
         <Typography variant="body1" color="primary.dark">
           Item: {errand.req_items[0].item}
@@ -33,8 +57,8 @@ const ErrandCard = function(props) {
         </Typography>
       </CardContent>
       <CardActions sx={{marginTop: 'auto'}}>
-        <Button sx={{alignSelf: 'flex-end'}} variant="contained">Yes</Button>
-        <Button sx={{alignSelf: 'flex-end'}} variant="contained">No</Button>
+        <Button sx={{alignSelf: 'flex-end'}} variant="contained" onClick={() => handleAccept()}>Yes</Button>
+        <Button sx={{alignSelf: 'flex-end'}} variant="contained" onClick={() => console.log('click')}>No</Button>
       </CardActions>
     </Card>
   );
