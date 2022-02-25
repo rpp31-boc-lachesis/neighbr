@@ -153,7 +153,7 @@ function Signup({ user, handleSignUp }) {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          {/* { user && (<Navigate to="/main" replace />)} */}
+          { user && (<Navigate to="/main" replace />)}
           <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleSignUp(e, loginData); }} sx={{ mt: 1 }} data-testid="form">
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>

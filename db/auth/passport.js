@@ -5,7 +5,7 @@ const path = require('path');
 const PUB_KEY = fs.readFileSync(path.join(__dirname, '../..', 'controllers/signature/pub_key.pem'), 'utf8');
 
 function authMiddleware(req, res, next) {
-  console.log('ACCESSING STRICTED ROUTES :::: hitting middleware');
+  // console.log('ACCESSING STRICTED ROUTES :::: hitting middleware');
 
   if (req.cookies.token !== undefined) {
     const token = req.cookies.token.split(' ');
