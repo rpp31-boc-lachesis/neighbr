@@ -15,7 +15,6 @@ import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
-import authService from './auth.js';
 import ProfilePopover from './components/Profile/ProfilePopover.jsx';
 import ProfileMain from './components/Profile/ProfileMain.jsx';
 // import Typography from '@mui/material/Typography';
