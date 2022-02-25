@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const errandSchema = Schema({
-  id: Number,
   category: String,
-  requester: mongoose.Types.ObjectId,
-  runner: mongoose.Types.ObjectId,
+  requester: { type: Schema.Types.ObjectId, ref: 'User' },
+  runner: { type: Schema.Types.ObjectId, ref: 'User' },
+  run: { type: Schema.Types.ObjectId, ref: 'Run' },
   req_items: [
     {
       item: String,
@@ -32,7 +32,7 @@ const errandSchema = Schema({
   start_time: Date,
   end_time: Date,
   given_rating: {
-    runner: mongoose.Types.ObjectId,
+    runner: { type: Schema.Types.ObjectId, ref: 'User' },
     rating: Number
   },
 });

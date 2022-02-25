@@ -27,43 +27,48 @@ const style = {
 export default function AddRunModal(props) {
   const [zip, setZip] = React.useState('');
   const [open, setOpen] = React.useState(false);
-  const [destination, setDestination] = React.useState('');
+  const [location, setLocation] = React.useState('');
   const [date, setDate] = React.useState(new Date());
   const [startTime, setStart] = React.useState(new Date());
   const [stopTime, setStop] = React.useState(new Date());
   const [transportation, setTransportation] = React.useState('');
-  const [proximity, setProximity] = React.useState(null)
+  const [proximity, setProximity] = React.useState(null);
   const { handlePostRun } = props;
+  let Value;
+
+  React.useEffect(() => {
+    if (zip.length >= 5) {
+      searchLocation(zip, null, )
+        .then((res) => res.json())
+        .then((result) => {
+          setProximity(result.features[0].center);
+        })
+        .catch((err) => { console.log(err); });
+    }
+  }, [zip]);
 
   const handleOpen = () => setOpen(true);
 
   const handleClose = () => setOpen(false);
 
-  const handleDestChange = (event) => {
-    setDestination(event.target.value);
+  const handleLocChange = (value) => {
+    setLocation(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const run = {
-      destination,
       date,
       startTime,
-      stopTime,
+      endTime: stopTime,
       transportation,
     };
-    handlePostRun(run);
+    handlePostRun(run, location);
     handleClose();
   };
-  let proximityValue;
   const handleZipChange = (e) => {
-    setProximity(e.target.value);
-    if (zip.length >= 5) {
-      searchLocation(zip, null)
-        .then((result) => { proximityValue = features[0].center })
-        .catch((err) => { console.log(err) });
-    }
+    setZip(e.target.value);
   };
 
   return (
@@ -84,18 +89,9 @@ export default function AddRunModal(props) {
               id="zip"
               label="Zip code"
               value={zip}
-              onChange={(e) => setZip(e.target.value)}
+              onChange={handleZipChange}
             />
-            <LocationAutocomplete proximity={proximity} />
-            <TextField
-              required
-              fullWidth
-              id="destination"
-              label="Destination"
-              value={destination}
-              autoComplete="off"
-              onChange={handleDestChange}
-            />
+            <LocationAutocomplete proximity={proximity} handleLocChange={handleLocChange} />
             <DatePicker
               label="Date"
               value={date}
@@ -131,6 +127,6 @@ export default function AddRunModal(props) {
   );
 }
 
-AddRunModal.propTypes = {
-  handlePostRun: PropTypes.func.isRequired,
-};
+// AddRunModal.propTypes = {
+//   handlePostRun: PropTypes.func.isRequired,
+// };

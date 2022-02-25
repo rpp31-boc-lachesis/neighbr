@@ -5,13 +5,14 @@ const app = express();
 const cookiePaser = require('cookie-parser');
 const path = require('path');
 const compression = require('compression');
+
 const { login, logout, signup } = require('../controllers/authController');
 const { getAll, getUsers, getOneUser, postUser } = require('../controllers/userController');
-const { getRuns, addRun } = require('../controllers/runController');
-const { getAllErrands, getErrandById } = require('../controllers/errandController');
+const { getRuns, addRun, buildRun } = require('../controllers/runController');
+const { getAllErrands, getErrandById, addErrand } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
 const { authMiddleware } = require('../db/auth/passport');
-const { getLocations } = require('../controllers/locationController');
+const { getLocations, getOrAddLocation } = require('../controllers/locationController');
 
 // middleware
 app.use(express.static(path.join(__dirname, '../client/dist')));
@@ -31,12 +32,15 @@ app.post('/users', postUser);
 
 app.get('/locations', getLocations);
 app.post('/locations/search', locationSearch);
+app.post('/locations/getOrAdd', getOrAddLocation);
 
 app.get('/runs', getRuns);
-app.post('/runs', addRun);
+app.post('/runs/add', addRun);
+app.post('/runs/post', buildRun);
 
 app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
+app.post('/errands/create', addErrand);
 
 // Catch all route for redirect must be last so others can fire first! :)
 app.get('/*', authMiddleware, (req, res) => {

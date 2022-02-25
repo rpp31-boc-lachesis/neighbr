@@ -2,7 +2,6 @@ const axios = require('axios');
 const {
   createErrand,
   getAllErrands,
-  getErrand,
   getErrandById,
 } = require('../db/services/errandService.js');
 

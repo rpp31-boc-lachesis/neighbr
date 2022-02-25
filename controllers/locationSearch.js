@@ -4,10 +4,17 @@ const querystring = require('querystring');
 const { MAPBOX_API_KEY } = process.env;
 
 module.exports.locationSearch = (req, res) => {
-  const { text, proximity } = req.body;
-  const urlParams = { access_token: MAPBOX_API_KEY };
+  const { text, proximity, type } = req.body;
+  const urlParams = {
+    access_token: MAPBOX_API_KEY,
+    country: 'US',
+  };
   if (proximity) {
     urlParams.proximity = `${proximity[0]},${proximity[1]}`;
+    // urlParams.bbox = `${proximity[0] - 1},${proximity[1] - 1},${proximity[0] + 1},${proximity[1] + 1}`;
+  }
+  if (type) {
+    urlParams.type = type;
   }
 
   axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${querystring.stringify(urlParams)}`, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
