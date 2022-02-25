@@ -3,6 +3,7 @@ const {
   createErrand,
   getAllErrands,
   getErrandById,
+  markErrandAccepted,
 } = require('../db/services/errandService.js');
 
 module.exports.getAllErrands = async (req, res) => {
@@ -33,6 +34,18 @@ module.exports.getErrandById = async (req, res) => {
       res.status(500).send(err.message);
     } else {
       res.status(200).send(data);
+    }
+  });
+};
+
+module.exports.acceptErrand = (req, res) => {
+  console.log(req.body);
+  const { errandId, user } = req.body.data;
+  markErrandAccepted(errandId, user, (err, data) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.send(data);
     }
   });
 };

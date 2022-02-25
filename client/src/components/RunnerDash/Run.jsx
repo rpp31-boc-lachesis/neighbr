@@ -34,7 +34,7 @@ export default function Run(props) {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button variant="contained">Add Destination</Button>
+        <Button onClick={() => console.log('click')} variant="contained">Add Destination</Button>
       </CardActions>
     </Card>
   );

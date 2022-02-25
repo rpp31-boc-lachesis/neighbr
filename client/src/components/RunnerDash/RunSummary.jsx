@@ -7,20 +7,27 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 const RunSummary = function(props) {
-  const { run } = props;
+  const { run, user} = props;
   const { errands } = run.location;
-  console.log(errands)
 
-  const errandCards = errands.map((errand) => <ErrandCard errand={errand} key={errand._id} />);
+  const errandCards = errands.map((errand) => (
+    <ErrandCard
+      declined={run.declinedErrands.includes(errand._id)}
+      runId={run.id}
+      errand={errand}
+      key={errand._id}
+      user={user}
+      />
+  ));
 
   return (
     <Grid container spacing={2} direction="column" justifyContent="space-between" padding="0.5em" height="100%">
       <Grid item container spacing={0.75} direction="row" alignItems="center" justifyContent="flex-start">
         <Grid item>
-        <Typography variant="h5" fontWeight="600" color="secondary.dark">Run to </Typography>
+          <Typography variant="h5" fontWeight="600" color="secondary.dark">Run to </Typography>
         </Grid>
         <Grid item>
-        <Typography variant="h5" fontWeight="400" color="secondary.dark">{run.location.placeText}</Typography>
+          <Typography variant="h5" fontWeight="400" color="secondary.dark">{run.location.placeText}</Typography>
         </Grid>
       </Grid>
 

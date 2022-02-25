@@ -51,7 +51,8 @@ module.exports.addRun = (req, res) => {
 module.exports.buildRun = (req, res) => {
   postRun(req.body, (err, data) => {
     if (err) {
-      res.status(500).send(err.message);
+      console.log(err);
+      res.status(500).send(err);
     } else {
       res.send(data);
     }

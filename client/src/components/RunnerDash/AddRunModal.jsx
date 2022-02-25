@@ -33,7 +33,7 @@ export default function AddRunModal(props) {
   const [stopTime, setStop] = React.useState(new Date());
   const [transportation, setTransportation] = React.useState('');
   const [proximity, setProximity] = React.useState(null);
-  const { handlePostRun } = props;
+  const { handlePostRun, refreshData } = props;
   let Value;
 
   React.useEffect(() => {
@@ -66,6 +66,7 @@ export default function AddRunModal(props) {
     };
     handlePostRun(run, location);
     handleClose();
+    refreshData();
   };
   const handleZipChange = (e) => {
     setZip(e.target.value);

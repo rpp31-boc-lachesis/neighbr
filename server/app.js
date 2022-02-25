@@ -7,9 +7,9 @@ const path = require('path');
 const compression = require('compression');
 
 const { login, logout, signup } = require('../controllers/authController');
-const { getAll, getUsers, getOneUser, postUser } = require('../controllers/userController');
+const { getAll, getUsers, getOneUser, postUser, addRunToUser } = require('../controllers/userController');
 const { getRuns, addRun, buildRun, updateRun } = require('../controllers/runController');
-const { getAllErrands, getErrandById, addErrand } = require('../controllers/errandController');
+const { getAllErrands, getErrandById, addErrand, acceptErrand } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
 const { authMiddleware } = require('../db/auth/passport');
 const { getLocations, getOrAddLocation, getLocationById } = require('../controllers/locationController');
@@ -29,6 +29,7 @@ app.get('/allusers', getAll);
 app.get('/users', getUsers);
 app.get('/users/:username', getOneUser);
 app.post('/users', postUser);
+app.post('/users/addRun', addRunToUser);
 
 app.get('/locations', getLocations);
 app.get('/locations/:id', getLocationById);
@@ -43,6 +44,7 @@ app.post('/runs/update', updateRun);
 app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
 app.post('/errands/create', addErrand);
+app.post('/errands/accept', acceptErrand);
 
 // Catch all route for redirect must be last so others can fire first! :)
 app.get('/*', authMiddleware, (req, res) => {

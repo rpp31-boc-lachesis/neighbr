@@ -19,5 +19,11 @@ module.exports = {
     Users.create({
       username: newUser
     })
-  )
+  ),
+  addRunToUser: (runId, userId) => {
+    Users.findOneAndUpdate(
+      { _id: userId},
+      { $push: { run_history: runId } }
+    )
+  }
 };
