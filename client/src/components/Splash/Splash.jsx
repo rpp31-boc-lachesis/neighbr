@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Navbar from './Navbar.jsx';
 
 function Splash({ user }) {
@@ -57,3 +58,7 @@ function Splash({ user }) {
 }
 
 export default Splash;
+
+Splash.propTypes = {
+  user: PropTypes.string.isRequired
+};
