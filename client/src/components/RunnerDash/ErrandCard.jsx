@@ -15,6 +15,7 @@ const ErrandCard = function(props) {
     ? errand.requester.username
     : errand.requester.email;
 
+  const [accepted, setAccepted] = React.useState(errand.accepted);
   const [isDeclined, setIsDeclined] = React.useState(declined);
 
   const cardStyle = {
