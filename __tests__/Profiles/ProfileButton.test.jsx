@@ -2,10 +2,7 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ProfileButton from '../../client/src/components/Profile/Profile.jsx';
 
-const mockHandleClick = () => {
-  const nothing = {};
-  return nothing;
-};
+const mockHandleClick = jest.fn();
 
 describe('<ProfileButton />', () => {
   it('Renders Profile Button component', () => {

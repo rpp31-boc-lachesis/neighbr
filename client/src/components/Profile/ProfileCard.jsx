@@ -35,7 +35,7 @@ export default function ProfileCard({ handleClose, currentUser }) {
     >
       <Grid
         item
-        sx={5}
+        sm={5}
         lg={12}
         // eslint-disable-next-line react/jsx-no-duplicate-props
         sx={{
@@ -63,13 +63,14 @@ export default function ProfileCard({ handleClose, currentUser }) {
         >
           <Avatar
             alt="profile image"
+            name="User Avatar"
             src={currentUser.avatar_url}
             sx={{ height: 'auto', width: '90%' }}
           />
-          <Typography variant="h5" component="div">
+          <Typography variant="h5" component="h5">
             {currentUser.first_name}
           </Typography>
-          <Typography variant="h6" component="div" sx={{ opacity: 0.6 }}>
+          <Typography variant="h6" component="h6" sx={{ opacity: 0.6 }}>
             {currentUser.city}
           </Typography>
         </Grid>
@@ -96,11 +97,8 @@ export default function ProfileCard({ handleClose, currentUser }) {
         </Grid>
       </Grid>
       <DialogContent sx={{ padding: '5%' }}>
-        <Typography sx={{ fontSize: '1.0rem' }}>
-          {/* {currentUser.bio} */}
-          Hi there! I love building community and serving my fellow Neighbrs!
-          See what I did there? I am always out and about, so if you have any items
-          you need picked up, just holler! Thanks!
+        <Typography component="h6" sx={{ fontSize: '1.0rem' }}>
+          {currentUser.bio}
         </Typography>
       </DialogContent>
       <Grid

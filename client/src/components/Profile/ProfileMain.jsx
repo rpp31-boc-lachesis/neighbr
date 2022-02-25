@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -13,6 +12,8 @@ import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
+import ProfileMap from './ProfileMap.jsx';
+import searchLocation from '../RunnerDash/searchLocation.js';
 
 function TabPanel(props) {
   const {
@@ -69,14 +70,15 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ProfileMain(props) {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
   const [currentUser, setCurrentUser] = useState({});
 
   const { user } = props;
+  // eslint-disable-next-line no-unused-vars
   const tempUser = 'brownkoala609';
 
   useEffect(() => {
-    axios.get(`/users/${user}`)
+    axios.get(`/users/${tempUser}`)
       .then((results) => {
         const oneUser = results.data[0];
         console.log('CURRENT USER:', oneUser);
@@ -172,7 +174,7 @@ export default function ProfileMain(props) {
                 opacity: 0.5
               }}
             >
-              {currentUser.created_at.slice(0, 10)}
+              {currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}
             </Typography>
           </Grid>
           <Grid
@@ -208,15 +210,15 @@ export default function ProfileMain(props) {
               </Item>
               <Item sx={{ fontSize: '1.0rem' }}>
                 <strong>Date of Birth:</strong>
-                {` ${currentUser.dob.slice(0, 10)}`}
+                {currentUser.dob ? ` ${currentUser.dob.slice(0, 10)}` : null}
               </Item>
               <Item sx={{ fontSize: '1.0rem' }}>
                 <strong>Rating:</strong>
-                {` ${currentUser.sum_rating / currentUser.rating_count}`}
+                {currentUser.rating_count ? ` ${currentUser.sum_rating / currentUser.rating_count}` : ` ${0}`}
               </Item>
               <Item sx={{ fontSize: '1.0rem' }}>
                 <strong>Bio:</strong>
-                {` ${currentUser.bio}`}
+                {currentUser.bio ? ` ${currentUser.bio}` : ''}
               </Item>
             </Stack>
           </Grid>
@@ -287,7 +289,12 @@ export default function ProfileMain(props) {
               paddingLeft: '2%'
             }}
           >
-            Map Box Here
+            <ProfileMap
+              coordinates={{
+                lat: currentUser.coordinates ? currentUser.coordinates.lat : '',
+                long: currentUser.coordinates ? currentUser.coordinates.long : ''
+              }}
+            />
           </Grid>
           <Grid
             item

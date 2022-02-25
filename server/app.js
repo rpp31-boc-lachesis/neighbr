@@ -7,7 +7,7 @@ const compression = require('compression');
 const passport = require('passport');
 const { login, signup } = require('../controllers/authController');
 const {
-  getAll,
+  getUserPopulate,
   getUsers,
   getOneUser,
   postUser
@@ -28,8 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/login', login);
 app.post('/signup', signup);
 
-app.get('/allusers', getAll);
 app.get('/users', getUsers);
+app.get('/users/populate/:username', getUserPopulate);
 app.get('/users/:username', getOneUser);
 app.post('/users', postUser);
 
