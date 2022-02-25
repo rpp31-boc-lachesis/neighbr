@@ -19,7 +19,7 @@ function authMiddleware(req, res, next) {
       }
     }
   } else {
-    res.redirect('/');
+    next();
   }
 }
 module.exports.authMiddleware = authMiddleware;

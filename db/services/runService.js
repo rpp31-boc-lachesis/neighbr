@@ -1,12 +1,11 @@
-const mongoose = require('mongoose')
-const { Run } = require('../models/index.js');
-const { Location } = require('../models/index.js');
+const mongoose = require('mongoose');
+const { Run, Location, Users } = require('../models/index.js');
 
 const getAllRuns = (callback) => {
   Run.find()
     .lean()
-    .populate({ path: 'location', populate: { path: 'errands', populate: { path: 'requester' } } })
-    .populate('user')
+    .populate({ path: 'location', populate: { path: 'errands', populate: { path: 'requester', select: '-password -salt' } } })
+    .populate({ path: 'user', select: '-password -salt' })
     .populate('acceptedErrands')
     .then((result) => {
       callback(null, result);
@@ -19,7 +18,7 @@ const getRun = (filter, callback) => {
     .lean()
     .populate('acceptedErrands')
     .populate('location')
-    .populate('user')
+    .populate({ path: 'user', select: '-password -salt' })
     .then((result) => {
       callback(null, result);
     })
@@ -31,7 +30,7 @@ const getRunById = (id, callback) => {
     .lean()
     .populate('acceptedErrands')
     .populate('location')
-    .populate('user')
+    .populate({ path: 'user', select: '-password -salt' })
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
@@ -60,6 +59,10 @@ const postRun = (body, callback) => {
     })
     .then((result) => {
       run.location = result._id;
+      return Users.findOne(run.userId);
+    })
+    .then((retUser) => {
+      run.user = retUser._id;
       return Run.create(run);
     })
     .then((newRun) => {
