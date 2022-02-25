@@ -12,6 +12,13 @@ import Grid from '@mui/material/Grid';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
 import Input from '@mui/material/Input';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
 
 function Signup({ user, handleSignUp }) {
   const [formInput, setFormInput] = useReducer(
@@ -28,13 +35,25 @@ function Signup({ user, handleSignUp }) {
       state: '',
       zip: '',
       country: 'US',
-      bio: '',
-      showPassword: false
+      bio: ''
     }
   );
-
+  const [error, setError] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      first_name: '',
+      last_name: '',
+      username: '',
+      email: '',
+      password: '',
+      street_address: '',
+      city: '',
+      state: '',
+      zip: '',
+    }
+  );
   const [loginData, setLoginData] = useState({ username: '', password: '', avatar_url: '' });
-
+  const [showPassword, setShowPassword] = useState(false);
   // const validate = () => {
   //   const temp = {};
   //   temp.first_name = values.first_name ? '' : 'This field is required.';
@@ -43,14 +62,21 @@ function Signup({ user, handleSignUp }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = { formInput };
-    // console.log(data.formInput);
-    axios.post('/signup', data.formInput)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    if (data.formInput.first_name.length === 0) {
+      const name = 'first_name';
+      const value = 'please enter valid first name';
+      setError({ [name]: value });
+    } else {
+      // console.log(data.formInput);
+      axios.post('/signup', data.formInput)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const handleLogin = (e) => {
@@ -61,6 +87,14 @@ function Signup({ user, handleSignUp }) {
   const handleInput = (event) => {
     const { name, value } = event.target;
     setFormInput({ [name]: value });
+  };
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
   const uploadImage = (e) => {
@@ -119,8 +153,8 @@ function Signup({ user, handleSignUp }) {
           <Typography component="h1" variant="h5">
             Sign Up
           </Typography>
-          { user && (<Navigate to="/main" replace />)}
-          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleSignUp(e, loginData); }} sx={{ mt: 1 }}>
+          {/* { user && (<Navigate to="/main" replace />)} */}
+          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleSignUp(e, loginData); }} sx={{ mt: 1 }} data-testid="form">
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -134,6 +168,9 @@ function Signup({ user, handleSignUp }) {
                   fullWidth
                   defaultValue={formInput.first_name}
                   onChange={handleInput}
+                  helperText={error.first_name}
+                  error={!!error.first_name}
+                  inputProps={{ 'data-testid': 'first-name' }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -161,6 +198,9 @@ function Signup({ user, handleSignUp }) {
                   fullWidth
                   defaultValue={formInput.username}
                   onChange={(e) => { handleInput(e); handleLogin(e); }}
+                  inputProps={{
+                    'data-testid': 'username'
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -246,20 +286,38 @@ function Signup({ user, handleSignUp }) {
                   onChange={handleInput}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  margin="none"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  color="secondary"
-                  defaultValue={formInput.password}
-                  onChange={(e) => { handleInput(e); handleLogin(e); }}
-                />
+              <Grid item xs={12} sx={{ color: 'secondary.main' }}>
+                <FormControl fullWidth required>
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    required
+                    name="password"
+                    label="Password"
+                    type={showPassword ? 'text' : 'password'}
+                    endAdornment={(
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    )}
+                    id="password"
+                    autoComplete="current-password"
+                    color="secondary"
+                    value={formInput.password}
+                    onChange={(e) => { handleInput(e); handleLogin(e); }}
+                    inputProps={{
+                      'data-testid': 'password'
+                    }}
+                  />
+                </FormControl>
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -303,6 +361,7 @@ function Signup({ user, handleSignUp }) {
               variant="contained"
               color="secondary"
               sx={{ mt: 3, mb: 2 }}
+              data-testid="submit-button"
             >
               Sign Up
             </Button>
