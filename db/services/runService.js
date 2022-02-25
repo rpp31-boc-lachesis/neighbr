@@ -59,9 +59,10 @@ const postRun = (body, callback) => {
     })
     .then((result) => {
       run.location = result._id;
-      return Users.findOne(run.userId);
+      return Users.findOne({ username: run.userName });
     })
     .then((retUser) => {
+      console.log(retUser)
       run.user = retUser._id;
       return Run.create(run);
     })
