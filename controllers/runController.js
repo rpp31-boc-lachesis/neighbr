@@ -7,6 +7,7 @@ const {
   getRun,
   getRunById,
   postRun,
+  updateRun
 } = require('../db/services/runService.js');
 
 const returnCallback = (err, data) => {
@@ -15,6 +16,16 @@ const returnCallback = (err, data) => {
   } else {
     return data;
   }
+};
+
+module.exports.updateRun = (req, res) => {
+  updateRun(req.body, (err) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).send();
+    }
+  });
 };
 
 module.exports.getRuns = (req, res) => {

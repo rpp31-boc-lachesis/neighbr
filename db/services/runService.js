@@ -76,10 +76,21 @@ const postRun = (body, callback) => {
     })
     .catch((err) => { callback(err, null); });
 };
+const updateRun = (body, callback) => {
+  const { runID, errandID, type } = body;
+
+  Run.findOneAndUpdate(
+    { _id: runID },
+    { $push: { [type]: errandID } }
+  )
+    .then(() => callback(null))
+    .catch((err) => callback(err));
+};
 
 module.exports = {
   getAllRuns,
   getRun,
   getRunById,
   postRun,
+  updateRun
 };
