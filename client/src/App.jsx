@@ -251,7 +251,7 @@ class App extends React.Component {
             <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
-            <Route path="/requestStatus" element={<RequestStatus errands={errands} users={users} locations={locations} />} />
+            <Route path="/requestStatus" element={<RequestStatus user={user} />} />
             <Route path="/runnerList" element={<RunnerList />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} />} />

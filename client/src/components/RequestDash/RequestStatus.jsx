@@ -25,8 +25,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import RequestMap from './RequestMap.jsx';
-import testData from './requestTestData.js';
-// import ProfilePopover from '../Profile/ProfilePopover.jsx';
+import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
 function LinearProgressWithLabel(percentage) {
   return (
@@ -53,6 +52,8 @@ export default function RequestStatus(props) {
   const [message, setMessage] = React.useState(null);
   const [category, setCategory] = React.useState(null);
   const [cart, setCart] = React.useState([]);
+  const [dropoff, setDropoff] = React.useState(null);
+  const [dropoffNote, setDropoffNote] = React.useState(null);
   const [runner, setRunner] = React.useState({});
   const [progress, setProgress] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -61,14 +62,31 @@ export default function RequestStatus(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { errands, users, locations } = props;
+  const { user } = props;
 
   React.useEffect(() => {
-    const testID = '6216bf01b510771e3d97e55a';
+    const testID = '621938d8d4cc29017923cb73';
     // `/requestStatus/${ [selected errand id] }`
+    axios.get(`/users/${user}`)
+      .then((results) => {
+        const dropoffAddress = `${results.data[0].street_address}, ${results.data[0].city}, ${results.data[0].state} ${results.data[0].zip}`;
+        setDropoff(dropoffAddress);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
     axios.get(`/requestStatus/${testID}`)
       .then((results) => {
         console.log('data: ', results.data);
+
+        axios.get(`/users/${results.data.runner}`)
+          .then((result) => {
+            console.log('runner\'s data: ', result);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
 
         const progressTotal = results.data.req_items.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
 
@@ -96,6 +114,7 @@ export default function RequestStatus(props) {
         setCategory(results.data.category);
         setMessage(results.data.message);
         setRunner(results.data.runner);
+        setDropoffNote(results.data.dropoff.note);
 
         return results.data.pickup.locationId;
       })
@@ -112,7 +131,7 @@ export default function RequestStatus(props) {
       .catch((err) => {
         console.error(err);
       });
-  });
+  }, []);
 
   const modalsx = {
     position: 'absolute',
@@ -127,14 +146,14 @@ export default function RequestStatus(props) {
   };
 
   const labels = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
+    0.5: 'Poor',
+    1: 'Poor+',
+    1.5: 'Average',
+    2: 'Average+',
     2.5: 'Ok',
     3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
+    3.5: 'Great',
+    4: 'Great+',
     4.5: 'Excellent',
     5: 'Excellent+',
   };
@@ -143,6 +162,16 @@ export default function RequestStatus(props) {
     border: '2px solid #DE9DE9',
     borderRadius: '10px'
   };
+
+  function progressMessage(percentage) {
+    if (percentage === 0) {
+      return 'Not Started';
+    }
+    if (percentage < 100) {
+      return 'In Progress';
+    }
+    return 'Completed';
+  }
 
   function statusIcon(status) {
     if (status === 'Cancelled') {
@@ -166,17 +195,13 @@ export default function RequestStatus(props) {
     );
   }
 
-  const shop = testData[0].pickup.store;
-  const dropoff = testData[0].dropoff.address;
-  const dropoffNote = testData[0].dropoff.note;
-
   return (
     <Container fixed sx={{ pb: 10 }}>
       <Typography display="block" align="left" variant="subtitle1">
         Request: &nbsp;
         {pickup.placeText}
       </Typography>
-      {/* <RequestMap /> */}
+      <RequestMap pickup={pickup.coordinates} />
       <Grid
         container
         sx={sx}
@@ -192,9 +217,9 @@ export default function RequestStatus(props) {
         <Grid item sx={{ m: 1 }}>{promisedBy}</Grid>
       </Grid>
       <Typography display="block" align="justify" variant="h6">Errand Details</Typography>
-      {runner === {} ? 'Errand not accepted yet' : (
+      {/* {runner === {} ? 'Errand not accepted yet' : (
 
-      )}
+      )} */}
       <Grid
         container
         sx={{
@@ -216,8 +241,8 @@ export default function RequestStatus(props) {
             <Typography variant="subtitle2">
               Haylie Schleifer
             </Typography>
-            {/* <ProfilePopover /> */}
-            <Button variant="outlined">View Profile</Button>
+            <ProfilePopover />
+            {/* <Button variant="outlined">View Profile</Button> */}
             <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
             <Modal
               open={open}
@@ -317,7 +342,10 @@ export default function RequestStatus(props) {
             </TableBody>
           </Table>
           <Box sx={{ width: '80%', margin: 'auto', p: 3 }}>
-            <Typography variant="body2">Progress: </Typography>
+            <Typography variant="body2">
+              Request: &nbsp;
+              {progressMessage(progress)}
+            </Typography>
             <LinearProgressWithLabel value={progress} />
           </Box>
         </TableContainer>
