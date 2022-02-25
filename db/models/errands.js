@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const errandSchema = Schema({
   category: String,
+  accepted: { type: Boolean, default: false },
   requester: { type: Schema.Types.ObjectId, ref: 'User' },
   runner: { type: Schema.Types.ObjectId, ref: 'User' },
   run: { type: Schema.Types.ObjectId, ref: 'Run' },

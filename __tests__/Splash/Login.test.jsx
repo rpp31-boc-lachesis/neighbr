@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import Login from '../../client/src/components/Splash/Login.jsx';
 
-const handleAuth = () => {
+const handleSignin = () => {
   const nothing = {};
   return nothing;
 };
@@ -22,7 +22,7 @@ describe('<Login />', () => {
     const user = 'test';
     const component = render(
       <MemoryRouter>
-        <Login user={user} handleAuth={handleAuth} />
+        <Login user={user} handleSignin={handleSignin} />
       </MemoryRouter>
     );
     expect(component).toBeDefined();
