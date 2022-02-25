@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
@@ -14,12 +15,8 @@ import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
 import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
-import authService from './auth.js';
 // import ProfilePopup from './components/ProfilePopup.jsx';
 import ProfilePopover from './components/ProfilePopover.jsx';
-// import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import Box from '@mui/material/Box';
 import TestingMenu from './TestingMenu.jsx';
 
 const theme = responsiveFontSizes(createTheme({
@@ -42,8 +39,8 @@ class App extends React.Component {
     this.state = {
       error: null,
       destinations: [],
-      user: window.localStorage.getItem('user') || '',
-      userPhoto: window.localStorage.getItem('avatar_url') || '',
+      user: '',
+      userPhoto: '',
       isLoggedIn: false,
       // isLoggedIn: true, //test setting
       isLoaded: false,
@@ -53,9 +50,9 @@ class App extends React.Component {
       errands: [],
     };
     this.handlePostRun = this.handlePostRun.bind(this);
-    this.handleAuth = this.handleAuth.bind(this);
+    this.handleSignin = this.handleSignin.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
-    this.logout = this.logout.bind(this);
+    this.handlelogout = this.handlelogout.bind(this);
   }
 
   componentDidMount() {
@@ -120,6 +117,10 @@ class App extends React.Component {
 
     Promise.all(fetches)
       .then(this.setState({ isLoaded: true }));
+    this.setState({
+      user: localStorage.getItem('user'),
+      userPhoto: localStorage.getItem('userphoto')
+    });
   }
 
   handlePostRun(run) {
@@ -138,23 +139,19 @@ class App extends React.Component {
       .catch((err) => console.log(err));
   }
 
-  handleAuth(e, loginData) {
-    e.preventDefault();
-    axios.request({
-      url: '/login',
-      method: 'post',
-      data: loginData
-    })
-      .then((res) => {
-        const { data } = res;
-        this.setState({
-          user: data.username,
-          userPhoto: data.avatar_url
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+  async handleSignin(loginData) {
+    try {
+      const res = await axios.post('/login', loginData);
+      const { data } = res;
+      this.setState({
+        user: data.username,
+        userPhoto: data.avatar_url
       });
+      localStorage.setItem('user', data.username);
+      localStorage.setItem('userphoto', data.avatar_url);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   handleSignUp(e, loginData) {
@@ -164,25 +161,26 @@ class App extends React.Component {
     // authService.setLocalStorage(loginData);
     // const expire = authService.getExpiration();
     // console.log(expire.$d)
-    window.localStorage.setItem('user', loginData.username);
-    window.localStorage.setItem('avatar_url', loginData.avatar_url);
+    localStorage.setItem('user', loginData.username);
+    localStorage.setItem('userphoto', loginData.avatar_url);
     this.setState({
       user: loginData.username,
       userPhoto: loginData.avatar_url
     });
   }
 
-  logout() {
+  async handlelogout() {
+    await axios.get('/logout');
     this.setState({
       user: '',
       userPhoto: ''
     });
-    authService.logout();
+    localStorage.removeItem('user');
+    localStorage.removeItem('userphoto');
   }
 
   render() {
     const { user, userPhoto } = this.state;
-    // eslint-disable-next-line object-curly-newline
     const {
       error,
       isLoaded,
@@ -192,6 +190,7 @@ class App extends React.Component {
       users,
       runs
     } = this.state;
+
     if (error) {
       return <Error />;
     }
@@ -203,12 +202,12 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <Router>
           <TestingMenu />
-          {user ? <Header userPhoto={userPhoto} user={user} logout={this.logout} /> : null }
+          {user ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
             {/* <Route path="/other" element={<Other />} /> */}
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
-            <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
+            <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
             <Route path="/requestStatus" element={<RequestStatus />} />

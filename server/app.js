@@ -39,7 +39,6 @@ app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
 
 // Catch all route for redirect must be last so others can fire first! :)
-// add auth here to make sure after refresh, user still login
 app.get('/*', authMiddleware, (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
