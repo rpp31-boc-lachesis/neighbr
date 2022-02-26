@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { styled } from '@mui/system';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -8,8 +9,15 @@ import { Link as RouterLink, Navigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import FormControl from '@mui/material/FormControl';
 import PeopleIcon from '@mui/icons-material/People';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
 
 // function Copyright(props) {
 //   return (
@@ -24,13 +32,29 @@ import Typography from '@mui/material/Typography';
 //   );
 // }
 
-function Login({ user, handleSignin }) {
-  const [loginData, setLoginData] = React.useState({ username: '', password: '' });
+function Login({ user, warning, handleSignin }) {
+  const [loginData, setLoginData] = useState({ username: '', password: '' });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
   };
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+  const Warning = styled('div')({
+    color: 'white',
+    backgroundColor: '#e6204f',
+    padding: 8,
+    borderRadius: 4,
+    marginBottom: 20
+  });
+
+  const handleWarning = (message) => <Warning>{message}</Warning>;
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
@@ -58,13 +82,14 @@ function Login({ user, handleSignin }) {
             alignItems: 'center',
           }}
         >
+          {warning && handleWarning('!  Incorrect username or password.')}
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <PeopleIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
-          { user && (<Navigate to="/main" replace />)}
+          {user && (<Navigate to="/main" replace />)}
           <Box
             component="form"
             noValidate
@@ -85,17 +110,37 @@ function Login({ user, handleSignin }) {
               autoFocus
               onChange={handleChange}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={handleChange}
-            />
+            <FormControl fullWidth required>
+              <InputLabel htmlFor="outlined-adornment-password">
+                Password
+              </InputLabel>
+              <OutlinedInput
+                required
+                name="password"
+                label="Password"
+                type={showPassword ? 'text' : 'password'}
+                endAdornment={(
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                )}
+                id="password"
+                autoComplete="current-password"
+                color="primary"
+                value={loginData.password}
+                onChange={handleChange}
+                inputProps={{
+                  'data-testid': 'password'
+                }}
+              />
+            </FormControl>
             <Button
               type="submit"
               fullWidth
@@ -122,6 +167,5 @@ function Login({ user, handleSignin }) {
 export default Login;
 
 Login.propTypes = {
-  user: PropTypes.string.isRequired,
   handleSignin: PropTypes.func.isRequired
 };
