@@ -14,28 +14,47 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
 
-function DestinationDetail() {
+function DestinationDetail({runDetail}) {
+
+  if (runDetail === null) {
+    return (
+<>
+  {/* entryBox */}
+            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+              Select run for details
+            </Box>
+            </>
+    )
+  }
+
+    const { startTime, endTime, date, location, transportation, user } = runDetail;
+    const { placeText } = location;
+    const { username } = user;
+
+    const startTimeEvent = new Date(startTime).toLocaleTimeString()
+    const dateEvent = new Date(date).toLocaleDateString()
 
   return (
   <>
   {/* entryBox */}
             <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
-              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
-                <div className="entryColumn">
+              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue', alignItems:'top' }}>
+                <div className="entryColumn" alignSelf="flex-start">
                 <div className="detailItem topLineLeft">
                   <div className="locationNumber">1</div>
-                    Target
+                    {placeText}
                 </div>
-                  <div className="detailItem">Time: 2:15 PM</div>
-                  <div className="detailItem">Date: 02 - 01 - 22</div>
+                  <div className="detailItem">Time: {startTimeEvent}</div>
+                  <div className="detailItem">Date: {dateEvent}</div>
                 </div>
                 <div className="entryColumn">
                 <RouterLink style={{ textDecoration: 'none' }} to="/main">
                 <Avatar>S</Avatar>
                 </RouterLink>
-                  <div className="detailItem textEnd topLineRight">Steve</div>
-                  <div className="detailItem textEnd">By: Car</div>
-                  <div className="detailItem textEnd">San Francisco</div>
+                  <div className="detailItem textEnd topLineRight">{username}</div>
+                  <div className="detailItem textEnd">By: {transportation}
+                  </div>
+                  <div className="detailItem textEnd">{location.district}</div>
                   {/* <Typography variant="h5">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}

@@ -6,7 +6,7 @@
   /* background: lightgreen; */
   border: var(--hidden-borders, 1px dashed lightgreen);
   width: 50%;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 
 .lineItem {

@@ -13,82 +13,48 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
-import css from './requestDash.css';
+import css from '../RunnerList/runnerList.css';
 
-function RequestEntry(props) {
-  const { errand } = props;
-  const { req_items } = errand;
-  console.log('props', props)
+function RequestEntry({errand, handleEntryClick}) {
+  console.log('errand here', errand)
+  const { start_time, end_time, date, size, weight, req_items } = errand;
+  // const { placeText } = location;
+  // const { username } = user;
+
+  const startTimeEvent = new Date(start_time).toLocaleTimeString()
+  const dateEvent = new Date(date).toLocaleDateString()
   console.log('errand', errand)
-  // const tempNav = {
-  //   backgroundColor: "orange",
-  //   outline: "1px dashed black"
-  // };
-
-  // const containerNav = {
-  //   backgroundColor: "orange",
-  //   outline: "1px dashed black",
-  //   display: "flex",
-  //   flexDirection: "column"
-  // };
-
-  // const EntryBox = styled(Box)(({ theme }) => ({
-  //   width: '100%',
-  //   height: '30%',
-  //   spacing: 1,
-  //   margin: '5px 0px 0px',
-  //   padding: '2px',
-  //   background: 'green',
-  //   border: '1px solid red'
-  // }));
-
-
-
 
   return (
-  // <div style={tempNav}>
-  //   My Page Two
-  //   <div style={containerNav}>
-  //     <div style={tempNav}>
-  //       one
-  //     </div>
-  //     <div style={tempNav}>
-  //       two
-  //     </div>
-  //     <div style={tempNav}>
-  //       three
-  //     </div>
-  //   </div>
-  // </div>
   <>
   {/* entryBox */}
-            <Box sx={{
-              height: '100px',
-              minWidth: '100%',
-              border: '1px solid black',
-              borderRadius: '10px',
-              background: '#5FC6C9',
-              '&:hover': {
+            <Box
+              sx={{
+              // height: '100px',
+                maxWidth: '95%',
+                border: '1px solid black',
+                borderRadius: '10px',
                 background: '#5FC6C9',
-                opacity: [0.9, 0.8, 0.7],
-              },
-              }}>
+                '&:hover': {
+                  background: '#5FC6C9',
+                  opacity: [0.9, 0.8, 0.7],
+                }
+              }}
+              key={errand.id}
+              onClick={() => { handleEntryClick(errand); }}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
-                <div className='entryColumn'>
-                  <div className='lineItem topLineLeft'>
-                    <div className='locationNumber'>1</div>
+                <div className="entryColumn">
+                  <div className="lineItem topLineLeft">
+                    <div className="locationNumber">1</div>
                     {req_items[0].item}
                   </div>
-                  <div className='lineItem'>Time: 2:15 PM</div>
-                  <div className='lineItem'>Date: 02 - 01 - 22</div>
-                  {/* <Typography variant="h5">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography> */}
+                  <div className="lineItem">Time: {startTimeEvent}</div>
+                  <div className="lineItem">Date: {dateEvent}</div>
                 </div>
-                <div className='entryColumn'>
-                  <div className='lineItem textEnd topLineRight'>Steve</div>
-                  <div className='lineItem textEnd'>By: Car</div>
-                  <div className='lineItem textEnd'>San Francisco</div>
+                <div className="entryColumn">
+                  <div className="lineItem textEnd topLineRight"></div>
+                  <div className="lineItem textEnd">{size}</div>
+                  <div className="lineItem textEnd">{weight}</div>
                   {/* <Typography variant="h5">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}

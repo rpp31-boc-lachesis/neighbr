@@ -20,10 +20,16 @@ import Footer from '../Home/Footer.jsx';
 import css from './runnerList.css';
 
 
-function DestinationList(props) {
+const BORDER_PX = '0px'
+// const BORDER_PX = '1px'
+
+
+function RunnerList(props) {
   const { runs, locations } = props;
   console.log('in RunsList', 'RUNS', runs);
   console.log('in RunsList', 'LOCATIONS', locations);
+
+  const [ runDetail, setRunDetail] = useState(null);
 
   //variation of componentDidMount for hooks
   useEffect(() => {
@@ -39,34 +45,20 @@ function DestinationList(props) {
     // });
   }, []);
 
-  //? reference from runnerStatus
-  // componentDidMount() {
-  //   const map = new mapboxgl.Map({
-  //     container: 'mapContainer',
-  //     style: 'mapbox://styles/mapbox/streets-v11',
-  //   });
-  //   this.setState({
-  //     map,
-  //     newRequests: errands
-  //   });
-  // }
+  const handleEntryClick = (run) => {
+    setRunDetail(run);
+  }
 
-  const Runs = runs.map((run) => <DestinationEntry run={run} />);
 
-  // const BORDER_PX = '0px'
-  const BORDER_PX = '1px'
+  const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} />);
+console.log('Runs', Runs)
 
   return (
     <Container maxwidth="sm" sx={{border: `${BORDER_PX} dashed red` }}>
       <Grid container sx={{ flexGrow: 1, height: '600px', border: `${BORDER_PX} solid  green`, marginTop: '20px' }} justifyContent="center" alignItems="top" spacing={2}>
 {/* left column */}
         <Grid container item direction="column" sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }} xs={2}>
-          {/* <Container
-          maxwidth="sm"
-        > */}
-          {/* <AddRunModal handlePostRun={handlePostRun} /> */}
-          {/* <img src={wavyBuddyPoint} alt="" /> */}
-          {/* </Container> */}
+
           <center>
 
           Filter by:
@@ -104,11 +96,7 @@ function DestinationList(props) {
 {/* right column */}
         <Grid item xs={6} sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }}>
         <Stack spacing={2} sx={{ minHeight: '100%', border: `${BORDER_PX} solid blue` }}>
-          {/* <Box sx={{ height: '40vh', maxWidth: '564px', border: '1px solid black', borderRadius: '2px' }}>
-            <div style={{width: '100%', height: '100%'}}>
-            <img className='mapImage' src="https://www.evernote.com/l/AAUb4rYWCdJDBaV76K7JnS7CHkR1LNFYPm8B/image.png" alt='a map'></img>
-            </div>
-          </Box> */}
+
           <Box
             id="mapContainer"
             container
@@ -123,9 +111,7 @@ function DestinationList(props) {
           >
                 <Typography>Map</Typography>
           </Box>
-          {/* <Box sx={{ height: '35vh', minWidth: '100%', border: '1px solid black', borderRadius: '2px', backgroundColor: '#de9de9' }}> */}
-            detail
-            <DestinationDetail />
+            <DestinationDetail runDetail={runDetail} />
           {/* </Box> */}
         </Stack>
         </Grid>
@@ -135,4 +121,4 @@ function DestinationList(props) {
   );
 }
 
-export default DestinationList;
+export default RunnerList;

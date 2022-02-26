@@ -13,90 +13,47 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
-//temp
-import Header from '../Home/Header.jsx';
-import Footer from '../Home/Footer.jsx';
 import css from './runnerList.css';
 
-function DestinationEntry(props) {
-  const { run } = props;
+function DestinationEntry({run, handleEntryClick}) {
   const { startTime, endTime, date, location, transportation, user } = run;
   const { placeText } = location;
   const { username } = user;
 
   const startTimeEvent = new Date(startTime).toLocaleTimeString()
   const dateEvent = new Date(date)
-  console.log('props', props)
   console.log('run', run)
-  // const tempNav = {
-  //   backgroundColor: "orange",
-  //   outline: "1px dashed black"
-  // };
-
-  // const containerNav = {
-  //   backgroundColor: "orange",
-  //   outline: "1px dashed black",
-  //   display: "flex",
-  //   flexDirection: "column"
-  // };
-
-  // const EntryBox = styled(Box)(({ theme }) => ({
-  //   width: '100%',
-  //   height: '30%',
-  //   spacing: 1,
-  //   margin: '5px 0px 0px',
-  //   padding: '2px',
-  //   background: 'green',
-  //   border: '1px solid red'
-  // }));
-
-
-
 
   return (
-  // <div style={tempNav}>
-  //   My Page Two
-  //   <div style={containerNav}>
-  //     <div style={tempNav}>
-  //       one
-  //     </div>
-  //     <div style={tempNav}>
-  //       two
-  //     </div>
-  //     <div style={tempNav}>
-  //       three
-  //     </div>
-  //   </div>
-  // </div>
   <>
   {/* entryBox */}
-            <Box sx={{
+            <Box
+              sx={{
               // height: '100px',
-              maxWidth: '95%',
-              border: '1px solid black',
-              borderRadius: '10px',
-              background: '#5FC6C9',
-              '&:hover': {
+                maxWidth: '95%',
+                border: '1px solid black',
+                borderRadius: '10px',
                 background: '#5FC6C9',
-                opacity: [0.9, 0.8, 0.7],
-              },
-              }}>
+                '&:hover': {
+                  background: '#5FC6C9',
+                  opacity: [0.9, 0.8, 0.7],
+                }
+              }}
+              key={run.id}
+              onClick={() => { handleEntryClick(run); }}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
-                <div className='entryColumn'>
-                  <div className='lineItem topLineLeft'>
-                    <div className='locationNumber'>1</div>
+                <div className="entryColumn">
+                  <div className="lineItem topLineLeft">
+                    <div className="locationNumber">1</div>
                     {placeText}
                   </div>
-                  <div className='lineItem'>Time: {startTimeEvent}</div>
-                  <div className='lineItem'>Date: {dateEvent.toLocaleDateString()}</div>
-                  {/* <Typography variant="h5">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography> */}
+                  <div className="lineItem">Time: {startTimeEvent}</div>
+                  <div className="lineItem">Date: {dateEvent.toLocaleDateString()}</div>
                 </div>
-                <div className='entryColumn'>
-                  <div className='lineItem textEnd topLineRight'>{username}</div>
-                  <div className='lineItem textEnd'>By: {transportation}</div>
-                  <div className='lineItem textEnd'>{location.district}</div>
+                <div className="entryColumn">
+                  <div className="lineItem textEnd topLineRight">{username}</div>
+                  <div className="lineItem textEnd">By: {transportation}</div>
+                  <div className="lineItem textEnd">{location.district}</div>
                   {/* <Typography variant="h5">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}

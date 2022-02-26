@@ -1,3 +1,6 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -11,8 +14,6 @@ import Grid from '@mui/material/Grid';
 export default function Run(props) {
   const { run } = props;
   const { location, date, startTime, endTime, transportation } = run;
-  console.log('props', props)
-  console.log('run', run)
   return (
     <Card
       elevation={4}
