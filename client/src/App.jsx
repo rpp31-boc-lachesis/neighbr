@@ -83,7 +83,7 @@ class App extends React.Component {
 
   async handleSignin(loginData) {
     try {
-      const res = await axios.post('/login', loginData);
+      const res = await axios.post('/auth/login', loginData);
       const { data } = res;
       this.setState({
         user: data.username,
@@ -108,7 +108,7 @@ class App extends React.Component {
   }
 
   async handlelogout() {
-    await axios.get('/logout');
+    await axios.get('/auth/logout');
     this.setState({
       user: '',
       userPhoto: ''

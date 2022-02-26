@@ -21,9 +21,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookiePaser());
 
-app.post('/login', login);
-app.get('/logout', logout);
-app.post('/signup', signup);
+app.post('/auth/login', login);
+app.get('/auth/logout', logout);
+app.post('/auth/signup', signup);
 
 app.get('/allusers', getAll);
 app.get('/users', getUsers);
@@ -47,10 +47,10 @@ app.get('/requestStatus/:id', getErrandById);
 app.post('/errands/create', addErrand);
 app.post('/errands/accept', acceptErrand);
 
-app.get('/login', (req, res) => {
+app.get('/auth/login', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
-app.get('/signup', (req, res) => {
+app.get('/auth/signup', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 // Catch all route for redirect must be last so others can fire first! :)

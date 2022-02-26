@@ -69,7 +69,7 @@ function Signup({ user, handleSignUp }) {
       setError({ [name]: value });
     } else {
       // console.log(data.formInput);
-      axios.post('/signup', data.formInput)
+      axios.post('/auth/signup', data.formInput)
         .then((response) => {
           console.log(response.data);
         })
