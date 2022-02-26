@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import Errand from './Errand.jsx';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
@@ -28,42 +29,73 @@ class RunnerStatus extends React.Component {
       style: 'mapbox://styles/mapbox/streets-v11',
     });
     const newRequests = [];
-    let currentRun = {};
+    // let currentRun;
 
-    for (let i = 0; i < runs.length; i += 1) {
-      if (runs[i].user.username === user) {
-        currentRun = runs[i];
-        break;
-      }
-    }
+    // for (let i = 0; i < runs.length; i += 1) {
+    //   if (runs[i].user.username === user) {
+    //     currentRun = runs[i];
+    //     break;
+    //   }
+    // }
 
+    // for (let i = 0; i < errands.length; i += 1) {
+    //   const { _id: errandID } = errands[i];
+    //   const { acceptedErrands, declinedErrands } = currentRun;
+
+    //   if (!acceptedErrands.includes(errandID) && !declinedErrands.includes(errandID)) {
+    //     newRequests.push(errands[i]);
+    //   }
+    // }
+
+    const currentRun = runs[1];
+
+    const {
+      acceptedErrands,
+      declinedErrands,
+      completedErrands,
+      mapMarkers
+    } = currentRun;
     for (let i = 0; i < errands.length; i += 1) {
       const { _id: errandID } = errands[i];
-      const { acceptedErrands, declinedErrands } = currentRun;
 
-      if (!acceptedErrands.includes(errandID) && !declinedErrands.includes(errandID)) {
+      if (
+        !acceptedErrands.includes(errandID)
+        && !declinedErrands.includes(errandID)
+        && !completedErrands.includes(errandID)) {
         newRequests.push(errands[i]);
       }
     }
+    mapMarkers.forEach((marker) => {
+      const { _lngLat: lnglat } = marker;
+      this.plotExistingPoint(lnglat);
+    });
 
     this.setState({
       map,
+      mapMarkers,
       newRequests,
-      currentRun
+      currentRun,
+      acceptedErrands
     });
   }
 
   onRequestAccept(errandObj) {
     const {
-      _id,
-      dropoff,
+      _id: errandID,
       category,
       requester,
       req_items: reqItems,
       start_time: startTime
     } = errandObj;
-    const { address } = dropoff;
-    const { newRequests, acceptedErrands, mapMarkers } = this.state;
+    const { state, street_address: streetAddress } = requester;
+    const requesterAddress = `${streetAddress}, ${state}`;
+    const {
+      currentRun,
+      newRequests,
+      acceptedErrands,
+      mapMarkers
+    } = this.state;
+    const { _id: runID } = currentRun;
     const requestsArr = [...newRequests];
     const acceptedRequest = requestsArr.splice(0, 1);
 
@@ -72,7 +104,7 @@ class RunnerStatus extends React.Component {
     const mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
     mapboxClient.geocoding
       .forwardGeocode({
-        query: address,
+        query: requesterAddress,
         autocomplete: false,
         limit: 1
       })
@@ -98,7 +130,7 @@ class RunnerStatus extends React.Component {
           .setPopup(
             new mapboxgl.Popup().setHTML(`<h2>${category}</h2>
             <p><strong>${requester}</strong><br>
-            <strong>Address:</strong> ${address}<br>
+            <strong>Address:</strong> ${streetAddress}<br>
             <strong>Requested at:</strong> ${startTime}<br>
             <strong>Item:</strong> ${reqItems.item}</p>
             `)
@@ -110,22 +142,48 @@ class RunnerStatus extends React.Component {
           zoom: 10
         });
 
-        const newMapMarkers = { ...mapMarkers, [_id]: marker };
+        axios({
+          url: '/runs/update',
+          method: 'POST',
+          data: {
+            errandID,
+            runID,
+            type: 'acceptedErrands'
+          }
+        })
+          .then(() => {
+            const newMapMarkers = { ...mapMarkers, [errandID]: marker };
 
-        this.setState({
-          newRequests: requestsArr,
-          acceptedErrands: newAcceptedErrands,
-          mapMarkers: newMapMarkers
-        });
+            this.setState({
+              newRequests: requestsArr,
+              acceptedErrands: newAcceptedErrands,
+              mapMarkers: newMapMarkers
+            });
+          })
+          .catch((err) => console.log(err));
       });
   }
 
-  onRequestDeny() {
-    const { newRequests } = this.state;
+  onRequestDeny(errandObj) {
+    const { _id: errandID } = errandObj;
+    const { newRequests, currentRun } = this.state;
+    const { _id: runID } = currentRun;
     const newRequestsCopy = [...newRequests];
     newRequestsCopy.shift();
 
-    this.setState({ newRequests: newRequestsCopy });
+    axios({
+      url: '/runs/update',
+      method: 'POST',
+      data: {
+        errandID,
+        runID,
+        type: 'declinedErrands'
+      }
+    })
+      .then((response) => {
+        this.setState({ newRequests: newRequestsCopy });
+      })
+      .catch((err) => console.log(err));
   }
 
   onErrandComplete(errandID, stateIndex) {
@@ -140,6 +198,27 @@ class RunnerStatus extends React.Component {
     this.setState({
       acceptedErrands: newAcceptedErrands,
       mapMarkers: newMapMarkers
+    });
+  }
+
+  plotExistingPoint(latlng) {
+    const { map } = this.state;
+    new mapboxgl
+      .Marker()
+      .setLngLat(latlng)
+      .setPopup(
+        new mapboxgl.Popup().setHTML(`<h2>${category}</h2>
+        <p><strong>${requester}</strong><br>
+        <strong>Address:</strong> ${streetAddress}<br>
+        <strong>Requested at:</strong> ${startTime}<br>
+        <strong>Item:</strong> ${reqItems.item}</p>
+        `)
+      )
+      .addTo(map);
+    map.flyTo({
+      center: feature.center,
+      speed: 1.5,
+      zoom: 10
     });
   }
 

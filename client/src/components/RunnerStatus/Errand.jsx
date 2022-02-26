@@ -111,7 +111,7 @@ export default function Errand(props) {
                 Accept
               </Button>
               <Button
-                onClick={onRequestDeny}
+                onClick={() => onRequestDeny(errandObj)}
                 sx={{ borderRadius: 4 }}
                 item
                 disableElevation
