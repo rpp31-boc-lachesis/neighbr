@@ -4,6 +4,7 @@ const {
   getOneUser,
   createUser,
   addRunToUser,
+  getUserById
 } = require('../db/services/userService');
 
 module.exports = {
@@ -56,6 +57,14 @@ module.exports = {
     try {
       const result = await addRunToUser(req.body.runId, req.body.userId);
       res.status(201).send(result);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
+  getUserById: async (req, res) => {
+    try {
+      const result = await getUserById(req.params.id);
+      res.status(200).send(result);
     } catch (err) {
       res.status(500).send(err);
     }

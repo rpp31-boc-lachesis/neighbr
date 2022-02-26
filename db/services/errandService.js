@@ -32,7 +32,7 @@ const getErrandById = (id, callback) => {
 };
 
 const markErrandAccepted = (errandId, user, callback) => {
-  console.log('user: ', user)
+  console.log('user: ', user);
   Users.findOne(
     { username: user }
   )
