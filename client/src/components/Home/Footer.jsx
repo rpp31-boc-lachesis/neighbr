@@ -23,15 +23,15 @@ export default function Footer() {
       elevation={5}
     >
       <Typography variant="body2" color="text.secondary" justifyContent="center">
-        Copyright ©
+        ©
         {'  '}
-        <a href="https://github.com/rpp31-boc-lachesis/neighbr" style={{ textDecoration: 'none', color: '#FFFFFF' }}>
+        {new Date().getFullYear()}
+        {'  '}
+        <a href="https://github.com/rpp31-boc-lachesis/neighbr" style={{ textDecoration: 'none' }}>
           Neighbr
           {'  '}
           <GitHubIcon sx={{ fontSize: 20, p: 0 }} />
         </a>
-        {'  '}
-        {new Date().getFullYear()}
       </Typography>
     </Paper>
   );
