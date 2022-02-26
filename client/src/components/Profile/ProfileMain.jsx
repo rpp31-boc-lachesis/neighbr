@@ -13,7 +13,6 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import ProfileMap from './ProfileMap.jsx';
-import searchLocation from '../RunnerDash/searchLocation.js';
 
 function TabPanel(props) {
   const {

@@ -1,18 +1,18 @@
 const crypto = require('crypto');
 const fs = require('fs');
-const jsonwebtoken = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
-const PRIV_KEY = fs.readFileSync(`${__dirname}/signature/priv_key.pem`);
+const PRIV_KEY = fs.readFileSync(`${__dirname}/signature/priv_key.pem`, 'utf8');
 
 module.exports = {
   issueJWT: (user) => {
     const { _id } = user;
-    const expiresIn = '1d';
+    const expiresIn = '1h';
     const payload = {
       sub: _id,
       iat: Date.now()
     };
-    const signedToken = jsonwebtoken.sign(payload, PRIV_KEY, { expiresIn, algorithm: 'RS256' });
+    const signedToken = jwt.sign(payload, PRIV_KEY, { expiresIn, algorithm: 'RS256' });
     return {
       token: `Bearer ${signedToken}`,
       expires: expiresIn

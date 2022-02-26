@@ -3,8 +3,9 @@ import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+// const { MAPBOX_API_KEY } = process.env;
 
-export default function RequestMap() {
+export default function RequestMap(props) {
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFyeW1peWFtb3RvIiwiYSI6ImNrempyOWg2bzBkYXgydnFvcWplZmJ1a2oifQ.oQ9QtYxKsabjCYJqjwmo0g';
     // process.env.MAPBOX_ACCESS_TOKEN;

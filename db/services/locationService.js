@@ -8,7 +8,7 @@ const createLocation = (locationObject, callback) => {
 
 const getAllLocations = (callback) => {
   Location.find()
-    // .lean()
+    .lean()
     .populate('runs')
     .populate('errands')
     .then((result) => { callback(null, result); })
@@ -17,16 +17,16 @@ const getAllLocations = (callback) => {
 
 const getLocation = (filter, callback) => {
   Location.find(filter)
-    // .lean()
+    .lean()
     .populate('runs')
-    .populate('errands')
+    .populate({ path: 'errands', populate: { path: 'requester', select: '-password -salt' } })
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });
 };
 
 const getLocationById = (id, callback) => {
   Location.findById(id)
-    // .lean()
+    .lean()
     .populate('runs')
     .populate('errands')
     .then((result) => { callback(null, result); })

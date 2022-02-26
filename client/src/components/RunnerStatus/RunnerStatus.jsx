@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
-import errands from './errandTestData.js';
+import PropTypes from 'prop-types';
 import Errand from './Errand.jsx';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
@@ -16,18 +16,40 @@ class RunnerStatus extends React.Component {
       map: undefined,
       newRequests: [],
       acceptedErrands: [],
-      mapMarkers: {}
+      mapMarkers: {},
+      currentRun: {}
     };
   }
 
   componentDidMount() {
+    const { errands, runs, user } = this.props;
     const map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
     });
+    const newRequests = [];
+    let currentRun = {};
+
+    for (let i = 0; i < runs.length; i += 1) {
+      if (runs[i].user.username === user) {
+        currentRun = runs[i];
+        break;
+      }
+    }
+
+    for (let i = 0; i < errands.length; i += 1) {
+      const { _id: errandID } = errands[i];
+      const { acceptedErrands, declinedErrands } = currentRun;
+
+      if (!acceptedErrands.includes(errandID) && !declinedErrands.includes(errandID)) {
+        newRequests.push(errands[i]);
+      }
+    }
+
     this.setState({
       map,
-      newRequests: errands
+      newRequests,
+      currentRun
     });
   }
 
@@ -62,7 +84,9 @@ class RunnerStatus extends React.Component {
           || !response.body.features
           || !response.body.features.length
         ) {
+          // eslint-disable-next-line no-console
           console.error('Invalid response:');
+          // eslint-disable-next-line no-console
           console.error(response);
           return;
         }
@@ -276,7 +300,7 @@ class RunnerStatus extends React.Component {
                 }}
                 item
               >
-                <Typography>Map</Typography>
+                { /* Map element renders here */ }
               </Box>
             </Box>
             <Box
@@ -299,5 +323,13 @@ class RunnerStatus extends React.Component {
     );
   }
 }
+
+RunnerStatus.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  errands: PropTypes.array.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  runs: PropTypes.array.isRequired,
+  user: PropTypes.string.isRequired
+};
 
 export default RunnerStatus;
