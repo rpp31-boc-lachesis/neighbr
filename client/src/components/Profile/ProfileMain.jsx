@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/jsx-props-no-spreading */
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -9,52 +11,10 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import ConstructionIcon from '@mui/icons-material/Construction';
 import { styled } from '@mui/material/styles';
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'left',
-  width: 'auto',
-  font: 'Roboto',
-  color: theme.palette.text.secondary,
-}));
-
-export function BasicStack() {
-  return (
-    <div>
-      <Stack
-        spacing={1}
-      >
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>First Name:</strong>
-          {' Some'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Last Name:</strong>
-          {' RandomUser'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Email:</strong>
-          {' random@test.com'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Date of Birth:</strong>
-          {' 05-16-1990'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Rating:</strong>
-          {' 4.5'}
-        </Item>
-        <Item sx={{ fontSize: '1.0rem' }}>
-          <strong>Bio:</strong>
-          {" What's up everyone?! I'm always out running around so please let me know what I can pick up for you."}
-        </Item>
-      </Stack>
-    </div>
-  );
-}
+import ProfileMap from './ProfileMap.jsx';
 
 function TabPanel(props) {
   const {
@@ -100,14 +60,43 @@ function a11yProps(index) {
   };
 }
 
-export default function VerticalTabs() {
-  const [value, setValue] = React.useState(0);
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'left',
+  width: 'auto',
+  font: 'Roboto',
+  color: theme.palette.text.secondary,
+}));
+
+export default function ProfileMain(props) {
+  const [value, setValue] = useState(0);
+  const [currentUser, setCurrentUser] = useState({});
+
+  const { user } = props;
+  // eslint-disable-next-line no-unused-vars
+  const tempUser = 'brownkoala609';
+
+  useEffect(() => {
+    axios.get(`/users/${tempUser}`)
+      .then((results) => {
+        const oneUser = results.data[0];
+        console.log('CURRENT USER:', oneUser);
+        setCurrentUser(oneUser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [user]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
+    Object.keys(currentUser).length > 0
+    && (
     <Box
       sx={{
         flexGrow: 1,
@@ -154,7 +143,7 @@ export default function VerticalTabs() {
         >
           <Grid
             item
-            sm={5}
+            sm={6}
             lg={3}
             sx={{
               display: 'flex',
@@ -165,7 +154,7 @@ export default function VerticalTabs() {
             }}
           >
             <Avatar
-              src="https://randomuser.me/api/portraits/men/52.jpg"
+              src={currentUser.avatar_url}
               sx={{
                 height: 'auto',
                 width: '75%'
@@ -178,7 +167,7 @@ export default function VerticalTabs() {
                 fontSize: '1.8rem'
               }}
             >
-              @username
+              {`@${currentUser.username}`}
             </Typography>
             <Typography
               component="span"
@@ -186,24 +175,58 @@ export default function VerticalTabs() {
                 opacity: 0.5
               }}
             >
-              Member since 02-15-2022
+              {currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}
             </Typography>
           </Grid>
           <Grid
             item
-            sm={5}
+            sm={7}
+            lg={5}
             sx={{
               display: 'flex',
-              alignItems: 'center',
-              paddingTop: '5%',
-              paddingLeft: '2%'
+              flexDirection: 'column',
+              justifyContent: 'center',
+              // alignItems: 'center',
+              paddingTop: '5%'
             }}
           >
-            <BasicStack />
+            <Stack
+              spacing={1}
+            >
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Account #:</strong>
+                {` ${currentUser._id}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>First Name:</strong>
+                {` ${currentUser.first_name}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Last Name:</strong>
+                {` ${currentUser.last_name}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Email:</strong>
+                {` ${currentUser.email}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Date of Birth:</strong>
+                {currentUser.dob ? ` ${currentUser.dob.slice(0, 10)}` : null}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Rating:</strong>
+                {currentUser.rating_count ? ` ${currentUser.sum_rating / currentUser.rating_count}` : ` ${0}`}
+              </Item>
+              <Item sx={{ fontSize: '1.0rem' }}>
+                <strong>Bio:</strong>
+                {currentUser.bio ? ` ${currentUser.bio}` : ''}
+              </Item>
+            </Stack>
           </Grid>
           <Grid
             item
-            sm={4}
+            sm={6}
+            lg={4}
             sx={{
               alignItems: 'right',
               minWidth: '15%',
@@ -250,9 +273,9 @@ export default function VerticalTabs() {
                   fontSize: '1.2rem'
                 }}
               >
-                1234 Main St
+                {currentUser.street_address}
                 <br />
-                San Francisco, CA 94102
+                {`${currentUser.city}, ${currentUser.state} ${currentUser.zip}`}
               </Item>
             </Stack>
           </Grid>
@@ -267,7 +290,12 @@ export default function VerticalTabs() {
               paddingLeft: '2%'
             }}
           >
-            Map Box Here
+            <ProfileMap
+              coordinates={{
+                lat: currentUser.coordinates ? currentUser.coordinates.lat : '',
+                long: currentUser.coordinates ? currentUser.coordinates.long : ''
+              }}
+            />
           </Grid>
           <Grid
             item
@@ -338,16 +366,93 @@ export default function VerticalTabs() {
                 overflow: 'scroll'
               }}
             >
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <RestaurantIcon sx={{ margin: '2px' }} />
+                    Coffee
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: small | Weight: light | Destination: San Francisco
+                    | Distance: 2.4mi | Est. Time: 24min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
+                  </Grid>
+                </Grid>
+              </Item>
             </Stack>
           </Grid>
           <Grid
@@ -418,16 +523,93 @@ export default function VerticalTabs() {
                 overflow: 'scroll'
               }}
             >
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <RestaurantIcon sx={{ margin: '2px' }} />
+                    Coffee
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: small | Weight: light | Destination: San Francisco
+                    | Distance: 2.4mi | Est. Time: 24min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
+                  </Grid>
+                </Grid>
+              </Item>
             </Stack>
           </Grid>
           <Grid
@@ -447,5 +629,59 @@ export default function VerticalTabs() {
         </Grid>
       </TabPanel>
     </Box>
+    )
   );
 }
+
+// const Item = styled(Paper)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+//   ...theme.typography.body2,
+//   padding: theme.spacing(1),
+//   textAlign: 'left',
+//   width: 'auto',
+//   font: 'Roboto',
+//   color: theme.palette.text.secondary,
+// }));
+
+// export function BasicStack() {
+//   return (
+//     <div>
+//       <Stack
+//         spacing={1}
+//       >
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Account #:</strong>
+//           {currentUser._id}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>First Name:</strong>
+//           {currentUser.first_name}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Last Name:</strong>
+//           {currentUser.last_name}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Email:</strong>
+//           {currentUser.email}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Date of Birth:</strong>
+//           {currentUser.dob}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Rating:</strong>
+//           {currentUser.sum_rating / currentUser.rating_count}
+//         </Item>
+//         <Item sx={{ fontSize: '1.0rem' }}>
+//           <strong>Bio:</strong>
+//           {currentUser.bio}
+//         </Item>
+//       </Stack>
+//     </div>
+//   );
+// }
+
+ProfileMain.propTypes = {
+  user: PropTypes.string.isRequired
+};

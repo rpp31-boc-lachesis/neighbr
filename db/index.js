@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const { DB_URI } = process.env;
 
 async function main() {

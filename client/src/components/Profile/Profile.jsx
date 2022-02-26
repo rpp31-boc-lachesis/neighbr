@@ -2,10 +2,10 @@ import React from 'react';
 import ProfilePopover from './ProfilePopover.jsx';
 
 export default function Profile() {
-  // const someRandomUsers =
+  const tempUser = 'organicrabbit525';
   return (
     <div>
-      <ProfilePopover />
+      <ProfilePopover user={tempUser} />
     </div>
   );
 }
