@@ -18,6 +18,16 @@ export default function ProfileMap(props) {
       zoom: 14
     });
 
+    new mapboxgl
+      .Marker()
+      .setLngLat({ lng: Number(long), lat: Number(lat) })
+      .addTo(map);
+    map.flyTo({
+      center: map.center,
+      speed: 1.5,
+      zoom: 14
+    });
+
     map.addControl(new mapboxgl.NavigationControl());
 
     map.addControl(
@@ -36,7 +46,7 @@ export default function ProfileMap(props) {
     width: 380,
     height: 275,
     bgcolor: 'background.paper',
-    p: 4,
+    p: 2,
     '& .MuiTextField-root': { m: 1 },
   };
 
