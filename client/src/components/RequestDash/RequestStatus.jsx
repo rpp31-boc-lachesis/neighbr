@@ -11,11 +11,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TableBody from '@mui/material/TableBody';
 import LinearProgress from '@mui/material/LinearProgress';
-import StarIcon from '@mui/icons-material/Star';
 import Modal from '@mui/material/Modal';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import Rating from '@mui/material/Rating';
 import Tooltip from '@mui/material/Tooltip';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -30,7 +28,7 @@ import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
 function LinearProgressWithLabel(percentage) {
   return (
-    <Box sx={{ display: 'flex', width: '80%', alignItems: 'center' }}>
+    <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Box sx={{ width: '100%', mr: 1 }}>
         <LinearProgress variant="determinate" {...percentage} />
       </Box>
@@ -135,7 +133,9 @@ export default function RequestStatus(props) {
 
   const sx = {
     border: '2px solid #DE9DE9',
-    borderRadius: '10px'
+    borderRadius: '10px',
+    maxWidth: '85%',
+    margin: 'auto'
   };
 
   function progressMessage(percentage) {
@@ -172,11 +172,11 @@ export default function RequestStatus(props) {
 
   return (
     <Container fixed sx={{ pb: 10 }}>
-      <Typography display="block" align="left" variant="subtitle1">
+      <Typography display="block" align="left" variant="subtitle1" sx={{ pl: 11 }}>
         Request: &nbsp;
         {pickup.placeText}
       </Typography>
-      <RequestMap pickup={pickup.coordinates} />
+      <RequestMap pickup={pickup.coordinates || [0, 0]} />
       <Grid
         container
         sx={sx}
@@ -191,16 +191,13 @@ export default function RequestStatus(props) {
         <Grid item xs={1} />
         <Grid item sx={{ m: 1 }}>{promisedBy}</Grid>
       </Grid>
-      <Typography display="block" align="justify" variant="h6">Errand Details</Typography>
+      <Typography display="block" align="justify" variant="h6" sx={{ pl: 11 }}>Errand Details</Typography>
       {/* {runner === {} ? 'Errand not accepted yet' : (
 
       )} */}
       <Grid
         container
-        sx={{
-          border: '2px solid #DE9DE9',
-          borderRadius: '10px',
-        }}
+        sx={sx}
       >
         <Grid item xs={4}>
           <Box sx={{
@@ -212,7 +209,7 @@ export default function RequestStatus(props) {
             height: 175
           }}
           >
-            <Avatar variant="contained" alt="Haylie Schleifer" src="https://s3-alpha-sig.figma.com/img/3af9/cdaf/deb44c5856c64700478bf852a42f0b39?Expires=1646611200&Signature=Mkz~SUB643eX761qAVY5r6pA5gFF9RODGQtquTaR4P5q4ECxMXVSlHLmJfYRJ1qmnnDsl6Uf6273iyds5GPfNQUMyNF6k52Sfnr1mPbjCteQkmsfz3iTc4zNO5iCCQTANNDDLifTdLWbrUZH4Jl-43hiiUtjrwLLZt-eSK-zTb302ABjt3Pjxd9GL1egctfIz8iNAkHX0dYoe-gpdlspFg-8zDobFdft7KTVPYy0XtmS-pSSAXUKIf8fqt-2Q~1v0ROIOv7zoZo1jjYvcIlfkRnJmZZOlJlS-B4ooqFgH1EetTW52xcXtRB3xhX54XiX~cj9jWfkge1s8~CkXNrD4w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA" sx={{ width: '80px', height: '80px' }} />
+            <Avatar variant="contained" alt="Haylie Schleifer" src={runner.avatar_url} sx={{ width: '80px', height: '80px' }} />
             <Typography variant="subtitle2">
               {runner.first_name}
               &nbsp;
