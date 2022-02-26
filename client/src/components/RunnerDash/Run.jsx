@@ -33,9 +33,6 @@ export default function Run(props) {
           <Typography variant="body2">{`Date: ${new Date(date).toLocaleDateString()}`}</Typography>
         </Grid>
       </CardContent>
-      <CardActions>
-        <Button onClick={() => console.log('click')} variant="contained">Add Destination</Button>
-      </CardActions>
     </Card>
   );
 }
