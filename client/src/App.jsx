@@ -7,6 +7,7 @@ import Header from './components/Home/Header.jsx';
 import Main from './components/Home/Main.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
+import RequestDash from './components/RequestDashActual/RequestDash.jsx';
 import RequestStatus from './components/RequestDash/RequestStatus.jsx';
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
@@ -250,6 +251,7 @@ class App extends React.Component {
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
             <Route path="/login" element={<Login handleAuth={this.handleAuth} user={user} />} />
             {user ? <Route path="/main" element={<Main />} /> : null }
+            <Route path="/requestDash" element={<RequestDash errands={errands} />} />
             <Route path="/requestStatus" element={<RequestStatus />} />
             <Route path="/runnerList" element={<RunnerList runs={runs} locations={locations} />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
