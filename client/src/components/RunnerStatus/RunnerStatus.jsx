@@ -43,7 +43,7 @@ class RunnerStatus extends React.Component {
     //   }
     // }
 
-    const currentRun = runs[1];
+    const currentRun = runs[3];
 
     const {
       acceptedErrands,
@@ -53,13 +53,13 @@ class RunnerStatus extends React.Component {
     } = currentRun;
     let map;
 
-    if (Object.keys(runMap).length === 0) {
+    if (runMap === undefined || Object.keys(JSON.parse(runMap)).length === 0) {
       map = new mapboxgl.Map({
         container: 'mapContainer',
         style: 'mapbox://styles/mapbox/streets-v11',
       });
     } else {
-      map = { runMap };
+      map = JSON.parse(runMap).map;
     }
 
     for (let i = 0; i < errands.length; i += 1) {
@@ -74,7 +74,7 @@ class RunnerStatus extends React.Component {
     }
 
     this.setState({
-      map: { map },
+      map,
       newRequests,
       currentRun,
       acceptedErrands
@@ -150,8 +150,7 @@ class RunnerStatus extends React.Component {
           data: {
             errandID,
             runID,
-            type: 'acceptedErrands',
-            map
+            type: 'acceptedErrands'
           }
         })
           .then(() => {
