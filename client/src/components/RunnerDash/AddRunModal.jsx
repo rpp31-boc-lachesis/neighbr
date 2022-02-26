@@ -64,9 +64,13 @@ export default function AddRunModal(props) {
       endTime: stopTime,
       transportation,
     };
-    handlePostRun(run, location);
-    handleClose();
-    refreshData();
+    handlePostRun(run, location)
+      .then(() => {
+        handleClose();
+      })
+      .then(() => {
+        refreshData();
+      });
   };
   const handleZipChange = (e) => {
     setZip(e.target.value);

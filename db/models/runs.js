@@ -12,7 +12,8 @@ const runSchema = new Schema({
   transportation: String,
   acceptedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }],
   declinedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }],
-  completedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }]
+  completedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }],
+  mapMarkers: Object
 });
 
 module.exports = runSchema;

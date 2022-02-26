@@ -6,6 +6,8 @@ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 // const { MAPBOX_API_KEY } = process.env;
 
 export default function RequestMap(props) {
+  const { pickup } = props;
+
   useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFyeW1peWFtb3RvIiwiYSI6ImNrempyOWg2bzBkYXgydnFvcWplZmJ1a2oifQ.oQ9QtYxKsabjCYJqjwmo0g';
     // process.env.MAPBOX_ACCESS_TOKEN;
@@ -16,6 +18,10 @@ export default function RequestMap(props) {
       zoom: 13
     });
 
+    const marker1 = new mapboxgl.Marker()
+      .setLngLat(pickup)
+      .addTo(map);
+
     map.addControl(new mapboxgl.NavigationControl());
 
     map.addControl(
@@ -24,7 +30,7 @@ export default function RequestMap(props) {
         mapboxgl
       })
     );
-  });
+  }, [pickup]);
 
   const style = {
     position: 'relative',

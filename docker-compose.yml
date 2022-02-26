@@ -9,8 +9,9 @@ services:
       - MAPBOX_API_KEY
       - jwtSecret
     build: .
-    # ports:
-    #   - 3000:3000
+    ports:
+      - 51234:51234
+      - 443:443
   mongo:
     image: mongo
     restart: always

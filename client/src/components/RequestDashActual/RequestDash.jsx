@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable spaced-comment */
 /* eslint-disable react/jsx-indent */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -13,23 +13,23 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-import DestinationEntry from './DestinationEntry.jsx';
-import DestinationDetail from './DestinationDetail.jsx';
+import RequestEntry from './RequestEntry.jsx';
+import RequestDetail from './RequestDetail.jsx';
 
-import Footer from '../Home/Footer.jsx';
-import css from './runnerList.css';
+import css from '../RunnerList/runnerList.css';
 
+//testing
+const testLoggedInUser = 'happycat171';
 
-const BORDER_PX = '0px'
+const BORDER_PX = '0px';
 // const BORDER_PX = '1px'
 
 
-function RunnerList(props) {
-  const { runs, locations } = props;
-  console.log('in RunsList', 'RUNS', runs);
-  console.log('in RunsList', 'LOCATIONS', locations);
+function RequestDash(props) {
+  const { errands } = props;
+  console.log('in RequestDash', 'ERRANDS', errands);
 
-  const [ runDetail, setRunDetail] = useState(null);
+  const [requestDetail, setRequestDetail] = useState(null);
 
   //variation of componentDidMount for hooks
   useEffect(() => {
@@ -45,58 +45,46 @@ function RunnerList(props) {
     // });
   }, []);
 
-  const handleEntryClick = (run) => {
-    setRunDetail(run);
-  }
+  const handleEntryClick = (request) => {
+    setRequestDetail(request);
+  };
 
 
-  const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} />);
-console.log('Runs', Runs)
 
   return (
-    <Container maxwidth="sm" sx={{border: `${BORDER_PX} dashed red` }}>
+    <Container maxwidth="sm" sx={{ border: `${BORDER_PX} dashed red` }}>
       <Grid container sx={{ flexGrow: 1, height: '600px', border: `${BORDER_PX} solid  green`, marginTop: '20px' }} justifyContent="center" alignItems="top" spacing={2}>
 {/* left column */}
         <Grid container item direction="column" sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }} xs={2}>
+          {/* <Container
+          maxwidth="sm"
+        > */}
+          {/* <AddRunModal handlePostRun={handlePostRun} /> */}
+          {/* <img src={wavyBuddyPoint} alt="" /> */}
+          {/* </Container> */}
 
-          <center>
-
-          Filter by:
-<br />
-          Time
-<br />
-          morning
-<br />
-          midday
-<br />
-          afternoon
-<br />
-          evening
-<br />
-          <br />
-          Type
-<br />
-          groceries
-<br />
-          food
-<br />
-          etc
-<br />
-          etc
-<br />
-          </center>
         </Grid>
 {/* middle column */}
         <Grid item xs={4} sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }}>
           {/* <Typography variant='h5'>Current Runs</Typography> */}
-          <Stack spacing={2} sx={{ height: '550px', overflow: 'overlay', border: `${BORDER_PX} solid blue`}}>
-          {Runs}
+          <Stack spacing={2} sx={{ height: '550px', overflow: 'overlay', border: `${BORDER_PX} solid blue` }}>
+          {
+            errands.map((errand) => {
+              if (errand.requester.username === testLoggedInUser) {
+                return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand.id} />);
+              }
+            })
+          }
           </Stack>
         </Grid>
 {/* right column */}
         <Grid item xs={6} sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }}>
         <Stack spacing={2} sx={{ minHeight: '100%', border: `${BORDER_PX} solid blue` }}>
-
+          {/* <Box sx={{ height: '40vh', maxWidth: '564px', border: '1px solid black', borderRadius: '2px' }}>
+            <div style={{width: '100%', height: '100%'}}>
+            <img className='mapImage' src="https://www.evernote.com/l/AAUb4rYWCdJDBaV76K7JnS7CHkR1LNFYPm8B/image.png" alt='a map'></img>
+            </div>
+          </Box> */}
           <Box
             id="mapContainer"
             container
@@ -111,14 +99,14 @@ console.log('Runs', Runs)
           >
                 <Typography>Map</Typography>
           </Box>
-            <DestinationDetail runDetail={runDetail} />
+          {/* <Box sx={{ height: '35vh', minWidth: '100%', border: '1px solid black', borderRadius: '2px', backgroundColor: '#de9de9' }}> */}
+            <RequestDetail requestDetail={requestDetail} />
           {/* </Box> */}
         </Stack>
         </Grid>
       </Grid>
-      <Footer />
     </Container>
   );
 }
 
-export default RunnerList;
+export default RequestDash;

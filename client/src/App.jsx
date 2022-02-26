@@ -9,6 +9,7 @@ import Footer from './components/Home/Footer.jsx';
 import Main from './components/Home/Main.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
+import RequestDash from './components/RequestDashActual/RequestDash.jsx';
 import RequestStatus from './components/RequestDash/RequestStatus.jsx';
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
@@ -44,6 +45,7 @@ class App extends React.Component {
       destinations: [],
       user: '',
       userPhoto: '',
+      warning: false,
       isLoggedIn: false,
       // isLoggedIn: true, //test setting
       isLoaded: false,
@@ -68,13 +70,11 @@ class App extends React.Component {
     const { user } = this.state;
     const combined = { run, location };
     combined.run.userName = user;
-    axios.post('/runs/post', {
+    return axios.post('/runs/post', {
       data: combined,
 
     })
-      .then((r) => {
-        return r.data.data;
-      })
+      .then((r) => r.data.data)
       .then((response) => {
         this.setState({ lastRun: response });
       })
@@ -91,18 +91,14 @@ class App extends React.Component {
       });
       localStorage.setItem('user', data.username);
       localStorage.setItem('userphoto', data.avatar_url);
+      this.setState({ warning: false });
     } catch (e) {
-      console.log(e);
+      this.setState({ warning: true });
     }
   }
 
   handleSignUp(e, loginData) {
     e.preventDefault();
-    // console.log('loginData', loginData);
-    // const { data } = res;
-    // authService.setLocalStorage(loginData);
-    // const expire = authService.getExpiration();
-    // console.log(expire.$d)
     localStorage.setItem('user', loginData.username);
     localStorage.setItem('userphoto', loginData.avatar_url);
     this.setState({
@@ -122,22 +118,14 @@ class App extends React.Component {
   }
 
   refreshData() {
-    const {
-      locations,
-      runs,
-      users,
-      errands,
-      user,
-    } = this.state;
     const fetches = [
       axios.get('/locations')
         .then((res) => res.data)
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              const oldArr = [...locations];
               this.setState(
-                { locations: [...oldArr, ...result] },
+                { locations: result },
                 () => {
                   // eslint-disable-next-line no-console
                   console.log('LOCATIONS:', result);
@@ -155,9 +143,8 @@ class App extends React.Component {
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              const oldArr = [...runs];
               this.setState(
-                { runs: [...oldArr, ...result] },
+                { runs: result },
                 () => {
                   // eslint-disable-next-line no-console
                   console.log('RUNS:', result);
@@ -175,9 +162,8 @@ class App extends React.Component {
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              const oldArr = [...users];
               this.setState(
-                { users: [...oldArr, ...result] },
+                { users: result },
                 () => {
                   // eslint-disable-next-line no-console
                   console.log('USERS:', result);
@@ -195,9 +181,8 @@ class App extends React.Component {
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              const oldArr = [...errands];
               this.setState(
-                { errands: [...oldArr, ...result] },
+                { errands: result },
                 () => {
                   // eslint-disable-next-line no-console
                   console.log('ERRANDS:', result);
@@ -225,7 +210,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { user, userPhoto } = this.state;
+    const { user, userPhoto, warning } = this.state;
     const {
       errands,
       error,
@@ -253,16 +238,17 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
-            <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} />} />
+            <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} warning={warning} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
-            <Route path="/requestStatus" element={<RequestStatus user={user} />} />
-            <Route path="/runnerList" element={<RunnerList />} />
-            {/* <Route path="/requestDash" element={<RunnerList />} /> */}
+            <Route path="/runnerList" element={<RunnerList runs={runs} locations={locations} />} />
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
+            <Route path="/requestDash" element={<RequestDash errands={errands} />} />
+            {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
-            {/* <Route path="/profile" element={<ProfilePopover user='organicrabbit525' />} /> */}
-            <Route path="/profilemain" element={<ProfileMain user={user} />} />
+            <Route path="/requestStatus" element={<RequestStatus user={user} />} />
+            {/* <Route path="/profile" element={<ProfilePopover />} /> */}
+            <Route path="/profilemain" element={<ProfileMain />} />
             <Route path="*" element={<Error />} />
           </Routes>
           {user ? <Footer /> : null}

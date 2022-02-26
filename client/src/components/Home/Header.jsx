@@ -52,7 +52,7 @@ export default function Header({ user, userPhoto, logout }) {
             4: '/runnerDash',
             5: '/requestDash'
           }[i]}
-          style={{ color: '#707070' }}
+          style={{ color: '#707070', textDecoration: 'none' }}
         >
           <ListItem button key={text} onClick={handleDrawerClose}>
             <ListItemIcon sx={{ color: '#EF5DA8' }}>
@@ -101,7 +101,7 @@ export default function Header({ user, userPhoto, logout }) {
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '30px' }}
+              sx={{ mt: '50px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
@@ -116,12 +116,12 @@ export default function Header({ user, userPhoto, logout }) {
               open={open}
               onClose={handleCloseUserMenu}
             >
-              <Link to="/profilemain">
+              <Link to="/profilemain" style={{ textDecoration: 'none' }}>
                 <MenuItem>
                   <Typography sx={{ color: '#EF5DA8' }}>Profile</Typography>
                 </MenuItem>
               </Link>
-              <Link to="/">
+              <Link to="/" style={{ textDecoration: 'none' }}>
                 <MenuItem onClick={logout}>
                   <Typography sx={{ color: '#EF5DA8' }}>Logout</Typography>
                 </MenuItem>
