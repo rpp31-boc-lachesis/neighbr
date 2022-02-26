@@ -15,11 +15,13 @@ const ErrandCard = function(props) {
     ? errand.requester.username
     : errand.requester.email;
 
+  const [accepted, setAccepted] = React.useState(errand.accepted);
   const [isDeclined, setIsDeclined] = React.useState(declined);
 
   const cardStyle = {
     display: 'flex',
     flexDirection: 'column',
+    border: accepted === true ? '2px solid' : '2px dashed',
     alignItems: 'center',
     justifyContent: 'flex-start',
     borderColor: 'secondary.main',
@@ -27,8 +29,6 @@ const ErrandCard = function(props) {
     width: '35%',
     margin: '0.5em',
   };
-
-  cardStyle.border = accepted === true ? '2px solid' : '2px dashed';
 
   const handleAccept = () => {
     console.log(errand);
