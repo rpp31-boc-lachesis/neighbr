@@ -47,6 +47,12 @@ app.get('/requestStatus/:id', getErrandById);
 app.post('/errands/create', addErrand);
 app.post('/errands/accept', acceptErrand);
 
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 // Catch all route for redirect must be last so others can fire first! :)
 app.get('/*', authMiddleware, (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
