@@ -68,13 +68,11 @@ class App extends React.Component {
     const { user } = this.state;
     const combined = { run, location };
     combined.run.userName = user;
-    axios.post('/runs/post', {
+    return axios.post('/runs/post', {
       data: combined,
 
     })
-      .then((r) => {
-        return r.data.data;
-      })
+      .then((r) => r.data.data)
       .then((response) => {
         this.setState({ lastRun: response });
       })
@@ -122,22 +120,14 @@ class App extends React.Component {
   }
 
   refreshData() {
-    const {
-      locations,
-      runs,
-      users,
-      errands,
-      user,
-    } = this.state;
     const fetches = [
       axios.get('/locations')
         .then((res) => res.data)
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              const oldArr = [...locations];
               this.setState(
-                { locations: [...oldArr, ...result] },
+                { locations: result },
                 () => {
                   // eslint-disable-next-line no-console
                   console.log('LOCATIONS:', result);
@@ -155,9 +145,8 @@ class App extends React.Component {
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              const oldArr = [...runs];
               this.setState(
-                { runs: [...oldArr, ...result] },
+                { runs: result },
                 () => {
                   // eslint-disable-next-line no-console
                   console.log('RUNS:', result);
@@ -175,9 +164,8 @@ class App extends React.Component {
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              const oldArr = [...users];
               this.setState(
-                { users: [...oldArr, ...result] },
+                { users: result },
                 () => {
                   // eslint-disable-next-line no-console
                   console.log('USERS:', result);
@@ -195,9 +183,8 @@ class App extends React.Component {
         .then(
           (result) => {
             if (Array.isArray(result)) {
-              const oldArr = [...errands];
               this.setState(
-                { errands: [...oldArr, ...result] },
+                { errands: result },
                 () => {
                   // eslint-disable-next-line no-console
                   console.log('ERRANDS:', result);
