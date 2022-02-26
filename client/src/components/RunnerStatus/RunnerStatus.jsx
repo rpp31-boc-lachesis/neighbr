@@ -49,17 +49,30 @@ class RunnerStatus extends React.Component {
 
     const currentRun = runs[1];
 
-    const { acceptedErrands, declinedErrands } = currentRun;
+    const {
+      acceptedErrands,
+      declinedErrands,
+      completedErrands,
+      mapMarkers
+    } = currentRun;
     for (let i = 0; i < errands.length; i += 1) {
       const { _id: errandID } = errands[i];
 
-      if (!acceptedErrands.includes(errandID) && !declinedErrands.includes(errandID)) {
+      if (
+        !acceptedErrands.includes(errandID)
+        && !declinedErrands.includes(errandID)
+        && !completedErrands.includes(errandID)) {
         newRequests.push(errands[i]);
       }
     }
+    mapMarkers.forEach((marker) => {
+      const { _lngLat: lnglat } = marker;
+      this.plotExistingPoint(lnglat);
+    });
 
     this.setState({
       map,
+      mapMarkers,
       newRequests,
       currentRun,
       acceptedErrands
@@ -151,12 +164,26 @@ class RunnerStatus extends React.Component {
       });
   }
 
-  onRequestDeny() {
-    const { newRequests } = this.state;
+  onRequestDeny(errandObj) {
+    const { _id: errandID } = errandObj;
+    const { newRequests, currentRun } = this.state;
+    const { _id: runID } = currentRun;
     const newRequestsCopy = [...newRequests];
     newRequestsCopy.shift();
 
-    this.setState({ newRequests: newRequestsCopy });
+    axios({
+      url: '/runs/update',
+      method: 'POST',
+      data: {
+        errandID,
+        runID,
+        type: 'declinedErrands'
+      }
+    })
+      .then((response) => {
+        this.setState({ newRequests: newRequestsCopy });
+      })
+      .catch((err) => console.log(err));
   }
 
   onErrandComplete(errandID, stateIndex) {
@@ -171,6 +198,27 @@ class RunnerStatus extends React.Component {
     this.setState({
       acceptedErrands: newAcceptedErrands,
       mapMarkers: newMapMarkers
+    });
+  }
+
+  plotExistingPoint(latlng) {
+    const { map } = this.state;
+    new mapboxgl
+      .Marker()
+      .setLngLat(latlng)
+      .setPopup(
+        new mapboxgl.Popup().setHTML(`<h2>${category}</h2>
+        <p><strong>${requester}</strong><br>
+        <strong>Address:</strong> ${streetAddress}<br>
+        <strong>Requested at:</strong> ${startTime}<br>
+        <strong>Item:</strong> ${reqItems.item}</p>
+        `)
+      )
+      .addTo(map);
+    map.flyTo({
+      center: feature.center,
+      speed: 1.5,
+      zoom: 10
     });
   }
 
