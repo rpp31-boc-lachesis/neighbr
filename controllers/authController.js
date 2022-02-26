@@ -11,19 +11,21 @@ module.exports = {
       const isValid = utils.comparePassword(req.body.password, user.password, user.salt);
       if (isValid) {
         const tokenObj = utils.issueJWT(user);
-        res.status(200).json({
-          token: tokenObj.token,
-          expiresIn: tokenObj.expires,
-          avatar_url: user.avatar_url,
-          username: user.username
+        res.cookie('token', tokenObj.token, {
+          httpOnly: true,
+          maxAge: 1000 * 60 * 60
         });
+        res.status(200).send({ avatar_url: user.avatar_url, username: user.username });
       } else {
         res.status(401).json({ message: 'You entered the wrong password' });
       }
     } catch (e) {
-      console.error(e);
       next(e);
     }
+  },
+  logout: async (req, res) => {
+    res.clearCookie('token');
+    res.redirect('/');
   },
   signup: async (req, res, next) => {
     // check if username or email exists

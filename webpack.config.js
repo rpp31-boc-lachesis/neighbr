@@ -6,14 +6,15 @@ const entryDir = path.join(__dirname, 'client/src/index.jsx');
 const outputDir = path.join(__dirname, 'client/dist');
 
 module.exports = {
-  watch: true,
-  cache: false,
 
-  entry: entryDir,
+  entry: ['regenerator-runtime/runtime.js', entryDir],
+
+  cache: false,
   output: {
     filename: 'bundle.js',
     path: outputDir,
   },
+  target: 'browserslist',
   module: {
     rules: [
       {
@@ -36,5 +37,14 @@ module.exports = {
       },
     ]
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
+  resolve: {
+    alias: {
+      '@mui/base': '@mui/base/modern',
+      '@mui/lab': '@mui/lab/modern',
+      '@mui/material': '@mui/material/modern',
+      '@mui/styled-engine': '@mui/styled-engine/modern',
+      '@mui/system': '@mui/system/modern',
+    }
+  }
 };

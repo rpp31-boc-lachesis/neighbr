@@ -19,7 +19,7 @@ import RequestDetail from './RequestDetail.jsx';
 import css from '../RunnerList/runnerList.css';
 
 //testing
-const testLoggedInUser = '620d3174fcabcc778c98c58b';
+const testLoggedInUser = 'happycat171';
 
 const BORDER_PX = '0px';
 // const BORDER_PX = '1px'
@@ -70,7 +70,7 @@ function RequestDash(props) {
           <Stack spacing={2} sx={{ height: '550px', overflow: 'overlay', border: `${BORDER_PX} solid blue` }}>
           {
             errands.map((errand) => {
-              if (errand.requester === testLoggedInUser) {
+              if (errand.requester.username === testLoggedInUser) {
                 return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand.id} />);
               }
             })

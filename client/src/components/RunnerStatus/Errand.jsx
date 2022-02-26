@@ -147,38 +147,38 @@ Errand.propTypes = {
   type: PropTypes.string.isRequired,
   stateIndex: PropTypes.number.isRequired,
   errandObj: PropTypes.shape({
-    _id: PropTypes.number,
+    _id: PropTypes.string,
     category: PropTypes.string,
-    req_items: {
+    accepted: PropTypes.bool,
+    requester: PropTypes.string,
+    runner: PropTypes.string,
+    run: PropTypes.string,
+    req_items: PropTypes.arrayOf(PropTypes.shape({
       item: PropTypes.string,
       quantity: PropTypes.number,
-      weight: PropTypes.string,
-      size: PropTypes.string,
-      notes: PropTypes.string,
-      status: PropTypes.string,
-      requester: PropTypes.number,
-      runner: PropTypes.number,
-      transportation: PropTypes.string
-    },
-    message: {
-      requester: PropTypes.number,
-      notes: PropTypes.string
-    },
-    pickup: {
+      status: PropTypes.string
+    })),
+    weight: PropTypes.string,
+    size: PropTypes.string,
+    transportation: PropTypes.string,
+    message: PropTypes.string,
+    pickup: PropTypes.shape({
       store: PropTypes.string,
-      address: PropTypes.string
-    },
-    dropoff: {
-      requester: PropTypes.number,
-      address: PropTypes.string
-    },
-    date: Date,
-    start_time: Date,
-    end_time: Date,
-    received_rating: {
-      requester: PropTypes.number,
+      address: PropTypes.string,
+      locationId: PropTypes.string,
+    }),
+    dropoff: PropTypes.shape({
+      address: PropTypes.string,
+      note: PropTypes.string,
+      locationId: PropTypes.string,
+    }),
+    date: PropTypes.string,
+    start_time: PropTypes.string,
+    end_time: PropTypes.string,
+    given_rating: PropTypes.shape({
+      runner: PropTypes.string,
       rating: PropTypes.number
-    }
+    }),
   }).isRequired,
   onRequestAccept: PropTypes.func,
   onRequestDeny: PropTypes.func,

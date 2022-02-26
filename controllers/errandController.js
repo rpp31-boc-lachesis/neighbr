@@ -2,8 +2,8 @@ const axios = require('axios');
 const {
   createErrand,
   getAllErrands,
-  getErrand,
   getErrandById,
+  markErrandAccepted,
 } = require('../db/services/errandService.js');
 
 module.exports.getAllErrands = async (req, res) => {
@@ -27,8 +27,21 @@ module.exports.addErrand = (req, res) => {
 };
 
 module.exports.getErrandById = async (req, res) => {
-  const { errandId } = req.params;
+  const errandId = req.params.id;
+
   await getErrandById(errandId, (err, data) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+};
+
+module.exports.acceptErrand = (req, res) => {
+  console.log(req.body);
+  const { errandId, user } = req.body.data;
+  markErrandAccepted(errandId, user, (err, data) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
