@@ -98,11 +98,19 @@ const postRun = (body, callback) => {
     .catch((err) => { callback(err, null); });
 };
 const updateRun = (body, callback) => {
-  const { runID, errandID, type } = body;
+  const {
+    runID,
+    errandID,
+    type,
+    map
+  } = body;
 
   Run.findOneAndUpdate(
     { _id: runID },
-    { $push: { [type]: errandID } }
+    {
+      $push: { [type]: errandID },
+      map
+    }
   )
     .then(() => callback(null))
     .catch((err) => callback(err));

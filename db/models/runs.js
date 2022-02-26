@@ -13,7 +13,7 @@ const runSchema = new Schema({
   acceptedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }],
   declinedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }],
   completedErrands: [{ type: Schema.Types.ObjectId, ref: 'Errand' }],
-  mapMarkers: Object
+  map: Object
 });
 
 module.exports = runSchema;
