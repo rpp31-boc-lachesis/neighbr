@@ -24,10 +24,6 @@ class RunnerStatus extends React.Component {
 
   componentDidMount() {
     const { errands, runs, user } = this.props;
-    const map = new mapboxgl.Map({
-      container: 'mapContainer',
-      style: 'mapbox://styles/mapbox/streets-v11',
-    });
     const newRequests = [];
     // let currentRun;
 
@@ -53,8 +49,19 @@ class RunnerStatus extends React.Component {
       acceptedErrands,
       declinedErrands,
       completedErrands,
-      mapMarkers
+      map: runMap
     } = currentRun;
+    let map;
+
+    if (Object.keys(runMap).length === 0) {
+      map = new mapboxgl.Map({
+        container: 'mapContainer',
+        style: 'mapbox://styles/mapbox/streets-v11',
+      });
+    } else {
+      map = { runMap };
+    }
+
     for (let i = 0; i < errands.length; i += 1) {
       const { _id: errandID } = errands[i];
 
@@ -65,14 +72,9 @@ class RunnerStatus extends React.Component {
         newRequests.push(errands[i]);
       }
     }
-    mapMarkers.forEach((marker) => {
-      const { _lngLat: lnglat } = marker;
-      this.plotExistingPoint(lnglat);
-    });
 
     this.setState({
-      map,
-      mapMarkers,
+      map: { map },
       newRequests,
       currentRun,
       acceptedErrands
@@ -148,7 +150,8 @@ class RunnerStatus extends React.Component {
           data: {
             errandID,
             runID,
-            type: 'acceptedErrands'
+            type: 'acceptedErrands',
+            map
           }
         })
           .then(() => {
@@ -198,27 +201,6 @@ class RunnerStatus extends React.Component {
     this.setState({
       acceptedErrands: newAcceptedErrands,
       mapMarkers: newMapMarkers
-    });
-  }
-
-  plotExistingPoint(latlng) {
-    const { map } = this.state;
-    new mapboxgl
-      .Marker()
-      .setLngLat(latlng)
-      .setPopup(
-        new mapboxgl.Popup().setHTML(`<h2>${category}</h2>
-        <p><strong>${requester}</strong><br>
-        <strong>Address:</strong> ${streetAddress}<br>
-        <strong>Requested at:</strong> ${startTime}<br>
-        <strong>Item:</strong> ${reqItems.item}</p>
-        `)
-      )
-      .addTo(map);
-    map.flyTo({
-      center: feature.center,
-      speed: 1.5,
-      zoom: 10
     });
   }
 
