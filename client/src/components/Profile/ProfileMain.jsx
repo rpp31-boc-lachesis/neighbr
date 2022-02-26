@@ -11,6 +11,8 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import RestaurantIcon from '@mui/icons-material/Restaurant';
+import ConstructionIcon from '@mui/icons-material/Construction';
 import { styled } from '@mui/material/styles';
 import ProfileMap from './ProfileMap.jsx';
 
@@ -364,16 +366,93 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <RestaurantIcon sx={{ margin: '2px' }} />
+                    Coffee
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: small | Weight: light | Destination: San Francisco
+                    | Distance: 2.4mi | Est. Time: 24min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
+                  </Grid>
+                </Grid>
+              </Item>
             </Stack>
           </Grid>
           <Grid
@@ -444,16 +523,93 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
-              <Item>Some Item</Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <RestaurantIcon sx={{ margin: '2px' }} />
+                    Coffee
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: small | Weight: light | Destination: San Francisco
+                    | Distance: 2.4mi | Est. Time: 24min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
+                  </Grid>
+                </Grid>
+              </Item>
+              <Item sx={{
+                border: '2px solid #B23CDB',
+                backgroundColor: '#C85CDB',
+                color: 'white',
+                width: '92%',
+                height: 'auto',
+                borderRadius: '8px'
+              }}
+              >
+                <Grid container>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      fontSize: '125%',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    <ConstructionIcon sx={{ padding: '2px' }} />
+                    Paint
+                  </Grid>
+                  <Grid sx={{ padding: '5px' }}>
+                    Size: medium | Weight: medium | Destination: San Francisco
+                    | Distance: 1.9mi | Est. Time: 34min
+                  </Grid>
+                </Grid>
+              </Item>
             </Stack>
           </Grid>
           <Grid

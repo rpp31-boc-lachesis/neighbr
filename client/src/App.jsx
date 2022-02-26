@@ -248,7 +248,7 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          {/* <TestingMenu /> */}
+          <TestingMenu />
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
@@ -261,8 +261,8 @@ class App extends React.Component {
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
-            <Route path="/profile" element={<ProfilePopover />} />
-            <Route path="/profilemain" element={<ProfileMain />} />
+            {/* <Route path="/profile" element={<ProfilePopover user='organicrabbit525' />} /> */}
+            <Route path="/profilemain" element={<ProfileMain user={user} />} />
             <Route path="*" element={<Error />} />
           </Routes>
           {user ? <Footer /> : null}
