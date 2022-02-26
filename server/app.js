@@ -5,24 +5,27 @@ const app = express();
 const cookiePaser = require('cookie-parser');
 const path = require('path');
 const compression = require('compression');
-<<<<<<< HEAD
-const passport = require('passport');
-const { login, signup } = require('../controllers/authController');
-const {
-  getUserPopulate,
-  getUsers,
-  getOneUser,
-  postUser
-} = require('../controllers/userController');
-const { getRuns, addRun, buildRun } = require('../controllers/runController');
-const { getAllErrands, getErrandById } = require('../controllers/errandController');
-=======
 
 const { login, logout, signup } = require('../controllers/authController');
-const { getAll, getUsers, getOneUser, postUser, addRunToUser, getUserById } = require('../controllers/userController');
-const { getRuns, addRun, buildRun, updateRun } = require('../controllers/runController');
-const { getAllErrands, getErrandById, addErrand, acceptErrand } = require('../controllers/errandController');
->>>>>>> master
+const {
+  getUsers,
+  getOneUser,
+  addRunToUser,
+  getUserById,
+  getUserPopulate
+} = require('../controllers/userController');
+const {
+  getRuns,
+  addRun,
+  buildRun,
+  updateRun
+} = require('../controllers/runController');
+const {
+  getAllErrands,
+  getErrandById,
+  addErrand,
+  acceptErrand
+} = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
 const { authMiddleware } = require('../db/auth/passport');
 const { getLocations, getOrAddLocation, getLocationById } = require('../controllers/locationController');
@@ -38,14 +41,10 @@ app.post('/login', login);
 app.get('/logout', logout);
 app.post('/signup', signup);
 
-app.get('/users', getUsers);
-<<<<<<< HEAD
 app.get('/users/populate/:username', getUserPopulate);
-=======
+app.get('/users', getUsers);
 app.get('/user/:id', getUserById);
->>>>>>> master
 app.get('/users/:username', getOneUser);
-app.post('/users', postUser);
 app.post('/users/addRun', addRunToUser);
 
 app.get('/locations', getLocations);

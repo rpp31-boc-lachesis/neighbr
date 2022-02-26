@@ -6,7 +6,6 @@ const { Users } = require('../models/index.js');
 module.exports = {
   getPopulatedUser: (user) => (
     Users.findOne({ username: user })
-      .lean()
       .populate('req_history')
       .populate('run_history')
   ),
@@ -20,11 +19,6 @@ module.exports = {
   ),
   getUserById: (id) => (
     Users.find({ _id: id })
-  ),
-  createUser: (newUser) => (
-    Users.create({
-      username: newUser
-    })
   ),
   addRunToUser: (runId, userId) => {
     Users.findOneAndUpdate(
