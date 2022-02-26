@@ -26,6 +26,8 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function ProfileCard(props) {
   const { handleClose, currentUser } = props;
   return (
+    currentUser
+    && (
     <Grid
       container
       sx={{
@@ -69,10 +71,10 @@ export default function ProfileCard(props) {
             sx={{ height: 'auto', width: '90%' }}
           />
           <Typography variant="h5" component="h5">
-            {currentUser.first_name}
+            {currentUser.first_name ? currentUser.first_name : ''}
           </Typography>
           <Typography variant="h6" component="h6" sx={{ opacity: 0.6 }}>
-            {currentUser.city}
+            {currentUser.city ? currentUser.city : ''}
           </Typography>
         </Grid>
         <Grid
@@ -86,7 +88,7 @@ export default function ProfileCard(props) {
         >
           <Rating
             name="half-rating-read"
-            value={(currentUser.sum_rating / currentUser.rating_count)}
+            value={currentUser.sum_rating ? (currentUser.sum_rating / currentUser.rating_count) : 0}
             precision={0.5}
             readOnly
             sx={{
@@ -223,6 +225,7 @@ export default function ProfileCard(props) {
         </Box>
       </Grid>
     </Grid>
+    )
   );
 }
 
