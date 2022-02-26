@@ -14,6 +14,8 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
 function RequestDetail({requestDetail}) {
 
   if (requestDetail === null) {
