@@ -6,7 +6,10 @@ const entryDir = path.join(__dirname, 'client/src/index.jsx');
 const outputDir = path.join(__dirname, 'client/dist');
 
 module.exports = {
+
   entry: ['regenerator-runtime/runtime.js', entryDir],
+
+  cache: false,
   output: {
     filename: 'bundle.js',
     path: outputDir,
@@ -29,7 +32,7 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
     ]

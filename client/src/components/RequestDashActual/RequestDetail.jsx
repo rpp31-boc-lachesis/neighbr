@@ -14,47 +14,49 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
 
-function DestinationDetail({runDetail}) {
+function RequestDetail({requestDetail}) {
 
-  if (runDetail === null) {
+  if (requestDetail === null) {
     return (
-<>
+      <>
   {/* entryBox */}
             <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
-              Select run for details
+              Select request for details
             </Box>
             </>
     )
   }
 
-    const { startTime, endTime, date, location, transportation, user } = runDetail;
-    const { placeText } = location;
-    const { username } = user;
+  const { start_time, end_time, date, message, weight, req_items } = requestDetail;
+  // const { placeText } = location;
+  // const { username } = user;
 
-    const startTimeEvent = new Date(startTime).toLocaleTimeString()
-    const dateEvent = new Date(date).toLocaleDateString()
+  const startTimeEvent = new Date(start_time).toLocaleTimeString()
+  const dateEvent = new Date(date).toLocaleDateString()
 
   return (
   <>
   {/* entryBox */}
             <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
-              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue', alignItems:'top' }}>
-                <div className="entryColumn" alignSelf="flex-start">
+              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
+                <div className="entryColumn">
                 <div className="detailItem topLineLeft">
                   <div className="locationNumber">1</div>
-                    {placeText}
+                    {req_items[0].item}
                 </div>
                   <div className="detailItem">Time: {startTimeEvent}</div>
                   <div className="detailItem">Date: {dateEvent}</div>
+                  {/* <Typography variant="h5">Item 1</Typography>
+                  <Typography variant="body1">Item 1</Typography>
+                  <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 <div className="entryColumn">
                 <RouterLink style={{ textDecoration: 'none' }} to="/main">
                 <Avatar>S</Avatar>
                 </RouterLink>
-                  <div className="detailItem textEnd topLineRight">{username}</div>
-                  <div className="detailItem textEnd">By: {transportation}
-                  </div>
-                  <div className="detailItem textEnd">{location.district}</div>
+                  <div className="detailItem textEnd topLineRight">---</div>
+                  <div className="detailItem textEnd">---</div>
+                  <div className="detailItem textEnd">Message: {message}</div>
                   {/* <Typography variant="h5">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
@@ -73,4 +75,4 @@ function DestinationDetail({runDetail}) {
   );
 }
 
-export default DestinationDetail;
+export default RequestDetail;

@@ -369,7 +369,7 @@ function Signup({ user, handleSignUp }) {
             <Grid container>
               <Grid item>
                 Already have an account?&nbsp;
-                <RouterLink style={{ color: '#5FC6C9', fontWeight: 'bold' }} to="/login">
+                <RouterLink style={{ textDecoration: 'none', color: '#5FC6C9', fontWeight: 'bold' }} to="/login">
                   Log In
                 </RouterLink>
               </Grid>

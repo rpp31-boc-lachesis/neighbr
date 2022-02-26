@@ -1,3 +1,6 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import propTypes from 'prop-types';
 import Box from '@mui/material/Box';

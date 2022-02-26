@@ -1,5 +1,5 @@
 const {
-  getAllUsers,
+  getPopulatedUser,
   getUsers,
   getOneUser,
   createUser,
@@ -8,11 +8,14 @@ const {
 } = require('../db/services/userService');
 
 module.exports = {
-  getAll: async (req, res) => {
+  getUserPopulate: async (req, res) => {
+    console.log('REQ PARAMS:', req.params);
+    const { username } = req.params;
     try {
-      const allUsers = await getAllUsers();
-      if (allUsers) {
-        res.status(200).send(allUsers);
+      const userPopulate = await getPopulatedUser(username);
+      console.log('USER POPULATE:', userPopulate);
+      if (userPopulate) {
+        res.status(200).send(userPopulate);
       }
     } catch (err) {
       res.status(500).send(err);

@@ -13,16 +13,17 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
-import css from './runnerList.css';
+import css from '../RunnerList/runnerList.css';
 
-function DestinationEntry({run, handleEntryClick}) {
-  const { startTime, endTime, date, location, transportation, user } = run;
-  const { placeText } = location;
-  const { username } = user;
+function RequestEntry({errand, handleEntryClick}) {
+  console.log('errand here', errand)
+  const { start_time, end_time, date, size, weight, req_items } = errand;
+  // const { placeText } = location;
+  // const { username } = user;
 
-  const startTimeEvent = new Date(startTime).toLocaleTimeString()
-  const dateEvent = new Date(date)
-  console.log('run', run)
+  const startTimeEvent = new Date(start_time).toLocaleTimeString()
+  const dateEvent = new Date(date).toLocaleDateString()
+  console.log('errand', errand)
 
   return (
   <>
@@ -39,21 +40,21 @@ function DestinationEntry({run, handleEntryClick}) {
                   opacity: [0.9, 0.8, 0.7],
                 }
               }}
-              key={run.id}
-              onClick={() => { handleEntryClick(run); }}>
+              key={errand.id}
+              onClick={() => { handleEntryClick(errand); }}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 <div className="entryColumn">
                   <div className="lineItem topLineLeft">
                     <div className="locationNumber">1</div>
-                    {placeText}
+                    {req_items[0].item}
                   </div>
                   <div className="lineItem">Time: {startTimeEvent}</div>
-                  <div className="lineItem">Date: {dateEvent.toLocaleDateString()}</div>
+                  <div className="lineItem">Date: {dateEvent}</div>
                 </div>
                 <div className="entryColumn">
-                  <div className="lineItem textEnd topLineRight">{username}</div>
-                  <div className="lineItem textEnd">By: {transportation}</div>
-                  <div className="lineItem textEnd">{location.district}</div>
+                  <div className="lineItem textEnd topLineRight"></div>
+                  <div className="lineItem textEnd">{size}</div>
+                  <div className="lineItem textEnd">{weight}</div>
                   {/* <Typography variant="h5">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
@@ -69,4 +70,4 @@ function DestinationEntry({run, handleEntryClick}) {
   );
 }
 
-export default DestinationEntry;
+export default RequestEntry;

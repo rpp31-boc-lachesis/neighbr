@@ -9,6 +9,7 @@ import Footer from './components/Home/Footer.jsx';
 import Main from './components/Home/Main.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
+import RequestDash from './components/RequestDashActual/RequestDash.jsx';
 import RequestStatus from './components/RequestDash/RequestStatus.jsx';
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
@@ -44,6 +45,7 @@ class App extends React.Component {
       destinations: [],
       user: '',
       userPhoto: '',
+      warning: false,
       isLoggedIn: false,
       // isLoggedIn: true, //test setting
       isLoaded: false,
@@ -89,18 +91,14 @@ class App extends React.Component {
       });
       localStorage.setItem('user', data.username);
       localStorage.setItem('userphoto', data.avatar_url);
+      this.setState({ warning: false });
     } catch (e) {
-      console.log(e);
+      this.setState({ warning: true });
     }
   }
 
   handleSignUp(e, loginData) {
     e.preventDefault();
-    // console.log('loginData', loginData);
-    // const { data } = res;
-    // authService.setLocalStorage(loginData);
-    // const expire = authService.getExpiration();
-    // console.log(expire.$d)
     localStorage.setItem('user', loginData.username);
     localStorage.setItem('userphoto', loginData.avatar_url);
     this.setState({
@@ -212,7 +210,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { user, userPhoto } = this.state;
+    const { user, userPhoto, warning } = this.state;
     const {
       errands,
       error,
@@ -240,15 +238,16 @@ class App extends React.Component {
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
             <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
-            <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} />} />
+            <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} warning={warning} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
-            <Route path="/requestStatus" element={<RequestStatus user={user} />} />
-            <Route path="/runnerList" element={<RunnerList />} />
-            {/* <Route path="/requestDash" element={<RunnerList />} /> */}
+            <Route path="/runnerList" element={<RunnerList runs={runs} locations={locations} />} />
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
+            <Route path="/requestDash" element={<RequestDash errands={errands} />} />
+            {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
-            <Route path="/profile" element={<ProfilePopover />} />
+            <Route path="/requestStatus" element={<RequestStatus user={user} />} />
+            {/* <Route path="/profile" element={<ProfilePopover />} /> */}
             <Route path="/profilemain" element={<ProfileMain />} />
             <Route path="*" element={<Error />} />
           </Routes>

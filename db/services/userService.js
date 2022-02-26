@@ -4,8 +4,10 @@ const { Users } = require('../models/index.js');
 // define and export services for request handlers
 
 module.exports = {
-  getAllUsers: () => (
-    Users.find({ username: { $exists: true } }).sort({ id: 1 })
+  getPopulatedUser: (user) => (
+    Users.findOne({ username: user })
+      .populate('req_history')
+      .populate('run_history')
   ),
   getUsers: (page, count) => {
     const pageNumber = Number(page) === 1 ? 0 : (page * 20 - 20);
@@ -17,11 +19,6 @@ module.exports = {
   ),
   getUserById: (id) => (
     Users.find({ _id: id })
-  ),
-  createUser: (newUser) => (
-    Users.create({
-      username: newUser
-    })
   ),
   addRunToUser: (runId, userId) => {
     Users.findOneAndUpdate(
