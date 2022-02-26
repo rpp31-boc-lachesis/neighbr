@@ -4,16 +4,17 @@ import { Popover } from '@mui/material';
 import ProfileButton from './ProfileButton.jsx';
 import ProfileCard from './ProfileCard.jsx';
 
-export default function ProfilePopover() {
+export default function ProfilePopover(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
   // TEMPORARY USERNAME
-  const tempUser = 'organicrabbit525';
+  // const tempUser = 'organicrabbit525';
+  const { users } = props;
 
   const handleClick = (event) => {
     event.preventDefault();
     event.persist();
-    axios.get(`/users/${tempUser}`)
+    axios.get(`/users/${users}`)
       .then((results) => {
         const oneUser = results.data[0];
         console.log(oneUser);
