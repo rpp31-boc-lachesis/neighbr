@@ -1,13 +1,16 @@
+:root {
+  --hidden-borders: 0px solid black;
+}
 
 .entryColumn {
   /* background: lightgreen; */
-  border: 0px dashed lightgreen;
+  border: var(--hidden-borders, 1px dashed lightgreen);
   width: 50%;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 
 .lineItem {
-  border: 0px dashed lightslategray;
+  border: var(--hidden-borders, 1px dashed lightslategray);
   margin: 8px 8px;
   padding: 0px;
 }
@@ -18,7 +21,7 @@
 
 .topLineLeft {
   /* margin-top: 15px; */
-  font-size: x-large;
+  font-size: large;
   display: flex;
   flex-direction: row;
 }
@@ -34,7 +37,7 @@
 }
 
 .detailItem {
-  border: 0px dashed lightslategray;
+  border: var(--hidden-borders, 1px dashed lightslategray);
   margin: 8px 8px;
   padding: 0px;
 }
