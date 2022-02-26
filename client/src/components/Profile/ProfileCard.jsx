@@ -23,7 +23,8 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function ProfileCard({ handleClose, currentUser }) {
+export default function ProfileCard(props) {
+  const { handleClose, currentUser } = props;
   return (
     <Grid
       container
@@ -64,7 +65,7 @@ export default function ProfileCard({ handleClose, currentUser }) {
           <Avatar
             alt="profile image"
             name="User Avatar"
-            src={currentUser.avatar_url}
+            src={currentUser.avatar_url ? currentUser.avatar_url : ''}
             sx={{ height: 'auto', width: '90%' }}
           />
           <Typography variant="h5" component="h5">
@@ -98,7 +99,7 @@ export default function ProfileCard({ handleClose, currentUser }) {
       </Grid>
       <DialogContent sx={{ padding: '5%' }}>
         <Typography component="h6" sx={{ fontSize: '1.0rem' }}>
-          {currentUser.bio}
+          {currentUser.bio ? currentUser.bio : 'Hi there! I love to help my Neighbrs pickup items when I am out running around. If you need anything, please let me know!'}
         </Typography>
       </DialogContent>
       <Grid

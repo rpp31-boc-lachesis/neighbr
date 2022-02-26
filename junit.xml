@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="7" failures="0" errors="0" time="3.863">
-  <testsuite name="&lt;ProfileCard /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-25T20:38:11" time="3.088" tests="7">
-    <testcase classname="&lt;ProfileCard /&gt; Renders Profile Card component" name="&lt;ProfileCard /&gt; Renders Profile Card component" time="0.152">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="5.12">
+  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-02-26T00:16:22" time="4.017" tests="3">
+    <testcase classname="&lt;ProfilePopover /&gt; Renders Profile Popover component" name="&lt;ProfilePopover /&gt; Renders Profile Popover component" time="0.1">
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Has an X button to close the modal" name="&lt;ProfileCard /&gt; Has an X button to close the modal" time="0.034">
+    <testcase classname="&lt;ProfilePopover /&gt; Renders view profile button" name="&lt;ProfilePopover /&gt; Renders view profile button" time="0.222">
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Can close the modal by clicking the X button" name="&lt;ProfileCard /&gt; Can close the modal by clicking the X button" time="0.035">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User avatar" name="&lt;ProfileCard /&gt; Displays a User avatar" time="0.039">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User name" name="&lt;ProfileCard /&gt; Displays a User name" time="0.097">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User location" name="&lt;ProfileCard /&gt; Displays a User location" time="0.049">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User biography" name="&lt;ProfileCard /&gt; Displays a User biography" time="0.045">
+    <testcase classname="&lt;ProfilePopover /&gt; Popover opens when button is clicked" name="&lt;ProfilePopover /&gt; Popover opens when button is clicked" time="0.233">
     </testcase>
   </testsuite>
 </testsuites>
