@@ -6,6 +6,9 @@ const entryDir = path.join(__dirname, 'client/src/index.jsx');
 const outputDir = path.join(__dirname, 'client/dist');
 
 module.exports = {
+  watch: true,
+  cache: false,
+
   entry: entryDir,
   output: {
     filename: 'bundle.js',
@@ -28,7 +31,7 @@ module.exports = {
         type: 'asset/resource',
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
     ]

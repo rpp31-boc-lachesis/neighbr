@@ -20,7 +20,11 @@ import Footer from '../Home/Footer.jsx';
 import css from './runnerList.css';
 
 
-function DestinationList() {
+function DestinationList(props) {
+  const { runs, locations } = props;
+  console.log('in RunsList', 'RUNS', runs);
+  console.log('in RunsList', 'LOCATIONS', locations);
+
   //variation of componentDidMount for hooks
   useEffect(() => {
     //stuff
@@ -46,6 +50,8 @@ function DestinationList() {
   //     newRequests: errands
   //   });
   // }
+
+  const Locations = locations.map((location) => <DestinationEntry location={location} key={location.id} />);
 
   return (
     <Container maxwidth="sm" sx={{border: '1px dashed red' }}>
@@ -90,10 +96,7 @@ function DestinationList() {
           {/* <Typography variant='h5'>Current Runs</Typography> */}
           <Stack spacing={2} sx={{ minHeight: '100%', border: '1px solid blue'}}>
       -- sort by: distance
-          <DestinationEntry />
-          <DestinationEntry />
-          <DestinationEntry />
-          <DestinationEntry />
+          {Locations}
           </Stack>
         </Grid>
 {/* right column */}

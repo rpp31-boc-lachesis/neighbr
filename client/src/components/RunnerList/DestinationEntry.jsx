@@ -18,7 +18,11 @@ import Header from '../Home/Header.jsx';
 import Footer from '../Home/Footer.jsx';
 import css from './runnerList.css';
 
-function DestinationEntry() {
+function DestinationEntry(props) {
+  const { location } = props;
+  const { placeText } = location;
+  console.log('props', props)
+  console.log('location', location)
   // const tempNav = {
   //   backgroundColor: "orange",
   //   outline: "1px dashed black"
@@ -74,9 +78,10 @@ function DestinationEntry() {
               }}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 <div className='entryColumn'>
-                <div className='lineItem topLineLeft'>
-                  <div className='locationNumber'>1</div>
-                  Target</div>
+                  <div className='lineItem topLineLeft'>
+                    <div className='locationNumber'>1</div>
+                    {placeText}
+                  </div>
                   <div className='lineItem'>Time: 2:15 PM</div>
                   <div className='lineItem'>Date: 02 - 01 - 22</div>
                   {/* <Typography variant="h5">Item 1</Typography>

@@ -7,7 +7,8 @@
     "start": "node ./controllers/signature/createKeypair.js  && node ./server/index.js",
     "build": "webpack --mode production",
     "start:dev": "node ./controllers/signature/createKeypair.js && nodemon ./server/index.js",
-    "build:dev": "webpack --mode development -w",
+    "start:dev2": "node ./controllers/signature/createKeypair.js && nodemon --watch ./server/index.js --ext js,css,jsx --ignore dist --exec \"npm run build:dev\"",
+    "build:dev": "webpack --mode development",
     "test": "jest --coverage --runInBand --detectOpenHandles",
     "test:ci": "jest --coverage --ci --runInBand --detectOpenHandles --reporters=default --reporters=jest-junit"
   },
