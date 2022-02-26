@@ -15,7 +15,7 @@ import Avatar from '@mui/material/Avatar';
 
 import css from '../RunnerList/runnerList.css';
 
-function RequestEntry({errand, handleEntryClick}) {
+function RequestEntry({errand, users, handleEntryClick}) {
   console.log('errand here', errand)
   const { start_time, end_time, date, size, weight, req_items } = errand;
   // const { placeText } = location;

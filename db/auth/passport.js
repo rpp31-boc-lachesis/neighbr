@@ -19,8 +19,8 @@ function authMiddleware(req, res, next) {
       }
     }
   } else {
-    // sending unauthenticated user trying to access restricted pages to login page!
-    res.redirect('/login');
+    // sending unauthenticated user trying to access restricted pages to splash page!
+    res.redirect('/');
   }
 }
 module.exports.authMiddleware = authMiddleware;
