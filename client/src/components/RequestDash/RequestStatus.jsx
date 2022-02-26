@@ -25,6 +25,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import RequestMap from './RequestMap.jsx';
+import ReviewModal from './ReviewModal.jsx';
 import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
 function LinearProgressWithLabel(percentage) {
@@ -132,31 +133,6 @@ export default function RequestStatus(props) {
       });
   }, []);
 
-  const modalsx = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-  };
-
-  const labels = {
-    0.5: 'Poor',
-    1: 'Poor+',
-    1.5: 'Average',
-    2: 'Average+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Great',
-    4: 'Great+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
-  };
-
   const sx = {
     border: '2px solid #DE9DE9',
     borderRadius: '10px'
@@ -250,26 +226,13 @@ export default function RequestStatus(props) {
               aria-labelledby="modal-modal-title"
               aria-describedby="modal-modal-description"
             >
-              <Box sx={modalsx}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Rating
-                </Typography>
-                <Rating
-                  name="hover-feedback"
-                  value={value}
-                  precision={0.5}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
-                  }}
-                  onChangeActive={(event, newHover) => {
-                    setHover(newHover);
-                  }}
-                  emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                />
-                {value !== null && (
-                  <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-                )}
-              </Box>
+              <ReviewModal
+                progress={progress}
+                setValue={setValue}
+                setHover={setHover}
+                value={value}
+                hover={hover}
+              />
             </Modal>
           </Box>
         </Grid>
