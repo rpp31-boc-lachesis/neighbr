@@ -1,5 +1,5 @@
 :root {
-  /* --hidden-borders: 0px solid black; */
+  --hidden-borders: 0px solid black;
 }
 
 .entryColumn {
@@ -37,7 +37,7 @@
 }
 
 .detailItem {
-  border: 1px dashed lightslategray;
+  border: var(--hidden-borders, 1px dashed lightslategray);
   margin: 8px 8px;
   padding: 0px;
 }

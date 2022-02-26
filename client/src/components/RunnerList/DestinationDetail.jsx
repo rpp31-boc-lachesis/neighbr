@@ -28,9 +28,6 @@ function DestinationDetail() {
                 </div>
                   <div className="detailItem">Time: 2:15 PM</div>
                   <div className="detailItem">Date: 02 - 01 - 22</div>
-                  {/* <Typography variant="h5">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 <div className="entryColumn">
                 <RouterLink style={{ textDecoration: 'none' }} to="/main">

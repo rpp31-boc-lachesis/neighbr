@@ -19,10 +19,15 @@ import Footer from '../Home/Footer.jsx';
 import css from './runnerList.css';
 
 function DestinationEntry(props) {
-  const { location } = props;
+  const { run } = props;
+  const { startTime, endTime, date, location, transportation, user } = run;
   const { placeText } = location;
+  const { username } = user;
+
+  const startTimeEvent = new Date(startTime).toLocaleTimeString()
+  const dateEvent = new Date(date)
   console.log('props', props)
-  console.log('location', location)
+  console.log('run', run)
   // const tempNav = {
   //   backgroundColor: "orange",
   //   outline: "1px dashed black"
@@ -66,8 +71,8 @@ function DestinationEntry(props) {
   <>
   {/* entryBox */}
             <Box sx={{
-              height: '100px',
-              minWidth: '100%',
+              // height: '100px',
+              maxWidth: '95%',
               border: '1px solid black',
               borderRadius: '10px',
               background: '#5FC6C9',
@@ -82,16 +87,16 @@ function DestinationEntry(props) {
                     <div className='locationNumber'>1</div>
                     {placeText}
                   </div>
-                  <div className='lineItem'>Time: 2:15 PM</div>
-                  <div className='lineItem'>Date: 02 - 01 - 22</div>
+                  <div className='lineItem'>Time: {startTimeEvent}</div>
+                  <div className='lineItem'>Date: {dateEvent.toLocaleDateString()}</div>
                   {/* <Typography variant="h5">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 <div className='entryColumn'>
-                  <div className='lineItem textEnd topLineRight'>Steve</div>
-                  <div className='lineItem textEnd'>By: Car</div>
-                  <div className='lineItem textEnd'>San Francisco</div>
+                  <div className='lineItem textEnd topLineRight'>{username}</div>
+                  <div className='lineItem textEnd'>By: {transportation}</div>
+                  <div className='lineItem textEnd'>{location.district}</div>
                   {/* <Typography variant="h5">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
