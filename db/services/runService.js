@@ -91,7 +91,7 @@ const postRun = (body, callback) => {
         .then((newRun) => {
           callback(null, newRun);
         })
-        .catch((err) => { console.log(err) })
+        .catch((err) => { console.log(err); });
       // addRunToUserHist(newRun._id, run.user);
       return newRun;
     })
@@ -108,8 +108,10 @@ const updateRun = (body, callback) => {
   Run.findOneAndUpdate(
     { _id: runID },
     {
-      $push: { [type]: errandID },
-      map
+      $set: {
+        $push: { [type]: errandID },
+        [`map.${errandID}`]: map
+      }
     }
   )
     .then(() => callback(null))

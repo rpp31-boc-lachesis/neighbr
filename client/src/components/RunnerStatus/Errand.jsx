@@ -13,8 +13,9 @@ export default function Errand(props) {
     onRequestDeny,
     onErrandComplete
   } = props;
-  const { _id: errandID, category, req_items: reqItems } = errandObj;
-  const { requester } = reqItems;
+  const { _id: errandID, requester, req_items: reqItems } = errandObj;
+  const { first_name: firstName, last_name: lastName,} = requester;
+  const { item, quantity } = reqItems[0];
 
   return (
     <Grid
@@ -51,18 +52,18 @@ export default function Errand(props) {
           padding="7px"
         >
           <Typography
-            variant="h4"
+            variant="h6"
             item
             id="ErrandName"
           >
-            {category}
+            {item}
           </Typography>
           <Typography
             color="#898989"
             item
             id="RequesterName"
           >
-            {requester}
+            {firstName}
           </Typography>
         </Grid>
         <Grid
@@ -78,7 +79,7 @@ export default function Errand(props) {
               item
               id="ErrandDetails"
             >
-              Errand Details
+              {`Quantity: ${quantity}`}
             </Typography>
           </Grid>
           <Typography
