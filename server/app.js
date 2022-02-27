@@ -5,6 +5,7 @@ const app = express();
 const cookiePaser = require('cookie-parser');
 const path = require('path');
 const compression = require('compression');
+const cors = require('cors');
 
 const { login, logout, signup } = require('../controllers/authController');
 const {
@@ -32,6 +33,7 @@ const { getLocations, getOrAddLocation, getLocationById } = require('../controll
 
 // middleware
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(cors());
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -69,7 +71,7 @@ app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 // Catch all route for redirect must be last so others can fire first! :)
-app.get('/*', authMiddleware, (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
