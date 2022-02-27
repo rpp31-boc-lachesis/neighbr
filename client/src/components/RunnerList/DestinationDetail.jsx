@@ -12,6 +12,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
+import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
 
 function DestinationDetail({runDetail}) {
@@ -49,7 +50,8 @@ function DestinationDetail({runDetail}) {
                 </div>
                 <div className="entryColumn">
                 <RouterLink style={{ textDecoration: 'none' }} to="/main">
-                <Avatar>S</Avatar>
+                <Avatar variant="contained" alt="Haylie Schleifer" src={user.avatar_url} sx={{ width: '80px', height: '80px' }} />
+                <ProfilePopover users={user.username} />
                 </RouterLink>
                   <div className="detailItem textEnd topLineRight">{username}</div>
                   <div className="detailItem textEnd">By: {transportation}

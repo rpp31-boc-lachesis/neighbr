@@ -19,6 +19,8 @@ import DestinationDetail from './DestinationDetail.jsx';
 import Footer from '../Home/Footer.jsx';
 import css from './runnerList.css';
 
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
 
 const BORDER_PX = '0px'
 // const BORDER_PX = '1px'
@@ -29,7 +31,8 @@ function RunnerList(props) {
   console.log('in RunsList', 'RUNS', runs);
   console.log('in RunsList', 'LOCATIONS', locations);
 
-  const [ runDetail, setRunDetail] = useState(null);
+  const [runDetail, setRunDetail] = useState(null);
+  const [mapCenter, setMapCenter] = useState([-79.4512, 43.6568])
 
   //variation of componentDidMount for hooks
   useEffect(() => {
@@ -38,6 +41,9 @@ function RunnerList(props) {
     const map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
+      // center: [-79.4512, 43.6568],
+      center: mapCenter,
+      zoom: 13
     });
     // this.setState({
     //   map,
@@ -47,8 +53,18 @@ function RunnerList(props) {
 
   const handleEntryClick = (run) => {
     setRunDetail(run);
-  }
+    setMapCenter(run.location.coordinates)
+    console.log('coords', run.location.coordinates)
 
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
+    const map = new mapboxgl.Map({
+      container: 'mapContainer',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      // center: [-79.4512, 43.6568],
+      center: mapCenter,
+      zoom: 13
+  })
+  }
 
   const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} />);
 console.log('Runs', Runs)

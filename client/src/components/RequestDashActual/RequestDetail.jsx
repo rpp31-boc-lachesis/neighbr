@@ -12,7 +12,9 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
+import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 function RequestDetail({requestDetail}) {
 
@@ -27,7 +29,7 @@ function RequestDetail({requestDetail}) {
     )
   }
 
-  const { start_time, end_time, date, message, weight, req_items } = requestDetail;
+  const { start_time, end_time, date, message, weight, req_items, requester } = requestDetail;
   // const { placeText } = location;
   // const { username } = user;
 
@@ -52,9 +54,10 @@ function RequestDetail({requestDetail}) {
                 </div>
                 <div className="entryColumn">
                 <RouterLink style={{ textDecoration: 'none' }} to="/main">
-                <Avatar>S</Avatar>
+                <Avatar variant="contained" alt="Haylie Schleifer" src={requester.avatar_url} sx={{ width: '80px', height: '80px' }} />
+                <ProfilePopover users={requester.username} />
                 </RouterLink>
-                  <div className="detailItem textEnd topLineRight">---</div>
+                  <div className="detailItem textEnd topLineRight">Your Runner</div>
                   <div className="detailItem textEnd">---</div>
                   <div className="detailItem textEnd">Message: {message}</div>
                   {/* <Typography variant="h5">Item 1</Typography>
@@ -62,7 +65,7 @@ function RequestDetail({requestDetail}) {
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
-                <Button>Request</Button>
+                <Button>Status</Button>
                 </RouterLink>
                 {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
