@@ -683,5 +683,9 @@ export default function ProfileMain(props) {
 // }
 
 ProfileMain.propTypes = {
-  user: PropTypes.string.isRequired
+  user: PropTypes.string
+};
+
+ProfileMain.defaultProps = {
+  user: ''
 };
