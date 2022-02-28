@@ -31,7 +31,6 @@ const ErrandCard = function(props) {
   };
 
   const handleAccept = () => {
-    console.log(errand);
     axios.post('/errands/accept', { data: { errandId: errand._id, user } })
       .then((response) => {
         console.log(response)

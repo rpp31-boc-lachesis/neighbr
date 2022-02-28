@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-// import Card from '@mui/material/Card';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
@@ -16,24 +15,26 @@ import AddRunModal from './AddRunModal.jsx';
 import RunSummary from './RunSummary.jsx';
 
 export default function RunnerDash(props) {
-  const { runs, handlePostRun, errands, user, refreshData } = props;
+  const { runs, handlePostRun, user, refreshData } = props;
 
   const [currentRun, setRun] = React.useState(null);
 
   const CurrentRuns = runs.map((run) => {
-    if (run.user.username === user && !run.complete) {
+    if (!run.complete) {
       return <Run setRun={setRun} run={run} key={run._id} />;
     }
   });
 
-  const CompleteRuns = runs.map((run) => {
-    if (run.user.username === user && run.complete) {
+  const completeRuns = runs.filter((run) => run.complete);
+
+  const CompleteRuns = completeRuns.map((run) => {
+    if (run.complete) {
       return <Run setRun={setRun} run={run} key={run._id} />;
     }
   });
 
   return (
-    <Container sx={{ height: '100%' }} maxwidth="sm">
+    // <Container sx={{ height: '100%' }} maxwidth="sm">
       <Grid container spacing={{ xs: 2, md: 3 }} columnSpacing={4} columns={{ xs: 4, sm: 8, md: 12 }} maxHeight="80vh" paddingTop="1em" marginTop="15px" paddingBottom="0.5em" justifyContent="space-around" alignItems="stretch">
         <Grid container item direction="column" sx={{ minHeight: '100%', justifyContent: 'flex-end' }} xs={3} spacing={2}>
           <Grid item sx={{ alignSelf: 'flex-end' }}>
@@ -61,12 +62,12 @@ export default function RunnerDash(props) {
 
         </Grid>
         <Grid item container xs={5} sx={{ paddingBottom: '45px', minHeight: '100%', overflow: 'auto' }} alignItems="flex-start">
-          <Grid container item sx={{ minHeight: '50%', border: '2px solid', borderColor: 'secondary.main'}} flexGrow={1} marginTop="10px" borderRadius="4px" spacing={2}>
+          <Grid container item sx={{ minHeight: '50%', border: '2px solid', borderColor: 'secondary.main' }} flexGrow={1} marginTop="10px" borderRadius="4px" spacing={2}>
             {currentRun && <RunSummary user={user} run={currentRun} />}
           </Grid>
         </Grid>
       </Grid>
-    </Container>
+    // </Container>
   );
 }
 // RunnerDash.propTypes = {

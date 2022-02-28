@@ -245,7 +245,7 @@ class App extends React.Component {
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
             <Route path="/requestDash" element={<RequestDash errands={errands} />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
-            <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
+            <Route path="/runnerStatus" element={<RunnerStatus runs={runs.filter((run) => run.user.username === user)} user={user} />} />
             <Route path="/requestStatus" element={<RequestStatus user={user} />} />
             <Route path="/profile" element={<ProfilePopover user="organicrabbit525" />} />
             <Route path="/profilemain" element={<ProfileMain />} />
