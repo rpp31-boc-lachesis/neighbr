@@ -57,8 +57,8 @@ const ErrandCard = function(props) {
         </Typography>
       </CardContent>
       <CardActions sx={{marginTop: 'auto'}}>
-        <Button sx={{alignSelf: 'flex-end'}} variant="contained" onClick={() => handleAccept()}>Yes</Button>
-        <Button sx={{alignSelf: 'flex-end'}} variant="contained" onClick={() => console.log('click')}>No</Button>
+        <Button sx={{alignself: 'flex-end'}} variant="contained" onClick={() => handleAccept()}>Yes</Button>
+        <Button sx={{alignself: 'flex-end'}} variant="contained" onClick={() => console.log('click')}>No</Button>
       </CardActions>
     </Card>
   );

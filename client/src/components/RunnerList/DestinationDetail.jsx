@@ -40,7 +40,7 @@ function DestinationDetail({runDetail}) {
   {/* entryBox */}
             <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue', alignItems:'top' }}>
-                <div className="entryColumn" alignSelf="flex-start">
+                <div className="entryColumn" alignself="flex-start">
                 <div className="detailItem topLineLeft">
                   <div className="locationNumber">1</div>
                     {placeText}
@@ -51,7 +51,7 @@ function DestinationDetail({runDetail}) {
                 <div className="entryColumn">
                 <RouterLink style={{ textDecoration: 'none' }} to="/main">
                 <Avatar variant="contained" alt="Haylie Schleifer" src={user.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                <ProfilePopover users={user.username} />
+                <ProfilePopover user={user.username} />
                 </RouterLink>
                   <div className="detailItem textEnd topLineRight">{username}</div>
                   <div className="detailItem textEnd">By: {transportation}

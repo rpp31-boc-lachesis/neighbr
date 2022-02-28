@@ -63,11 +63,13 @@ function RunnerList(props) {
       // center: [-79.4512, 43.6568],
       center: mapCenter,
       zoom: 13
-  })
-  }
+    });
+    const marker1 = new mapboxgl.Marker()
+      .setLngLat(mapCenter)
+      .addTo(map);
+  };
 
-  const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} />);
-console.log('Runs', Runs)
+  const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} key={run._id}/>);
 
   return (
     <Container maxwidth="sm" sx={{border: `${BORDER_PX} dashed red` }}>

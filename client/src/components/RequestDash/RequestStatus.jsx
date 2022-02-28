@@ -193,7 +193,6 @@ export default function RequestStatus(props) {
       </Grid>
       <Typography display="block" align="justify" variant="h6" sx={{ pl: 11 }}>Errand Details</Typography>
       {/* {runner === {} ? 'Errand not accepted yet' : (
-
       )} */}
       <Grid
         container
