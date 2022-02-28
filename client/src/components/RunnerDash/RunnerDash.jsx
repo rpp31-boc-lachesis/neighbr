@@ -19,22 +19,16 @@ export default function RunnerDash(props) {
 
   const [currentRun, setRun] = React.useState(null);
 
-  const CurrentRuns = runs.map((run) => {
-    if (!run.complete) {
-      return <Run setRun={setRun} run={run} key={run._id} />;
-    }
-  });
+  const currentRuns = runs.filter((run) => !run.complete);
+
+  const CurrentRuns = currentRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
 
   const completeRuns = runs.filter((run) => run.complete);
 
-  const CompleteRuns = completeRuns.map((run) => {
-    if (run.complete) {
-      return <Run setRun={setRun} run={run} key={run._id} />;
-    }
-  });
+  const CompleteRuns = completeRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
 
   return (
-    // <Container sx={{ height: '100%' }} maxwidth="sm">
+    <Container sx={{ height: '100%' }} maxwidth="sm">
       <Grid container spacing={{ xs: 2, md: 3 }} columnSpacing={4} columns={{ xs: 4, sm: 8, md: 12 }} maxHeight="80vh" paddingTop="1em" marginTop="15px" paddingBottom="0.5em" justifyContent="space-around" alignItems="stretch">
         <Grid container item direction="column" sx={{ minHeight: '100%', justifyContent: 'flex-end' }} xs={3} spacing={2}>
           <Grid item sx={{ alignSelf: 'flex-end' }}>
@@ -67,7 +61,7 @@ export default function RunnerDash(props) {
           </Grid>
         </Grid>
       </Grid>
-    // </Container>
+    </Container>
   );
 }
 // RunnerDash.propTypes = {
