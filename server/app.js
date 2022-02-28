@@ -70,6 +70,8 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
+
+app.use(authMiddleware);
 // Catch all route for redirect must be last so others can fire first! :)
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
