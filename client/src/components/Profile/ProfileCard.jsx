@@ -24,7 +24,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function ProfileCard(props) {
-  const { handleClose, currentUser } = props;
+  const { handleClose, currentUser, themeColor } = props;
   return (
     currentUser
     && (
@@ -46,7 +46,7 @@ export default function ProfileCard(props) {
           justifyContent: 'flex-end'
         }}
       >
-        <Button onClick={handleClose} sx={{ color: 'primary' }}>
+        <Button onClick={handleClose} sx={{ color: themeColor }}>
           <CloseIcon />
         </Button>
       </Grid>
@@ -232,5 +232,7 @@ export default function ProfileCard(props) {
 ProfileCard.propTypes = {
   handleClose: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  themeColor: PropTypes.string
 };

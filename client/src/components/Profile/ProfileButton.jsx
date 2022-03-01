@@ -4,10 +4,10 @@ import { Button } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function ProfileButton(props) {
-  const { handleClick } = props;
+  const { handleClick, themeColor } = props;
   return (
     <Button
-      color="primary"
+      color={themeColor}
       variant="contained"
       startIcon={<AccountCircleIcon />}
       onClick={handleClick}
@@ -25,5 +25,6 @@ export default function ProfileButton(props) {
 }
 
 ProfileButton.propTypes = {
-  handleClick: PropTypes.func.isRequired
+  handleClick: PropTypes.func.isRequired,
+  themeColor: PropTypes.string.isRequired
 };
