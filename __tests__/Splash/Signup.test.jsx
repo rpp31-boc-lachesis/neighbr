@@ -59,7 +59,7 @@ describe('<Signup />', () => {
         <Signup user={user} handleSignUp={handleSignUp} />
       </MemoryRouter>
     );
-    expect(getAllByRole('textbox').length).toBe(10);
+    expect(getAllByRole('textbox').length).toBe(7);
   });
 
   it('Rendered username state', () => {
