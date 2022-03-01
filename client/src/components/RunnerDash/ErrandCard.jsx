@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import axios from 'axios';
 import Card from '@mui/material/Card';
@@ -10,13 +11,11 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 
 const ErrandCard = function(props) {
-  const { errand, declined, user } = props;
+  const { errand, user, runId, refreshData } = props;
+  const { accepted } = errand;
   const requestUser = errand.requester.hasOwnProperty('username')
     ? errand.requester.username
     : errand.requester.email;
-
-  const [accepted, setAccepted] = React.useState(errand.accepted);
-  const [isDeclined, setIsDeclined] = React.useState(declined);
 
   const cardStyle = {
     display: 'flex',
@@ -32,32 +31,57 @@ const ErrandCard = function(props) {
 
   const handleAccept = () => {
     axios.post('/errands/accept', { data: { errandId: errand._id, user } })
-      .then((response) => {
-        console.log(response)
-      })
+      .then(() => { refreshData(); })
       .catch((err) => console.error(err));
   };
 
+  const handleDecline = () => axios.post(
+    '/runs/updateNoMap',
+    {
+      data: {
+        runID: runId,
+        errandID: errand._id,
+        type: 'declinedErrands'
+      }
+    }
+  )
+    .then(() => { refreshData(); })
+    .catch((err) => { console.error(err); });
+
+  React.useEffect(() => {
+    if (accepted) {
+      cardStyle.border = '2px dashed';
+    }
+  });
+
   return (
     <Card variant="outlined" sx={cardStyle}>
-      <CardHeader avatar={
-        <Avatar sx={{ height: '5rem', width: '5rem'}} alt={errand.requester.email} src={errand.requester.avatar_url} />
+      <CardHeader
+        sx={{ paddingBottom: 0 }}
+        avatar={
+          <Avatar sx={{ height: '5rem', width: '5rem' }} alt={errand.requester.username} src={errand.requester.avatar_url} />
       }
       />
-      <CardContent>
-        <Typography variant="body1" color="primary.dark">
+      <CardContent sx={{ paddingTop: 0 }}>
+        <Typography sx={{ maxWidth: '100%', textOverflow: 'ellipsis' }} paddingBottom="0.5rem" variant="h6" color="primary.dark">
           {requestUser}
         </Typography>
         <Typography variant="body1" color="primary.dark">
-          Item: {errand.req_items[0].item}
+          Item
+        </Typography>
+        <Typography variant="body2" paddingBottom="1rem" color="primary.dark">
+          {`${errand.req_items[0].item}`}
         </Typography>
         <Typography variant="body1" color="primary.dark">
-          Address: {errand.requester.street_address}
+          Address
+        </Typography>
+        <Typography variant="body2" color="primary.dark">
+          {`${errand.requester.street_address}`}
         </Typography>
       </CardContent>
-      <CardActions sx={{marginTop: 'auto'}}>
-        <Button sx={{alignSelf: 'flex-end'}} variant="contained" onClick={() => handleAccept()}>Yes</Button>
-        <Button sx={{alignSelf: 'flex-end'}} variant="contained" onClick={() => console.log('click')}>No</Button>
+      <CardActions sx={{ marginTop: 'auto' }}>
+        <Button sx={{ alignSelf: 'flex-end' }} variant="contained" onClick={() => handleAccept()}>Yes</Button>
+        <Button sx={{ alignSelf: 'flex-end' }} variant="contained" onClick={() => handleDecline()}>No</Button>
       </CardActions>
     </Card>
   );

@@ -23,7 +23,7 @@ import ProfileMain from './components/Profile/ProfileMain.jsx';
 // import Box from '@mui/material/Box';
 import TestingMenu from './TestingMenu.jsx';
 
-const theme = responsiveFontSizes(createTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: '#C85CDB',
@@ -35,7 +35,9 @@ const theme = responsiveFontSizes(createTheme({
   typography: {
     fontFamily: 'Roboto'
   },
-}));
+});
+
+theme = responsiveFontSizes(theme);
 
 class App extends React.Component {
   constructor(props) {

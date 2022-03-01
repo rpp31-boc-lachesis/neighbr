@@ -15,17 +15,30 @@ import AddRunModal from './AddRunModal.jsx';
 import RunSummary from './RunSummary.jsx';
 
 export default function RunnerDash(props) {
-  const { runs, handlePostRun, user, refreshData } = props;
-
+  let { runs, handlePostRun, user, refreshData, errands } = props;
   const [currentRun, setRun] = React.useState(null);
+  let currentRuns = runs.filter((run) => !run.complete);
 
-  const currentRuns = runs.filter((run) => !run.complete);
+  let CurrentRuns = currentRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
 
-  const CurrentRuns = currentRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
+  let completeRuns = runs.filter((run) => run.complete);
 
-  const completeRuns = runs.filter((run) => run.complete);
+  let CompleteRuns = completeRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
 
-  const CompleteRuns = completeRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
+  React.useEffect(() => {
+    currentRuns = runs.filter((run) => !run.complete);
+
+    CurrentRuns = currentRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
+
+    completeRuns = runs.filter((run) => run.complete);
+
+    CompleteRuns = completeRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
+    runs.forEach((newRun) => {
+      if (newRun !== null  && currentRun !== null && newRun._id === currentRun._id) {
+        setRun(newRun);
+      }
+    });
+  }, [runs, errands]);
 
   return (
     <Container sx={{ height: '100%' }} maxwidth="sm">
@@ -40,7 +53,7 @@ export default function RunnerDash(props) {
         </Grid>
         <Grid item container xs={4} sx={{ paddingBottom: '45px', maxHeight: '88vh', height: '100%' }}>
 
-          <Grid item sx={{ overflow: 'auto', maxHeight: '44vh', width: '100%' }}>
+          <Grid item sx={{ overflow: 'auto', maxHeight: '44vh', height: '44vh', width: '100%' }}>
             <Typography variant="h5">Current Runs</Typography>
             <Stack spacing={2}>
               {CurrentRuns}
@@ -57,7 +70,7 @@ export default function RunnerDash(props) {
         </Grid>
         <Grid item container xs={5} sx={{ paddingBottom: '45px', minHeight: '100%', overflow: 'auto' }} alignItems="flex-start">
           <Grid container item sx={{ minHeight: '50%', border: '2px solid', borderColor: 'secondary.main' }} flexGrow={1} marginTop="10px" borderRadius="4px" spacing={2}>
-            {currentRun && <RunSummary user={user} run={currentRun} />}
+            {currentRun && <RunSummary refreshData={refreshData} user={user} run={currentRun} />}
           </Grid>
         </Grid>
       </Grid>

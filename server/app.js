@@ -19,7 +19,8 @@ const {
   getRuns,
   addRun,
   buildRun,
-  updateRun
+  updateRun,
+  updateRunNoMap,
 } = require('../controllers/runController');
 const {
   getAllErrands,
@@ -58,6 +59,7 @@ app.get('/runs', getRuns);
 app.post('/runs/add', addRun);
 app.post('/runs/post', buildRun);
 app.post('/runs/update', updateRun);
+app.post('/runs/updateNoMap', updateRunNoMap);
 
 app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
