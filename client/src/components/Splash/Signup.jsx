@@ -19,6 +19,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
+import FormHelperText from '@mui/material/FormHelperText';
 import LocationAutoComplete from '../RunnerDash/LocationAutocomplete.jsx';
 import searchLocation from '../RunnerDash/searchLocation.js';
 
@@ -52,9 +53,6 @@ function Signup({ user, handleSignUp }) {
       username: '',
       email: '',
       password: '',
-      street_address: '',
-      city: '',
-      state: '',
       zip: ''
     }
   );
@@ -70,10 +68,30 @@ function Signup({ user, handleSignUp }) {
     event.preventDefault();
     const data = { formInput };
 
-    if (data.formInput.first_name.length === 0) {
-      const name = 'first_name';
-      const value = 'please enter valid first name';
-      setError({ [name]: value });
+    if (data.formInput.first_name.length === 0
+        || data.formInput.last_name.length === 0
+        || data.formInput.username.length === 0
+        || data.formInput.email.length === 0
+        || data.formInput.password.length === 0
+        || data.formInput.zip.length < 5) {
+      if (data.formInput.first_name.length === 0) {
+        setError({ first_name: 'please enter valid first name' });
+      }
+      if (data.formInput.first_name.length === 0) {
+        setError({ last_name: 'please enter valid last name' });
+      }
+      if (data.formInput.username.length === 0) {
+        setError({ username: 'please enter valid username' });
+      }
+      if (data.formInput.email.length === 0) {
+        setError({ email: 'please enter valid email' });
+      }
+      if (data.formInput.password.length === 0) {
+        setError({ password: 'please enter valid password' });
+      }
+      if (data.formInput.zip.length < 5) {
+        setError({ zip: 'please enter valid zip' });
+      }
     } else {
       // console.log(data.formInput);
       axios.post('/signup', data.formInput)
@@ -228,6 +246,8 @@ function Signup({ user, handleSignUp }) {
                   fullWidth
                   defaultValue={formInput.last_name}
                   onChange={handleInput}
+                  helperText={error.last_name}
+                  error={!!error.last_name}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -242,6 +262,8 @@ function Signup({ user, handleSignUp }) {
                   fullWidth
                   defaultValue={formInput.username}
                   onChange={(e) => { handleInput(e); handleLogin(e); }}
+                  helperText={error.username}
+                  error={!!error.username}
                   inputProps={{
                     'data-testid': 'username'
                   }}
@@ -259,6 +281,8 @@ function Signup({ user, handleSignUp }) {
                   color="secondary"
                   defaultValue={formInput.email}
                   onChange={handleInput}
+                  helperText={error.email}
+                  error={!!error.email}
                 />
               </Grid>
               {/* <Grid item xs={12}>
@@ -315,6 +339,8 @@ function Signup({ user, handleSignUp }) {
                   fullWidth
                   defaultValue={formInput.zip}
                   onChange={handleInput}
+                  helperText={error.zip}
+                  error={!!error.zip}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -361,7 +387,14 @@ function Signup({ user, handleSignUp }) {
                     inputProps={{
                       'data-testid': 'password'
                     }}
+                    helpertext={error.password}
+                    error={!!error.password}
                   />
+                  {!!error.password && (
+                  <FormHelperText error id="password-error">
+                    {error.password}
+                  </FormHelperText>
+                  )}
                 </FormControl>
               </Grid>
               <Grid item xs={12}>
