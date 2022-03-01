@@ -19,6 +19,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
+import LocationAutoComplete from '../RunnerDash/LocationAutocomplete.jsx';
+import searchLocation from '../RunnerDash/searchLocation.js';
 
 function Signup({ user, handleSignUp }) {
   const [formInput, setFormInput] = useReducer(
@@ -35,7 +37,11 @@ function Signup({ user, handleSignUp }) {
       state: '',
       zip: '',
       country: 'US',
-      bio: ''
+      bio: '',
+      coordinates: {
+        lat: '',
+        long: ''
+      }
     }
   );
   const [error, setError] = useReducer(
@@ -49,11 +55,12 @@ function Signup({ user, handleSignUp }) {
       street_address: '',
       city: '',
       state: '',
-      zip: '',
+      zip: ''
     }
   );
   const [loginData, setLoginData] = useState({ username: '', password: '', avatar_url: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const [proximity, setProximity] = useState(null);
   // const validate = () => {
   //   const temp = {};
   //   temp.first_name = values.first_name ? '' : 'This field is required.';
@@ -89,6 +96,32 @@ function Signup({ user, handleSignUp }) {
     setFormInput({ [name]: value });
   };
 
+  const handleLocChange = (value) => {
+    if (value !== null) {
+      // console.log(value);
+      setFormInput({
+        coordinates: {
+          lat: value.geometry.coordinates[0],
+          long: value.geometry.coordinates[1]
+        },
+        street_address: value.place_name
+      });
+      value.context.forEach((arr) => {
+        // console.log(arr);
+        if (arr.id.startsWith('place')) {
+          setFormInput({
+            city: arr.text,
+          });
+        }
+        if (arr.id.startsWith('region')) {
+          setFormInput({
+            state: arr.text,
+          });
+        }
+      });
+    }
+  };
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -121,6 +154,17 @@ function Signup({ user, handleSignUp }) {
   useEffect(() => {
   }, [loginData]);
 
+  useEffect(() => {
+    if (formInput.zip.length >= 5) {
+      searchLocation(formInput.zip, null,)
+        .then((res) => res.json())
+        .then((result) => {
+          setProximity(result.features[0].center);
+        })
+        .catch((err) => { console.log(err); });
+    }
+  }, [formInput.zip]);
+
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
       <CssBaseline />
@@ -140,7 +184,7 @@ function Signup({ user, handleSignUp }) {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <Box
           sx={{
-            my: 4,
+            my: 10,
             mx: 4,
             display: 'flex',
             flexDirection: 'column',
@@ -217,7 +261,7 @@ function Signup({ user, handleSignUp }) {
                   onChange={handleInput}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   margin="none"
                   required
@@ -258,8 +302,8 @@ function Signup({ user, handleSignUp }) {
                   defaultValue={formInput.state}
                   onChange={handleInput}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6}>
+              </Grid> */}
+              <Grid item xs={12}>
                 <TextField
                   margin="none"
                   required
@@ -273,8 +317,8 @@ function Signup({ user, handleSignUp }) {
                   onChange={handleInput}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
+              <Grid item xs={12}>
+                {/* <TextField
                   margin="none"
                   id="country"
                   label="Country"
@@ -284,7 +328,8 @@ function Signup({ user, handleSignUp }) {
                   fullWidth
                   defaultValue={formInput.country}
                   onChange={handleInput}
-                />
+                /> */}
+                <LocationAutoComplete proximity={proximity} handleLocChange={handleLocChange} />
               </Grid>
               <Grid item xs={12} sx={{ color: 'secondary.main' }}>
                 <FormControl fullWidth required>
