@@ -66,16 +66,14 @@ function RequestDetail({requestDetail}) {
                 </div>
                 <RouterLink
                   style={{ textDecoration: 'none' }}
-                  // to={{
-                  //   pathname: '/requestStatus',
-                  //   state: requestDetail
-                  // }}
                   to="/requestStatus"
                   state={requestDetail}
                 >
                   <Button>Status</Button>
                 </RouterLink>
-                {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
+                {/* <RouterLink to="/requestStatus" state={{ requestDetail }}>Status</RouterLink> */}
+                  {/* <Button>Status</Button> */}
+                {/* <Stack spacing={3} sx={{ misnHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>
                   <EntryBox>Item 3</EntryBox>

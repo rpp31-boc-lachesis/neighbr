@@ -23,9 +23,9 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+import HourglassDisabledIcon from '@mui/icons-material/HourglassDisabled';
 import RequestMap from './RequestMap.jsx';
-import ReviewModal from './ReviewModal.jsx';
-import ProfilePopover from '../Profile/ProfilePopover.jsx';
+import RunnerBox from './RunnerBox.jsx';
 
 function LinearProgressWithLabel(percentage) {
   return (
@@ -45,11 +45,11 @@ function LinearProgressWithLabel(percentage) {
 
 export default function RequestStatus(props) {
   const [promisedBy, setPromisedBy] = React.useState(null);
-  const [pickup, setPickup] = React.useState({});
+  const [pickupData, setPickupData] = React.useState({});
   const [transportation, setTransportation] = React.useState(null);
-  const [weight, setWeight] = React.useState(null);
-  const [size, setSize] = React.useState(null);
-  const [message, setMessage] = React.useState(null);
+  // const [weight, setWeight] = React.useState(null);
+  // const [size, setSize] = React.useState(null);
+  // const [message, setMessage] = React.useState(null);
   const [category, setCategory] = React.useState(null);
   const [cart, setCart] = React.useState([]);
   const [dropoff, setDropoff] = React.useState(null);
@@ -62,14 +62,18 @@ export default function RequestStatus(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { user } = props;
-  const { state } = useLocation();
+  const { user, errands, users, locations } = props;
+  const { accepted, end_time, message, pickup, req_items, requester, size, weight, _id } = useLocation().state;
 
   React.useEffect(() => {
-    console.log('ERRAND DATA?: ', state);
+    // console.log('testy: ', errandData);
+    console.log('errands: ', errands);
+    console.log('users: ', users);
 
-    const testID = '621938d8d4cc29017923cb73';
-    // `/requestStatus/${ [selected errand id] }`
+    const endTime = `${new Date(end_time)}`;
+    setPromisedBy(endTime);
+
+    // const testID = '621938d8d4cc29017923cb73';
     axios.get(`/users/${user}`)
       .then((results) => {
         const dropoffAddress = `${results.data[0].street_address}, ${results.data[0].city}, ${results.data[0].state} ${results.data[0].zip}`;
@@ -79,60 +83,67 @@ export default function RequestStatus(props) {
         console.error(err);
       });
 
-    axios.get(`/requestStatus/${testID}`)
-      .then((results) => {
-        axios.get(`/user/${results.data.runner}`)
-          .then((result) => {
-            console.log('runner: ', result.data);
-            setRunner(result.data[0]);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+    for (var i = 0; i < locations.length; i++) {
+      if (locations[i]._id === pickup.locationId) {
+        setPickupData(locations[i]);
+      }
+    }
+    setCart(req_items);
 
-        const progressTotal = results.data.req_items.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
+    // axios.get(`/requestStatus/${errandData._id}`)
+    //   .then((results) => {
+    //     axios.get(`/user/${results.data.runner}`)
+    //       .then((result) => {
+    //         console.log('runner: ', result.data);
+    //         setRunner(result.data[0]);
+    //       })
+    //       .catch((err) => {
+    //         console.error(err);
+    //       });
 
-        let accum = 0;
+    //     const progressTotal = results.data.req_items.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
 
-        for (let i = 0; i < results.data.req_items.length; i += 1) {
-          if (results.data.req_items[i].status === 'Cancelled') {
-            accum += 0;
-          } else if (results.data.req_items[i].status === 'In-Progress') {
-            accum += 50;
-          } else if (results.data.req_items[i].status === 'Completed') {
-            accum += 100;
-          }
-        }
+    //     let accum = 0;
 
-        const result = (accum / progressTotal) * 100;
-        setProgress(result);
+    //     for (let i = 0; i < results.data.req_items.length; i += 1) {
+    //       if (results.data.req_items[i].status === 'Cancelled') {
+    //         accum += 0;
+    //       } else if (results.data.req_items[i].status === 'In-Progress') {
+    //         accum += 50;
+    //       } else if (results.data.req_items[i].status === 'Completed') {
+    //         accum += 100;
+    //       }
+    //     }
 
-        const endTime = `${new Date(results.data.end_time)}`;
-        setPromisedBy(endTime);
-        setCart(results.data.req_items);
-        setTransportation(results.data.transportation);
-        setWeight(results.data.weight);
-        setSize(results.data.size);
-        setCategory(results.data.category);
-        setMessage(results.data.message);
-        setRunner(results.data.runner);
-        setDropoffNote(results.data.dropoff.note);
+    //     const result = (accum / progressTotal) * 100;
+    //     setProgress(result);
 
-        return results.data.pickup.locationId;
-      })
-      .then((locationID) => {
-        axios.get(`/locations/${locationID}`)
-          .then((results) => {
-            setPickup(results.data);
-            console.log('pickup: ', results.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    //     const endTime = `${new Date(results.data.end_time)}`;
+    //     setPromisedBy(endTime);
+    //     setCart(results.data.req_items);
+    //     setTransportation(results.data.transportation);
+    //     setWeight(results.data.weight);
+    //     setSize(results.data.size);
+    //     setCategory(results.data.category);
+    //     setMessage(results.data.message);
+    //     setRunner(results.data.runner);
+    //     setDropoffNote(results.data.dropoff.note);
+
+    //     return results.data.pickup.locationId;
+    //   })
+    //   .then((locationID) => {
+    //     axios.get(`/locations/${locationID}`)
+    //       .then((results) => {
+    //         setPickup(results.data);
+    //         console.log('pickup: ', results.data);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   }, []);
 
   const sx = {
@@ -143,7 +154,7 @@ export default function RequestStatus(props) {
   };
 
   function progressMessage(percentage) {
-    if (percentage === 0) {
+    if (percentage === 0 || !runner) {
       return 'Not Started';
     }
     if (percentage < 100) {
@@ -153,6 +164,13 @@ export default function RequestStatus(props) {
   }
 
   function statusIcon(status) {
+    if (status === 'In-Progress' && !accepted) {
+      return (
+        <Tooltip title="Errand not started">
+          <HourglassDisabledIcon />
+        </Tooltip>
+      )
+    }
     if (status === 'Cancelled') {
       return (
         <Tooltip title="Cancelled">
@@ -204,49 +222,18 @@ export default function RequestStatus(props) {
         sx={sx}
       >
         <Grid item xs={4}>
-          <Box sx={{
-            display: 'inline-flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            m: 1,
-            width: 150,
-            height: 175
-          }}
-          >
-            <Avatar variant="contained" alt="Haylie Schleifer" src={runner.avatar_url} sx={{ width: '80px', height: '80px' }} />
-            <Typography variant="subtitle2">
-              {runner.first_name}
-              &nbsp;
-              {runner.last_name}
-            </Typography>
-            <ProfilePopover user={runner.username || ''} />
-            <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <ReviewModal
-                progress={progress}
-                setValue={setValue}
-                setHover={setHover}
-                value={value}
-                hover={hover}
-              />
-            </Modal>
-          </Box>
+          {accepted ? <RunnerBox /> : <Typography variant="caption">No runner yet!</Typography>}
         </Grid>
         <Grid item>
           <Typography variant="h5">
             Pick-Up:
           </Typography>
           <Typography variant="overline">
-            {pickup.placeText}
+            {pickupData.placeText}
             &nbsp;
           </Typography>
           <Typography variant="caption">
-            {pickup.address}
+            {pickupData.address}
           </Typography>
         </Grid>
         <Grid item>
@@ -315,7 +302,7 @@ export default function RequestStatus(props) {
         </TableContainer>
         <Typography alignItems="right" variant="body1">
           Message to&nbsp;
-          {runner.first_name}
+          {runner.first_name || 'runner'}
           : &nbsp;
           {message}
         </Typography>
