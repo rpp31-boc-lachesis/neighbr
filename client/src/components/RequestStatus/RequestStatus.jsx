@@ -86,6 +86,7 @@ export default function RequestStatus(props) {
     for (var i = 0; i < locations.length; i++) {
       if (locations[i]._id === pickup.locationId) {
         setPickupData(locations[i]);
+        console.log('pickup data: ', locations[i]);
       }
     }
     setCart(req_items);
@@ -198,7 +199,7 @@ export default function RequestStatus(props) {
         Request: &nbsp;
         {pickup.placeText}
       </Typography>
-      <RequestMap pickup={pickup.coordinates || [0, 0]} />
+      <RequestMap pickup={pickupData.coordinates} />
       <Grid
         container
         sx={sx}
