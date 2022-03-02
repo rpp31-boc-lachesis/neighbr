@@ -39,7 +39,7 @@ export default function AddRunModal(props) {
   React.useEffect(() => {
     if (zip.length >= 5) {
       searchLocation(zip, null, )
-        .then((res) => res.json())
+        .then((res) => res.data)
         .then((result) => {
           setProximity(result.features[0].center);
         })

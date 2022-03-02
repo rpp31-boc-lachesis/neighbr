@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import wavyBuddyPoint from '../../assets/wavyBuddiesStanding.png';
+// import wavyBuddiesClouds from '../../assets/wavyBuddiesClouds.png';
 import Run from './Run.jsx';
 import AddRunModal from './AddRunModal.jsx';
 import RunSummary from './RunSummary.jsx';
