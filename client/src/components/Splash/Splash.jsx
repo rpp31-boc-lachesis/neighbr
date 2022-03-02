@@ -8,7 +8,8 @@ function Splash({ user }) {
     // fontFamily: 'Optima',
     // fontSize: '4vw',
     display: 'flex',
-    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
     maxWidth: '100%',
   };
 
@@ -67,8 +68,6 @@ function Splash({ user }) {
       { user ? null : <Navbar /> }
       <div style={overall}>
         <img style={slogan} src="https://ucarecdn.com/571e81b2-3b17-44e8-aad3-393e8e41271d/slogan.svg" alt="slogan" />
-      </div>
-      <div style={overall}>
         <img style={photo} src="https://ucarecdn.com/d4060b59-7e76-4b0a-8529-ea2f56d5825f/" alt="splash" />
       </div>
     </Grid>
