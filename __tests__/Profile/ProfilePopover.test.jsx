@@ -3,8 +3,7 @@ import 'regenerator-runtime/runtime';
 import {
   render,
   screen,
-  fireEvent,
-  cleanup
+  fireEvent
 } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
@@ -183,21 +182,14 @@ describe('<ProfilePopover />', () => {
     );
   });
 
-  afterEach(() => {
-    cleanup();
-  });
-
-  it('Renders Profile Popover component', async () => {
-    await expect(component).toBeDefined();
-  });
   it('Renders view profile button', async () => {
     const viewProfileButton = await screen.findByRole('button', {
       name: /view profile/i
     });
+    expect(component).toBeDefined();
     expect(viewProfileButton).toBeInTheDocument();
   });
   it('Popover opens when button is clicked', async () => {
-    screen.debug();
     const viewProfileButton = await screen.findByRole('button', {
       name: /view profile/i
     });

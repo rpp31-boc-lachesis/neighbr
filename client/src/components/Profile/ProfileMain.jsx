@@ -117,7 +117,7 @@ export default function ProfileMain(props) {
           borderColor: 'divider',
           minWidth: '15%',
           maxWidth: '17%',
-          backgroundColor: '#88C4FB',
+          backgroundColor: '#7293FB',
           paddingTop: '2%'
         }}
       >

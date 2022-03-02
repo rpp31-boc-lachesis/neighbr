@@ -22,8 +22,7 @@ export default function ProfileCard(props) {
     ...theme.typography.body2,
     padding: theme.spacing(1),
     // textAlign: 'center',
-    color: theme.palette.text.secondary,
-    backgroundColor: themeColor
+    color: theme.palette.text.secondary
   }));
   return (
     currentUser
@@ -118,7 +117,7 @@ export default function ProfileCard(props) {
         <Typography
           variant="h6"
         >
-          {themeColor === 'primary' ? 'Previous Requests' : 'Previous Runs'}
+          {themeColor === 'primary' ? 'Previous Runs' : 'Previous Requests'}
         </Typography>
         <Box sx={{
           height: '135px',
@@ -135,7 +134,7 @@ export default function ProfileCard(props) {
           }}
           >
             {themeColor === 'primary'
-              ? currentUser.req_history.map((req, index) => (
+              ? currentUser.run_history.map((req, index) => (
                 <Item
                   key={index._id}
                   sx={{
@@ -177,11 +176,11 @@ export default function ProfileCard(props) {
                   </Grid>
                 </Item>
               ))
-              : currentUser.run_history.map((run, index) => (
+              : currentUser.req_history.map((run, index) => (
                 <Item
                   key={index._id}
                   sx={{
-                    backgroundColor: '#88C4FB',
+                    backgroundColor: '#7293FB',
                     color: 'white',
                     width: '92%',
                     height: 'auto',

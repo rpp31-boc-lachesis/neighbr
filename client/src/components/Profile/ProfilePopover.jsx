@@ -12,8 +12,6 @@ export default function ProfilePopover(props) {
   const { user, themeColor } = props;
 
   useEffect(() => {
-    const { CancelToken } = axios;
-    const source = CancelToken.source();
     axios.get(`/users/populate/${user}`)
       .then((results) => {
         const oneUser = results.data[0];
@@ -23,9 +21,6 @@ export default function ProfilePopover(props) {
       .catch((err) => {
         console.log(err);
       });
-    return () => {
-      source.cancel();
-    };
   }, [user]);
 
   const handleClick = (event) => {
