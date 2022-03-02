@@ -78,8 +78,6 @@ const postRun = (body, callback) => {
       return newRun;
     })
     .then((newRun) => {
-      console.log(run.user)
-      console.log('newRun at addruntouserhist', newRun._id)
       Users.findOneAndUpdate(
         { _id: run.user},
         { $push: { run_history: newRun._id } }
@@ -115,11 +113,29 @@ const updateRun = (body, callback) => {
     .then(() => callback(null))
     .catch((err) => callback(err));
 };
+const updateRunNoMap = (body, callback) => {
+  const {
+    runID,
+    errandID,
+    type
+  } = body.data;
+
+  const update = { [type]: errandID };
+  Run.findOneAndUpdate(
+    { _id: runID },
+    { $push: update }
+  )
+    .then((data) => {
+      callback(null, data);
+    })
+    .catch((err) => callback(err, null));
+};
 
 module.exports = {
   getAllRuns,
   getRun,
   getRunById,
   postRun,
-  updateRun
+  updateRun,
+  updateRunNoMap,
 };
