@@ -20,7 +20,11 @@ export default function Errand(props) {
   return (
     <Grid
       sx={{
-        height: '15vh'
+        height: '15vh',
+        marginTop: '1vh',
+        marginBottom: '1vh',
+        width: '100%',
+        overflow: 'hidden'
       }}
       id="NewRequest"
       item

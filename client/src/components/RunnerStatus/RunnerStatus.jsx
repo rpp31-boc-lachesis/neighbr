@@ -233,21 +233,28 @@ class RunnerStatus extends React.Component {
     let placeText;
     let address;
     let transport;
+    let startTime;
     let avatarURL;
 
     if (renderCard) {
       transport = currentRun.transportation;
+      startTime = currentRun.start_time;
       avatarURL = currentRun.user.avatar_url;
       location = currentRun.location;
       placeText = location.placeText;
       address = location.address;
+
+      startTime = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short', hour12: true }).format(startTime);
     }
 
     return (
       <Grid
         container
         sx={{
-          padding: '4vw'
+          paddingLeft: '4vw',
+          paddingRight: '4vw',
+          paddingTop: '2vh',
+          paddingBottom: '2vh'
         }}
         height="100%"
       >
@@ -297,17 +304,40 @@ class RunnerStatus extends React.Component {
                     >
                       <Card
                         item
+                        container
                         sx={{
+                          color: '#FFFFFF',
                           bgcolor: 'secondary.light',
                           borderRadius: 4,
                           width: '50%',
-                          minHeight: '20vh'
+                          minHeight: '20vh',
+                          alignItems: 'center',
+                          justifyContent: 'center'
                         }}
                       >
-                        <CardContent>
-                          <Typography>{`Location: ${placeText}`}</Typography>
-                          <Typography>{`Address: ${address}`}</Typography>
-                          <Typography>{`Transportation: ${transport}`}</Typography>
+                        <CardContent
+                          item
+                          sx={{
+                            justifyContent: 'spaced-evenly',
+                            width: '100%'
+                          }}
+                        >
+                          <Typography>
+                            <strong>Location: </strong>
+                            {placeText}
+                          </Typography>
+                          <Typography>
+                            <strong>Address: </strong>
+                            {address}
+                          </Typography>
+                          <Typography>
+                            <strong>Start Time: </strong>
+                            {startTime}
+                          </Typography>
+                          <Typography>
+                            <strong>Transportation: </strong>
+                            {transport}
+                          </Typography>
                         </CardContent>
                       </Card>
                       <Grid
@@ -322,6 +352,7 @@ class RunnerStatus extends React.Component {
                           alt="profile image"
                           name="User Avatar"
                           src={avatarURL}
+                          sx={{ height: '10vh', width: '10vh' }}
                         />
                       </Grid>
                     </Grid>
@@ -375,15 +406,17 @@ class RunnerStatus extends React.Component {
                 container
                 minHeight="30vh"
                 maxHeight="30vh"
+                maxWidth="100%"
                 sx={{
                   border: 1,
                   borderRadius: 4,
                   borderColor: '#F88202',
                   width: '100%',
                   overflow: 'scroll',
-                  padding: '1vh'
+                  paddingLeft: '.5vw',
+                  paddingRight: '.5vw'
                 }}
-                justifyContent="space-around"
+                justifyContent="space-evenly"
                 item
               >
                 {
