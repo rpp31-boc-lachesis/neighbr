@@ -1,26 +1,27 @@
 const axios = require('axios');
 
 const userIds = [
-  '620d3174fcabcc778c98c580',
-  '620d3174fcabcc778c98c581',
-  '620d3174fcabcc778c98c582',
-  '620d3174fcabcc778c98c583',
-  '620d3174fcabcc778c98c584',
-  '620d3174fcabcc778c98c585',
-  '620d3174fcabcc778c98c586',
-  '620d3174fcabcc778c98c587',
-  '620d3174fcabcc778c98c588',
-  '620d3174fcabcc778c98c589',
-  '620d3174fcabcc778c98c58a',
-  '620d3174fcabcc778c98c58b',
-  '620d3174fcabcc778c98c58c',
-  '620d3174fcabcc778c98c58d',
-  '620d3174fcabcc778c98c58e',
-  '620d3174fcabcc778c98c58f',
-  '620d3174fcabcc778c98c590',
-  '620d3174fcabcc778c98c591',
-  '620d3174fcabcc778c98c592',
-  '620d3174fcabcc778c98c593'
+  // '620d3174fcabcc778c98c580',
+  // '620d3174fcabcc778c98c581',
+  // '620d3174fcabcc778c98c582',
+  // '620d3174fcabcc778c98c583',
+  // '620d3174fcabcc778c98c584',
+  // '620d3174fcabcc778c98c585',
+  // '620d3174fcabcc778c98c586',
+  // '620d3174fcabcc778c98c587',
+  // '620d3174fcabcc778c98c588',
+  // '620d3174fcabcc778c98c589',
+  // '620d3174fcabcc778c98c58a',
+  // '620d3174fcabcc778c98c58b',
+  // '620d3174fcabcc778c98c58c',
+  // '620d3174fcabcc778c98c58d',
+  // '620d3174fcabcc778c98c58e',
+  // '620d3174fcabcc778c98c58f',
+  // '620d3174fcabcc778c98c590',
+  // '620d3174fcabcc778c98c591',
+  // '620d3174fcabcc778c98c592',
+  // '620d3174fcabcc778c98c593',
+  '621d83f306fce7ac61df6eb0'
 ];
 
 const items = JSON.parse(`[{
@@ -131,4 +132,4 @@ const makeErrands = function(num) {
   }
 };
 
-makeErrands(1);
+makeErrands(3);

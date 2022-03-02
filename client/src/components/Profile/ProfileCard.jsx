@@ -16,15 +16,15 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import CloseIcon from '@mui/icons-material/Close';
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  // textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 export default function ProfileCard(props) {
   const { handleClose, currentUser, themeColor } = props;
+  const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    // textAlign: 'center',
+    color: theme.palette.text.secondary,
+    backgroundColor: themeColor
+  }));
   return (
     currentUser
     && (
@@ -46,8 +46,8 @@ export default function ProfileCard(props) {
           justifyContent: 'flex-end'
         }}
       >
-        <Button onClick={handleClose} sx={{ color: themeColor }}>
-          <CloseIcon />
+        <Button onClick={handleClose}>
+          <CloseIcon color={themeColor} />
         </Button>
       </Grid>
       <Grid
@@ -118,7 +118,7 @@ export default function ProfileCard(props) {
         <Typography
           variant="h6"
         >
-          Previous Requests
+          {themeColor === 'primary' ? 'Previous Requests' : 'Previous Runs'}
         </Typography>
         <Box sx={{
           height: '135px',
@@ -134,93 +134,91 @@ export default function ProfileCard(props) {
             gap: '7px'
           }}
           >
-            <Item sx={{
-              border: '2px solid #B23CDB',
-              backgroundColor: '#C85CDB',
-              color: 'white',
-              width: '92%',
-              height: 'auto',
-              borderRadius: '8px'
-            }}
-            >
-              <Grid container>
-                <Grid
-                  item
-                  sm={12}
+            {themeColor === 'primary'
+              ? currentUser.req_history.map((req, index) => (
+                <Item
+                  key={index._id}
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '125%',
-                    fontWeight: 'bold'
+                    backgroundColor: '#88C4FB',
+                    color: 'white',
+                    width: '92%',
+                    height: 'auto',
+                    borderRadius: '8px'
                   }}
                 >
-                  <RestaurantIcon sx={{ margin: '2px' }} />
-                  Coffee
-                </Grid>
-                <Grid sx={{ padding: '5px' }}>
-                  Size: small | Weight: light | Destination: San Francisco
-                  | Distance: 2.4mi | Est. Time: 24min
-                </Grid>
-              </Grid>
-            </Item>
-            <Item sx={{
-              border: '2px solid #B23CDB',
-              backgroundColor: '#C85CDB',
-              color: 'white',
-              width: '92%',
-              height: 'auto',
-              borderRadius: '8px'
-            }}
-            >
-              <Grid container>
-                <Grid
-                  item
-                  sm={12}
+                  <Grid
+                    key={index._id}
+                    container
+                  >
+                    <Grid
+                      key={index._id}
+                      item
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontSize: '125%',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      <RestaurantIcon
+                        key={index._id}
+                        sx={{ margin: '2px' }}
+                      />
+                      Coffee
+                    </Grid>
+                    <Grid
+                      key={index._id}
+                      sx={{ padding: '5px' }}
+                    >
+                      Size: small | Weight: light | Destination: San Francisco
+                      | Distance: 2.4mi | Est. Time: 24min
+                    </Grid>
+                  </Grid>
+                </Item>
+              ))
+              : currentUser.run_history.map((run, index) => (
+                <Item
+                  key={index._id}
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '125%',
-                    fontWeight: 'bold'
+                    backgroundColor: '#88C4FB',
+                    color: 'white',
+                    width: '92%',
+                    height: 'auto',
+                    borderRadius: '8px'
                   }}
                 >
-                  <ConstructionIcon sx={{ padding: '2px' }} />
-                  Paint
-                </Grid>
-                <Grid sx={{ padding: '5px' }}>
-                  Size: medium | Weight: medium | Destination: San Francisco
-                  | Distance: 1.9mi | Est. Time: 34min
-                </Grid>
-              </Grid>
-            </Item>
-            <Item sx={{
-              border: '2px solid #B23CDB',
-              backgroundColor: '#C85CDB',
-              color: 'white',
-              width: '92%',
-              height: 'auto',
-              borderRadius: '8px'
-            }}
-            >
-              <Grid container>
-                <Grid
-                  item
-                  sm={12}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '125%',
-                    fontWeight: 'bold'
-                  }}
-                >
-                  <ConstructionIcon sx={{ padding: '2px' }} />
-                  Paint
-                </Grid>
-                <Grid sx={{ padding: '5px' }}>
-                  Size: medium | Weight: medium | Destination: San Francisco
-                  | Distance: 1.9mi | Est. Time: 34min
-                </Grid>
-              </Grid>
-            </Item>
+                  <Grid
+                    key={index._id}
+                    container
+                  >
+                    <Grid
+                      key={index._id}
+                      item
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontSize: '125%',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      <RestaurantIcon
+                        key={index._id}
+                        sx={{ margin: '2px' }}
+                      />
+                      Coffee
+                    </Grid>
+                    <Grid
+                      key={index._id}
+                      sx={{ padding: '5px' }}
+                    >
+                      Size: small | Weight: light | Destination: San Francisco
+                      | Distance: 2.4mi | Est. Time: 24min
+                    </Grid>
+                  </Grid>
+                </Item>
+              ))}
           </Stack>
         </Box>
       </Grid>
@@ -233,6 +231,9 @@ ProfileCard.propTypes = {
   handleClose: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   currentUser: PropTypes.object.isRequired,
-  // eslint-disable-next-line react/require-default-props
+  themeColor: PropTypes.string
+};
+
+ProfileCard.defaultProps = {
   themeColor: PropTypes.string
 };

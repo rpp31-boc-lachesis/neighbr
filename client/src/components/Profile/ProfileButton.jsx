@@ -26,5 +26,9 @@ export default function ProfileButton(props) {
 
 ProfileButton.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  themeColor: PropTypes.string.isRequired
+  themeColor: PropTypes.string
+};
+
+ProfileButton.defaultProps = {
+  themeColor: PropTypes.string
 };

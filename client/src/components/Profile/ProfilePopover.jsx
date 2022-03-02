@@ -12,7 +12,7 @@ export default function ProfilePopover(props) {
   const { user, themeColor } = props;
 
   useEffect(() => {
-    axios.get(`/users/${user}`)
+    axios.get(`/users/populate/${user}`)
       .then((results) => {
         const oneUser = results.data[0];
         console.log('CURRENT USER:', oneUser);
