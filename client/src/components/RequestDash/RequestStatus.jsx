@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -62,8 +63,11 @@ export default function RequestStatus(props) {
   const handleClose = () => setOpen(false);
 
   const { user } = props;
+  const { state } = useLocation();
 
   React.useEffect(() => {
+    console.log('ERRAND DATA?: ', state);
+
     const testID = '621938d8d4cc29017923cb73';
     // `/requestStatus/${ [selected errand id] }`
     axios.get(`/users/${user}`)
