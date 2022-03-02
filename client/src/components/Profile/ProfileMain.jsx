@@ -76,10 +76,10 @@ export default function ProfileMain(props) {
 
   const { user } = props;
   // eslint-disable-next-line no-unused-vars
-  const tempUser = 'brownkoala609';
+  const tempUser = 'organicrabbit525';
 
   useEffect(() => {
-    axios.get(`/users/${tempUser}`)
+    axios.get(`/users/populate/${tempUser}`)
       .then((results) => {
         const oneUser = results.data[0];
         console.log('CURRENT USER:', oneUser);

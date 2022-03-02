@@ -215,7 +215,7 @@ export default function RequestStatus(props) {
               &nbsp;
               {runner.last_name}
             </Typography>
-            <ProfilePopover user={runner.username || ''} />
+            <ProfilePopover user={runner.username || ''} themeColor="primary" />
             <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
             <Modal
               open={open}

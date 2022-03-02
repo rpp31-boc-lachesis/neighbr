@@ -8,10 +8,12 @@ import ProfileCard from './ProfileCard.jsx';
 export default function ProfilePopover(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentUser, setCurrentUser] = useState({});
-  // TEMPORARY USERNAME
+
   const { user, themeColor } = props;
 
   useEffect(() => {
+    const { CancelToken } = axios;
+    const source = CancelToken.source();
     axios.get(`/users/populate/${user}`)
       .then((results) => {
         const oneUser = results.data[0];
@@ -21,6 +23,9 @@ export default function ProfilePopover(props) {
       .catch((err) => {
         console.log(err);
       });
+    return () => {
+      source.cancel();
+    };
   }, [user]);
 
   const handleClick = (event) => {
@@ -66,8 +71,11 @@ export default function ProfilePopover(props) {
 }
 
 ProfilePopover.propTypes = {
-  // eslint-disable-next-line react/require-default-props
   user: PropTypes.string,
-  // eslint-disable-next-line react/require-default-props
+  themeColor: PropTypes.string
+};
+
+ProfilePopover.defaultProps = {
+  user: PropTypes.string,
   themeColor: PropTypes.string
 };

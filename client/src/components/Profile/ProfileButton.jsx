@@ -32,3 +32,5 @@ ProfileButton.propTypes = {
 ProfileButton.defaultProps = {
   themeColor: PropTypes.string
 };
+
+// COMMENT

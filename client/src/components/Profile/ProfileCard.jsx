@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
-import ConstructionIcon from '@mui/icons-material/Construction';
+// import ConstructionIcon from '@mui/icons-material/Construction';
 import CloseIcon from '@mui/icons-material/Close';
 
 export default function ProfileCard(props) {

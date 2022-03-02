@@ -1,8 +1,28 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import 'regenerator-runtime/runtime';
+import {
+  render,
+  screen,
+  fireEvent
+} from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import ProfileCard from '../../client/src/components/Profile/ProfileCard.jsx';
 
 const mockHandleClose = jest.fn();
+const theme = responsiveFontSizes(createTheme({
+  palette: {
+    primary: {
+      main: '#C85CDB',
+    },
+    secondary: {
+      main: '#5FC6C9',
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto'
+  },
+}));
 const mockCurrentUser = {
   coordinates: {
     lat: '37.79829808740386',
@@ -143,49 +163,54 @@ describe('<ProfileCard />', () => {
   let component;
   beforeEach(() => {
     component = render(
-      <ProfileCard
-        handleClose={mockHandleClose}
-        currentUser={mockCurrentUser}
-      />
+      <ThemeProvider theme={theme}>
+        <Router>
+          <ProfileCard
+            handleClose={mockHandleClose}
+            currentUser={mockCurrentUser}
+            themeColor="primary"
+          />
+        </Router>
+      </ThemeProvider>
     );
   });
 
-  it('Renders Profile Card component', () => {
-    expect(component).toBeDefined();
+  it('Renders Profile Card component', async () => {
+    await expect(component).toBeDefined();
   });
-  it('Has an X button to close the modal', () => {
-    const closeButton = screen.getByTestId('CloseIcon');
+  it('Has an X button to close the modal', async () => {
+    const closeButton = await screen.getByTestId('CloseIcon');
     expect(closeButton).toBeInTheDocument();
   });
-  it('Can close the modal by clicking the X button', () => {
-    const closeButton = screen.getByTestId('CloseIcon');
+  it('Can close the modal by clicking the X button', async () => {
+    const closeButton = await screen.getByTestId('CloseIcon');
     fireEvent.click(closeButton);
     expect(mockHandleClose).toHaveBeenCalledTimes(1);
   });
-  it('Displays a User avatar', () => {
-    const userAvatar = screen.getByAltText('profile image');
+  it('Displays a User avatar', async () => {
+    const userAvatar = await screen.getByAltText('profile image');
     expect(userAvatar).toBeInTheDocument();
   });
-  it('Displays a User name', () => {
-    const userNameDisplay = screen.getByRole('heading', {
+  it('Displays a User name', async () => {
+    const userNameDisplay = await screen.getByRole('heading', {
       name: 'Darryl'
     });
     expect(userNameDisplay).toBeInTheDocument();
   });
-  it('Displays a User location', () => {
-    const userLocationDisplay = screen.getByRole('heading', {
+  it('Displays a User location', async () => {
+    const userLocationDisplay = await screen.getByRole('heading', {
       name: 'San Francisco'
     });
     expect(userLocationDisplay).toBeInTheDocument();
   });
-  it('Displays a User biography', () => {
-    const userBioDisplay = screen.getByRole('heading', {
+  it('Displays a User biography', async () => {
+    const userBioDisplay = await screen.getByRole('heading', {
       name: mockCurrentUser.bio
     });
     expect(userBioDisplay).toBeInTheDocument();
   });
-  it('Displays previous Runs or Requests', () => {
-    const userBioDisplay = screen.getByRole('heading', {
+  it('Displays previous Runs or Requests', async () => {
+    const userBioDisplay = await screen.getByRole('heading', {
       name: mockCurrentUser.bio
     });
     expect(userBioDisplay).toBeInTheDocument();
