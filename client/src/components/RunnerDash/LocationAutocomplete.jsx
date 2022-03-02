@@ -20,7 +20,7 @@ export default function LocationAutoComplete(props) {
     }
     if (inputValue !== null && inputValue.length > 3) {
       searchLocation(inputValue, proximity)
-        .then((response) => response.json())
+        .then((response) => response.data)
         .then((results) => {
           if (active) {
             let newOptions = [];
