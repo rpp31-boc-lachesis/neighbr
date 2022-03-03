@@ -54,7 +54,11 @@ function RequestDetail({requestDetail}) {
                 <div className="entryColumn">
                 <RouterLink style={{ textDecoration: 'none' }} to="/main">
                 <Avatar variant="contained" alt="Haylie Schleifer" src={requester.avatar_url} sx={{ width: '80px', height: '80px' }} />
+<<<<<<< HEAD
                 <ProfilePopover user={requester.username} />
+=======
+                {/* <ProfilePopover users={requester.username} /> */}
+>>>>>>> master
                 </RouterLink>
                   <div className="detailItem textEnd topLineRight">Your Runner</div>
                   <div className="detailItem textEnd">---</div>
@@ -63,10 +67,21 @@ function RequestDetail({requestDetail}) {
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
+<<<<<<< HEAD
                 <RouterLink style={{ textDecoration: 'none' }} to={{pathname: "/requestStatus", state: requestDetail }}>
                  <Button>Status</Button>
+=======
+                <RouterLink
+                  style={{ textDecoration: 'none' }}
+                  to="/requestStatus"
+                  state={requestDetail}
+                >
+                  <Button>Status</Button>
+>>>>>>> master
                 </RouterLink>
-                {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
+                {/* <RouterLink to="/requestStatus" state={{ requestDetail }}>Status</RouterLink> */}
+                  {/* <Button>Status</Button> */}
+                {/* <Stack spacing={3} sx={{ misnHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>
                   <EntryBox>Item 3</EntryBox>

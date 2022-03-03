@@ -18,22 +18,22 @@ export default function LocationAutoComplete(props) {
       setOptions(value ? [value] : []);
       return undefined;
     }
+    if (inputValue !== null && inputValue.length > 3) {
+      searchLocation(inputValue, proximity)
+        .then((response) => response.data)
+        .then((results) => {
+          if (active) {
+            let newOptions = [];
 
-    // console.log(value, inputValue);
-    searchLocation(inputValue, proximity)
-      .then((response) => response.json())
-      .then((results) => {
-        if (active) {
-          let newOptions = [];
+            if (results) {
+              newOptions = [...newOptions, ...results.features];
+            }
 
-          if (results) {
-            newOptions = [...newOptions, ...results.features];
+            setOptions(newOptions);
           }
-
-          setOptions(newOptions);
-        }
-      })
-      .catch((err) => console.error(err));
+        })
+        .catch((err) => console.error(err));
+    }
     props.handleLocChange(value);
     return () => {
       active = false;

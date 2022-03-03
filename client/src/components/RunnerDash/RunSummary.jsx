@@ -7,18 +7,31 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 const RunSummary = function(props) {
-  const { run, user} = props;
+  const { run, user, refreshData } = props;
   const { errands } = run.location;
 
-  const errandCards = errands.map((errand) => (
+  const currentErrands = errands.filter((errand) => !run.declinedErrands.includes(errand._id));
+  let errandCards = currentErrands.map((errand) => (
     <ErrandCard
-      declined={run.declinedErrands.includes(errand._id)}
-      runId={run.id}
+      refreshData={refreshData}
+      runId={run._id}
       errand={errand}
       key={errand._id}
       user={user}
-      />
+    />
   ));
+
+  React.useEffect(() => {
+    errandCards = currentErrands.map((errand) => (
+      <ErrandCard
+        refreshData={refreshData}
+        runId={run._id}
+        errand={errand}
+        key={errand._id}
+        user={user}
+      />
+    ));
+  }, [props]);
 
   return (
     <Grid container spacing={2} direction="column" justifyContent="space-between" padding="0.5em" height="100%">
