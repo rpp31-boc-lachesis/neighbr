@@ -11,10 +11,49 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import Rating from '@mui/material/Rating';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import { styled } from '@mui/material/styles';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ImageIcon from '@mui/icons-material/Image';
+import WorkIcon from '@mui/icons-material/Work';
+import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import ProfileMap from './ProfileMap.jsx';
+
+function FolderList() {
+  return (
+    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <ImageIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <WorkIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Work" secondary="Jan 7, 2014" />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <BeachAccessIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Vacation" secondary="July 20, 2014" />
+      </ListItem>
+    </List>
+  );
+}
 
 function TabPanel(props) {
   const {
@@ -76,10 +115,10 @@ export default function ProfileMain(props) {
 
   const { user } = props;
   // eslint-disable-next-line no-unused-vars
-  const tempUser = 'organicrabbit525';
+  // const tempUser = 'organicrabbit525';
 
   useEffect(() => {
-    axios.get(`/users/populate/${tempUser}`)
+    axios.get(`/users/populate/${user}`)
       .then((results) => {
         const oneUser = results.data[0];
         console.log('CURRENT USER:', oneUser);
@@ -175,8 +214,21 @@ export default function ProfileMain(props) {
                 opacity: 0.5
               }}
             >
-              {currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}
+              {`Member since ${currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}`}
             </Typography>
+            <Rating
+              name="half-rating-read"
+              value={
+                currentUser.sum_rating ? (currentUser.sum_rating / currentUser.rating_count) : 0
+              }
+              precision={0.5}
+              readOnly
+              sx={{
+                color: '#5E4CFF',
+                paddingTop: '5%',
+                paddingRight: '15%'
+              }}
+            />
           </Grid>
           <Grid
             item
@@ -366,93 +418,56 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
+              {currentUser.run_history.map((run, index) => (
+                <Item
+                  key={index._id}
+                  sx={{
+                    backgroundColor: '#88C4FB',
+                    color: 'white',
+                    width: '92%',
+                    height: 'auto',
+                    borderRadius: '8px'
+                  }}
+                >
                   <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
+                    key={index._id}
+                    container
                   >
-                    <RestaurantIcon sx={{ margin: '2px' }} />
-                    Coffee
+                    <Grid
+                      key={index._id}
+                      item
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontSize: '125%',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      <RestaurantIcon
+                        key={index._id}
+                        sx={{ margin: '2px' }}
+                      />
+                      Coffee
+                    </Grid>
+                    <Grid
+                      key={index._id}
+                      sx={{ padding: '5px' }}
+                    >
+                      <ul>
+                        <li>
+                          Start Time:
+                          {` ${new Date(run.startTime)}`}
+                        </li>
+                        <li>
+                          End Time:
+                          {` ${new Date(run.endTime)}`}
+                        </li>
+                      </ul>
+                    </Grid>
                   </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: small | Weight: light | Destination: San Francisco
-                    | Distance: 2.4mi | Est. Time: 24min
-                  </Grid>
-                </Grid>
-              </Item>
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
-                  <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    <ConstructionIcon sx={{ padding: '2px' }} />
-                    Paint
-                  </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: medium | Weight: medium | Destination: San Francisco
-                    | Distance: 1.9mi | Est. Time: 34min
-                  </Grid>
-                </Grid>
-              </Item>
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
-                  <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    <ConstructionIcon sx={{ padding: '2px' }} />
-                    Paint
-                  </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: medium | Weight: medium | Destination: San Francisco
-                    | Distance: 1.9mi | Est. Time: 34min
-                  </Grid>
-                </Grid>
-              </Item>
+                </Item>
+              ))}
             </Stack>
           </Grid>
           <Grid
@@ -523,93 +538,56 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
+              {currentUser.run_history.map((run, index) => (
+                <Item
+                  key={index._id}
+                  sx={{
+                    backgroundColor: '#88C4FB',
+                    color: 'white',
+                    width: '92%',
+                    height: 'auto',
+                    borderRadius: '8px'
+                  }}
+                >
                   <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
+                    key={index._id}
+                    container
                   >
-                    <RestaurantIcon sx={{ margin: '2px' }} />
-                    Coffee
+                    <Grid
+                      key={index._id}
+                      item
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontSize: '125%',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      <RestaurantIcon
+                        key={index._id}
+                        sx={{ margin: '2px' }}
+                      />
+                      Coffee
+                    </Grid>
+                    <Grid
+                      key={index._id}
+                      sx={{ padding: '5px' }}
+                    >
+                      <ul>
+                        <li>
+                          Start Time:
+                          {` ${new Date(run.startTime)}`}
+                        </li>
+                        <li>
+                          End Time:
+                          {` ${new Date(run.endTime)}`}
+                        </li>
+                      </ul>
+                    </Grid>
                   </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: small | Weight: light | Destination: San Francisco
-                    | Distance: 2.4mi | Est. Time: 24min
-                  </Grid>
-                </Grid>
-              </Item>
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
-                  <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    <ConstructionIcon sx={{ padding: '2px' }} />
-                    Paint
-                  </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: medium | Weight: medium | Destination: San Francisco
-                    | Distance: 1.9mi | Est. Time: 34min
-                  </Grid>
-                </Grid>
-              </Item>
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
-                  <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    <ConstructionIcon sx={{ padding: '2px' }} />
-                    Paint
-                  </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: medium | Weight: medium | Destination: San Francisco
-                    | Distance: 1.9mi | Est. Time: 34min
-                  </Grid>
-                </Grid>
-              </Item>
+                </Item>
+              ))}
             </Stack>
           </Grid>
           <Grid
