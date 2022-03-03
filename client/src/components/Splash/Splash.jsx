@@ -5,45 +5,11 @@ import Navbar from './Navbar.jsx';
 
 function Splash({ user }) {
   const overall = {
-    // fontFamily: 'Optima',
-    // fontSize: '4vw',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
     maxWidth: '100%',
   };
-
-  // const logo = {
-  //   fontFamily: 'Optima',
-  //   position: 'absolute',
-  //   left: '32%',
-  //   top: '32%',
-  //   color: '#C85CDB',
-  //   fontSize: '8vw',
-  //   display: 'inline-block',
-  //   whiteSpace: 'nowrap'
-  // };
-
-  // const photo = {
-  //   position: 'absolute',
-  //   bottom: '5%',
-  //   left: '25%',
-  //   height: '50%'
-  //   // width: '50%'
-  // };
-
-  // const p1 = {
-  //   fontFamily: 'Optima',
-  //   position: 'absolute',
-  //   left: '28%',
-  //   top: '25%'
-  // };
-
-  // const p2 = {
-  //   fontFamily: 'Optima',
-  //   fontSize: '4vw',
-  //   color: 'black'
-  // };
 
   const slogan = {
     top: '0',
