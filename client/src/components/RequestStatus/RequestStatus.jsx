@@ -221,7 +221,7 @@ export default function RequestStatus(props) {
     <Container fixed sx={{ pb: 10 }}>
       <Typography display="block" align="left" variant="subtitle1" sx={{ pl: 11 }}>
         Request: &nbsp;
-        {pickup.placeText}
+        {pickupData.placeText}
       </Typography>
       <RequestMap pickup={pickupData.coordinates || [0, 0]} />
       <Grid
