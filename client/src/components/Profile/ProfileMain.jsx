@@ -153,6 +153,7 @@ export default function ProfileMain(props) {
             }}
           >
             <Avatar
+              alt="User Profile Image"
               src={currentUser.avatar_url}
               sx={{
                 height: 'auto',
@@ -161,7 +162,7 @@ export default function ProfileMain(props) {
             />
             <Typography
               color="primary"
-              component="span"
+              component="h4"
               sx={{
                 fontSize: '1.8rem'
               }}
@@ -169,7 +170,7 @@ export default function ProfileMain(props) {
               {`@${currentUser.username}`}
             </Typography>
             <Typography
-              component="span"
+              component="h4"
               sx={{
                 opacity: 0.5
               }}
@@ -177,6 +178,7 @@ export default function ProfileMain(props) {
               {`Member since ${currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}`}
             </Typography>
             <Rating
+              alt="User Star Rating"
               name="half-rating-read"
               value={
                 currentUser.sum_rating ? (currentUser.sum_rating / currentUser.rating_count) : 0
@@ -184,9 +186,7 @@ export default function ProfileMain(props) {
               precision={0.5}
               readOnly
               sx={{
-                color: '#5E4CFF',
-                paddingTop: '5%',
-                paddingRight: '15%'
+                color: '#5E4CFF'
               }}
             />
           </Grid>

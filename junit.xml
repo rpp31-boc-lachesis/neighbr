@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="2.859">
-  <testsuite name="Run Dashboard" errors="0" failures="0" skipped="0" timestamp="2022-03-02T05:21:52" time="2.444" tests="3">
-    <testcase classname="Run Dashboard renders the Runner Dashboard" name="Run Dashboard renders the Runner Dashboard" time="0.191">
+<testsuites name="jest tests" tests="9" failures="0" errors="0" time="3.932">
+  <testsuite name="&lt;Profile Main /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-03T22:29:47" time="3.37" tests="9">
+    <testcase classname="&lt;Profile Main /&gt; Renders Profile Main component" name="&lt;Profile Main /&gt; Renders Profile Main component" time="0.112">
     </testcase>
-    <testcase classname="Run Dashboard shows errand cards after clicking on run" name="Run Dashboard shows errand cards after clicking on run" time="0.493">
+    <testcase classname="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" name="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" time="0.295">
     </testcase>
-    <testcase classname="Run Dashboard opens run entry modal" name="Run Dashboard opens run entry modal" time="0.254">
+    <testcase classname="&lt;Profile Main /&gt; Renders Location tab in navigation bar" name="&lt;Profile Main /&gt; Renders Location tab in navigation bar" time="0.085">
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" name="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" time="0.094">
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" name="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" time="0.081">
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Displays User Avatar image" name="&lt;Profile Main /&gt; Displays User Avatar image" time="0.06">
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Displays User name below Avatar" name="&lt;Profile Main /&gt; Displays User name below Avatar" time="0.092">
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Displays membership below User name" name="&lt;Profile Main /&gt; Displays membership below User name" time="0.073">
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Displays star rating below membership" name="&lt;Profile Main /&gt; Displays star rating below membership" time="0.059">
     </testcase>
   </testsuite>
 </testsuites>
