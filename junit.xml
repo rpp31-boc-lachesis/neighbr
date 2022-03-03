@@ -1,39 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="15" failures="0" errors="0" time="5.204">
-  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-02T22:12:56" time="2.557" tests="2">
-    <testcase classname="&lt;ProfilePopover /&gt; Renders view profile button" name="&lt;ProfilePopover /&gt; Renders view profile button" time="0.22">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="2.061">
+  <testsuite name="&lt;Error /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-03T00:44:35" time="1.526" tests="3">
+    <testcase classname="&lt;Error /&gt; Renders Error page" name="&lt;Error /&gt; Renders Error page" time="0.056">
     </testcase>
-    <testcase classname="&lt;ProfilePopover /&gt; Popover opens when button is clicked" name="&lt;ProfilePopover /&gt; Popover opens when button is clicked" time="0.27">
+    <testcase classname="&lt;Error /&gt; Greets the user in a friendly way" name="&lt;Error /&gt; Greets the user in a friendly way" time="0.077">
     </testcase>
-  </testsuite>
-  <testsuite name="&lt;ProfileCard /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-02T22:12:59" time="1.18" tests="8">
-    <testcase classname="&lt;ProfileCard /&gt; Renders Profile Card component" name="&lt;ProfileCard /&gt; Renders Profile Card component" time="0.148">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Has an X button to close the modal" name="&lt;ProfileCard /&gt; Has an X button to close the modal" time="0.031">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Can close the modal by clicking the X button" name="&lt;ProfileCard /&gt; Can close the modal by clicking the X button" time="0.03">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User avatar" name="&lt;ProfileCard /&gt; Displays a User avatar" time="0.033">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User name" name="&lt;ProfileCard /&gt; Displays a User name" time="0.078">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User location" name="&lt;ProfileCard /&gt; Displays a User location" time="0.045">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User biography" name="&lt;ProfileCard /&gt; Displays a User biography" time="0.048">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays previous Runs or Requests" name="&lt;ProfileCard /&gt; Displays previous Runs or Requests" time="0.042">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;ProfileButton /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-02T22:13:00" time="0.9" tests="5">
-    <testcase classname="&lt;ProfileButton /&gt; Renders Profile Button component" name="&lt;ProfileButton /&gt; Renders Profile Button component" time="0.059">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Should be enabled" name="&lt;ProfileButton /&gt; Should be enabled" time="0.036">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct text to view profile" name="&lt;ProfileButton /&gt; Has correct text to view profile" time="0.032">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color when primary" name="&lt;ProfileButton /&gt; Has correct theme color when primary" time="0.03">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color when secondary" name="&lt;ProfileButton /&gt; Has correct theme color when secondary" time="0.033">
+    <testcase classname="&lt;Error /&gt; Displays the Neighbr color themes" name="&lt;Error /&gt; Displays the Neighbr color themes" time="0.034">
     </testcase>
   </testsuite>
 </testsuites>

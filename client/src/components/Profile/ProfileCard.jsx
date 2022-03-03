@@ -134,7 +134,7 @@ export default function ProfileCard(props) {
           }}
           >
             {themeColor === 'primary'
-              ? currentUser.run_history.map((req, index) => (
+              ? currentUser.run_history.map((run, index) => (
                 <Item
                   key={index._id}
                   sx={{
@@ -170,17 +170,25 @@ export default function ProfileCard(props) {
                       key={index._id}
                       sx={{ padding: '5px' }}
                     >
-                      Size: small | Weight: light | Destination: San Francisco
-                      | Distance: 2.4mi | Est. Time: 24min
+                      <ul>
+                        <li>
+                          Start Time:
+                          {` ${new Date(run.startTime)}`}
+                        </li>
+                        <li>
+                          End Time:
+                          {` ${new Date(run.endTime)}`}
+                        </li>
+                      </ul>
                     </Grid>
                   </Grid>
                 </Item>
               ))
-              : currentUser.req_history.map((run, index) => (
+              : currentUser.req_history.map((req, index) => (
                 <Item
                   key={index._id}
                   sx={{
-                    backgroundColor: '#7293FB',
+                    backgroundColor: 'pink',
                     color: 'white',
                     width: '92%',
                     height: 'auto',
