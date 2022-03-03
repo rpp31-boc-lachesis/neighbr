@@ -16,14 +16,14 @@ import Avatar from '@mui/material/Avatar';
 import css from '../RunnerList/runnerList.css';
 
 function RequestEntry({errand, users, handleEntryClick}) {
-  console.log('errand here', errand)
+  // console.log('errand here', errand)
   const { start_time, end_time, date, size, weight, req_items } = errand;
   // const { placeText } = location;
   // const { username } = user;
 
   const startTimeEvent = new Date(start_time).toLocaleTimeString()
   const dateEvent = new Date(date).toLocaleDateString()
-  console.log('errand', errand)
+  // console.log('errand', errand)
 
   return (
   <>

@@ -29,13 +29,12 @@ function RequestDetail({requestDetail}) {
     )
   }
 
-  const { start_time, end_time, date, message, weight, req_items, requester } = requestDetail;
+  const { _id, start_time, end_time, date, message, weight, req_items, requester } = requestDetail;
   // const { placeText } = location;
   // const { username } = user;
-
   const startTimeEvent = new Date(start_time).toLocaleTimeString()
   const dateEvent = new Date(date).toLocaleDateString()
-
+  console.log(_id)
   return (
   <>
   {/* entryBox */}
@@ -64,8 +63,8 @@ function RequestDetail({requestDetail}) {
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
-                <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
-                <Button>Status</Button>
+                <RouterLink style={{ textDecoration: 'none' }} to={{pathname: "/requestStatus", state: requestDetail }}>
+                 <Button>Status</Button>
                 </RouterLink>
                 {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>

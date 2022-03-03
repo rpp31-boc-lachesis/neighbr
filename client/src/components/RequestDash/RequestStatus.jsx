@@ -62,10 +62,14 @@ export default function RequestStatus(props) {
   const handleClose = () => setOpen(false);
 
   const { user } = props;
-
+  console.log('in RequestStatus location', location)
+  console.log('in RequestStatus props', props)
   React.useEffect(() => {
     const testID = '621938d8d4cc29017923cb73';
     // `/requestStatus/${ [selected errand id] }`
+    console.log('in useEffect', location)
+    // console.log('useEffect', props.location.state)
+
     axios.get(`/users/${user}`)
       .then((results) => {
         const dropoffAddress = `${results.data[0].street_address}, ${results.data[0].city}, ${results.data[0].state} ${results.data[0].zip}`;
@@ -169,6 +173,8 @@ export default function RequestStatus(props) {
       </Tooltip>
     );
   }
+
+  // console.log('outside', state)
 
   return (
     <Container fixed sx={{ pb: 10 }}>
