@@ -28,14 +28,14 @@ class RunnerStatus extends React.Component {
   componentDidMount() {
     const { errands, runs, user } = this.props;
     const newRequests = [];
-    // let currentRun;
+    let currentRun;
 
-    // for (let i = 0; i < runs.length; i += 1) {
-    //   if (runs[i].user.username === user) {
-    //     currentRun = runs[i];
-    //     break;
-    //   }
-    // }
+    for (let i = 0; i < runs.length; i += 1) {
+      if (runs[i].user.username === user) {
+        currentRun = runs[i];
+        break;
+      }
+    }
 
     // for (let i = 0; i < errands.length; i += 1) {
     //   const { _id: errandID } = errands[i];
@@ -46,7 +46,7 @@ class RunnerStatus extends React.Component {
     //   }
     // }
 
-    const currentRun = runs[3];
+    // const currentRun = runs[3];
 
     const {
       acceptedErrands,
