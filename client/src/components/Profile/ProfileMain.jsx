@@ -12,48 +12,10 @@ import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
-import ConstructionIcon from '@mui/icons-material/Construction';
 import { styled } from '@mui/material/styles';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ImageIcon from '@mui/icons-material/Image';
-import WorkIcon from '@mui/icons-material/Work';
-import BeachAccessIcon from '@mui/icons-material/BeachAccess';
 import ProfileMap from './ProfileMap.jsx';
-
-function FolderList() {
-  return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Photos" secondary="Jan 9, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <WorkIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Work" secondary="Jan 7, 2014" />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar>
-            <BeachAccessIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Vacation" secondary="July 20, 2014" />
-      </ListItem>
-    </List>
-  );
-}
+import ProfileRunHistory from './ProfileRunHistory.jsx';
+import ProfileReqHistory from './ProfileReqHistory.jsx';
 
 function TabPanel(props) {
   const {
@@ -156,7 +118,7 @@ export default function ProfileMain(props) {
           borderColor: 'divider',
           minWidth: '15%',
           maxWidth: '17%',
-          backgroundColor: '#7293FB',
+          backgroundColor: '#73B4FA',
           paddingTop: '2%'
         }}
       >
@@ -392,10 +354,38 @@ export default function ProfileMain(props) {
               My Run History:
             </Typography>
             <Stack spacing={1}>
-              <Item sx={{ fontSize: '1.2rem' }}>Most Frequent Category: Food</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Average Run Time: 28min</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Most Frequented Neighborhood: Mission District</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Total Runs: 25</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Category:
+                {' '}
+                {
+                currentUser.run_history[currentUser.run_history.length - 1].location.category
+                }
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Run Time:
+                {' '}
+                {
+                (Number(currentUser.run_history[currentUser.run_history.length - 1]
+                  .endTime.slice(11, 13))
+                - Number(currentUser.run_history[currentUser.run_history.length - 1]
+                  .startTime.slice(11, 13)))
+                * 60
+                }
+                {' '}
+                mins
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Neighborhood:
+                {' '}
+                {
+                currentUser.run_history[currentUser.run_history.length - 1].location.neighborhood
+                }
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Total Runs:
+                {' '}
+                {currentUser.run_history.length}
+              </Item>
             </Stack>
           </Grid>
           <Grid
@@ -404,10 +394,12 @@ export default function ProfileMain(props) {
             lg={5}
             sx={{
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
+              // justifyContent: 'center',
               paddingTop: '5%',
-              paddingLeft: '2%'
+              paddingLeft: '2%',
+              height: '600px'
             }}
           >
             <Stack
@@ -418,11 +410,11 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              {currentUser.run_history.map((run, index) => (
+              {currentUser.run_history.map((run) => (
                 <Item
-                  key={index._id}
+                  key={run._id}
                   sx={{
-                    backgroundColor: '#88C4FB',
+                    backgroundColor: '#73B4FA',
                     color: 'white',
                     width: '92%',
                     height: 'auto',
@@ -430,40 +422,21 @@ export default function ProfileMain(props) {
                   }}
                 >
                   <Grid
-                    key={index._id}
                     container
                   >
                     <Grid
-                      key={index._id}
                       item
                       sm={12}
                       sx={{
                         display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
                         alignItems: 'center',
                         fontSize: '125%',
                         fontWeight: 'bold'
                       }}
                     >
-                      <RestaurantIcon
-                        key={index._id}
-                        sx={{ margin: '2px' }}
-                      />
-                      Coffee
-                    </Grid>
-                    <Grid
-                      key={index._id}
-                      sx={{ padding: '5px' }}
-                    >
-                      <ul>
-                        <li>
-                          Start Time:
-                          {` ${new Date(run.startTime)}`}
-                        </li>
-                        <li>
-                          End Time:
-                          {` ${new Date(run.endTime)}`}
-                        </li>
-                      </ul>
+                      <ProfileRunHistory history={run} />
                     </Grid>
                   </Grid>
                 </Item>
@@ -524,10 +497,12 @@ export default function ProfileMain(props) {
             lg={5}
             sx={{
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
+              // justifyContent: 'center',
               paddingTop: '5%',
-              paddingLeft: '2%'
+              paddingLeft: '2%',
+              height: '600px'
             }}
           >
             <Stack
@@ -538,11 +513,11 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              {currentUser.run_history.map((run, index) => (
+              {currentUser.req_history.map((req) => (
                 <Item
-                  key={index._id}
+                  key={req._id}
                   sx={{
-                    backgroundColor: '#88C4FB',
+                    backgroundColor: '#73B4FA',
                     color: 'white',
                     width: '92%',
                     height: 'auto',
@@ -550,40 +525,21 @@ export default function ProfileMain(props) {
                   }}
                 >
                   <Grid
-                    key={index._id}
                     container
                   >
                     <Grid
-                      key={index._id}
                       item
                       sm={12}
                       sx={{
                         display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
                         alignItems: 'center',
                         fontSize: '125%',
                         fontWeight: 'bold'
                       }}
                     >
-                      <RestaurantIcon
-                        key={index._id}
-                        sx={{ margin: '2px' }}
-                      />
-                      Coffee
-                    </Grid>
-                    <Grid
-                      key={index._id}
-                      sx={{ padding: '5px' }}
-                    >
-                      <ul>
-                        <li>
-                          Start Time:
-                          {` ${new Date(run.startTime)}`}
-                        </li>
-                        <li>
-                          End Time:
-                          {` ${new Date(run.endTime)}`}
-                        </li>
-                      </ul>
+                      <ProfileReqHistory history={req} />
                     </Grid>
                   </Grid>
                 </Item>
@@ -610,55 +566,6 @@ export default function ProfileMain(props) {
     )
   );
 }
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: 'left',
-//   width: 'auto',
-//   font: 'Roboto',
-//   color: theme.palette.text.secondary,
-// }));
-
-// export function BasicStack() {
-//   return (
-//     <div>
-//       <Stack
-//         spacing={1}
-//       >
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Account #:</strong>
-//           {currentUser._id}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>First Name:</strong>
-//           {currentUser.first_name}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Last Name:</strong>
-//           {currentUser.last_name}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Email:</strong>
-//           {currentUser.email}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Date of Birth:</strong>
-//           {currentUser.dob}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Rating:</strong>
-//           {currentUser.sum_rating / currentUser.rating_count}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Bio:</strong>
-//           {currentUser.bio}
-//         </Item>
-//       </Stack>
-//     </div>
-//   );
-// }
 
 ProfileMain.propTypes = {
   user: PropTypes.string

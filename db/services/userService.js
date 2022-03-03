@@ -7,7 +7,7 @@ module.exports = {
   getPopulatedUser: (user) => (
     Users.find({ username: user }, { password: 0, salt: 0 })
       // .lean()
-      .populate('run_history')
+      .populate({ path: 'run_history', populate: { path: 'location' } })
       .populate('req_history')
   ),
   getUsers: (page, count) => {
