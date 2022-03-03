@@ -249,8 +249,8 @@ class App extends React.Component {
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
             <Route path="/requestStatus" element={<RequestStatus user={user} errands={errands} users={users} locations={locations} />} />
-            <Route path="/profile" element={<ProfilePopover user="organicrabbit525" />} />
-            <Route path="/profilemain" element={<ProfileMain />} />
+            <Route path="/profile" element={<ProfilePopover user={user} themeColor="primary" />} />
+            <Route path="/profilemain" element={<ProfileMain user={user} />} />
             <Route path="*" element={<Error />} />
           </Routes>
           {user ? <Footer /> : null}

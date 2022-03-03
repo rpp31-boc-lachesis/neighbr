@@ -11,10 +11,11 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
-import ConstructionIcon from '@mui/icons-material/Construction';
+import Rating from '@mui/material/Rating';
 import { styled } from '@mui/material/styles';
 import ProfileMap from './ProfileMap.jsx';
+import ProfileRunHistory from './ProfileRunHistory.jsx';
+import ProfileReqHistory from './ProfileReqHistory.jsx';
 
 function TabPanel(props) {
   const {
@@ -75,11 +76,9 @@ export default function ProfileMain(props) {
   const [currentUser, setCurrentUser] = useState({});
 
   const { user } = props;
-  // eslint-disable-next-line no-unused-vars
-  const tempUser = 'brownkoala609';
 
   useEffect(() => {
-    axios.get(`/users/${tempUser}`)
+    axios.get(`/users/populate/${user}`)
       .then((results) => {
         const oneUser = results.data[0];
         console.log('CURRENT USER:', oneUser);
@@ -117,7 +116,7 @@ export default function ProfileMain(props) {
           borderColor: 'divider',
           minWidth: '15%',
           maxWidth: '17%',
-          backgroundColor: '#88C4FB',
+          backgroundColor: '#73B4FA',
           paddingTop: '2%'
         }}
       >
@@ -175,8 +174,21 @@ export default function ProfileMain(props) {
                 opacity: 0.5
               }}
             >
-              {currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}
+              {`Member since ${currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}`}
             </Typography>
+            <Rating
+              name="half-rating-read"
+              value={
+                currentUser.sum_rating ? (currentUser.sum_rating / currentUser.rating_count) : 0
+              }
+              precision={0.5}
+              readOnly
+              sx={{
+                color: '#5E4CFF',
+                paddingTop: '5%',
+                paddingRight: '15%'
+              }}
+            />
           </Grid>
           <Grid
             item
@@ -340,10 +352,38 @@ export default function ProfileMain(props) {
               My Run History:
             </Typography>
             <Stack spacing={1}>
-              <Item sx={{ fontSize: '1.2rem' }}>Most Frequent Category: Food</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Average Run Time: 28min</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Most Frequented Neighborhood: Mission District</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Total Runs: 25</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Category:
+                {' '}
+                {
+                currentUser.run_history[currentUser.run_history.length - 1].location.category
+                }
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Run Time:
+                {' '}
+                {
+                (Number(currentUser.run_history[currentUser.run_history.length - 1]
+                  .endTime.slice(11, 13))
+                - Number(currentUser.run_history[currentUser.run_history.length - 1]
+                  .startTime.slice(11, 13)))
+                * 60
+                }
+                {' '}
+                mins
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Neighborhood:
+                {' '}
+                {
+                currentUser.run_history[currentUser.run_history.length - 1].location.neighborhood
+                }
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Total Runs:
+                {' '}
+                {currentUser.run_history.length}
+              </Item>
             </Stack>
           </Grid>
           <Grid
@@ -352,10 +392,12 @@ export default function ProfileMain(props) {
             lg={5}
             sx={{
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
+              // justifyContent: 'center',
               paddingTop: '5%',
-              paddingLeft: '2%'
+              paddingLeft: '2%',
+              height: '600px'
             }}
           >
             <Stack
@@ -366,93 +408,37 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
+              {currentUser.run_history.map((run) => (
+                <Item
+                  key={run._id}
+                  sx={{
+                    backgroundColor: '#73B4FA',
+                    color: 'white',
+                    width: '92%',
+                    height: 'auto',
+                    borderRadius: '8px'
+                  }}
+                >
                   <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
+                    container
                   >
-                    <RestaurantIcon sx={{ margin: '2px' }} />
-                    Coffee
+                    <Grid
+                      item
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        fontSize: '125%',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      <ProfileRunHistory history={run} />
+                    </Grid>
                   </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: small | Weight: light | Destination: San Francisco
-                    | Distance: 2.4mi | Est. Time: 24min
-                  </Grid>
-                </Grid>
-              </Item>
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
-                  <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    <ConstructionIcon sx={{ padding: '2px' }} />
-                    Paint
-                  </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: medium | Weight: medium | Destination: San Francisco
-                    | Distance: 1.9mi | Est. Time: 34min
-                  </Grid>
-                </Grid>
-              </Item>
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
-                  <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    <ConstructionIcon sx={{ padding: '2px' }} />
-                    Paint
-                  </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: medium | Weight: medium | Destination: San Francisco
-                    | Distance: 1.9mi | Est. Time: 34min
-                  </Grid>
-                </Grid>
-              </Item>
+                </Item>
+              ))}
             </Stack>
           </Grid>
           <Grid
@@ -497,10 +483,40 @@ export default function ProfileMain(props) {
               My Request History:
             </Typography>
             <Stack spacing={1}>
-              <Item sx={{ fontSize: '1.2rem' }}>Most Frequent Category: Housewares</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Average Request Time: 22min</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Most Frequented Neighborhood: Union Square</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Total Requests: 47</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Category:
+                {' '}
+                {
+                currentUser.req_history[currentUser.req_history.length - 1]
+                  .pickup.locationId.category
+                }
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Request Time:
+                {' '}
+                {
+                (Number(currentUser.req_history[currentUser.req_history.length - 1]
+                  .end_time.slice(11, 13))
+                - Number(currentUser.req_history[currentUser.req_history.length - 1]
+                  .start_time.slice(11, 13)))
+                * 60
+                }
+                {' '}
+                mins
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Neighborhood:
+                {' '}
+                {
+                currentUser.req_history[currentUser.req_history.length - 1]
+                  .pickup.locationId.neighborhood
+                }
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Total Requests:
+                {' '}
+                {currentUser.req_history.length}
+              </Item>
             </Stack>
           </Grid>
           <Grid
@@ -509,10 +525,12 @@ export default function ProfileMain(props) {
             lg={5}
             sx={{
               display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
-              justifyContent: 'center',
+              // justifyContent: 'center',
               paddingTop: '5%',
-              paddingLeft: '2%'
+              paddingLeft: '2%',
+              height: '600px'
             }}
           >
             <Stack
@@ -523,93 +541,37 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
+              {currentUser.req_history.map((req) => (
+                <Item
+                  key={req._id}
+                  sx={{
+                    backgroundColor: '#73B4FA',
+                    color: 'white',
+                    width: '92%',
+                    height: 'auto',
+                    borderRadius: '8px'
+                  }}
+                >
                   <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
+                    container
                   >
-                    <RestaurantIcon sx={{ margin: '2px' }} />
-                    Coffee
+                    <Grid
+                      item
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        fontSize: '125%',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      <ProfileReqHistory history={req} />
+                    </Grid>
                   </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: small | Weight: light | Destination: San Francisco
-                    | Distance: 2.4mi | Est. Time: 24min
-                  </Grid>
-                </Grid>
-              </Item>
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
-                  <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    <ConstructionIcon sx={{ padding: '2px' }} />
-                    Paint
-                  </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: medium | Weight: medium | Destination: San Francisco
-                    | Distance: 1.9mi | Est. Time: 34min
-                  </Grid>
-                </Grid>
-              </Item>
-              <Item sx={{
-                border: '2px solid #B23CDB',
-                backgroundColor: '#C85CDB',
-                color: 'white',
-                width: '92%',
-                height: 'auto',
-                borderRadius: '8px'
-              }}
-              >
-                <Grid container>
-                  <Grid
-                    item
-                    sm={12}
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      fontSize: '125%',
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    <ConstructionIcon sx={{ padding: '2px' }} />
-                    Paint
-                  </Grid>
-                  <Grid sx={{ padding: '5px' }}>
-                    Size: medium | Weight: medium | Destination: San Francisco
-                    | Distance: 1.9mi | Est. Time: 34min
-                  </Grid>
-                </Grid>
-              </Item>
+                </Item>
+              ))}
             </Stack>
           </Grid>
           <Grid
@@ -632,55 +594,6 @@ export default function ProfileMain(props) {
     )
   );
 }
-
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//   ...theme.typography.body2,
-//   padding: theme.spacing(1),
-//   textAlign: 'left',
-//   width: 'auto',
-//   font: 'Roboto',
-//   color: theme.palette.text.secondary,
-// }));
-
-// export function BasicStack() {
-//   return (
-//     <div>
-//       <Stack
-//         spacing={1}
-//       >
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Account #:</strong>
-//           {currentUser._id}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>First Name:</strong>
-//           {currentUser.first_name}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Last Name:</strong>
-//           {currentUser.last_name}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Email:</strong>
-//           {currentUser.email}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Date of Birth:</strong>
-//           {currentUser.dob}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Rating:</strong>
-//           {currentUser.sum_rating / currentUser.rating_count}
-//         </Item>
-//         <Item sx={{ fontSize: '1.0rem' }}>
-//           <strong>Bio:</strong>
-//           {currentUser.bio}
-//         </Item>
-//       </Stack>
-//     </div>
-//   );
-// }
 
 ProfileMain.propTypes = {
   user: PropTypes.string

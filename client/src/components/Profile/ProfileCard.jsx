@@ -12,19 +12,18 @@ import {
   Rating
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
-import ConstructionIcon from '@mui/icons-material/Construction';
 import CloseIcon from '@mui/icons-material/Close';
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  // textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
+import ProfileReqHistory from './ProfileReqHistory.jsx';
+import ProfileRunHistory from './ProfileRunHistory.jsx';
 
 export default function ProfileCard(props) {
-  const { handleClose, currentUser } = props;
+  const { handleClose, currentUser, themeColor } = props;
+  const Item = styled(Paper)(({ theme }) => ({
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    // textAlign: 'center',
+    color: theme.palette.text.secondary
+  }));
   return (
     currentUser
     && (
@@ -46,8 +45,8 @@ export default function ProfileCard(props) {
           justifyContent: 'flex-end'
         }}
       >
-        <Button onClick={handleClose} sx={{ color: 'primary' }}>
-          <CloseIcon />
+        <Button onClick={handleClose}>
+          <CloseIcon color={themeColor} />
         </Button>
       </Grid>
       <Grid
@@ -118,7 +117,7 @@ export default function ProfileCard(props) {
         <Typography
           variant="h6"
         >
-          Previous Requests
+          {themeColor === 'primary' ? 'Previous Runs' : 'Previous Requests'}
         </Typography>
         <Box sx={{
           height: '135px',
@@ -134,93 +133,66 @@ export default function ProfileCard(props) {
             gap: '7px'
           }}
           >
-            <Item sx={{
-              border: '2px solid #B23CDB',
-              backgroundColor: '#C85CDB',
-              color: 'white',
-              width: '92%',
-              height: 'auto',
-              borderRadius: '8px'
-            }}
-            >
-              <Grid container>
-                <Grid
-                  item
-                  sm={12}
+            {themeColor === 'primary'
+              ? currentUser.run_history.map((run) => (
+                <Item
+                  key={run._id}
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '125%',
-                    fontWeight: 'bold'
+                    backgroundColor: '#88C4FB',
+                    color: 'white',
+                    width: '92%',
+                    height: 'auto',
+                    borderRadius: '8px'
                   }}
                 >
-                  <RestaurantIcon sx={{ margin: '2px' }} />
-                  Coffee
-                </Grid>
-                <Grid sx={{ padding: '5px' }}>
-                  Size: small | Weight: light | Destination: San Francisco
-                  | Distance: 2.4mi | Est. Time: 24min
-                </Grid>
-              </Grid>
-            </Item>
-            <Item sx={{
-              border: '2px solid #B23CDB',
-              backgroundColor: '#C85CDB',
-              color: 'white',
-              width: '92%',
-              height: 'auto',
-              borderRadius: '8px'
-            }}
-            >
-              <Grid container>
-                <Grid
-                  item
-                  sm={12}
+                  <Grid
+                    container
+                  >
+                    <Grid
+                      item
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontSize: '125%',
+                        fontWeight: 'bold',
+                        borderRadius: '8px'
+                      }}
+                    >
+                      <ProfileRunHistory history={run} />
+                    </Grid>
+                  </Grid>
+                </Item>
+              ))
+              : currentUser.req_history.map((req) => (
+                <Item
+                  key={req._id}
                   sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '125%',
-                    fontWeight: 'bold'
+                    backgroundColor: '#88C4FB',
+                    color: 'white',
+                    width: '92%',
+                    height: 'auto',
+                    borderRadius: '8px'
                   }}
                 >
-                  <ConstructionIcon sx={{ padding: '2px' }} />
-                  Paint
-                </Grid>
-                <Grid sx={{ padding: '5px' }}>
-                  Size: medium | Weight: medium | Destination: San Francisco
-                  | Distance: 1.9mi | Est. Time: 34min
-                </Grid>
-              </Grid>
-            </Item>
-            <Item sx={{
-              border: '2px solid #B23CDB',
-              backgroundColor: '#C85CDB',
-              color: 'white',
-              width: '92%',
-              height: 'auto',
-              borderRadius: '8px'
-            }}
-            >
-              <Grid container>
-                <Grid
-                  item
-                  sm={12}
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '125%',
-                    fontWeight: 'bold'
-                  }}
-                >
-                  <ConstructionIcon sx={{ padding: '2px' }} />
-                  Paint
-                </Grid>
-                <Grid sx={{ padding: '5px' }}>
-                  Size: medium | Weight: medium | Destination: San Francisco
-                  | Distance: 1.9mi | Est. Time: 34min
-                </Grid>
-              </Grid>
-            </Item>
+                  <Grid
+                    container
+                  >
+                    <Grid
+                      item
+                      sm={12}
+                      sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        fontSize: '125%',
+                        fontWeight: 'bold'
+                      }}
+                    >
+                      <ProfileReqHistory history={req} />
+                    </Grid>
+                  </Grid>
+                </Item>
+              ))}
           </Stack>
         </Box>
       </Grid>
@@ -232,5 +204,10 @@ export default function ProfileCard(props) {
 ProfileCard.propTypes = {
   handleClose: PropTypes.func.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  currentUser: PropTypes.object.isRequired
+  currentUser: PropTypes.object.isRequired,
+  themeColor: PropTypes.string
+};
+
+ProfileCard.defaultProps = {
+  themeColor: PropTypes.string
 };
