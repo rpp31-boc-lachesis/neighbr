@@ -485,10 +485,40 @@ export default function ProfileMain(props) {
               My Request History:
             </Typography>
             <Stack spacing={1}>
-              <Item sx={{ fontSize: '1.2rem' }}>Most Frequent Category: Housewares</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Average Request Time: 22min</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Most Frequented Neighborhood: Union Square</Item>
-              <Item sx={{ fontSize: '1.2rem' }}>Total Requests: 47</Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Category:
+                {' '}
+                {
+                currentUser.req_history[currentUser.req_history.length - 1]
+                  .pickup.locationId.category
+                }
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Request Time:
+                {' '}
+                {
+                (Number(currentUser.req_history[currentUser.req_history.length - 1]
+                  .end_time.slice(11, 13))
+                - Number(currentUser.req_history[currentUser.req_history.length - 1]
+                  .start_time.slice(11, 13)))
+                * 60
+                }
+                {' '}
+                mins
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Most Recent Neighborhood:
+                {' '}
+                {
+                currentUser.req_history[currentUser.req_history.length - 1]
+                  .pickup.locationId.neighborhood
+                }
+              </Item>
+              <Item sx={{ fontSize: '1.2rem' }}>
+                Total Requests:
+                {' '}
+                {currentUser.req_history.length}
+              </Item>
             </Stack>
           </Grid>
           <Grid

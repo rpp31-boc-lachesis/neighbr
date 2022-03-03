@@ -8,7 +8,7 @@ module.exports = {
     Users.find({ username: user }, { password: 0, salt: 0 })
       // .lean()
       .populate({ path: 'run_history', populate: { path: 'location' } })
-      .populate('req_history')
+      .populate({ path: 'req_history', populate: { path: 'pickup.locationId' } })
   ),
   getUsers: (page, count) => {
     const pageNumber = Number(page) === 1 ? 0 : (page * 20 - 20);

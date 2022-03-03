@@ -7,10 +7,11 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import DomainIcon from '@mui/icons-material/Domain';
 import PlaceIcon from '@mui/icons-material/Place';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import HouseIcon from '@mui/icons-material/House';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import CommuteIcon from '@mui/icons-material/Commute';
+import CategoryIcon from '@mui/icons-material/Category';
+import DateRangeIcon from '@mui/icons-material/DateRange';
 
 export default function ProfileRunHistory(props) {
   const { history } = props;
@@ -43,7 +44,7 @@ export default function ProfileRunHistory(props) {
       <ListItem>
         <ListItemAvatar>
           <Avatar>
-            <AddShoppingCartIcon />
+            <CategoryIcon />
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary="Category" secondary={history.location.category} />
@@ -71,6 +72,14 @@ export default function ProfileRunHistory(props) {
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary="Transportation" secondary={history.transportation} />
+      </ListItem>
+      <ListItem>
+        <ListItemAvatar>
+          <Avatar>
+            <DateRangeIcon />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary="Date" secondary={history.date.slice(0, 10)} />
       </ListItem>
     </List>
   );
