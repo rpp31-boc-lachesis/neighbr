@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import testLocationSearch from '../client/src/components/RunnerDash/testLocationSearch';
 
 // const { PRODUCTION_URL } = process.env;
 
@@ -246,5 +247,14 @@ export const handlers = [
     res(
       ctx.json([{}])
     )
-  ))
+  )),
+  rest.post('/errands/accept', (req, res, ctx) => {
+    res(ctx.json({ result: true }));
+  }),
+  rest.post('/runs/updateNoMap', (req, res, ctx) => {
+    res(ctx.json({ result: true }));
+  }),
+  rest.post('/location/search', (req, res, ctx) => {
+    res(ctx.json(testLocationSearch));
+  })
 ];
