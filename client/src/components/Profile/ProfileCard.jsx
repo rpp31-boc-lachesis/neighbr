@@ -12,9 +12,9 @@ import {
   Rating
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
-// import ConstructionIcon from '@mui/icons-material/Construction';
 import CloseIcon from '@mui/icons-material/Close';
+import ProfileReqHistory from './ProfileReqHistory.jsx';
+import ProfileRunHistory from './ProfileRunHistory.jsx';
 
 export default function ProfileCard(props) {
   const { handleClose, currentUser, themeColor } = props;
@@ -134,9 +134,9 @@ export default function ProfileCard(props) {
           }}
           >
             {themeColor === 'primary'
-              ? currentUser.run_history.map((run, index) => (
+              ? currentUser.run_history.map((run) => (
                 <Item
-                  key={index._id}
+                  key={run._id}
                   sx={{
                     backgroundColor: '#88C4FB',
                     color: 'white',
@@ -146,49 +146,29 @@ export default function ProfileCard(props) {
                   }}
                 >
                   <Grid
-                    key={index._id}
                     container
                   >
                     <Grid
-                      key={index._id}
                       item
                       sm={12}
                       sx={{
                         display: 'flex',
                         alignItems: 'center',
                         fontSize: '125%',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        borderRadius: '8px'
                       }}
                     >
-                      <RestaurantIcon
-                        key={index._id}
-                        sx={{ margin: '2px' }}
-                      />
-                      Coffee
-                    </Grid>
-                    <Grid
-                      key={index._id}
-                      sx={{ padding: '5px' }}
-                    >
-                      <ul>
-                        <li>
-                          Start Time:
-                          {` ${new Date(run.startTime)}`}
-                        </li>
-                        <li>
-                          End Time:
-                          {` ${new Date(run.endTime)}`}
-                        </li>
-                      </ul>
+                      <ProfileRunHistory history={run} />
                     </Grid>
                   </Grid>
                 </Item>
               ))
-              : currentUser.req_history.map((req, index) => (
+              : currentUser.req_history.map((req) => (
                 <Item
-                  key={index._id}
+                  key={req._id}
                   sx={{
-                    backgroundColor: 'pink',
+                    backgroundColor: '#88C4FB',
                     color: 'white',
                     width: '92%',
                     height: 'auto',
@@ -196,11 +176,9 @@ export default function ProfileCard(props) {
                   }}
                 >
                   <Grid
-                    key={index._id}
                     container
                   >
                     <Grid
-                      key={index._id}
                       item
                       sm={12}
                       sx={{
@@ -210,18 +188,7 @@ export default function ProfileCard(props) {
                         fontWeight: 'bold'
                       }}
                     >
-                      <RestaurantIcon
-                        key={index._id}
-                        sx={{ margin: '2px' }}
-                      />
-                      Coffee
-                    </Grid>
-                    <Grid
-                      key={index._id}
-                      sx={{ padding: '5px' }}
-                    >
-                      Size: small | Weight: light | Destination: San Francisco
-                      | Distance: 2.4mi | Est. Time: 24min
+                      <ProfileReqHistory history={req} />
                     </Grid>
                   </Grid>
                 </Item>

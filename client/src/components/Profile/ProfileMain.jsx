@@ -76,8 +76,6 @@ export default function ProfileMain(props) {
   const [currentUser, setCurrentUser] = useState({});
 
   const { user } = props;
-  // eslint-disable-next-line no-unused-vars
-  // const tempUser = 'organicrabbit525';
 
   useEffect(() => {
     axios.get(`/users/populate/${user}`)
