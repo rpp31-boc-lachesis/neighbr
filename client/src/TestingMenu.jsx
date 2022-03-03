@@ -70,9 +70,6 @@ function TestingMenu() {
           <Link to="/runnerDash">
            <Button sx={{ height: 30 }}>RunnerDash</Button>
           </Link>
-          <Link to="/requestStatus">
-            <Button sx={{ height: 30 }}>RequestStatus</Button>
-          </Link>
           <Link to="/runnerStatus">
            <Button sx={{ height: 30 }}>RunnerStatus</Button>
           </Link>

@@ -1,6 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
@@ -11,6 +13,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TableBody from '@mui/material/TableBody';
 import LinearProgress from '@mui/material/LinearProgress';
+import InputAdornment from '@mui/material/InputAdornment';
+import IconButton from '@mui/material/IconButton';
+import Edit from '@mui/icons-material/Edit';
+import TextField from '@mui/material/TextField';
 import Modal from '@mui/material/Modal';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
@@ -22,9 +28,10 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
+import HourglassDisabledIcon from '@mui/icons-material/HourglassDisabled';
+import PropTypes from 'prop-types';
 import RequestMap from './RequestMap.jsx';
-import ReviewModal from './ReviewModal.jsx';
-import ProfilePopover from '../Profile/ProfilePopover.jsx';
+import RunnerContainer from './RunnerContainer.jsx';
 
 function LinearProgressWithLabel(percentage) {
   return (
@@ -44,28 +51,37 @@ function LinearProgressWithLabel(percentage) {
 
 export default function RequestStatus(props) {
   const [promisedBy, setPromisedBy] = React.useState(null);
-  const [pickup, setPickup] = React.useState({});
-  const [transportation, setTransportation] = React.useState(null);
-  const [weight, setWeight] = React.useState(null);
-  const [size, setSize] = React.useState(null);
-  const [message, setMessage] = React.useState(null);
-  const [category, setCategory] = React.useState(null);
-  const [cart, setCart] = React.useState([]);
+  const [pickupData, setPickupData] = React.useState({});
+  const [done, setDone] = React.useState(false);
+  // const [transportation, setTransportation] = React.useState(null);
+  // const [cart, setCart] = React.useState(useLocation().state.req_items);
   const [dropoff, setDropoff] = React.useState(null);
   const [dropoffNote, setDropoffNote] = React.useState(null);
-  const [runner, setRunner] = React.useState({});
+  // const [runner, setRunner] = React.useState({});
   const [progress, setProgress] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(null);
   const [hover, setHover] = React.useState(-1);
+  const [mouseover, setMouseover] = React.useState(false);
+  const [editMode, setEditMode] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const cart = useLocation().state.req_items;
 
-  const { user } = props;
+  const {
+    user, errands, users, locations
+  } = props;
+
+  const {
+    accepted, end_time, message, pickup, requester, size, weight, _id, runner,
+    transportation, category
+  } = useLocation().state;
 
   React.useEffect(() => {
-    const testID = '621938d8d4cc29017923cb73';
-    // `/requestStatus/${ [selected errand id] }`
+    const endTime = `${new Date(end_time)}`;
+    setPromisedBy(endTime);
+
+    // axios.get(`/users/${user}`)
     axios.get(`/users/${user}`)
       .then((results) => {
         const dropoffAddress = `${results.data[0].street_address}, ${results.data[0].city}, ${results.data[0].state} ${results.data[0].zip}`;
@@ -75,60 +91,45 @@ export default function RequestStatus(props) {
         console.error(err);
       });
 
-    axios.get(`/requestStatus/${testID}`)
-      .then((results) => {
-        axios.get(`/user/${results.data.runner}`)
-          .then((result) => {
-            console.log('runner: ', result.data);
-            setRunner(result.data[0]);
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+    for (let i = 0; i < locations.length; i += 1) {
+      if (locations[i]._id === pickup.locationId) {
+        setPickupData(locations[i]);
+        console.log('pickup data: ', locations[i]);
+      }
+    }
 
-        const progressTotal = results.data.req_items.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
+    // axios.get(`/requestStatus/${errandData._id}`)
+    //   .then((results) => {
+    //     axios.get(`/user/${results.data.runner}`)
+    //       .then((result) => {
+    //         console.log('runner: ', result.data);
+    //         setRunner(result.data[0]);
+    //       })
+    //       .catch((err) => {
+    //         console.error(err);
+    //       });
 
-        let accum = 0;
+    const progressTotal = cart.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
+    let accum = 0;
 
-        for (let i = 0; i < results.data.req_items.length; i += 1) {
-          if (results.data.req_items[i].status === 'Cancelled') {
-            accum += 0;
-          } else if (results.data.req_items[i].status === 'In-Progress') {
-            accum += 50;
-          } else if (results.data.req_items[i].status === 'Completed') {
-            accum += 100;
-          }
-        }
+    for (let i = 0; i < cart.length; i += 1) {
+      if (cart[i].status === 'Cancelled') {
+        accum += 0;
+      } else if (cart[i].status === 'In-Progress') {
+        accum += 50;
+      } else if (cart[i].status === 'Completed') {
+        accum += 100;
+      }
+    }
 
-        const result = (accum / progressTotal) * 100;
-        setProgress(result);
+    const isAccepted = () => {
+      if (accepted) {
+        return (accum / progressTotal) * 100;
+      }
+      return 0;
+    };
 
-        const endTime = `${new Date(results.data.end_time)}`;
-        setPromisedBy(endTime);
-        setCart(results.data.req_items);
-        setTransportation(results.data.transportation);
-        setWeight(results.data.weight);
-        setSize(results.data.size);
-        setCategory(results.data.category);
-        setMessage(results.data.message);
-        setRunner(results.data.runner);
-        setDropoffNote(results.data.dropoff.note);
-
-        return results.data.pickup.locationId;
-      })
-      .then((locationID) => {
-        axios.get(`/locations/${locationID}`)
-          .then((results) => {
-            setPickup(results.data);
-            console.log('pickup: ', results.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    setProgress(isAccepted());
   }, []);
 
   const sx = {
@@ -138,8 +139,47 @@ export default function RequestStatus(props) {
     margin: 'auto'
   };
 
+  // const handleNoteChange = (e) => {
+  //   console.log('target value: ', e.target.value);
+  //   // setDropoffNote(e.target.value);
+  // };
+
+  // const handleMouseover = React.useCallback(() => {
+  //   if (!mouseover) {
+  //     setMouseover(true);
+  //   }
+  // });
+
+  // const handleMouseout = React.useCallback(() => {
+  //   if (mouseover) {
+  //     setMouseover(false);
+  //   }
+  // });
+
+  // const handleEditClick = React.useCallback(() => {
+  //   setEditMode(true);
+  //   setMouseover(false);
+  // });
+
+  // const textStyles = () => ({
+  //   container: {
+  //     display: 'flex',
+  //     flexWrap: 'wrap',
+  //   },
+  //   textField: {
+  //     margin: 'auto',
+  //     width: 200,
+  //   },
+  //   dense: {
+  //     marginTop: 19,
+  //   },
+  //   menu: {
+  //     width: 200,
+  //   },
+  // });
+
   function progressMessage(percentage) {
-    if (percentage === 0) {
+    if (percentage === 0 || !runner) {
       return 'Not Started';
     }
     if (percentage < 100) {
@@ -149,6 +189,13 @@ export default function RequestStatus(props) {
   }
 
   function statusIcon(status) {
+    if (status === 'In-Progress' && !accepted) {
+      return (
+        <Tooltip title="Errand not started">
+          <HourglassDisabledIcon />
+        </Tooltip>
+      );
+    }
     if (status === 'Cancelled') {
       return (
         <Tooltip title="Cancelled">
@@ -174,9 +221,9 @@ export default function RequestStatus(props) {
     <Container fixed sx={{ pb: 10 }}>
       <Typography display="block" align="left" variant="subtitle1" sx={{ pl: 11 }}>
         Request: &nbsp;
-        {pickup.placeText}
+        {pickupData.placeText}
       </Typography>
-      <RequestMap pickup={pickup.coordinates || [0, 0]} />
+      <RequestMap pickup={pickupData.coordinates || [0, 0]} />
       <Grid
         container
         sx={sx}
@@ -192,57 +239,23 @@ export default function RequestStatus(props) {
         <Grid item sx={{ m: 1 }}>{promisedBy}</Grid>
       </Grid>
       <Typography display="block" align="justify" variant="h6" sx={{ pl: 11 }}>Errand Details</Typography>
-      {/* {runner === {} ? 'Errand not accepted yet' : (
-
-      )} */}
       <Grid
         container
         sx={sx}
       >
-        <Grid item xs={4}>
-          <Box sx={{
-            display: 'inline-flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            m: 1,
-            width: 150,
-            height: 175
-          }}
-          >
-            <Avatar variant="contained" alt="Haylie Schleifer" src={runner.avatar_url} sx={{ width: '80px', height: '80px' }} />
-            <Typography variant="subtitle2">
-              {runner.first_name}
-              &nbsp;
-              {runner.last_name}
-            </Typography>
-            <ProfilePopover user={runner.username || ''} />
-            <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <ReviewModal
-                progress={progress}
-                setValue={setValue}
-                setHover={setHover}
-                value={value}
-                hover={hover}
-              />
-            </Modal>
-          </Box>
+        <Grid item xs={4} justifyContent="flex-end">
+          {accepted ? <RunnerContainer setDone={setDone} handleOpen={handleOpen} handleClose={handleClose} runner={runner} open={open} progress={progress} setValue={setValue} setHover={setHover} value={value} hover={hover} runnerUsername={runner.username} /> : <Typography variant="caption">No runner yet!</Typography>}
         </Grid>
         <Grid item>
           <Typography variant="h5">
             Pick-Up:
           </Typography>
           <Typography variant="overline">
-            {pickup.placeText}
+            {pickupData.placeText}
             &nbsp;
           </Typography>
           <Typography variant="caption">
-            {pickup.address}
+            {pickupData.address}
           </Typography>
         </Grid>
         <Grid item>
@@ -253,12 +266,39 @@ export default function RequestStatus(props) {
             {dropoff}
           </Typography>
           <Typography variant="body2">
-            Note: &nbsp;
-            {dropoffNote}
+            {dropoffNote === undefined || dropoffNote === null ? '' : `Note: ${dropoffNote}`}
           </Typography>
+          {/* <Typography variant="body2">
+            Note: &nbsp;
+            {dropoffNote === undefined || dropoffNote === null ? '' : dropoffNote}
+          </Typography> */}
+          {/* <Typography variant="body2">
+            Note: &nbsp;
+            <TextField
+              sx={textStyles}
+              name="dropoffNote"
+              margin="normal"
+              defaultValue={dropoffNote === undefined || dropoffNote === null ? '' : dropoffNote}
+              onChange={(e) => { handleNoteChange(e); }}
+              disabled={!editMode}
+              onMouseEnter={handleMouseover()}
+              onMouseLeave={handleMouseout()}
+              input={{
+                endAdornment: mouseover ? (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleEditClick()}>
+                      <Edit />
+                    </IconButton>
+                  </InputAdornment>
+                ) : (
+                  ''
+                )
+              }}
+            />
+          </Typography> */}
           <Typography variant="body2">
             Category: &nbsp;
-            {category === undefined ? 'Not Specified' : category}
+            {category === undefined || category === null ? 'Grocery' : category}
           </Typography>
         </Grid>
         <TableContainer component={Paper}>
@@ -289,7 +329,7 @@ export default function RequestStatus(props) {
               <TableRow>
                 <TableCell rowSpan={3} />
                 <TableCell colSpan={1}>Transportation</TableCell>
-                <TableCell align="right">{transportation === undefined ? 'Not Specified' : transportation}</TableCell>
+                <TableCell align="right">{transportation === undefined ? 'Car' : transportation}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell>Total Weight</TableCell>
@@ -311,11 +351,19 @@ export default function RequestStatus(props) {
         </TableContainer>
         <Typography alignItems="right" variant="body1">
           Message to&nbsp;
-          {runner.first_name}
+          {runner ? runner.first_name : 'runner'}
           : &nbsp;
           {message}
         </Typography>
+        {done ? 'Rating: ' : ''}
       </Grid>
     </Container>
   );
 }
+
+RequestStatus.propTypes = {
+  user: PropTypes.string.isRequired,
+  errands: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
+  locations: PropTypes.array.isRequired,
+};
