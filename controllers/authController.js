@@ -59,7 +59,11 @@ module.exports = {
           state: req.body.state,
           zip: req.body.zip,
           country: req.body.country,
-          bio: req.body.bio
+          bio: req.body.bio,
+          coordinates: {
+            lat: req.body.coordinates.lat,
+            long: req.body.coordinates.long
+          }
         });
 
         try {

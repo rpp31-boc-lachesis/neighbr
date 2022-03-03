@@ -1,35 +1,35 @@
 import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-// const { MAPBOX_API_KEY } = process.env;
+import PropTypes from 'prop-types';
 
 export default function RequestMap(props) {
   const { pickup } = props;
 
   useEffect(() => {
+    const pickupLong = pickup[0] !== undefined ? pickup[0] : 0;
+    const pickupLat = pickup[1] !== undefined ? pickup[1] : 0;
+
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFyeW1peWFtb3RvIiwiYSI6ImNrempyOWg2bzBkYXgydnFvcWplZmJ1a2oifQ.oQ9QtYxKsabjCYJqjwmo0g';
-    // process.env.MAPBOX_ACCESS_TOKEN;
     const map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
-      center: [-79.4512, 43.6568],
-      zoom: 13
+      center: [pickupLong, pickupLat],
+      zoom: 14
     });
 
-    const marker1 = new mapboxgl.Marker()
-      .setLngLat(pickup)
+    new mapboxgl
+      .Marker()
+      .setLngLat({ lng: Number(pickupLong), lat: Number(pickupLat) })
       .addTo(map);
+    map.flyTo({
+      center: map.center,
+      speed: 1.5,
+      zoom: 14
+    });
 
     map.addControl(new mapboxgl.NavigationControl());
-
-    map.addControl(
-      new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl
-      })
-    );
   }, [pickup]);
 
   const style = {
@@ -53,3 +53,12 @@ export default function RequestMap(props) {
     />
   );
 }
+
+RequestMap.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
+  pickup: PropTypes.array
+};
+
+RequestMap.defaultProps = {
+  pickup: PropTypes.array
+};

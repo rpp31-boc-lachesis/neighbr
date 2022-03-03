@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="2.061">
-  <testsuite name="&lt;Error /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-03T00:44:35" time="1.526" tests="3">
-    <testcase classname="&lt;Error /&gt; Renders Error page" name="&lt;Error /&gt; Renders Error page" time="0.056">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="2.859">
+  <testsuite name="Run Dashboard" errors="0" failures="0" skipped="0" timestamp="2022-03-02T05:21:52" time="2.444" tests="3">
+    <testcase classname="Run Dashboard renders the Runner Dashboard" name="Run Dashboard renders the Runner Dashboard" time="0.191">
     </testcase>
-    <testcase classname="&lt;Error /&gt; Greets the user in a friendly way" name="&lt;Error /&gt; Greets the user in a friendly way" time="0.077">
+    <testcase classname="Run Dashboard shows errand cards after clicking on run" name="Run Dashboard shows errand cards after clicking on run" time="0.493">
     </testcase>
-    <testcase classname="&lt;Error /&gt; Displays the Neighbr color themes" name="&lt;Error /&gt; Displays the Neighbr color themes" time="0.034">
+    <testcase classname="Run Dashboard opens run entry modal" name="Run Dashboard opens run entry modal" time="0.254">
     </testcase>
   </testsuite>
 </testsuites>
