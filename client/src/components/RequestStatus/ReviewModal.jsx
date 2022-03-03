@@ -5,7 +5,19 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 
 export default function ReviewModal(props) {
-  const { progress, value, setValue, setHover, hover } = props;
+  // const [givenRating, setGivenRating] = React.useState(0);
+  const {
+    runnerUsername, progress, setHover, setValue, value, hover
+  } = props;
+
+  // update on first click
+  function updateRating(givenRating) {
+    axios.put('/users/rate', { user: runnerUsername, givenRating })
+      .then((result) => {
+        console.log('updated rating: ', result);
+      })
+      .catch((err) => console.log(err));
+  }
 
   const modalsx = {
     position: 'absolute',

@@ -10,7 +10,7 @@ import Main from './components/Home/Main.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
 import RequestDash from './components/RequestDashActual/RequestDash.jsx';
-import RequestStatus from './components/RequestDash/RequestStatus.jsx';
+import RequestStatus from './components/RequestStatus/RequestStatus.jsx';
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
@@ -248,7 +248,7 @@ class App extends React.Component {
             <Route path="/requestDash" element={<RequestDash errands={errands} />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
-            <Route path="/requestStatus" element={<RequestStatus user={user} />} />
+            <Route path="/requestStatus" element={<RequestStatus user={user} errands={errands} users={users} locations={locations} />} />
             <Route path="/profile" element={<ProfilePopover user="organicrabbit525" />} />
             <Route path="/profilemain" element={<ProfileMain />} />
             <Route path="*" element={<Error />} />

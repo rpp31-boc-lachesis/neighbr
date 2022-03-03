@@ -4,10 +4,23 @@ const {
   getOneUser,
   createUser,
   addRunToUser,
-  getUserById
+  getUserById,
+  updateRating
 } = require('../db/services/userService');
 
 module.exports = {
+  updateRating: async (req, res) => {
+    console.log('updated rating: ', req.body);
+    try {
+      const newRating = await updateRating(user, givenRating);
+      console.log('New rating sum: ', newRating);
+      if (newRating) {
+        res.status(200).send(newRating);
+      }
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  },
   getUserPopulate: async (req, res) => {
     console.log('REQ PARAMS:', req.params);
     const { username } = req.params;
