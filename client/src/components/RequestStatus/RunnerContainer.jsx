@@ -9,6 +9,11 @@ import ReviewModal from './ReviewModal.jsx';
 import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
 export default function RunnerContainer(props) {
+  const {
+    handleOpen, handleClose, runner, open, progress, setValue, value, setHover, hover,
+    runnerUsername
+  } = props;
+
   return (
     <Grid item xs={4}>
       <Box sx={{
@@ -40,6 +45,7 @@ export default function RunnerContainer(props) {
             setHover={setHover}
             value={value}
             hover={hover}
+            runnerUsername={runnerUsername}
           />
         </Modal>
       </Box>

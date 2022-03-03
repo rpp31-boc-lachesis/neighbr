@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import PropTypes from 'prop-types';
 
 export default function RequestMap(props) {
   const { pickup } = props;
-  // console.log(' coords: ', pickup);
-  // const { pickupLat, pickupLong } = pickup;
 
   useEffect(() => {
     const pickupLong = pickup[0] !== undefined ? pickup[0] : 0;
@@ -33,13 +30,6 @@ export default function RequestMap(props) {
     });
 
     map.addControl(new mapboxgl.NavigationControl());
-
-    map.addControl(
-      new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl
-      })
-    );
   }, [pickup]);
 
   const style = {
@@ -67,12 +57,8 @@ export default function RequestMap(props) {
 RequestMap.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   pickup: PropTypes.array
-  // pickupLat: PropTypes.func,
-  // pickupLong: PropTypes.func
 };
 
 RequestMap.defaultProps = {
   pickup: PropTypes.array
-  // pickupLat: PropTypes.func,
-  // pickupLong: PropTypes.func
 };

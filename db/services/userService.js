@@ -4,6 +4,19 @@ const { Users } = require('../models/index.js');
 // define and export services for request handlers
 
 module.exports = {
+  updateRating: (user, givenRating) => {
+    const calculateSumRating = (currentSum, ratingCount) => {
+      const newSum = ((currentSum * ratingCount) + givenRating) / ratingCount + 1;
+
+      return Math.round((newSum + Number.EPSILON) * 100) / 100;
+    };
+
+    Users.findOneAndUpdate(
+      { username: user },
+      { $set: { sum_rating: calculateSumRating() }, $inc: { rating_count: 1 } },
+      { new: true }
+    );
+  },
   getPopulatedUser: (user) => (
     Users.findOne({ username: user })
       .populate('req_history')
