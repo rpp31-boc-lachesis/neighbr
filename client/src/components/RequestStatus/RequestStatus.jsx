@@ -68,17 +68,6 @@ export default function RequestStatus(props) {
   const handleClose = () => setOpen(false);
   const cart = useLocation().state.req_items;
 
-<<<<<<< HEAD:client/src/components/RequestDash/RequestStatus.jsx
-  const { user } = props;
-  console.log('in RequestStatus location', location)
-  console.log('in RequestStatus props', props)
-  React.useEffect(() => {
-    const testID = '621938d8d4cc29017923cb73';
-    // `/requestStatus/${ [selected errand id] }`
-    console.log('in useEffect', location)
-    // console.log('useEffect', props.location.state)
-
-=======
   const {
     user, errands, users, locations
   } = props;
@@ -93,7 +82,6 @@ export default function RequestStatus(props) {
     setPromisedBy(endTime);
 
     // axios.get(`/users/${user}`)
->>>>>>> master:client/src/components/RequestStatus/RequestStatus.jsx
     axios.get(`/users/${user}`)
       .then((results) => {
         const dropoffAddress = `${results.data[0].street_address}, ${results.data[0].city}, ${results.data[0].state} ${results.data[0].zip}`;
@@ -253,11 +241,6 @@ export default function RequestStatus(props) {
         <Grid item sx={{ m: 1 }}>{promisedBy}</Grid>
       </Grid>
       <Typography display="block" align="justify" variant="h6" sx={{ pl: 11 }}>Errand Details</Typography>
-<<<<<<< HEAD:client/src/components/RequestDash/RequestStatus.jsx
-      {/* {runner === {} ? 'Errand not accepted yet' : (
-      )} */}
-=======
->>>>>>> master:client/src/components/RequestStatus/RequestStatus.jsx
       <Grid
         container
         sx={sx}

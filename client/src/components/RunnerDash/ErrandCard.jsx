@@ -79,15 +79,9 @@ const ErrandCard = function(props) {
           {`${errand.requester.street_address}`}
         </Typography>
       </CardContent>
-<<<<<<< HEAD
-      <CardActions sx={{marginTop: 'auto'}}>
-        <Button sx={{alignself: 'flex-end'}} variant="contained" onClick={() => handleAccept()}>Yes</Button>
-        <Button sx={{alignself: 'flex-end'}} variant="contained" onClick={() => console.log('click')}>No</Button>
-=======
       <CardActions sx={{ marginTop: 'auto' }}>
         <Button sx={{ alignSelf: 'flex-end' }} variant="contained" onClick={() => handleAccept()}>Yes</Button>
         <Button sx={{ alignSelf: 'flex-end' }} variant="contained" onClick={() => handleDecline()}>No</Button>
->>>>>>> master
       </CardActions>
     </Card>
   );
