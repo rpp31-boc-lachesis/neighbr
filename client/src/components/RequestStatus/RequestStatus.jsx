@@ -50,11 +50,9 @@ function LinearProgressWithLabel(percentage) {
 }
 
 export default function RequestStatus(props) {
-  const [promisedBy, setPromisedBy] = React.useState(null);
+  // const [promisedBy, setPromisedBy] = React.useState(null);
   const [pickupData, setPickupData] = React.useState({});
   const [done, setDone] = React.useState(false);
-  // const [transportation, setTransportation] = React.useState(null);
-  // const [cart, setCart] = React.useState(useLocation().state.req_items);
   const [dropoff, setDropoff] = React.useState(null);
   const [dropoffNote, setDropoffNote] = React.useState(null);
   // const [runner, setRunner] = React.useState({});
@@ -67,19 +65,20 @@ export default function RequestStatus(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const cart = useLocation().state.req_items;
+  const promisedBy = `${new Date(useLocation().state.end_time)}`;
 
   const {
     user, errands, users, locations
   } = props;
 
   const {
-    accepted, end_time, message, pickup, requester, size, weight, _id, runner,
+    accepted, message, pickup, requester, size, weight, _id, runner,
     transportation, category
   } = useLocation().state;
 
   React.useEffect(() => {
-    const endTime = `${new Date(end_time)}`;
-    setPromisedBy(endTime);
+    // const newEndTime = `${new Date(endTime)}`;
+    // setPromisedBy(newEndTime);
 
     // axios.get(`/users/${user}`)
     axios.get(`/users/${user}`)
