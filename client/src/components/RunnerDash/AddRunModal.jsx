@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading, react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
@@ -38,7 +39,7 @@ export default function AddRunModal(props) {
 
   React.useEffect(() => {
     if (zip.length >= 5) {
-      searchLocation(zip, null, )
+      searchLocation(zip, null, 'postcode')
         .then((res) => res.data)
         .then((result) => {
           setProximity(result.features[0].center);

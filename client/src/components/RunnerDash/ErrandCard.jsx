@@ -13,7 +13,7 @@ import Avatar from '@mui/material/Avatar';
 const ErrandCard = function(props) {
   const { errand, user, runId, refreshData } = props;
   const { accepted } = errand;
-  const requestUser = errand.requester.hasOwnProperty('username')
+  const requestUser = Object.prototype.hasOwnProperty.call(errand.requester, 'username')
     ? errand.requester.username
     : errand.requester.email;
 
