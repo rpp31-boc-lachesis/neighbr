@@ -118,6 +118,14 @@ describe('<Profile Main />', () => {
     const previousRunsText = await screen.findByText(/my run history/i);
     expect(previousRunsText.textContent).toBe('My Run History:');
   });
+  // it(`Shows user's location on a map`, async () => {
+  //   const locationTab = await screen.findByRole('tab', {
+  //     name: /location/i
+  //   });
+  //   fireEvent.click(locationTab);
+  //   const addressText = await screen.findAllByText(/My address/i);
+  //   expect(addressText).toHaveTextContent('My address:');
+  // });
   it(`Shows location of a user's runs`, async () => {
     const runsTab = await screen.findByRole('tab', {
       name: /runs/i
@@ -125,5 +133,13 @@ describe('<Profile Main />', () => {
     fireEvent.click(runsTab);
     const runLocationText = await screen.findAllByText(/location/i);
     expect(runLocationText[0]).toHaveTextContent('Location');
+  });
+  it(`Shows location of a user's requests`, async () => {
+    const requestsTab = await screen.findByRole('tab', {
+      name: /requests/i
+    });
+    fireEvent.click(requestsTab);
+    const requestLocationText = await screen.findAllByText(/location/i);
+    expect(requestLocationText[0]).toHaveTextContent('Location');
   });
 });
