@@ -156,8 +156,8 @@ export default function ProfileMain(props) {
               alt="User Profile Image"
               src={currentUser.avatar_url}
               sx={{
-                height: 'auto',
-                width: '75%'
+                height: '150px',
+                width: '150px'
               }}
             />
             <Typography
@@ -358,7 +358,7 @@ export default function ProfileMain(props) {
                 {
                 currentUser.run_history.length
                   ? currentUser.run_history[currentUser.run_history.length - 1].location.category
-                  : 'You have no runs yet.'
+                  : '🛍️'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
@@ -371,7 +371,7 @@ export default function ProfileMain(props) {
                 - Number(currentUser.run_history[currentUser.run_history.length - 1]
                   .startTime.slice(11, 13)))
                 * 60
-                  : 'You have no runs yet.'
+                  : '⏱️'
                 }
                 {' '}
                 mins
@@ -383,7 +383,7 @@ export default function ProfileMain(props) {
                 currentUser.run_history.length
                   ? currentUser.run_history[currentUser.run_history.length - 1]
                     .location.neighborhood
-                  : 'You have no runs yet.'
+                  : '🏘️'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
@@ -392,7 +392,7 @@ export default function ProfileMain(props) {
                 {
                 currentUser.run_history.length
                   ? currentUser.run_history.length
-                  : 'You have no runs yet.'
+                  : '📋'
                 }
               </Item>
             </Stack>
@@ -501,7 +501,7 @@ export default function ProfileMain(props) {
                 currentUser.req_history.length
                   ? currentUser.req_history[currentUser.req_history.length - 1]
                     .pickup.locationId.category
-                  : 'No requests yet.'
+                  : '🛍️'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
@@ -514,7 +514,7 @@ export default function ProfileMain(props) {
                 - Number(currentUser.req_history[currentUser.req_history.length - 1]
                   .start_time.slice(11, 13)))
                 * 60
-                  : 'No requests yet.'
+                  : '⏱️'
                 }
                 {' '}
                 mins
@@ -526,7 +526,7 @@ export default function ProfileMain(props) {
                 currentUser.req_history.length
                   ? currentUser.req_history[currentUser.req_history.length - 1]
                     .pickup.locationId.neighborhood
-                  : 'No requests yet.'
+                  : '🏘️'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
@@ -535,7 +535,7 @@ export default function ProfileMain(props) {
                 {
                 currentUser.req_history.length
                   ? currentUser.req_history.length
-                  : 'No requests yet.'
+                  : '📋'
                 }
               </Item>
             </Stack>
