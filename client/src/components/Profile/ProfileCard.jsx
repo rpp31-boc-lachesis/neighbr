@@ -135,8 +135,8 @@ export default function ProfileCard(props) {
             gap: '7px'
           }}
           >
-            {themeColor === 'secondary'
-              ? currentUser.run_history.map((run) => (
+            {themeColor === 'secondary' && currentUser.run_history.length > 0
+              && currentUser.run_history.map((run) => (
                 <Item
                   key={run._id}
                   sx={{
@@ -165,36 +165,37 @@ export default function ProfileCard(props) {
                     </Grid>
                   </Grid>
                 </Item>
-              ))
-              : currentUser.req_history.map((req) => (
-                <Item
-                  key={req._id}
-                  sx={{
-                    backgroundColor: '#73B4FA',
-                    color: 'white',
-                    width: '92%',
-                    height: 'auto',
-                    borderRadius: '8px'
-                  }}
-                >
-                  <Grid
-                    container
-                  >
-                    <Grid
-                      item
-                      sm={12}
+              ))}
+            {themeColor === 'primary' && currentUser.req_history.length > 0
+                  && currentUser.req_history.map((req) => (
+                    <Item
+                      key={req._id}
                       sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        fontSize: '125%',
-                        fontWeight: 'bold'
+                        backgroundColor: '#73B4FA',
+                        color: 'white',
+                        width: '92%',
+                        height: 'auto',
+                        borderRadius: '8px'
                       }}
                     >
-                      <ProfileReqHistory history={req} />
-                    </Grid>
-                  </Grid>
-                </Item>
-              ))}
+                      <Grid
+                        container
+                      >
+                        <Grid
+                          item
+                          sm={12}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontSize: '125%',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          <ProfileReqHistory history={req} />
+                        </Grid>
+                      </Grid>
+                    </Item>
+                  ))}
           </Stack>
         </Box>
       </Grid>
