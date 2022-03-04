@@ -23,11 +23,11 @@ function() {
   // do a thing...
 }
 ```
-* Controllers separate HTTP and database logic, in clean async/await syntax; integrated with Redis:
+* Some more stuff
 
 ## 🧪 Running Tests
 
-To run tests using Jest and Supertest, run the following command
+To run tests using Jest and React Testing Library
 
 ```bash
   npm run test
@@ -56,36 +56,36 @@ API_KEY=<your API key here>
 * [Webpack](https://webpack.js.org/)
 * [React Router](https://reactrouter.com/)
 * [Material UI](https://mui.com/)
+* [Passport JS](https://www.passportjs.org/)
+* [Figma](https://www.figma.com/design/)
 * [Jest](https://jestjs.io/)
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 * [Docker](https://www.docker.com/)
 * [CirclCI](https://circleci.com/)
 * [Amazon Web Services](https://aws.amazon.com/)
 * [NGINX](https://www.nginx.com/)
-* [Passport JS](https://www.passportjs.org/)
-* [Figma](https://www.figma.com/design/)
 
 
 ## 🛠 Skills
 Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, Webpack, CircleCI, Docker, Passport, Amazon Web Services, MapBox GL, Passport JS, Jest, React Testing Library...
 
 ## 🤖 Contributors
-Git Hub:
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)
-Jake Caughern - Architecture Owner
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jake-caughern/)
-Cameron Colaco - Software Engineer
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cameroncolaco/)
-Josh Fuqua - Product Manager
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)
-Michael Lapid - UI Owner
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)
-Yitong Lui - Software Engineer
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
-Maxine Seo - Software Engineer
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)
-Mary Miyamoto - Software Engineer
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/<MARY_MIYAMOTO_HERE>)
+Git Hub:\
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)\
+Jake Caughern - Architecture Owner\
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jake-caughern/)\
+Cameron Colaco - Software Engineer\
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cameroncolaco/)\
+Josh Fuqua - Product Manager\
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)\
+Michael Lapid - UI Owner\
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)\
+Yitong Lui - Software Engineer\
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)\
+Maxine Seo - Software Engineer\
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)\
+Mary Miyamoto - Software Engineer\
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/<MARY_MIYAMOTO_HERE>)\
 
 ## 🔗 Links
 Links here
