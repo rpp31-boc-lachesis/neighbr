@@ -1,22 +1,19 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import wavyBuddyPoint from '../../assets/wavyBuddiesStanding.png';
-// import wavyBuddiesClouds from '../../assets/wavyBuddiesClouds.png';
 import Run from './Run.jsx';
 import AddRunModal from './AddRunModal.jsx';
 import RunSummary from './RunSummary.jsx';
 
 export default function RunnerDash(props) {
-  let { runs, handlePostRun, user, refreshData, errands } = props;
+  const {
+    runs, handlePostRun, user, refreshData, errands
+  } = props;
   const [currentRun, setRun] = React.useState(null);
   let currentRuns = runs.filter((run) => !run.complete);
 
@@ -35,7 +32,7 @@ export default function RunnerDash(props) {
 
     CompleteRuns = completeRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
     runs.forEach((newRun) => {
-      if (newRun !== null  && currentRun !== null && newRun._id === currentRun._id) {
+      if (newRun !== null && currentRun !== null && newRun._id === currentRun._id) {
         setRun(newRun);
       }
     });
@@ -54,7 +51,12 @@ export default function RunnerDash(props) {
         </Grid>
         <Grid item container xs={4} sx={{ paddingBottom: '45px', maxHeight: '88vh', height: '100%' }}>
 
-          <Grid item sx={{ overflow: 'auto', maxHeight: '44vh', height: '44vh', width: '100%' }}>
+          <Grid
+            item
+            sx={{
+              overflow: 'auto', maxHeight: '44vh', height: '44vh', width: '100%'
+            }}
+          >
             <Typography variant="h5">Current Runs</Typography>
             <Stack spacing={2}>
               {CurrentRuns}

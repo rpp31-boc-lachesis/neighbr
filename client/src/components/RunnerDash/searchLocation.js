@@ -7,9 +7,7 @@ function searchLocation(text, proximity, type) {
     type,
     country: 'US',
   };
-  return axios.post('/locations/search', {
-    body
-  });
+  return axios.post('/locations/search', body);
 }
 
 export default searchLocation;

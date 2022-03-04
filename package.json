@@ -10,8 +10,8 @@
     "start:dev": "node ./controllers/signature/createKeypair.js && nodemon ./server/index.js",
     "start:dev2": "node ./controllers/signature/createKeypair.js && nodemon --watch ./server/index.js --ext js,css,jsx --ignore dist --exec \"npm run build:dev\"",
     "build:dev": "webpack --mode development --watch",
-    "test": "jest --coverage --runInBand --detectOpenHandles",
-    "test:ci": "jest --coverage --ci --runInBand --detectOpenHandles --reporters=default --reporters=jest-junit"
+    "test": "jest --coverage --runInBand --silent --detectOpenHandles",
+    "test:ci": "jest --coverage --ci --silent --runInBand --detectOpenHandles --reporters=default --reporters=jest-junit"
   },
   "repository": {
     "type": "git",

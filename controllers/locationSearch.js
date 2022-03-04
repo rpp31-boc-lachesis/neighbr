@@ -11,12 +11,10 @@ module.exports.locationSearch = (req, res) => {
   };
   if (proximity) {
     urlParams.proximity = `${proximity[0]},${proximity[1]}`;
-    // urlParams.bbox = `${proximity[0] - 1},${proximity[1] - 1},${proximity[0] + 1},${proximity[1] + 1}`;
   }
   if (type) {
     urlParams.type = type;
   }
-
   axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${text}.json?${querystring.stringify(urlParams)}`, { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
     .then((response) => {
       res.send(response.data);
