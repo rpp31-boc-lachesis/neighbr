@@ -54,17 +54,17 @@ export default function RequestStatus(props) {
   const [pickupData, setPickupData] = React.useState({});
   const [done, setDone] = React.useState(false);
   const [dropoff, setDropoff] = React.useState(null);
-  const [dropoffNote, setDropoffNote] = React.useState(null);
+  // const [dropoffNote, setDropoffNote] = React.useState(null);
   // const [runner, setRunner] = React.useState({});
   const [progress, setProgress] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState(null);
-  const [hover, setHover] = React.useState(-1);
-  const [mouseover, setMouseover] = React.useState(false);
-  const [editMode, setEditMode] = React.useState(false);
+  // const [value, setValue] = React.useState(null);
+  // const [hover, setHover] = React.useState(-1);
+  // const [mouseover, setMouseover] = React.useState(false);
+  // const [editMode, setEditMode] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const cart = useLocation().state.req_items;
+  const cart = useLocation().state.req_items || [];
   const promisedBy = `${new Date(useLocation().state.end_time)}`;
 
   const {
@@ -253,7 +253,8 @@ export default function RequestStatus(props) {
         sx={sx}
       >
         <Grid item xs={4} justifyContent="flex-end">
-          {accepted ? <RunnerContainer setDone={setDone()} handleOpen={handleOpen()} handleClose={handleClose()} runner={runner} open={open} progress={progress} setValue={setValue()} setHover={setHover()} value={value} hover={hover} runnerUsername={runner.username} /> : <Typography variant="caption">No runner yet!</Typography>}
+          {accepted ? <RunnerContainer runner={runner} open={open} progress={progress} setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose} runnerUsername={runner.username} /> : <Typography variant="caption">No runner yet!</Typography>}
+          {/* setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose} setValue={setValue} setHover={setHover} */}
         </Grid>
         <Grid item>
           <Typography variant="h5">
