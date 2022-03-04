@@ -6,7 +6,13 @@
 
 ## 📋 Features
 
-- Some features here
+- Signup
+- Login
+- User Profiles
+- Requester Dashboard
+- Runner Dashboard
+- Requester Status Window
+- Runner Status Window
 
 ## 💾 Installation
 
@@ -16,24 +22,28 @@
    ```
 2. Next steps...
 
-## ⚗️ Usage/Examples
+## ⚗️ Usage & Examples
 ```javascript
 // some code here
 function() {
   // do a thing...
 }
 ```
-* Some more stuff
 
 ## 🧪 Running Tests
 
-To run tests using Jest and React Testing Library
+Our test suite is set up with Jest, React Testing Library, and Mock Service Worker.\
+To run the test suite, simply run:
 
 ```bash
-  npm run test
+  npm test
+```
+or
+```bash
+  npm test:ci
 ```
 
-## ⛰️ Environment Variables
+## ⛰️ Environment
 
 ```.env```:
 ```javascript
@@ -70,31 +80,30 @@ API_KEY=<your API key here>
 Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, Webpack, CircleCI, Docker, Passport, Amazon Web Services, MapBox GL, Passport JS, Jest, React Testing Library...
 
 ## 🤖 Contributors
-Git Hub:\
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)\
-Jake Caughern - Architecture Owner\
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jake-caughern/)\
-Cameron Colaco - Software Engineer\
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cameroncolaco/)\
-Josh Fuqua - Product Manager\
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)\
-Michael Lapid - UI Owner\
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)\
-Yitong Lui - Software Engineer\
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)\
-Maxine Seo - Software Engineer\
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)\
-Mary Miyamoto - Software Engineer\
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/<MARY_MIYAMOTO_HERE>)\
+- Git Hub:\
+* [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)\
+- Jake Caughern - Architecture Owner\
+* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jake-caughern/)\
+- Cameron Colaco - Software Engineer\
+* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cameroncolaco/)\
+- Josh Fuqua - Product Manager\
+* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)\
+- Michael Lapid - UI Owner\
+* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)\
+- Yitong Lui - Software Engineer\
+* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)\
+- Maxine Seo - Software Engineer\
+* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)\
+- Mary Miyamoto - Software Engineer\
+* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/<MARY_MIYAMOTO_HERE>)
 
 ## 🔗 Links
-Links here
-
+- Links here
 
 ## 📷 Screenshots
 * ### **Screenshot:**
 ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
-* ### **Screenshot: consolidate multiple collections into one:**
+* ### **Screenshot:**
 ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
 * ### **Screenshot:**
 ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
@@ -108,6 +117,5 @@ Links here
 ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
 
 ## 🔊 Special Acknowledgements
-
  - [Hack Reactor](https://www.hackreactor.com/)
     * A special thank you to Hack Reactor!
