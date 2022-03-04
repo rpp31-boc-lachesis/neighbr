@@ -10,6 +10,22 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import ProfileMain from '../../client/src/components/Profile/ProfileMain.jsx';
 
+jest.mock('mapbox-gl/dist/mapbox-gl', () => ({
+  GeolocateControl: jest.fn(),
+  Map: jest.fn(() => ({
+    addControl: jest.fn(),
+    on: jest.fn(),
+    remove: jest.fn(),
+    flyTo: jest.fn()
+  })),
+  Marker: jest.fn().mockReturnValue({
+    setLngLat: jest.fn().mockReturnValue({
+      addTo: jest.fn().mockReturnValue({})
+    })
+  }),
+  NavigationControl: jest.fn(),
+}));
+
 const theme = responsiveFontSizes(createTheme({
   palette: {
     primary: {
@@ -118,14 +134,14 @@ describe('<Profile Main />', () => {
     const previousRunsText = await screen.findByText(/my run history/i);
     expect(previousRunsText.textContent).toBe('My Run History:');
   });
-  // it(`Shows user's location on a map`, async () => {
-  //   const locationTab = await screen.findByRole('tab', {
-  //     name: /location/i
-  //   });
-  //   fireEvent.click(locationTab);
-  //   const addressText = await screen.findAllByText(/My address/i);
-  //   expect(addressText).toHaveTextContent('My address:');
-  // });
+  it(`Shows user's location on a map`, async () => {
+    const locationTab = await screen.findByRole('tab', {
+      name: /location/i
+    });
+    fireEvent.click(locationTab);
+    const mapBox = await screen.findByTestId('mapbox');
+    expect(mapBox).toBeInTheDocument();
+  });
   it(`Shows location of a user's runs`, async () => {
     const runsTab = await screen.findByRole('tab', {
       name: /runs/i

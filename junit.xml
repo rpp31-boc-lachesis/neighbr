@@ -1,77 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="33" failures="0" errors="0" time="8.338">
-  <testsuite name="&lt;Profile Main /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T16:59:03" time="3.276" tests="18">
-    <testcase classname="&lt;Profile Main /&gt; Renders Profile Main component" name="&lt;Profile Main /&gt; Renders Profile Main component" time="0.097">
+<testsuites name="jest tests" tests="19" failures="0" errors="0" time="3.985">
+  <testsuite name="&lt;Profile Main /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T18:45:47" time="3.484" tests="19">
+    <testcase classname="&lt;Profile Main /&gt; Renders Profile Main component" name="&lt;Profile Main /&gt; Renders Profile Main component" time="0.093">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" name="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" time="0.289">
+    <testcase classname="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" name="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" time="0.288">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Renders Location tab in navigation bar" name="&lt;Profile Main /&gt; Renders Location tab in navigation bar" time="0.093">
+    <testcase classname="&lt;Profile Main /&gt; Renders Location tab in navigation bar" name="&lt;Profile Main /&gt; Renders Location tab in navigation bar" time="0.086">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" name="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" time="0.087">
+    <testcase classname="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" name="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" time="0.086">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" name="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" time="0.079">
+    <testcase classname="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" name="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" time="0.077">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Displays User Avatar image" name="&lt;Profile Main /&gt; Displays User Avatar image" time="0.053">
+    <testcase classname="&lt;Profile Main /&gt; Displays User Avatar image" name="&lt;Profile Main /&gt; Displays User Avatar image" time="0.059">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Displays User name below Avatar" name="&lt;Profile Main /&gt; Displays User name below Avatar" time="0.084">
+    <testcase classname="&lt;Profile Main /&gt; Displays User name below Avatar" name="&lt;Profile Main /&gt; Displays User name below Avatar" time="0.086">
     </testcase>
     <testcase classname="&lt;Profile Main /&gt; Displays membership below User name" name="&lt;Profile Main /&gt; Displays membership below User name" time="0.07">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Displays star rating below membership" name="&lt;Profile Main /&gt; Displays star rating below membership" time="0.052">
+    <testcase classname="&lt;Profile Main /&gt; Displays star rating below membership" name="&lt;Profile Main /&gt; Displays star rating below membership" time="0.054">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s account number" name="&lt;Profile Main /&gt; Shows current user&apos;s account number" time="0.061">
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s account number" name="&lt;Profile Main /&gt; Shows current user&apos;s account number" time="0.056">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s first name" name="&lt;Profile Main /&gt; Shows current user&apos;s first name" time="0.056">
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s first name" name="&lt;Profile Main /&gt; Shows current user&apos;s first name" time="0.051">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s last name" name="&lt;Profile Main /&gt; Shows current user&apos;s last name" time="0.044">
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s last name" name="&lt;Profile Main /&gt; Shows current user&apos;s last name" time="0.047">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s email" name="&lt;Profile Main /&gt; Shows current user&apos;s email" time="0.043">
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s email" name="&lt;Profile Main /&gt; Shows current user&apos;s email" time="0.045">
     </testcase>
     <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s rating" name="&lt;Profile Main /&gt; Shows current user&apos;s rating" time="0.046">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s biography" name="&lt;Profile Main /&gt; Shows current user&apos;s biography" time="0.042">
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s biography" name="&lt;Profile Main /&gt; Shows current user&apos;s biography" time="0.04">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s previous runs" name="&lt;Profile Main /&gt; Shows current user&apos;s previous runs" time="0.184">
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s previous runs" name="&lt;Profile Main /&gt; Shows current user&apos;s previous runs" time="0.204">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Shows location of a user&apos;s runs" name="&lt;Profile Main /&gt; Shows location of a user&apos;s runs" time="0.157">
+    <testcase classname="&lt;Profile Main /&gt; Shows user&apos;s location on a map" name="&lt;Profile Main /&gt; Shows user&apos;s location on a map" time="0.103">
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Shows location of a user&apos;s requests" name="&lt;Profile Main /&gt; Shows location of a user&apos;s requests" time="0.151">
+    <testcase classname="&lt;Profile Main /&gt; Shows location of a user&apos;s runs" name="&lt;Profile Main /&gt; Shows location of a user&apos;s runs" time="0.149">
     </testcase>
-  </testsuite>
-  <testsuite name="&lt;ProfileCard /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T16:59:06" time="2.428" tests="8">
-    <testcase classname="&lt;ProfileCard /&gt; Renders Profile Card component" name="&lt;ProfileCard /&gt; Renders Profile Card component" time="0.186">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Has an X button to close the modal" name="&lt;ProfileCard /&gt; Has an X button to close the modal" time="0.105">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Can close the modal by clicking the X button" name="&lt;ProfileCard /&gt; Can close the modal by clicking the X button" time="0.095">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User avatar" name="&lt;ProfileCard /&gt; Displays a User avatar" time="0.1">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User name" name="&lt;ProfileCard /&gt; Displays a User name" time="0.131">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User location" name="&lt;ProfileCard /&gt; Displays a User location" time="0.101">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User biography" name="&lt;ProfileCard /&gt; Displays a User biography" time="0.1">
-    </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays previous Runs or Requests" name="&lt;ProfileCard /&gt; Displays previous Runs or Requests" time="0.092">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T16:59:09" time="1.143" tests="2">
-    <testcase classname="&lt;ProfilePopover /&gt; Renders view profile button" name="&lt;ProfilePopover /&gt; Renders view profile button" time="0.109">
-    </testcase>
-    <testcase classname="&lt;ProfilePopover /&gt; Popover opens when button is clicked" name="&lt;ProfilePopover /&gt; Popover opens when button is clicked" time="0.251">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;ProfileButton /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T16:59:10" time="0.874" tests="5">
-    <testcase classname="&lt;ProfileButton /&gt; Renders Profile Button component" name="&lt;ProfileButton /&gt; Renders Profile Button component" time="0.052">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Should be enabled" name="&lt;ProfileButton /&gt; Should be enabled" time="0.043">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct text to view profile" name="&lt;ProfileButton /&gt; Has correct text to view profile" time="0.026">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color when primary" name="&lt;ProfileButton /&gt; Has correct theme color when primary" time="0.024">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color when secondary" name="&lt;ProfileButton /&gt; Has correct theme color when secondary" time="0.03">
+    <testcase classname="&lt;Profile Main /&gt; Shows location of a user&apos;s requests" name="&lt;Profile Main /&gt; Shows location of a user&apos;s requests" time="0.138">
     </testcase>
   </testsuite>
 </testsuites>

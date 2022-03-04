@@ -122,11 +122,13 @@ export default function ProfileCard(props) {
         <Box sx={{
           height: '135px',
           width: '325px',
+          paddingLeft: '12px',
           overflow: 'scroll'
         }}
         >
           <Stack sx={{
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
             width: '300px',
             padding: '10px',
