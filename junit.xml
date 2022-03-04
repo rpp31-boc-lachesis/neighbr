@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="4" failures="0" errors="0" time="4.261">
-  <testsuite name="Run Dashboard" errors="0" failures="0" skipped="0" timestamp="2022-03-04T17:31:22" time="3.838" tests="4">
-    <testcase classname="Run Dashboard renders the Runner Dashboard" name="Run Dashboard renders the Runner Dashboard" time="0.196">
+<testsuites name="jest tests" tests="4" failures="0" errors="0" time="4.175">
+  <testsuite name="Run Dashboard" errors="0" failures="0" skipped="0" timestamp="2022-03-04T18:16:11" time="3.731" tests="4">
+    <testcase classname="Run Dashboard renders the Runner Dashboard" name="Run Dashboard renders the Runner Dashboard" time="0.205">
     </testcase>
-    <testcase classname="Run Dashboard shows errand cards after clicking on run" name="Run Dashboard shows errand cards after clicking on run" time="0.462">
+    <testcase classname="Run Dashboard shows errand cards after clicking on run" name="Run Dashboard shows errand cards after clicking on run" time="0.475">
     </testcase>
-    <testcase classname="Run Dashboard searchLocation works" name="Run Dashboard searchLocation works" time="0.005">
+    <testcase classname="Run Dashboard searchLocation works" name="Run Dashboard searchLocation works" time="0.004">
     </testcase>
-    <testcase classname="RunnerDash Modal opens run entry modal" name="RunnerDash Modal opens run entry modal" time="1.649">
+    <testcase classname="RunnerDash Modal opens run entry modal" name="RunnerDash Modal opens run entry modal" time="1.645">
     </testcase>
   </testsuite>
 </testsuites>

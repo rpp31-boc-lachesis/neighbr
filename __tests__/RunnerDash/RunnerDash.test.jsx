@@ -32,15 +32,21 @@ let theme = createTheme({
 
 theme = responsiveFontSizes(theme);
 
+const StateWrapper = function(props) {
+  const [currentRun, setRun] = React.useState(null);
+  return <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} currentRun={currentRun} setRun={setRun} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />;
+}
+
 describe('Run Dashboard', () => {
   test('renders the Runner Dashboard', () => {
     render(
       <ThemeProvider theme={theme}>
         <Router>
-          <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />
+          <StateWrapper />
         </Router>
       </ThemeProvider>
     );
+
     expect(screen.getByRole('heading', { name: 'Current Runs' })).toHaveTextContent('Current Runs');
     expect(screen.getByRole('heading', { name: 'Completed Runs' })).toHaveTextContent('Completed Runs');
     expect(screen.getByRole('button')).toHaveTextContent('Post New Run');
@@ -49,7 +55,7 @@ describe('Run Dashboard', () => {
     render(
       <ThemeProvider theme={theme}>
         <Router>
-          <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />
+          <StateWrapper />
         </Router>
       </ThemeProvider>
     );
@@ -81,7 +87,7 @@ describe('RunnerDash Modal', () => {
     render(
       <ThemeProvider theme={theme}>
         <Router>
-          <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />
+          <StateWrapper />
         </Router>
       </ThemeProvider>
     );
