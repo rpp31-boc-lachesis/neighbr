@@ -117,7 +117,7 @@ export default function ProfileCard(props) {
         <Typography
           variant="h6"
         >
-          {themeColor === 'primary' ? 'Previous Runs' : 'Previous Requests'}
+          {themeColor === 'secondary' ? 'Previous Runs' : 'Previous Requests'}
         </Typography>
         <Box sx={{
           height: '135px',
@@ -133,12 +133,12 @@ export default function ProfileCard(props) {
             gap: '7px'
           }}
           >
-            {themeColor === 'primary'
+            {themeColor === 'secondary'
               ? currentUser.run_history.map((run) => (
                 <Item
                   key={run._id}
                   sx={{
-                    backgroundColor: '#88C4FB',
+                    backgroundColor: '#73B4FA',
                     color: 'white',
                     width: '92%',
                     height: 'auto',
@@ -168,7 +168,7 @@ export default function ProfileCard(props) {
                 <Item
                   key={req._id}
                   sx={{
-                    backgroundColor: '#88C4FB',
+                    backgroundColor: '#73B4FA',
                     color: 'white',
                     width: '92%',
                     height: 'auto',
