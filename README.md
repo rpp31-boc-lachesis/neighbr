@@ -51,19 +51,23 @@ API_KEY=<your API key here>
 * [NodeJS](https://nodejs.dev/)
 * [MongoDB](https://www.mongodb.com/)
 * [Mongoose](https://mongoosejs.com/)
-* [Jest](https://jestjs.io/docs/expect)
-* [Supertest](https://www.npmjs.com/package/supertest)
-* [K6](https://k6.io/)
-* [New Relic](https://newrelic.com/)
-* [Loader](https://loader.io/)
-<br>
-Full Deployment:
-<br>
+* [React](https://reactjs.org/)
+* [Babel](https://babeljs.io/)
+* [Webpack](https://webpack.js.org/)
+* [React Router](https://reactrouter.com/)
+* [Material UI](https://mui.com/)
+* [Jest](https://jestjs.io/)
+* [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+* [Docker](https://www.docker.com/)
+* [CirclCI](https://circleci.com/)
+* [Amazon Web Services](https://aws.amazon.com/)
 * [NGINX](https://www.nginx.com/)
-* [Redis](https://redis.io/)
+* [Passport JS](https://www.passportjs.org/)
+* [Figma](https://www.figma.com/design/)
+
 
 ## 🛠 Skills
-Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, Webpack, CircleCI, Docker, Passport, Amazon Web Services, MapBox GL, ...
+Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, Webpack, CircleCI, Docker, Passport, Amazon Web Services, MapBox GL, Passport JS, Jest, React Testing Library...
 
 ## 🤖 Contributors
 Git Hub:
