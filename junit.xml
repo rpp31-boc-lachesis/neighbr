@@ -1,23 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="9" failures="0" errors="0" time="3.932">
-  <testsuite name="&lt;Profile Main /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-03T22:29:47" time="3.37" tests="9">
-    <testcase classname="&lt;Profile Main /&gt; Renders Profile Main component" name="&lt;Profile Main /&gt; Renders Profile Main component" time="0.112">
+<testsuites name="jest tests" tests="17" failures="0" errors="0" time="2.734">
+  <testsuite name="&lt;Profile Main /&gt;" errors="0" failures="0" skipped="16" timestamp="2022-03-04T00:19:43" time="2.22" tests="17">
+    <testcase classname="&lt;Profile Main /&gt; Renders Profile Main component" name="&lt;Profile Main /&gt; Renders Profile Main component" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" name="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" time="0.295">
+    <testcase classname="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" name="&lt;Profile Main /&gt; Renders Profile tab in navigation bar" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Renders Location tab in navigation bar" name="&lt;Profile Main /&gt; Renders Location tab in navigation bar" time="0.085">
+    <testcase classname="&lt;Profile Main /&gt; Renders Location tab in navigation bar" name="&lt;Profile Main /&gt; Renders Location tab in navigation bar" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" name="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" time="0.094">
+    <testcase classname="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" name="&lt;Profile Main /&gt; Renders Runs tab in navigation bar" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" name="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" time="0.081">
+    <testcase classname="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" name="&lt;Profile Main /&gt; Renders Requests tab in navigation bar" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Displays User Avatar image" name="&lt;Profile Main /&gt; Displays User Avatar image" time="0.06">
+    <testcase classname="&lt;Profile Main /&gt; Displays User Avatar image" name="&lt;Profile Main /&gt; Displays User Avatar image" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Displays User name below Avatar" name="&lt;Profile Main /&gt; Displays User name below Avatar" time="0.092">
+    <testcase classname="&lt;Profile Main /&gt; Displays User name below Avatar" name="&lt;Profile Main /&gt; Displays User name below Avatar" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Displays membership below User name" name="&lt;Profile Main /&gt; Displays membership below User name" time="0.073">
+    <testcase classname="&lt;Profile Main /&gt; Displays membership below User name" name="&lt;Profile Main /&gt; Displays membership below User name" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;Profile Main /&gt; Displays star rating below membership" name="&lt;Profile Main /&gt; Displays star rating below membership" time="0.059">
+    <testcase classname="&lt;Profile Main /&gt; Displays star rating below membership" name="&lt;Profile Main /&gt; Displays star rating below membership" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s account number" name="&lt;Profile Main /&gt; Shows current user&apos;s account number" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s first name" name="&lt;Profile Main /&gt; Shows current user&apos;s first name" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s last name" name="&lt;Profile Main /&gt; Shows current user&apos;s last name" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s email" name="&lt;Profile Main /&gt; Shows current user&apos;s email" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s rating" name="&lt;Profile Main /&gt; Shows current user&apos;s rating" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s biography" name="&lt;Profile Main /&gt; Shows current user&apos;s biography" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Shows current user&apos;s previous runs" name="&lt;Profile Main /&gt; Shows current user&apos;s previous runs" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="&lt;Profile Main /&gt; Shows location of a user&apos;s runs" name="&lt;Profile Main /&gt; Shows location of a user&apos;s runs" time="0.458">
     </testcase>
   </testsuite>
 </testsuites>
