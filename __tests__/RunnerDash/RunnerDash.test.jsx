@@ -1,17 +1,20 @@
 import React from 'react';
+import regeneratorRuntime from 'regenerator-runtime';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+import {
+  render, fireEvent, waitFor, screen
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 
 import testData from '../../client/src/components/RunnerDash/data.js';
 import RunnerDash from '../../client/src/components/RunnerDash/RunnerDash.jsx';
-// import searchLocation from '../../client/src/components/RunnerDash/searchLocation.js';
+import searchLocation from '../../client/src/components/RunnerDash/searchLocation.js';
+import testLocationSearch from '../../client/src/components/RunnerDash/testLocationSearch.js';
 
-const mockPostRun = jest.fn();
+const mockPostRun = jest.fn(async () => testLocationSearch);
 const mockRefreshData = jest.fn();
 const { runs, errands, locations } = testData;
-// const searchLocation = jest.fn();
 
 let theme = createTheme({
   palette: {
@@ -30,9 +33,6 @@ let theme = createTheme({
 theme = responsiveFontSizes(theme);
 
 describe('Run Dashboard', () => {
-  beforeAll(() => {});
-  afterEach(() => {});
-  beforeAll(() => {});
   test('renders the Runner Dashboard', () => {
     render(
       <ThemeProvider theme={theme}>
@@ -60,13 +60,24 @@ describe('Run Dashboard', () => {
     const user1 = screen.getByRole('heading', { name: 'crazyswan889' });
     const user2 = screen.getByRole('heading', { name: 'organicrabbit525' });
     const user3 = screen.getByRole('heading', { name: 'tinybird439' });
-    expect(user1).toBeVisible();
-    expect(user2).toBeVisible();
-    expect(user3).toBeVisible();
+    expect(user1).toBeInTheDocument();
+    expect(user2).toBeInTheDocument();
+    expect(user3).toBeInTheDocument();
     fireEvent.click(screen.getAllByRole('button', { name: 'Yes' })[0]);
     fireEvent.click(screen.getAllByRole('button', { name: 'No' })[0]);
   });
-  test('opens run entry modal', () => {
+  test('searchLocation works', () => {
+    searchLocation('test', [1, 1])
+      .then((response) => {
+        const responseId = response.data.features[0].id;
+        expect(responseId).toBe('poi.661425015052');
+      })
+      .catch((err) => { console.error(err); });
+  });
+});
+
+describe('RunnerDash Modal', () => {
+  test('opens run entry modal', async () => {
     render(
       <ThemeProvider theme={theme}>
         <Router>
@@ -75,23 +86,35 @@ describe('Run Dashboard', () => {
       </ThemeProvider>
     );
 
-    userEvent.click(screen.getByRole('button', { name: 'Post New Run' }));
-    screen.findByRole('heading', { name: 'Enter Your Run' })
-      .then((element) => {
-        expect(element).toBeVisible();
-      })
-      .then(() => {
-        userEvent.type(screen.getByRole('textbox', { name: 'Zip code' }), '940');
-        userEvent.type(screen.getByRole('textbox', { name: 'Zip code' }), '16');
-        userEvent.type(screen.getByRole('textbox', { name: 'Add a location' }), 'Grace{space}Cathedral');
-        userEvent.type(screen.getByRole('textbox', { name: /Choose date,.*/ }), '03/01/2023');
-        userEvent.type(screen.getByRole('textbox', { id: 'mui-6' }), '11:01');
-        userEvent.type(screen.getByRole('textbox', { id: 'mui-8' }), '11:59');
-        userEvent.type(screen.getByRole('textbox', { name: 'Transportation' }), 'Car');
-        userEvent.click(screen.getByRole('button'), { name: 'Submit Run' });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  })
+    await userEvent.click(screen.getByRole('button', { name: 'Post New Run' }));
+    const enterRun = await screen.findByRole('heading', { name: 'Enter Your Run' });
+    await expect(enterRun).toHaveTextContent('Enter Your Run');
+    const zip = await screen.findByRole('textbox', { name: 'Zip code' });
+    await userEvent.type(zip, '94016');
+    // const text = await screen.findByDisplayValue('940');
+    // expect(text).toHaveValue('940');
+    // await userEvent.type(screen.getByRole('textbox', { name: 'Zip code' }), '16');
+    await userEvent.type(screen.getByRole('textbox', { name: 'Add a location' }), 'Grace{space}Cathedral');
+    // const address = await screen.getByRole('combobox');
+    // await expect(address).toBeInTheDocument();
+    // userEvent.keyboard('{arrowdown}');
+    // screen.debug(screen.getAllByRole('textbox'));
+    // userEvent.type(screen.getByRole('textbox', { name: /Choose date,.*/ }), '03/01/2023');
+    // userEvent.click(screen.getByRole('button', { name: 'OK' }));
+    // userEvent.click(screen.getByRole('textbox', { name: /Choose date,.*/ }));
+    // userEvent.click(screen.getAllByText('Start Time')[0]);
+    // userEvent.click(screen.getByRole('button', { name: 'clock view is open, go to text input view' }));
+    // userEvent.keyboard('11:01');
+    // userEvent.click(screen.getAllByText('Start Time')[0]);
+    // // userEvent.click(screen.getByRole('button', { name: 'OK' }));
+    // userEvent.click(screen.getAllByText('Stop Time')[0]);
+    // userEvent.click(screen.getByRole('button', { name: 'clock view is open, go to text input view' }));
+    // userEvent.keyboard('11:59');
+    // userEvent.click(screen.getAllByText('Stop Time')[0]);
+    // // userEvent.click(screen.getByRole('button', { name: 'OK' }));
+    // userEvent.type(screen.getAllByText('Transportation')[0], 'Car');
+    // userEvent.keyboard('{enter}');
+    userEvent.click(screen.getByRole('button', { name: 'Submit Run' }));
+    // console.log(mockRefreshRun.mock);
+  });
 });

@@ -572,13 +572,7 @@ export const handlers = [
       ctx.json([{}])
     )
   )),
-  rest.post('/errands/accept', (req, res, ctx) => {
-    res(ctx.json({ result: true }));
-  }),
-  rest.post('/runs/updateNoMap', (req, res, ctx) => {
-    res(ctx.json({ result: true }));
-  }),
-  rest.post('/location/search', (req, res, ctx) => {
-    res(ctx.json(testLocationSearch));
-  })
+  rest.post('/errands/accept', (req, res, ctx) => res(ctx.json({ result: true }))),
+  rest.post('/runs/updateNoMap', (req, res, ctx) => res(ctx.json({ result: true }))),
+  rest.post('/locations/search', (req, res, ctx) => res(ctx.json(testLocationSearch)))
 ];
