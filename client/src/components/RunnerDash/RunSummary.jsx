@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import ErrandCard from './ErrandCard.jsx'
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
+import ErrandCard from './ErrandCard.jsx';
 
 const RunSummary = function(props) {
   const { run, user, refreshData } = props;

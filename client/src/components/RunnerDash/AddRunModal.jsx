@@ -1,9 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading, react/prop-types */
 import React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -13,13 +10,9 @@ import DatePicker from '@mui/lab/DatePicker';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import LocationAutocomplete from './LocationAutocomplete.jsx';
-
 import searchLocation from './searchLocation.js';
-
-// import AddRunForm from './AddRunForm.jsx';
 
 const style = {
   '& .MuiTextField-root': { mt: 1, mb: 1 },
@@ -35,7 +28,6 @@ export default function AddRunModal(props) {
   const [transportation, setTransportation] = React.useState('');
   const [proximity, setProximity] = React.useState(null);
   const { handlePostRun, refreshData } = props;
-  let Value;
 
   React.useEffect(() => {
     if (zip.length >= 5) {

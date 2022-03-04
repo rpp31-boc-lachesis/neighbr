@@ -12,7 +12,7 @@ import RunSummary from './RunSummary.jsx';
 
 export default function RunnerDash(props) {
   const {
-    runs, handlePostRun, user, refreshData, errands, setRun, currentRun
+    runs, handlePostRun, user, refreshData, setRun, currentRun
   } = props;
 
   let currentRuns = runs.filter((run) => !run.complete);
