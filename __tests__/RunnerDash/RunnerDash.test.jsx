@@ -32,15 +32,21 @@ let theme = createTheme({
 
 theme = responsiveFontSizes(theme);
 
+const StateWrapper = function(props) {
+  const [currentRun, setRun] = React.useState(null);
+  return <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} currentRun={currentRun} setRun={setRun} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />;
+}
+
 describe('Run Dashboard', () => {
   test('renders the Runner Dashboard', () => {
     render(
       <ThemeProvider theme={theme}>
         <Router>
-          <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />
+          <StateWrapper />
         </Router>
       </ThemeProvider>
     );
+
     expect(screen.getByRole('heading', { name: 'Current Runs' })).toHaveTextContent('Current Runs');
     expect(screen.getByRole('heading', { name: 'Completed Runs' })).toHaveTextContent('Completed Runs');
     expect(screen.getByRole('button')).toHaveTextContent('Post New Run');
@@ -49,7 +55,7 @@ describe('Run Dashboard', () => {
     render(
       <ThemeProvider theme={theme}>
         <Router>
-          <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />
+          <StateWrapper />
         </Router>
       </ThemeProvider>
     );
@@ -81,7 +87,7 @@ describe('RunnerDash Modal', () => {
     render(
       <ThemeProvider theme={theme}>
         <Router>
-          <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />
+          <StateWrapper />
         </Router>
       </ThemeProvider>
     );
@@ -90,31 +96,11 @@ describe('RunnerDash Modal', () => {
     const enterRun = await screen.findByRole('heading', { name: 'Enter Your Run' });
     await expect(enterRun).toHaveTextContent('Enter Your Run');
     const zip = await screen.findByRole('textbox', { name: 'Zip code' });
-    await userEvent.type(zip, '94016');
-    // const text = await screen.findByDisplayValue('940');
-    // expect(text).toHaveValue('940');
-    // await userEvent.type(screen.getByRole('textbox', { name: 'Zip code' }), '16');
+    await userEvent.type(zip, '940');
+    await userEvent.keyboard('16');
     await userEvent.type(screen.getByRole('textbox', { name: 'Add a location' }), 'Grace{space}Cathedral');
-    // const address = await screen.getByRole('combobox');
-    // await expect(address).toBeInTheDocument();
-    // userEvent.keyboard('{arrowdown}');
-    // screen.debug(screen.getAllByRole('textbox'));
-    // userEvent.type(screen.getByRole('textbox', { name: /Choose date,.*/ }), '03/01/2023');
-    // userEvent.click(screen.getByRole('button', { name: 'OK' }));
-    // userEvent.click(screen.getByRole('textbox', { name: /Choose date,.*/ }));
-    // userEvent.click(screen.getAllByText('Start Time')[0]);
-    // userEvent.click(screen.getByRole('button', { name: 'clock view is open, go to text input view' }));
-    // userEvent.keyboard('11:01');
-    // userEvent.click(screen.getAllByText('Start Time')[0]);
-    // // userEvent.click(screen.getByRole('button', { name: 'OK' }));
-    // userEvent.click(screen.getAllByText('Stop Time')[0]);
-    // userEvent.click(screen.getByRole('button', { name: 'clock view is open, go to text input view' }));
-    // userEvent.keyboard('11:59');
-    // userEvent.click(screen.getAllByText('Stop Time')[0]);
-    // // userEvent.click(screen.getByRole('button', { name: 'OK' }));
-    // userEvent.type(screen.getAllByText('Transportation')[0], 'Car');
-    // userEvent.keyboard('{enter}');
     userEvent.click(screen.getByRole('button', { name: 'Submit Run' }));
-    // console.log(mockRefreshRun.mock);
+    expect(mockPostRun.mock.calls.length).toBe(1);
+    expect(mockRefreshData.mock.calls.length).toBe(2);
   });
 });

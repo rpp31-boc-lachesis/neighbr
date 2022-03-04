@@ -149,7 +149,7 @@ function Signup({ user, handleSignin }) {
     event.preventDefault();
   };
 
-  const uploadImage = (e) => {
+  const uploadImage = async (e) => {
     const file = e.target.files;
     const data = new FormData();
     data.append('file', file[0]);
@@ -157,26 +157,28 @@ function Signup({ user, handleSignin }) {
     // specific to cloudinary
 
     // setLoading(true);
-    const res = fetch(
+    const res = await fetch(
       'https://api.cloudinary.com/v1_1/dkztds7yn/image/upload',
       {
         method: 'Post',
         body: data
       }
-    ).then((response) => response.json()).then((resData) => {
-      const name = 'avatar_url';
-      const value = resData.secure_url;
-      setFormInput({ [name]: value });
-      setLoginData({ ...loginData, [name]: value });
-    });
+    );
+    const resFile = await res.json();
+    const name = 'avatar_url';
+    const value = resFile.secure_url;
+    // console.log(value);
+    setFormInput({ [name]: value });
+    setLoginData({ ...loginData, [name]: value });
   };
   useEffect(() => {
-  }, [loginData]);
+    // uploadImage();
+  }, [formInput.avatar_url]);
 
   useEffect(() => {
     if (formInput.zip.length >= 5) {
       searchLocation(formInput.zip, null,)
-        .then((res) => res.json())
+        .then((res) => res.data)
         .then((result) => {
           setProximity(result.features[0].center);
         })
