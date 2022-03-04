@@ -356,18 +356,22 @@ export default function ProfileMain(props) {
                 Most Recent Category:
                 {' '}
                 {
-                currentUser.run_history[currentUser.run_history.length - 1].location.category
+                currentUser.run_history.length
+                  ? currentUser.run_history[currentUser.run_history.length - 1].location.category
+                  : 'You have no runs yet.'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
                 Most Recent Run Time:
                 {' '}
                 {
-                (Number(currentUser.run_history[currentUser.run_history.length - 1]
-                  .endTime.slice(11, 13))
+                currentUser.run_history.length
+                  ? (Number(currentUser.run_history[currentUser.run_history.length - 1]
+                    .endTime.slice(11, 13))
                 - Number(currentUser.run_history[currentUser.run_history.length - 1]
                   .startTime.slice(11, 13)))
                 * 60
+                  : 'You have no runs yet.'
                 }
                 {' '}
                 mins
@@ -376,13 +380,20 @@ export default function ProfileMain(props) {
                 Most Recent Neighborhood:
                 {' '}
                 {
-                currentUser.run_history[currentUser.run_history.length - 1].location.neighborhood
+                currentUser.run_history.length
+                  ? currentUser.run_history[currentUser.run_history.length - 1]
+                    .location.neighborhood
+                  : 'You have no runs yet.'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
                 Total Runs:
                 {' '}
-                {currentUser.run_history.length}
+                {
+                currentUser.run_history.length
+                  ? currentUser.run_history.length
+                  : 'You have no runs yet.'
+                }
               </Item>
             </Stack>
           </Grid>
@@ -408,7 +419,7 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              {currentUser.run_history.map((run) => (
+              {currentUser.run_history.length > 0 && currentUser.run_history.map((run) => (
                 <Item
                   key={run._id}
                   sx={{
@@ -487,19 +498,23 @@ export default function ProfileMain(props) {
                 Most Recent Category:
                 {' '}
                 {
-                currentUser.req_history[currentUser.req_history.length - 1]
-                  .pickup.locationId.category
+                currentUser.req_history.length
+                  ? currentUser.req_history[currentUser.req_history.length - 1]
+                    .pickup.locationId.category
+                  : 'No requests yet.'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
                 Most Recent Request Time:
                 {' '}
                 {
-                (Number(currentUser.req_history[currentUser.req_history.length - 1]
-                  .end_time.slice(11, 13))
+                currentUser.req_history.length
+                  ? (Number(currentUser.req_history[currentUser.req_history.length - 1]
+                    .end_time.slice(11, 13))
                 - Number(currentUser.req_history[currentUser.req_history.length - 1]
                   .start_time.slice(11, 13)))
                 * 60
+                  : 'No requests yet.'
                 }
                 {' '}
                 mins
@@ -508,14 +523,20 @@ export default function ProfileMain(props) {
                 Most Recent Neighborhood:
                 {' '}
                 {
-                currentUser.req_history[currentUser.req_history.length - 1]
-                  .pickup.locationId.neighborhood
+                currentUser.req_history.length
+                  ? currentUser.req_history[currentUser.req_history.length - 1]
+                    .pickup.locationId.neighborhood
+                  : 'No requests yet.'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
                 Total Requests:
                 {' '}
-                {currentUser.req_history.length}
+                {
+                currentUser.req_history.length
+                  ? currentUser.req_history.length
+                  : 'No requests yet.'
+                }
               </Item>
             </Stack>
           </Grid>
@@ -541,7 +562,7 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              {currentUser.req_history.map((req) => (
+              {currentUser.req_history.length > 0 && currentUser.req_history.map((req) => (
                 <Item
                   key={req._id}
                   sx={{
