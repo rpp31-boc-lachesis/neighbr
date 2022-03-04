@@ -54,7 +54,7 @@ function RequestDetail({requestDetail}) {
                 <div className="entryColumn">
                 <RouterLink style={{ textDecoration: 'none' }} to="/main">
                 <Avatar variant="contained" alt="Haylie Schleifer" src={requester.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                <ProfilePopover user={requester.username} />
+                {/* <ProfilePopover user={requester.username} /> */}
                 {/* <ProfilePopover users={requester.username} /> */}
                 </RouterLink>
                   <div className="detailItem textEnd topLineRight">Your Runner</div>

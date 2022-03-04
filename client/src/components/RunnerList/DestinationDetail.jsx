@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import ProfilePopover from '../Profile/ProfilePopover.jsx';
+import AddRequestModal from './addRequestModal.jsx';
 
 
 function DestinationDetail({runDetail}) {
@@ -49,10 +50,10 @@ function DestinationDetail({runDetail}) {
                   <div className="detailItem">Date: {dateEvent}</div>
                 </div>
                 <div className="entryColumn">
-                <RouterLink style={{ textDecoration: 'none' }} to="/main">
+                {/* <RouterLink style={{ textDecoration: 'none' }} to="/main"> */}
                 <Avatar variant="contained" alt="Haylie Schleifer" src={user.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                <ProfilePopover user={user.username} />
-                </RouterLink>
+                {/* <ProfilePopover user={user.username} /> */}
+                {/* </RouterLink> */}
                   <div className="detailItem textEnd topLineRight">{username}</div>
                   <div className="detailItem textEnd">By: {transportation}
                   </div>
@@ -61,9 +62,13 @@ function DestinationDetail({runDetail}) {
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
-                <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
+                {/* link to requestStatus */}
+                {/* <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus"> */}
                 <Button>Request</Button>
-                </RouterLink>
+                <AddRequestModal />
+                {/* <AddRequestModal refreshData={refreshData} handlePostErrand={handlePostErrand}/> */}
+                {/* </RouterLink> */}
+
                 {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>
@@ -76,3 +81,10 @@ function DestinationDetail({runDetail}) {
 }
 
 export default DestinationDetail;
+
+
+//on request button
+  //modal to request form
+
+  //on accept of request form
+    //go to summary?
