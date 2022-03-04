@@ -21,7 +21,8 @@ class RunnerStatus extends React.Component {
       newRequests: [],
       acceptedErrands: [],
       mapMarkers: {},
-      currentRun: {}
+      currentRun: {},
+      selectedErrand: false
     };
   }
 
@@ -164,28 +165,38 @@ class RunnerStatus extends React.Component {
           zoom: 10
         });
 
-        marker = { ...marker, _map: undefined };
+        /*
+         * This block of commented code was supposed to be used to post information to the
+         * database for persistent maps, but there is currently an issue of covnverting the
+         * map and/or markers to JSON, where they both have circular references, and can't
+         * be converted.  Thought I had successfully removed the references on the markers
+         * but as it turns out, I rendered the Marker.remove() functionality useless.
+         * Gonna have to figure something else out.  It's crunch time now, though, so no time
+         * to do it just yet.
+         */
 
-        axios({
-          url: '/runs/update',
-          method: 'POST',
-          data: {
-            errandID,
-            runID,
-            type: 'acceptedErrands',
-            map: marker
-          }
-        })
-          .then(() => {
-            const newMapMarkers = { ...mapMarkers, [errandID]: marker };
+        // marker = { ...marker, _map: undefined };
 
-            this.setState({
-              newRequests: requestsArr,
-              acceptedErrands: newAcceptedErrands,
-              mapMarkers: newMapMarkers
-            });
-          })
-          .catch((err) => console.log(err));
+        // axios({
+        //   url: '/runs/update',
+        //   method: 'POST',
+        //   data: {
+        //     errandID,
+        //     runID,
+        //     type: 'acceptedErrands',
+        //     map: marker
+        //   }
+        // })
+        //   .then(() => {
+        const newMapMarkers = { ...mapMarkers, [errandID]: marker };
+
+        this.setState({
+          newRequests: requestsArr,
+          acceptedErrands: newAcceptedErrands,
+          mapMarkers: newMapMarkers
+        });
+        // })
+        // .catch((err) => console.log(err));
       });
   }
 
@@ -226,15 +237,32 @@ class RunnerStatus extends React.Component {
     });
   }
 
+  onErrandClick(errandObj) {
+    this.setState({ selectedErrand: errandObj });
+  }
+
   render() {
-    const { newRequests, acceptedErrands, currentRun } = this.state;
-    const renderCard = Object.keys(currentRun).length > 0;
+    const {
+      newRequests,
+      acceptedErrands,
+      currentRun,
+      selectedErrand
+    } = this.state;
+    const renderCard = Object.keys(currentRun).length > 0; // Mainly needed for development
     let location;
     let placeText;
     let address;
     let transport;
     let startTime;
     let avatarURL;
+
+    let errandWeight;
+    let errandDropOff;
+    let errandItem;
+    let requestedTime;
+    let errandMessage;
+    let requesterAvatar;
+    let requesterFirstName;
 
     if (renderCard) {
       transport = currentRun.transportation;
@@ -245,6 +273,28 @@ class RunnerStatus extends React.Component {
       address = location.address;
 
       startTime = new Intl.DateTimeFormat('en-US', { dateStyle: 'short', timeStyle: 'short', hour12: true }).format(startTime);
+    }
+
+    // Handles data to be displayed when an errand card is clicked
+    if (selectedErrand) {
+      const {
+        street_address: errandStreet,
+        state: errandState,
+        avatar_url: requesterAvatarURL,
+        first_name: FirstName
+      } = selectedErrand.requester;
+      errandWeight = selectedErrand.weight;
+      errandItem = selectedErrand.req_items[0].item;
+      errandDropOff = `${errandStreet}, ${errandState}`;
+      requestedTime = selectedErrand.start_time;
+      errandMessage = selectedErrand.message.slice(0, 100);
+      requesterAvatar = requesterAvatarURL;
+      requesterFirstName = FirstName;
+
+      requestedTime = new Date(requestedTime).toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric'
+      });
     }
 
     return (
@@ -386,6 +436,7 @@ class RunnerStatus extends React.Component {
                   newRequests.length >= 1
                   && (
                     <Errand
+                      onclick={this.onErrandClick.bind(this)}
                       type="NewRequest"
                       errandObj={newRequests[0]}
                       onRequestAccept={this.onRequestAccept.bind(this)}
@@ -413,8 +464,6 @@ class RunnerStatus extends React.Component {
                   borderColor: '#F88202',
                   width: '100%',
                   overflow: 'scroll',
-                  paddingLeft: '.5vw',
-                  paddingRight: '.5vw'
                 }}
                 justifyContent="space-evenly"
                 item
@@ -427,6 +476,7 @@ class RunnerStatus extends React.Component {
                       return (
                         <Errand
                           key={errandID}
+                          onclick={this.onErrandClick.bind(this)}
                           type="AcceptedErrand"
                           stateIndex={i}
                           errandObj={req}
@@ -438,7 +488,6 @@ class RunnerStatus extends React.Component {
                 }
               </Box>
             </Box>
-
           </Grid>
           <Grid // right column
             xs
@@ -484,7 +533,97 @@ class RunnerStatus extends React.Component {
               }}
               item
             >
-              <Typography>Placeholder</Typography>
+              {
+                selectedErrand
+                && (
+                  <Grid
+                    item
+                    container
+                    direction="row"
+                    alignItems="center"
+                  >
+                    <Card
+                      item
+                      container
+                      sx={{
+                        color: '#FFFFFF',
+                        bgcolor: 'primary.main',
+                        borderRadius: 4,
+                        width: '50%',
+                        minHeight: '20vh',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <CardContent
+                        item
+                        sx={{
+                          justifyContent: 'spaced-evenly',
+                          width: '100%'
+                        }}
+                      >
+                        <Typography>
+                          <strong>DropOff: </strong>
+                          {errandDropOff}
+                        </Typography>
+                        <Typography>
+                          <strong>Item: </strong>
+                          {errandItem}
+                        </Typography>
+                        <Typography>
+                          <strong>Weight: </strong>
+                          {errandWeight}
+                        </Typography>
+                        <Typography>
+                          <strong>Requested: </strong>
+                          {requestedTime}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                    <Card
+                      item
+                      container
+                      raised="false"
+                      sx={{
+                        color: '#FFFFFF',
+                        bgcolor: 'primary.light',
+                        borderRadius: 4,
+                        width: '50%',
+                        minHeight: '20vh',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <CardContent
+                        item
+                        sx={{
+                          justifyContent: 'spaced-evenly',
+                          width: '100%'
+                        }}
+                      >
+                        <Typography>
+                          <strong>Requester: </strong>
+                          {requesterFirstName}
+                        </Typography>
+                        <Typography>
+                          <strong>
+                            Message to you:
+                            <br />
+                          </strong>
+                          {errandMessage}
+                        </Typography>
+                        {/* <Avatar
+                          src={requesterAvatar}
+                          sx={{
+                            height: '10vh',
+                            width: '10vh'
+                          }}
+                        /> */}
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                )
+              }
             </Box>
           </Grid>
         </Grid>
