@@ -12,9 +12,9 @@ import RunSummary from './RunSummary.jsx';
 
 export default function RunnerDash(props) {
   const {
-    runs, handlePostRun, user, refreshData, errands
+    runs, handlePostRun, user, refreshData, errands, setRun, currentRun
   } = props;
-  const [currentRun, setRun] = React.useState(null);
+
   let currentRuns = runs.filter((run) => !run.complete);
 
   let CurrentRuns = currentRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
@@ -31,12 +31,14 @@ export default function RunnerDash(props) {
     completeRuns = runs.filter((run) => run.complete);
 
     CompleteRuns = completeRuns.map((run) => <Run setRun={setRun} run={run} key={run._id} />);
-    runs.forEach((newRun) => {
-      if (newRun !== null && currentRun !== null && newRun._id === currentRun._id) {
-        setRun(newRun);
-      }
-    });
-  }, [runs, errands]);
+    if (currentRun) {
+      runs.forEach((newRun) => {
+        if (newRun !== null && currentRun !== null && newRun._id === currentRun._id) {
+          setRun(newRun);
+        }
+      });
+    }
+  }, [currentRun]);
 
   return (
     <Container sx={{ height: '100%' }} maxwidth="sm">
