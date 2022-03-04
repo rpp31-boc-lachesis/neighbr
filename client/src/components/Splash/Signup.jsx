@@ -171,12 +171,13 @@ function Signup({ user, handleSignin }) {
     });
   };
   useEffect(() => {
-  }, [loginData]);
+    // uploadImage();
+  }, [formInput.avatar_url]);
 
   useEffect(() => {
     if (formInput.zip.length >= 5) {
       searchLocation(formInput.zip, null,)
-        .then((res) => res.json())
+        .then((res) => res.data)
         .then((result) => {
           setProximity(result.features[0].center);
         })
