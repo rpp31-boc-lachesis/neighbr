@@ -386,6 +386,10 @@ describe('<ProfileCard />', () => {
     });
     expect(userLocationDisplay).toBeInTheDocument();
   });
+  it('Shows current user rating', async () => {
+    const userRating = await screen.findByLabelText(/stars/i);
+    expect(userRating).toBeInTheDocument();
+  });
   it('Displays a User biography', async () => {
     const userBioDisplay = await screen.findByRole('heading', {
       name: mockCurrentUser.bio
@@ -397,5 +401,21 @@ describe('<ProfileCard />', () => {
       name: mockCurrentUser.bio
     });
     expect(userBioDisplay).toBeInTheDocument();
+  });
+  it('Displays secondary color theme when given secondary themeColor prop', async () => {
+    const secondaryTheme = render(
+      <ThemeProvider theme={theme}>
+        <Router>
+          <ProfileCard
+            handleClose={mockHandleClose}
+            currentUser={mockCurrentUser}
+            themeColor="secondary"
+          />
+        </Router>
+      </ThemeProvider>
+    );
+    const runnerLocations = await screen.findAllByText(/location/i);
+    expect(secondaryTheme).toBeDefined();
+    expect(runnerLocations[0]).toHaveTextContent('Location');
   });
 });

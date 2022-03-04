@@ -86,6 +86,7 @@ export default function ProfileCard(props) {
           }}
         >
           <Rating
+            alt="User Star Rating"
             name="half-rating-read"
             value={currentUser.sum_rating ? (currentUser.sum_rating / currentUser.rating_count) : 0}
             precision={0.5}

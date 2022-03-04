@@ -119,8 +119,8 @@ describe('<Profile Main />', () => {
     expect(userFirstName.textContent).toBe('Email:');
   });
   it(`Shows current user's rating`, async () => {
-    const userFirstName = await screen.findByText(/rating/i);
-    expect(userFirstName.textContent).toBe('Rating:');
+    const userRating = await screen.findByText(/rating/i);
+    expect(userRating.textContent).toBe('Rating:');
   });
   it(`Shows current user's biography`, async () => {
     const userFirstName = await screen.findByText(/bio/i);
