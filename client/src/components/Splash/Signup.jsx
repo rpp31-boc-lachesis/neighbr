@@ -23,7 +23,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import LocationAutoComplete from '../RunnerDash/LocationAutocomplete.jsx';
 import searchLocation from '../RunnerDash/searchLocation.js';
 
-function Signup({ user, handleSignUp }) {
+function Signup({ user, handleSignin }) {
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -56,7 +56,7 @@ function Signup({ user, handleSignUp }) {
       zip: ''
     }
   );
-  const [loginData, setLoginData] = useState({ username: '', password: '', avatar_url: '' });
+  const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [proximity, setProximity] = useState(null);
   // const validate = () => {
@@ -96,6 +96,7 @@ function Signup({ user, handleSignUp }) {
       // console.log(data.formInput);
       axios.post('/signup', data.formInput)
         .then((response) => {
+          handleSignin(loginData);
           console.log(response.data);
         })
         .catch((err) => {
@@ -216,7 +217,7 @@ function Signup({ user, handleSignUp }) {
             Sign Up
           </Typography>
           { user && (<Navigate to="/main" replace />)}
-          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleSignUp(e, loginData); }} sx={{ mt: 1 }} data-testid="form">
+          <Box component="form" noValidate onSubmit={(e) => handleSubmit(e)} sx={{ mt: 1 }} data-testid="form">
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -463,5 +464,5 @@ export default Signup;
 
 Signup.propTypes = {
   user: PropTypes.string.isRequired,
-  handleSignUp: PropTypes.func.isRequired
+  handleSignin: PropTypes.func.isRequired
 };

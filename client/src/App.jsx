@@ -10,7 +10,7 @@ import Main from './components/Home/Main.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
 import RequestDash from './components/RequestDashActual/RequestDash.jsx';
-import RequestStatus from './components/RequestDash/RequestStatus.jsx';
+import RequestStatus from './components/RequestStatus/RequestStatus.jsx';
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
 import testData from './testData'; // temporary test data
@@ -59,7 +59,6 @@ class App extends React.Component {
     };
     this.handlePostRun = this.handlePostRun.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
-    this.handleSignUp = this.handleSignUp.bind(this);
     this.handlelogout = this.handlelogout.bind(this);
     this.refreshData = this.refreshData.bind(this);
   }
@@ -97,16 +96,6 @@ class App extends React.Component {
     } catch (e) {
       this.setState({ warning: true });
     }
-  }
-
-  handleSignUp(e, loginData) {
-    e.preventDefault();
-    localStorage.setItem('user', loginData.username);
-    localStorage.setItem('userphoto', loginData.avatar_url);
-    this.setState({
-      user: loginData.username,
-      userPhoto: loginData.avatar_url
-    });
   }
 
   async handlelogout() {
@@ -239,7 +228,7 @@ class App extends React.Component {
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
-            <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
+            <Route path="/signup" element={<Signup handleSignin={this.handleSignin} user={user} />} />
             <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} warning={warning} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
@@ -248,9 +237,9 @@ class App extends React.Component {
             <Route path="/requestDash" element={<RequestDash errands={errands} />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
-            <Route path="/requestStatus" element={<RequestStatus user={user} />} />
-            <Route path="/profile" element={<ProfilePopover user="organicrabbit525" />} />
-            <Route path="/profilemain" element={<ProfileMain />} />
+            <Route path="/requestStatus" element={<RequestStatus user={user} errands={errands} users={users} locations={locations} />} />
+            <Route path="/profile" element={<ProfilePopover user={user} themeColor="primary" />} />
+            <Route path="/profilemain" element={<ProfileMain user={user} />} />
             <Route path="*" element={<Error />} />
           </Routes>
           {user ? <Footer /> : null}

@@ -1,7 +1,16 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import 'regenerator-runtime/runtime';
+import {
+  render,
+  screen,
+  fireEvent
+} from '@testing-library/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
+import ProfilePopover from '../../client/src/components/Profile/ProfilePopover.jsx';
 import ProfileCard from '../../client/src/components/Profile/ProfileCard.jsx';
 
+const tempUser = 'purplerabbit400';
 const mockHandleClose = jest.fn();
 const mockCurrentUser = {
   coordinates: {
@@ -138,56 +147,56 @@ const mockCurrentUser = {
   }],
   __v: 0
 };
+const theme = responsiveFontSizes(createTheme({
+  palette: {
+    primary: {
+      main: '#C85CDB',
+    },
+    secondary: {
+      main: '#5FC6C9',
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto'
+  },
+}));
 
-describe('<ProfileCard />', () => {
+describe('<ProfilePopover />', () => {
   let component;
   beforeEach(() => {
     component = render(
-      <ProfileCard
-        handleClose={mockHandleClose}
-        currentUser={mockCurrentUser}
-      />
+      <ThemeProvider theme={theme}>
+        <Router>
+          <ProfilePopover
+            user={tempUser}
+            themeColor="primary"
+          >
+            <ProfileCard
+              handleClose={mockHandleClose}
+              currentUser={mockCurrentUser}
+              themeColor="primary"
+            />
+          </ProfilePopover>
+        </Router>
+      </ThemeProvider>
     );
   });
 
-  it('Renders Profile Card component', () => {
+  it('Renders view profile button', async () => {
+    const viewProfileButton = await screen.findByRole('button', {
+      name: /view profile/i
+    });
     expect(component).toBeDefined();
+    expect(viewProfileButton).toBeInTheDocument();
   });
-  it('Has an X button to close the modal', () => {
-    const closeButton = screen.getByTestId('CloseIcon');
-    expect(closeButton).toBeInTheDocument();
-  });
-  it('Can close the modal by clicking the X button', () => {
-    const closeButton = screen.getByTestId('CloseIcon');
-    fireEvent.click(closeButton);
-    expect(mockHandleClose).toHaveBeenCalledTimes(1);
-  });
-  it('Displays a User avatar', () => {
-    const userAvatar = screen.getByAltText('profile image');
-    expect(userAvatar).toBeInTheDocument();
-  });
-  it('Displays a User name', () => {
-    const userNameDisplay = screen.getByRole('heading', {
+  it('Popover opens when button is clicked', async () => {
+    const viewProfileButton = await screen.findByRole('button', {
+      name: /view profile/i
+    });
+    fireEvent.click(viewProfileButton);
+    const userNameDisplay = await screen.findByRole('heading', {
       name: 'Darryl'
     });
     expect(userNameDisplay).toBeInTheDocument();
-  });
-  it('Displays a User location', () => {
-    const userLocationDisplay = screen.getByRole('heading', {
-      name: 'San Francisco'
-    });
-    expect(userLocationDisplay).toBeInTheDocument();
-  });
-  it('Displays a User biography', () => {
-    const userBioDisplay = screen.getByRole('heading', {
-      name: mockCurrentUser.bio
-    });
-    expect(userBioDisplay).toBeInTheDocument();
-  });
-  it('Displays previous Runs or Requests', () => {
-    const userBioDisplay = screen.getByRole('heading', {
-      name: mockCurrentUser.bio
-    });
-    expect(userBioDisplay).toBeInTheDocument();
   });
 });

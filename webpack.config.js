@@ -7,7 +7,7 @@ const outputDir = path.join(__dirname, 'client/dist');
 
 module.exports = {
 
-  entry: ['regenerator-runtime/runtime.js', entryDir],
+  entry: entryDir,
 
   cache: false,
   output: {
