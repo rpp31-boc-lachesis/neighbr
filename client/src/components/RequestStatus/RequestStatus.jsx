@@ -91,6 +91,16 @@ export default function RequestStatus(props) {
         console.error(err);
       });
 
+    if (runner) {
+      axios.get(`/users/${runner}`)
+        .then((results) => {
+          console.log('runner data: ', results);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+
     for (let i = 0; i < locations.length; i += 1) {
       if (locations[i]._id === pickup.locationId) {
         setPickupData(locations[i]);
@@ -244,7 +254,7 @@ export default function RequestStatus(props) {
         sx={sx}
       >
         <Grid item xs={4} justifyContent="flex-end">
-          {accepted ? <RunnerContainer setDone={setDone} handleOpen={handleOpen} handleClose={handleClose} runner={runner} open={open} progress={progress} setValue={setValue} setHover={setHover} value={value} hover={hover} runnerUsername={runner.username} /> : <Typography variant="caption">No runner yet!</Typography>}
+          {accepted ? <RunnerContainer setDone={setDone()} handleOpen={handleOpen()} handleClose={handleClose()} runner={runner} open={open} progress={progress} setValue={setValue()} setHover={setHover()} value={value} hover={hover} runnerUsername={runner.username} /> : <Typography variant="caption">No runner yet!</Typography>}
         </Grid>
         <Grid item>
           <Typography variant="h5">

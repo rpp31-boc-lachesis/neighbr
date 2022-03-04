@@ -9,6 +9,8 @@ import ReviewModal from './ReviewModal.jsx';
 import ProfilePopover from '../Profile/ProfilePopover.jsx';
 
 export default function RunnerContainer(props) {
+  console.log('PROPS: ', props);
+
   const {
     handleOpen, handleClose, runner, open, progress, setValue, value, setHover, hover,
     runnerUsername
@@ -31,7 +33,7 @@ export default function RunnerContainer(props) {
           &nbsp;
           {runner.last_name}
         </Typography>
-        <ProfilePopover user={runner.username} />
+        <ProfilePopover user="jake" themeColor="primary" />
         <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
         <Modal
           open={open}
