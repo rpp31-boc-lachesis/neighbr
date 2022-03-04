@@ -23,7 +23,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 import LocationAutoComplete from '../RunnerDash/LocationAutocomplete.jsx';
 import searchLocation from '../RunnerDash/searchLocation.js';
 
-function Signup({ user, handleSignUp }) {
+function Signup({ user, handleSignin }) {
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -56,7 +56,7 @@ function Signup({ user, handleSignUp }) {
       zip: ''
     }
   );
-  const [loginData, setLoginData] = useState({ username: '', password: '', avatar_url: '' });
+  const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [proximity, setProximity] = useState(null);
   // const validate = () => {
@@ -96,6 +96,7 @@ function Signup({ user, handleSignUp }) {
       // console.log(data.formInput);
       axios.post('/signup', data.formInput)
         .then((response) => {
+          handleSignin(loginData);
           console.log(response.data);
         })
         .catch((err) => {
@@ -148,7 +149,7 @@ function Signup({ user, handleSignUp }) {
     event.preventDefault();
   };
 
-  const uploadImage = (e) => {
+  const uploadImage = async (e) => {
     const file = e.target.files;
     const data = new FormData();
     data.append('file', file[0]);
@@ -156,26 +157,28 @@ function Signup({ user, handleSignUp }) {
     // specific to cloudinary
 
     // setLoading(true);
-    const res = fetch(
+    const res = await fetch(
       'https://api.cloudinary.com/v1_1/dkztds7yn/image/upload',
       {
         method: 'Post',
         body: data
       }
-    ).then((response) => response.json()).then((resData) => {
-      const name = 'avatar_url';
-      const value = resData.secure_url;
-      setFormInput({ [name]: value });
-      setLoginData({ ...loginData, [name]: value });
-    });
+    );
+    const resFile = await res.json();
+    const name = 'avatar_url';
+    const value = resFile.secure_url;
+    // console.log(value);
+    setFormInput({ [name]: value });
+    setLoginData({ ...loginData, [name]: value });
   };
   useEffect(() => {
-  }, [loginData]);
+    // uploadImage();
+  }, [formInput.avatar_url]);
 
   useEffect(() => {
     if (formInput.zip.length >= 5) {
       searchLocation(formInput.zip, null,)
-        .then((res) => res.json())
+        .then((res) => res.data)
         .then((result) => {
           setProximity(result.features[0].center);
         })
@@ -216,7 +219,7 @@ function Signup({ user, handleSignUp }) {
             Sign Up
           </Typography>
           { user && (<Navigate to="/main" replace />)}
-          <Box component="form" noValidate onSubmit={(e) => { handleSubmit(e); handleSignUp(e, loginData); }} sx={{ mt: 1 }} data-testid="form">
+          <Box component="form" noValidate onSubmit={(e) => handleSubmit(e)} sx={{ mt: 1 }} data-testid="form">
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -463,5 +466,5 @@ export default Signup;
 
 Signup.propTypes = {
   user: PropTypes.string.isRequired,
-  handleSignUp: PropTypes.func.isRequired
+  handleSignin: PropTypes.func.isRequired
 };
