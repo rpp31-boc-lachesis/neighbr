@@ -1,4 +1,5 @@
 import { render, fireEvent } from '@testing-library/react';
+import regeneratorRuntime from 'regenerator-runtime';
 import React from 'react';
 import {
   MemoryRouter
