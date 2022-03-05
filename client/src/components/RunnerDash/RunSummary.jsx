@@ -7,12 +7,13 @@ import Grid from '@mui/material/Grid';
 import ErrandCard from './ErrandCard.jsx';
 
 const RunSummary = function(props) {
-  const { run, user, refreshData } = props;
+  const { run, user, refreshData, setRun } = props;
   const { errands } = run.location;
 
   const currentErrands = errands.filter((errand) => !run.declinedErrands.includes(errand._id));
   let errandCards = currentErrands.map((errand) => (
     <ErrandCard
+      setRun={setRun}
       refreshData={refreshData}
       runId={run._id}
       errand={errand}
@@ -24,6 +25,7 @@ const RunSummary = function(props) {
   React.useEffect(() => {
     errandCards = currentErrands.map((errand) => (
       <ErrandCard
+        setRun={setRun}
         refreshData={refreshData}
         runId={run._id}
         errand={errand}
