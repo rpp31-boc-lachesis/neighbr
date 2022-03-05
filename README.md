@@ -91,7 +91,7 @@ Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, We
 - Michael Lapid - UI Owner
 * [![linkedin](https://img.shields.io/badge/Michael.Lapid-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)
 - Yitong Liu - Software Engineer
-* [![linkedin](https://img.shields.io/badge/Yitong.Lui-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
+* [![linkedin](https://img.shields.io/badge/Yitong.Liu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
 - Maxine Majnaric - Software Engineer
 * [![linkedin](https://img.shields.io/badge/Maxine.Majnaric-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)
 - Mary Miyamoto - Software Engineer
