@@ -27,7 +27,7 @@ const BORDER_PX = '0px'
 
 
 function RunnerList(props) {
-  const { runs, locations } = props;
+  const { runs, locations, errands, user, handleRequestErrand, refreshData} = props;
   console.log('in RunsList', 'RUNS', runs);
   console.log('in RunsList', 'LOCATIONS', locations);
 
@@ -129,7 +129,7 @@ function RunnerList(props) {
           >
                 <Typography>Map</Typography>
           </Box>
-            <DestinationDetail runDetail={runDetail} />
+            <DestinationDetail runDetail={runDetail} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
           {/* </Box> */}
         </Stack>
         </Grid>

@@ -16,7 +16,8 @@ import ProfilePopover from '../Profile/ProfilePopover.jsx';
 import AddRequestModal from './addRequestModal.jsx';
 
 
-function DestinationDetail({runDetail}) {
+function DestinationDetail(props) {
+const {handlePostErrand, refreshData, runDetail} = props
 
   if (runDetail === null) {
     return (
@@ -30,8 +31,8 @@ function DestinationDetail({runDetail}) {
   }
 
     const { startTime, endTime, date, location, transportation, user } = runDetail;
-    const { placeText } = location;
-    const { username } = user;
+    const { placeText } = location; //location
+    const { username } = user; //runner
 
     const startTimeEvent = new Date(startTime).toLocaleTimeString()
     const dateEvent = new Date(date).toLocaleDateString()
@@ -63,7 +64,7 @@ function DestinationDetail({runDetail}) {
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 {/* link to requestStatus */}
-                <AddRequestModal run={runDetail}/>
+                <AddRequestModal run={runDetail} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
                 {/* <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
                 <Button>Request</Button>
                 </RouterLink> */}
