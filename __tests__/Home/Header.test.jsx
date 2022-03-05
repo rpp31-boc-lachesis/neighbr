@@ -36,6 +36,7 @@ describe('Unit test', () => {
     expect(screen.queryByRole('link', { name: 'Neighbr' })).toBeInTheDocument();
   });
   it('Renders user\'s profile photo', () => {
+    screen.debug();
     render(
       <MemoryRouter>
         <Header user={user} userPhoto={photo} logout={mockLogout} />
