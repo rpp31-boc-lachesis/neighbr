@@ -26,9 +26,9 @@ const style = {
 };
 
 export default function AddRequestModal(props) {
-  const {run} = props
-  const {startTime, endTime } = run
-  console.log(run)
+  const { run } = props
+  const { startTime, endTime, transportation, _id, user, location} = run
+  // console.log('addRequesetModal', run)
 
   const [open, setOpen] = React.useState(false);
 
@@ -39,15 +39,16 @@ export default function AddRequestModal(props) {
   const [message, setMessage] = React.useState('');
   const [pickup, setPickup] = React.useState(''); // use locationId
   const [dropoff, setDropoff] = React.useState('') // use address thing
+  const [note, setNote] = React.useState('') // use address thing
   const [date, setDate] = React.useState(new Date());
   // const [startTime, setStart] = React.useState(startTime);
   // const [endTime, setEnd] = React.useState(endTime);
   const [requester, setRequester] = React.useState(''); // use current user
 
   const [zip, setZip] = React.useState('');
-  const [location, setLocation] = React.useState('');
+  // const [location, setLocation] = React.useState(''); //this location is the pickup, not dropoff
   const [proximity, setProximity] = React.useState(null);
-  // const { handlePostErrand, refreshData } = props;
+  const { handlePostErrand, refreshData } = props;
   // let Value;
 
   React.useEffect(() => {
@@ -66,7 +67,7 @@ export default function AddRequestModal(props) {
   const handleClose = () => setOpen(false);
 
   const handleLocChange = (value) => {
-    setLocation(value);
+    setDropoff(value);
   };
 
   const handleSubmit = (e) => {
@@ -75,45 +76,46 @@ export default function AddRequestModal(props) {
     const errand = {
       category: '',
       accepted: false,
-      requester: { type: Schema.Types.ObjectId, ref: 'User' },
-      runner: { type: Schema.Types.ObjectId, ref: 'User' },
-      run: { type: Schema.Types.ObjectId, ref: 'Run' },
+      requester: '', //fill in App
+      runner: user._id,
+      run: _id,
       req_items: [
         {
-          item: String,
-          quantity: Number,
-          status: null // ['Cancelled', 'In-Progress', 'Completed']
+          item,
+          quantity,
+          status: 'Pending' // ['Pending', 'Cancelled', 'In-Progress', 'Completed']
         },
       ],
-      weight: weight,
-      size: size,
-      transportation: transportation,
-      message: message,
+      weight,
+      size,
+      transportation,
+      message,
       pickup: {
-        store: String,
-        address: String,
-        locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
+        store: location.placeText,
+        address: location.address,
+        locationId: location._id,
       },
       dropoff: {
-        address: '',
-        note: '',
-        locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
+        address: dropoff, //fill with new. if empty, then fill in app
+        note,
+        // locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
       },
-      date: date,
+      date,
       start_time: startTime,
       end_time: endTime,
-      given_rating: {
-        runner: { type: Schema.Types.ObjectId, ref: 'User' },
-        rating: null
-      },
+      // given_rating: {
+      //   runner: 'runnerName',
+      //   rating: null
+      // },
     };
-    handlePostErrand(errand, location) //location?
-      .then(() => {
+    console.log(errand)  //testing
+    handlePostErrand(errand) //location?
+      // .then(() => {
         handleClose();
-      })
-      .then(() => {
+      // })
+      // .then(() => {
         refreshData();
-      });
+      // });
   };
 
   const handleZipChange = (e) => {
@@ -132,16 +134,6 @@ export default function AddRequestModal(props) {
             Enter Your Request
           </DialogTitle>
           <DialogContent sx={style}>
-            {/* form<br/><br/>
-
-            info that goes here:<br/>
-            req_items: form<br/>
-              item: form<br/>
-              quantity: form<br/>
-            weight: form string<br/>
-            size: pulldown string<br/>
-            message: form string<br/>
-            dropoff: either user current address or enter address<br/> */}
             <TextField
               required
               fullWidth
@@ -171,6 +163,12 @@ export default function AddRequestModal(props) {
               onChange={(e) => setSize(e.target.value)}
             />
             <TextField
+              fullWidth
+              label="Message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+            <TextField
               required
               fullWidth
               id="zip"
@@ -179,57 +177,31 @@ export default function AddRequestModal(props) {
               onChange={handleZipChange}
             />
             <LocationAutocomplete proximity={proximity} handleLocChange={handleLocChange} />
+            <TextField
+              fullWidth
+              label="Drop-off Address"
+              value={dropoff}
+              onChange={(e) => setDropoff(e.target.value)}
+            />
+            <TextField
+              fullWidth
+              label="Delivery Note"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
           </DialogContent>
           <DialogActions>
-            {/* <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus"> */}
+            <RouterLink style={{ textDecoration: 'none' }}
+            // to="/requestStatus"
+            to="/requestDash"
+            // state={} //if to requestStatus, pass errand id
+            >
 
             <Button onClick={handleSubmit} variant="contained">Submit Request</Button>
-            {/* </RouterLink> */}
+            </RouterLink>
           </DialogActions>
         </Dialog>
       </LocalizationProvider>
     </div>
   );
 }
-
-/*
-const errandSchema = Schema({
-  category: String,
-  accepted: { type: Boolean, default: false },
-  requester: { type: Schema.Types.ObjectId, ref: 'User' },
-  runner: { type: Schema.Types.ObjectId, ref: 'User' },
-  run: { type: Schema.Types.ObjectId, ref: 'Run' },
-  req_items: [
-    {
-      item: String,
-      quantity: Number,
-      status: String // ['Cancelled', 'In-Progress', 'Completed']
-    },
-  ],
-  weight: String,
-  size: String,
-  transportation: String,
-  message: String,
-  pickup: {
-    store: String,
-    address: String,
-    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
-  },
-  dropoff: {
-    address: String,
-    note: String,
-    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
-  },
-  date: Date,
-  start_time: Date,
-  end_time: Date,
-  given_rating: {
-    runner: { type: Schema.Types.ObjectId, ref: 'User' },
-    rating: Number
-  },
-});
-
-
-
-
-*/

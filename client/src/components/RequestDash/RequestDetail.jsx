@@ -46,15 +46,10 @@ function RequestDetail({requestDetail}) {
     if (runner) {
       axios.get(`/user/${runner}`)
         .then((results) => {
-          console.log('RUNNER RESULTS: ', results.data[0]);
+          // console.log('RUNNER RESULTS: ', results.data[0]);
           setRunnerAvatar(results.data[0].avatar_url);
           setRunnerUsername(results.data[0].username);
           // setRunnerFullname(`${results.data[0].first_name} ${results.data[0].last_name}`);
-        })
-        .then(() => {
-          console.log('runner avatar: ', runnerAvatar);
-          console.log('runner username: ', runnerUsername);
-        //   console.log('runner fullname: ', runnerFullname);
         })
         .catch((err) => {
           console.error(err);

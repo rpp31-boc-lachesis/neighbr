@@ -64,7 +64,7 @@ const {handlePostErrand, refreshData, runDetail} = props
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 {/* link to requestStatus */}
-                <AddRequestModal run={runDetail} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
+                <AddRequestModal run={runDetail} location={location} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
                 {/* <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
                 <Button>Request</Button>
                 </RouterLink> */}
