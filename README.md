@@ -90,7 +90,7 @@ Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, We
 * [![linkedin](https://img.shields.io/badge/Josh.Fuqua-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)
 - Michael Lapid - UI Owner
 * [![linkedin](https://img.shields.io/badge/Michael.Lapid-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)
-- Yitong Lui - Software Engineer
+- Yitong Liu - Software Engineer
 * [![linkedin](https://img.shields.io/badge/Yitong.Lui-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
 - Maxine Majnaric - Software Engineer
 * [![linkedin](https://img.shields.io/badge/Maxine.Majnaric-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)
@@ -104,17 +104,17 @@ Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, We
 * ### **Authorization / Authentication flow**
    ![auth-neighbr](https://user-images.githubusercontent.com/64869554/156875923-9b985bb9-a6f3-4555-9de4-7568256281fe.jpg)
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 
 ## 🔊 Special Acknowledgements
  - [Hack Reactor](https://www.hackreactor.com/)
