@@ -13,15 +13,17 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import ProfilePopover from '../Profile/ProfilePopover.jsx';
+import AddRequestModal from './addRequestModal.jsx';
 
 
-function DestinationDetail({runDetail}) {
+function DestinationDetail(props) {
+const {handlePostErrand, refreshData, runDetail} = props
 
   if (runDetail === null) {
     return (
 <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#5FC6C9'}}>
               Select run for details
             </Box>
             </>
@@ -29,8 +31,8 @@ function DestinationDetail({runDetail}) {
   }
 
     const { startTime, endTime, date, location, transportation, user } = runDetail;
-    const { placeText } = location;
-    const { username } = user;
+    const { placeText } = location; //location
+    const { username } = user; //runner
 
     const startTimeEvent = new Date(startTime).toLocaleTimeString()
     const dateEvent = new Date(date).toLocaleDateString()
@@ -38,9 +40,9 @@ function DestinationDetail({runDetail}) {
   return (
   <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#5FC6C9'}}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue', alignItems:'top' }}>
-                <div className="entryColumn" alignSelf="flex-start">
+                <div className="entryColumn" alignself="flex-start">
                 <div className="detailItem topLineLeft">
                   <div className="locationNumber">1</div>
                     {placeText}
@@ -49,10 +51,10 @@ function DestinationDetail({runDetail}) {
                   <div className="detailItem">Date: {dateEvent}</div>
                 </div>
                 <div className="entryColumn">
-                <RouterLink style={{ textDecoration: 'none' }} to="/main">
+                {/* <RouterLink style={{ textDecoration: 'none' }} to="/main"> */}
                 <Avatar variant="contained" alt="Haylie Schleifer" src={user.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                <ProfilePopover users={user.username} />
-                </RouterLink>
+                <ProfilePopover user={user.username} themeColor='secondary'/>
+                {/* </RouterLink> */}
                   <div className="detailItem textEnd topLineRight">{username}</div>
                   <div className="detailItem textEnd">By: {transportation}
                   </div>
@@ -61,9 +63,12 @@ function DestinationDetail({runDetail}) {
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
-                <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
+                {/* link to requestStatus */}
+                <AddRequestModal run={runDetail} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
+                {/* <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
                 <Button>Request</Button>
-                </RouterLink>
+                </RouterLink> */}
+
                 {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>
@@ -76,3 +81,10 @@ function DestinationDetail({runDetail}) {
 }
 
 export default DestinationDetail;
+
+
+//on request button
+  //modal to request form
+
+  //on accept of request form
+    //go to summary?

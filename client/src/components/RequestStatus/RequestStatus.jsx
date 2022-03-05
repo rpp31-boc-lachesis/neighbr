@@ -167,6 +167,8 @@ export default function RequestStatus(props) {
     );
   }
 
+  // console.log('outside', state)
+
   return (
     <Container fixed maxWidth="md" sx={{ pb: 10 }}>
       <Typography

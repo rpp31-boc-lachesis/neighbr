@@ -27,6 +27,7 @@ const {
   getAllErrands,
   getErrandById,
   addErrand,
+  postErrand,
   acceptErrand
 } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
@@ -65,7 +66,8 @@ app.post('/runs/updateNoMap', updateRunNoMap);
 
 app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
-app.post('/errands/create', addErrand);
+app.post('/errands/create', addErrand); //in use
+app.post('/errands/post', postErrand);
 app.post('/errands/accept', acceptErrand);
 
 app.get('/login', (req, res) => {

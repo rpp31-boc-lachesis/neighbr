@@ -15,7 +15,6 @@ export default function RunnerContainer(props) {
     handleOpen, handleClose, runnerAvatar, runnerFullname, open, progress, setValue, value,
     setHover, hover, runnerUsername, setDone, setGivenRating, givenRating
   } = props;
-
   return (
     <Grid item xs={4}>
       <Box sx={{
