@@ -54,7 +54,7 @@ export default function RequestStatus(props) {
   const [pickupData, setPickupData] = React.useState({});
   const [done, setDone] = React.useState(false);
   const [dropoff, setDropoff] = React.useState(null);
-  // const [dropoffNote, setDropoffNote] = React.useState(null);
+  const [dropoffNote, setDropoffNote] = React.useState(null);
   // const [runner, setRunner] = React.useState({});
   const [progress, setProgress] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -62,6 +62,9 @@ export default function RequestStatus(props) {
   // const [hover, setHover] = React.useState(-1);
   // const [mouseover, setMouseover] = React.useState(false);
   // const [editMode, setEditMode] = React.useState(false);
+  const [runnerFullname, setRunnerFullname] = React.useState('');
+  const [runnerAvatar, setRunnerAvatar] = React.useState('');
+  const [runnerUsername, setRunnerUsername] = React.useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const cart = useLocation().state.req_items || [];
@@ -76,36 +79,66 @@ export default function RequestStatus(props) {
     transportation, category
   } = useLocation().state;
 
+  console.log('entire state: ', useLocation().state);
+
+  for (let i = 0; i < locations.length; i += 1) {
+    if (locations[i]._id === pickup.locationId) {
+      setPickupData(locations[i]);
+      console.log('pickup data: ', locations[i]);
+    }
+  }
+
+  if (runner) {
+    axios.get(`/user/${runner}`)
+      .then((results) => {
+        setRunnerAvatar(results.data[0].avatar_url);
+        setRunnerUsername(results.data[0].username);
+        setRunnerFullname(`${results.data[0].first_name} ${results.data[0].last_name}`);
+      })
+      .then(() => {
+        console.log('avatar, username, fullname: ', runnerAvatar, runnerUsername, runnerFullname);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
+  axios.get(`/users/${user}`)
+    .then((results) => {
+      const dropoffAddress = `${results.data[0].street_address}, ${results.data[0].city}, ${results.data[0].state} ${results.data[0].zip}`;
+      setDropoff(dropoffAddress);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+
+  const progressTotal = cart.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
+  let accum = 0;
+
+  for (let i = 0; i < cart.length; i += 1) {
+    if (cart[i].status === 'Cancelled') {
+      accum += 0;
+    } else if (cart[i].status === 'In-Progress') {
+      accum += 50;
+    } else if (cart[i].status === 'Completed') {
+      accum += 100;
+    }
+  }
+
+  const isAccepted = () => {
+    if (accepted) {
+      return (accum / progressTotal) * 100;
+    }
+    return 0;
+  };
+
+  setProgress(isAccepted());
+
   React.useEffect(() => {
     // const newEndTime = `${new Date(endTime)}`;
     // setPromisedBy(newEndTime);
 
     // axios.get(`/users/${user}`)
-    axios.get(`/users/${user}`)
-      .then((results) => {
-        const dropoffAddress = `${results.data[0].street_address}, ${results.data[0].city}, ${results.data[0].state} ${results.data[0].zip}`;
-        setDropoff(dropoffAddress);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    if (runner) {
-      axios.get(`/users/${runner}`)
-        .then((results) => {
-          console.log('runner data: ', results);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-
-    for (let i = 0; i < locations.length; i += 1) {
-      if (locations[i]._id === pickup.locationId) {
-        setPickupData(locations[i]);
-        console.log('pickup data: ', locations[i]);
-      }
-    }
 
     // axios.get(`/requestStatus/${errandData._id}`)
     //   .then((results) => {
@@ -118,27 +151,6 @@ export default function RequestStatus(props) {
     //         console.error(err);
     //       });
 
-    const progressTotal = cart.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
-    let accum = 0;
-
-    for (let i = 0; i < cart.length; i += 1) {
-      if (cart[i].status === 'Cancelled') {
-        accum += 0;
-      } else if (cart[i].status === 'In-Progress') {
-        accum += 50;
-      } else if (cart[i].status === 'Completed') {
-        accum += 100;
-      }
-    }
-
-    const isAccepted = () => {
-      if (accepted) {
-        return (accum / progressTotal) * 100;
-      }
-      return 0;
-    };
-
-    setProgress(isAccepted());
   }, []);
 
   const sx = {
@@ -253,8 +265,10 @@ export default function RequestStatus(props) {
         sx={sx}
       >
         <Grid item xs={4} justifyContent="flex-end">
-          {accepted ? <RunnerContainer runner={runner} open={open} progress={progress} setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose} runnerUsername={runner.username} /> : <Typography variant="caption">No runner yet!</Typography>}
-          {/* setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose} setValue={setValue} setHover={setHover} */}
+          {accepted ? <RunnerContainer runnerAvatar={runnerAvatar} runnerFullname={runnerFullname} runnerUsername={runnerUsername} open={open} progress={progress} /> : <Typography variant="caption">No runner yet!</Typography>}
+          {/* setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose}  */}
+          {/* setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose}
+          setValue={setValue} setHover={setHover} */}
         </Grid>
         <Grid item>
           <Typography variant="h5">

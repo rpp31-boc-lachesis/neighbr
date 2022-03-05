@@ -12,7 +12,7 @@ export default function RunnerContainer(props) {
   console.log('PROPS: ', props);
 
   const {
-    handleOpen, handleClose, runner, open, progress, setValue, value, setHover, hover,
+    handleOpen, handleClose, runnerAvatar, runnerFullname, open, progress, setValue, value, setHover, hover,
     runnerUsername
   } = props;
 
@@ -27,13 +27,11 @@ export default function RunnerContainer(props) {
         height: 175
       }}
       >
-        <Avatar variant="contained" alt="Haylie Schleifer" src={runner.avatar_url} sx={{ width: '80px', height: '80px' }} />
+        <Avatar variant="contained" alt={runnerFullname} src={runnerAvatar} sx={{ width: '80px', height: '80px' }} />
         <Typography variant="subtitle2">
-          {runner.first_name}
-          &nbsp;
-          {runner.last_name}
+          {runnerFullname}
         </Typography>
-        <ProfilePopover user="jake" themeColor="primary" />
+        <ProfilePopover user={runnerUsername} themeColor="primary" />
         <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
         <Modal
           open={open}
@@ -43,10 +41,10 @@ export default function RunnerContainer(props) {
         >
           <ReviewModal
             progress={progress}
-            setValue={setValue}
-            setHover={setHover}
-            value={value}
-            hover={hover}
+            // setValue={setValue}
+            // setHover={setHover}
+            // value={value}
+            // hover={hover}
             runnerUsername={runnerUsername}
           />
         </Modal>
