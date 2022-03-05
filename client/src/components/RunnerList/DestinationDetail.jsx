@@ -53,7 +53,7 @@ const {handlePostErrand, refreshData, runDetail} = props
                 <div className="entryColumn">
                 {/* <RouterLink style={{ textDecoration: 'none' }} to="/main"> */}
                 <Avatar variant="contained" alt="Haylie Schleifer" src={user.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                <ProfilePopover user={user.username} themeColor='primary'/>
+                <ProfilePopover user={user.username} themeColor='secondary'/>
                 {/* </RouterLink> */}
                   <div className="detailItem textEnd topLineRight">{username}</div>
                   <div className="detailItem textEnd">By: {transportation}

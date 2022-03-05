@@ -53,7 +53,7 @@ function RequestDetail({requestDetail}) {
                 </div>
                 <div className="entryColumn">
                 <Avatar variant="contained" alt="Haylie Schleifer" src={requester.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                <ProfilePopover user={requester.username} themeColor='primary' />
+                <ProfilePopover user={requester.username} themeColor='secondary' />
                   <div className="detailItem textEnd topLineRight">Your Runner</div>
                   <div className="detailItem textEnd">---</div>
                   <div className="detailItem textEnd">Message: {message}</div>
