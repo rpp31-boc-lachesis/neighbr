@@ -27,7 +27,7 @@ const BORDER_PX = '0px';
 
 function RequestDash(props) {
   const { errands } = props;
-  console.log('in RequestDash', 'ERRANDS', errands);
+  // console.log('in RequestDash', 'ERRANDS', errands);
 
   const [requestDetail, setRequestDetail] = useState(null);
 
@@ -49,7 +49,15 @@ function RequestDash(props) {
     setRequestDetail(request);
   };
 
+  // let pending = '';
 
+  // pending = errands.map((errand) => {
+  //   if (errand.requester.username === testLoggedInUser
+  //     && errand.accepted === false) {
+  //     return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand.id} />);
+  // }})
+
+  // console.log(pending)
 
   return (
     <Container maxwidth="sm" sx={{ border: `${BORDER_PX} dashed red` }}>
@@ -68,10 +76,35 @@ function RequestDash(props) {
         <Grid item xs={4} sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }}>
           {/* <Typography variant='h5'>Current Runs</Typography> */}
           <Stack spacing={2} sx={{ height: '550px', overflow: 'overlay', border: `${BORDER_PX} solid blue` }}>
+            Pending
           {
             errands.map((errand) => {
-              if (errand.requester.username === testLoggedInUser) {
-                return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand.id} />);
+              // console.log('pending - false', errand.requester.username, errand.accepted)
+              if (errand.requester.username === testLoggedInUser
+                && errand.accepted === false) {
+                return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand._id} />);
+              }
+            })
+          }
+            Accepted
+          {
+            errands.map((errand) => {
+              // console.log('accept - true', errand.requester.username, errand.accepted)
+              if (errand.requester.username === testLoggedInUser
+                && errand.accepted === true
+                && errand.req_items[0].status === 'In-Progress') {
+                return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand._id} />);
+              }
+            })
+          }
+            Complete
+          {
+            errands.map((errand) => {
+              // console.log(errand.requester.username, errand.req_items[0].status)
+              if (errand.requester.username === testLoggedInUser
+                && errand.accepted === true
+                && errand.req_items[0].status === 'Completed') {
+                return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand._id} />);
               }
             })
           }
@@ -110,3 +143,41 @@ function RequestDash(props) {
 }
 
 export default RequestDash;
+
+/*
+const errandSchema = Schema({
+  category: String,
+  accepted: { type: Boolean, default: false },
+  requester: { type: Schema.Types.ObjectId, ref: 'User' },
+  runner: { type: Schema.Types.ObjectId, ref: 'User' },
+  run: { type: Schema.Types.ObjectId, ref: 'Run' },
+  req_items: [
+    {
+      item: String,
+      quantity: Number,
+      status: String // ['Cancelled', 'In-Progress', 'Completed']
+    },
+  ],
+  weight: String,
+  size: String,
+  transportation: String,
+  message: String,
+  pickup: {
+    store: String,
+    address: String,
+    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
+  },
+  dropoff: {
+    address: String,
+    note: String,
+    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
+  },
+  date: Date,
+  start_time: Date,
+  end_time: Date,
+  given_rating: {
+    runner: { type: Schema.Types.ObjectId, ref: 'User' },
+    rating: Number
+  },
+});
+*/

@@ -9,7 +9,7 @@ import Footer from './components/Home/Footer.jsx';
 import Main from './components/Home/Main.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
-import RequestDash from './components/RequestDashActual/RequestDash.jsx';
+import RequestDash from './components/RequestDash/RequestDash.jsx';
 import RequestStatus from './components/RequestStatus/RequestStatus.jsx';
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
@@ -56,6 +56,7 @@ class App extends React.Component {
       currentRun: null,
     };
     this.handlePostRun = this.handlePostRun.bind(this);
+    this.handlePostErrand = this.handlePostErrand.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
     this.handlelogout = this.handlelogout.bind(this);
     this.refreshData = this.refreshData.bind(this);
@@ -77,6 +78,21 @@ class App extends React.Component {
       .then((r) => r.data.data)
       .then((response) => {
         this.setState({ lastRun: response });
+      })
+      .catch((err) => console.error(err));
+  }
+
+  handlePostErrand(errand, location) {
+    const { user } = this.state;
+    const combined = { errand, location };
+    combined.errand.requester = user;
+    return axios.post('/errands/post', {
+      data: combined,
+
+    })
+      .then((r) => r.data.data)
+      .then((response) => {
+        // this.setState({ lastRun: response });
       })
       .catch((err) => console.error(err));
   }
@@ -228,7 +244,7 @@ class App extends React.Component {
     return (
       <ThemeProvider theme={theme}>
         <Router>
-          {/* <TestingMenu /> */}
+          <TestingMenu />
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
@@ -236,12 +252,12 @@ class App extends React.Component {
             <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} warning={warning} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
-            <Route path="/runnerList" element={<RunnerList runs={runs} locations={locations} />} />
-            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} setRun={this.setRun} currentRun={currentRun} refreshData={this.refreshData} />} />
+            <Route path="/runnerList" element={<RunnerList destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostErrand={this.handlePostErrand} refreshData={this.refreshData} />} />
+            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
             <Route path="/requestDash" element={<RequestDash errands={errands} />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
-            <Route path="/requestStatus" element={<RequestStatus locations={locations} />} />
+            <Route path="/requestStatus" element={<RequestStatus user={user} errands={errands} users={users} locations={locations} />} />
             <Route path="/profile" element={<ProfilePopover user={user} themeColor="primary" />} />
             <Route path="/profilemain" element={<ProfileMain user={user} />} />
             <Route path="*" element={<Error />} />
