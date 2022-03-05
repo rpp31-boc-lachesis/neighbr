@@ -28,8 +28,8 @@ const BORDER_PX = '0px'
 
 function RunnerList(props) {
   const { runs, locations, errands, user, handlePostErrand, refreshData} = props;
-  console.log('in RunsList', 'RUNS', runs);
-  console.log('in RunsList', 'LOCATIONS', locations);
+  // console.log('in RunsList', 'RUNS', runs);
+  // console.log('in RunsList', 'LOCATIONS', locations);
 
   const [runDetail, setRunDetail] = useState(null);
   const [mapCenter, setMapCenter] = useState([-79.4512, 43.6568])
@@ -77,7 +77,7 @@ function RunnerList(props) {
 {/* left column */}
         <Grid container item direction="column" sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }} xs={2}>
 
-          <center>
+          {/* <center>
 
           Filter by:
 <br />
@@ -102,7 +102,7 @@ function RunnerList(props) {
 <br />
           etc
 <br />
-          </center>
+          </center> */}
         </Grid>
 {/* middle column */}
         <Grid item xs={4} sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }}>

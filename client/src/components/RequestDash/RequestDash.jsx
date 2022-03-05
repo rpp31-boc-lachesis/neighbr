@@ -19,17 +19,18 @@ import RequestDetail from './RequestDetail.jsx';
 import css from '../RunnerList/runnerList.css';
 
 //testing
-const testLoggedInUser = 'happycat171';
+// const testLoggedInUser = 'happycat171';
 
 const BORDER_PX = '0px';
 // const BORDER_PX = '1px'
 
 
 function RequestDash(props) {
-  const { errands } = props;
+  const { errands, locations, user} = props;
   // console.log('in RequestDash', 'ERRANDS', errands);
 
   const [requestDetail, setRequestDetail] = useState(null);
+  const [mapCenter, setMapCenter] = useState([-79.4512, 43.6568])
 
   //variation of componentDidMount for hooks
   useEffect(() => {
@@ -38,6 +39,8 @@ function RequestDash(props) {
     const map = new mapboxgl.Map({
       container: 'mapContainer',
       style: 'mapbox://styles/mapbox/streets-v11',
+      center: mapCenter,
+      zoom: 13
     });
     // this.setState({
     //   map,
@@ -45,8 +48,30 @@ function RequestDash(props) {
     // });
   }, []);
 
+
+
   const handleEntryClick = (request) => {
+    // console.log('request:', request)
     setRequestDetail(request);
+    // console.log('rDetail', requestDetail)
+    // // console.log('request location:', request.pickup.locationId)
+    // // console.log('locations', locations[0]._id)
+    // const pickup = locations.find((location) => location._id === request.pickup.locationId)
+    // console.log(pickup.coordinates)
+    // setMapCenter(pickup.coordiantes)
+    // console.log('mapcenter', mapCenter)
+
+    // mapboxgl.accessToken = 'pk.eyJ1Ijoiam9zaGRmdXF1YSIsImEiOiJja3pqa3VrMnMwd3c1MnZwYXlkbzV2eWU0In0.ysBe17NfB-x0MG0O-LAgNA';
+    // const map = new mapboxgl.Map({
+    //   container: 'mapContainer',
+    //   style: 'mapbox://styles/mapbox/streets-v11',
+    //   // center: [-79.4512, 43.6568],
+    //   center: mapCenter,
+    //   zoom: 13
+    // });
+    // const marker1 = new mapboxgl.Marker()
+    //   .setLngLat(mapCenter)
+    //   .addTo(map);
   };
 
   // let pending = '';
@@ -80,7 +105,7 @@ function RequestDash(props) {
           {
             errands.map((errand) => {
               // console.log('pending - false', errand.requester.username, errand.accepted)
-              if (errand.requester.username === testLoggedInUser
+              if (errand.requester.username === user
                 && errand.accepted === false) {
                 return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand._id} />);
               }
@@ -90,7 +115,7 @@ function RequestDash(props) {
           {
             errands.map((errand) => {
               // console.log('accept - true', errand.requester.username, errand.accepted)
-              if (errand.requester.username === testLoggedInUser
+              if (errand.requester.username === user
                 && errand.accepted === true
                 && errand.req_items[0].status === 'In-Progress') {
                 return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand._id} />);
@@ -101,7 +126,7 @@ function RequestDash(props) {
           {
             errands.map((errand) => {
               // console.log(errand.requester.username, errand.req_items[0].status)
-              if (errand.requester.username === testLoggedInUser
+              if (errand.requester.username === user
                 && errand.accepted === true
                 && errand.req_items[0].status === 'Completed') {
                 return (<RequestEntry errand={errand} handleEntryClick={handleEntryClick} key={errand._id} />);
@@ -143,41 +168,3 @@ function RequestDash(props) {
 }
 
 export default RequestDash;
-
-/*
-const errandSchema = Schema({
-  category: String,
-  accepted: { type: Boolean, default: false },
-  requester: { type: Schema.Types.ObjectId, ref: 'User' },
-  runner: { type: Schema.Types.ObjectId, ref: 'User' },
-  run: { type: Schema.Types.ObjectId, ref: 'Run' },
-  req_items: [
-    {
-      item: String,
-      quantity: Number,
-      status: String // ['Cancelled', 'In-Progress', 'Completed']
-    },
-  ],
-  weight: String,
-  size: String,
-  transportation: String,
-  message: String,
-  pickup: {
-    store: String,
-    address: String,
-    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
-  },
-  dropoff: {
-    address: String,
-    note: String,
-    locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
-  },
-  date: Date,
-  start_time: Date,
-  end_time: Date,
-  given_rating: {
-    runner: { type: Schema.Types.ObjectId, ref: 'User' },
-    rating: Number
-  },
-});
-*/
