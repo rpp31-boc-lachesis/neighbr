@@ -15,7 +15,7 @@ export default function ProfilePopover(props) {
     axios.get(`/users/populate/${user}`)
       .then((results) => {
         const oneUser = results.data[0];
-        console.log('CURRENT USER:', oneUser);
+        // console.log('CURRENT USER:', oneUser);
         setCurrentUser(oneUser);
       })
       .catch((err) => {
