@@ -41,7 +41,7 @@ export default function Header({ user, userPhoto, logout }) {
   const logo = (<Link to="/main" style={{ color: '#FFFFFF', textDecoration: 'none' }}><Typography variant="h5" component="div" sx={{ fontFamily: 'Optima' }}>Neighbr</Typography></Link>);
   const list = (
     <List>
-      {['', 'Home', 'Post Your Run', 'Find Your Runner', 'Runner Dashboard', 'Requester Dashboard'].map((text, i) => (
+      {['', 'Home', 'Post Your Run / Dashboard', 'Find Your Runner', 'Requester Dashboard'].map((text, i) => (
         <Link
           key={text}
           to={{
@@ -49,8 +49,7 @@ export default function Header({ user, userPhoto, logout }) {
             1: '/main',
             2: '/runnerDash',
             3: '/runnerList',
-            4: '/runnerDash',
-            5: '/requestDash'
+            4: '/requestDash'
           }[i]}
           style={{ color: '#707070', textDecoration: 'none' }}
         >
@@ -62,8 +61,7 @@ export default function Header({ user, userPhoto, logout }) {
                   1: <HomeIcon />,
                   2: <SendIcon />,
                   3: <SearchIcon />,
-                  4: <DashboardIcon />,
-                  5: <DashboardIcon />
+                  4: <DashboardIcon />
                 }[i]
               }
             </ListItemIcon>

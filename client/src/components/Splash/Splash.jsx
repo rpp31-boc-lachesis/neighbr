@@ -16,8 +16,8 @@ function Splash({ user }) {
     right: '0',
     bottom: '0',
     left: '0',
-    width: '70%',
-    height: '70%',
+    width: '50%',
+    height: '50%',
     marginTop: '70px'
   };
   const photo = {
@@ -25,8 +25,8 @@ function Splash({ user }) {
     right: '0',
     bottom: '0',
     left: '0',
-    width: '70%',
-    height: '70%',
+    width: '50%',
+    height: '50%',
     marginTop: '20px'
   };
   return (
