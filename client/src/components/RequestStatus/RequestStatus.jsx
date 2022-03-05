@@ -2,22 +2,16 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import TableBody from '@mui/material/TableBody';
 import LinearProgress from '@mui/material/LinearProgress';
-import InputAdornment from '@mui/material/InputAdornment';
-import IconButton from '@mui/material/IconButton';
-import Edit from '@mui/icons-material/Edit';
-import TextField from '@mui/material/TextField';
-import Modal from '@mui/material/Modal';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import Tooltip from '@mui/material/Tooltip';
@@ -29,7 +23,6 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import HourglassDisabledIcon from '@mui/icons-material/HourglassDisabled';
-import PropTypes from 'prop-types';
 import RequestMap from './RequestMap.jsx';
 import RunnerContainer from './RunnerContainer.jsx';
 
@@ -50,18 +43,14 @@ function LinearProgressWithLabel(percentage) {
 }
 
 export default function RequestStatus(props) {
-  // const [promisedBy, setPromisedBy] = React.useState(null);
   const [pickupData, setPickupData] = React.useState({});
   const [done, setDone] = React.useState(false);
   const [givenRating, setGivenRating] = React.useState(null);
   const [dropoff, setDropoff] = React.useState([{}]);
-  // const [runner, setRunner] = React.useState({});
   const [progress, setProgress] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(null);
   const [hover, setHover] = React.useState(-1);
-  // const [mouseover, setMouseover] = React.useState(false);
-  // const [editMode, setEditMode] = React.useState(false);
   const [runnerFullname, setRunnerFullname] = React.useState('');
   const [runnerAvatar, setRunnerAvatar] = React.useState('');
   const [runnerUsername, setRunnerUsername] = React.useState('');
@@ -138,44 +127,6 @@ export default function RequestStatus(props) {
 
     setProgress(isAccepted());
   }, []);
-  // const handleNoteChange = (e) => {
-  //   console.log('target value: ', e.target.value);
-  //   // setDropoffNote(e.target.value);
-  // };
-
-  // const handleMouseover = React.useCallback(() => {
-  //   if (!mouseover) {
-  //     setMouseover(true);
-  //   }
-  // });
-
-  // const handleMouseout = React.useCallback(() => {
-  //   if (mouseover) {
-  //     setMouseover(false);
-  //   }
-  // });
-
-  // const handleEditClick = React.useCallback(() => {
-  //   setEditMode(true);
-  //   setMouseover(false);
-  // });
-
-  // const textStyles = () => ({
-  //   container: {
-  //     display: 'flex',
-  //     flexWrap: 'wrap',
-  //   },
-  //   textField: {
-  //     margin: 'auto',
-  //     width: 200,
-  //   },
-  //   dense: {
-  //     marginTop: 19,
-  //   },
-  //   menu: {
-  //     width: 200,
-  //   },
-  // });
 
   function progressMessage(percentage) {
     if (percentage === 0 || !runner) {
@@ -217,8 +168,14 @@ export default function RequestStatus(props) {
   }
 
   return (
-    <Container fixed sx={{ pb: 10 }}>
-      <Typography display="block" align="left" variant="subtitle1" sx={{ pl: 11 }}>
+    <Container fixed maxWidth="md" sx={{ pb: 10 }}>
+      <Typography
+        align="left"
+        variant="subtitle1"
+        sx={{
+          p: 1, pl: 8, letterSpacing: 2, color: '#c463d5'
+        }}
+      >
         Request: &nbsp;
         {pickupData.placeText}
       </Typography>
@@ -240,15 +197,20 @@ export default function RequestStatus(props) {
       <Typography display="block" align="justify" variant="h6" sx={{ pl: 11 }}>Errand Details</Typography>
       <Grid
         container
+        spacing={4}
         sx={sx}
       >
         <Grid item xs={4} justifyContent="flex-end">
           {accepted ? <RunnerContainer runnerAvatar={runnerAvatar} runnerFullname={runnerFullname} runnerUsername={runnerUsername} open={open} value={value} setValue={setValue} progress={progress} handleOpen={handleOpen} handleClose={handleClose} setHover={setHover} hover={hover} setGivenRating={setGivenRating} setDone={setDone} givenRating={givenRating} done={done} /> : <Typography variant="caption">No runner yet!</Typography>}
-          {/* setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose}  */}
-          {/* setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose}
-          setValue={setValue} setHover={setHover} */}
         </Grid>
         <Grid item>
+          <Typography variant="h5">
+            Category: &nbsp;
+          </Typography>
+          <Typography variant="body2">
+            {category === undefined || category === null ? 'Grocery' : category}
+            &nbsp;
+          </Typography>
           <Typography variant="h5">
             Pick-Up: &nbsp;
           </Typography>
@@ -259,8 +221,6 @@ export default function RequestStatus(props) {
           <Typography variant="caption">
             {pickupData.address}
           </Typography>
-        </Grid>
-        <Grid item>
           <Typography variant="h5">
             Drop-Off: &nbsp;
           </Typography>
@@ -270,41 +230,10 @@ export default function RequestStatus(props) {
           <Typography variant="body2">
             {dropoff[0].note === undefined ? '' : `Note: ${dropoff[0].note}` || ''}
           </Typography>
-          {/* <Typography variant="body2">
-            Note: &nbsp;
-            {dropoffNote === undefined || dropoffNote === null ? '' : dropoffNote}
-          </Typography> */}
-          {/* <Typography variant="body2">
-            Note: &nbsp;
-            <TextField
-              sx={textStyles}
-              name="dropoffNote"
-              margin="normal"
-              defaultValue={dropoffNote === undefined || dropoffNote === null ? '' : dropoffNote}
-              onChange={(e) => { handleNoteChange(e); }}
-              disabled={!editMode}
-              onMouseEnter={handleMouseover()}
-              onMouseLeave={handleMouseout()}
-              input={{
-                endAdornment: mouseover ? (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleEditClick()}>
-                      <Edit />
-                    </IconButton>
-                  </InputAdornment>
-                ) : (
-                  ''
-                )
-              }}
-            />
-          </Typography> */}
-          <Typography variant="body2">
-            Category: &nbsp;
-            {category === undefined || category === null ? 'Grocery' : category}
-          </Typography>
         </Grid>
         <TableContainer component={Paper}>
           <Typography align="center" variant="body1">
+            &nbsp;
             CART
           </Typography>
           <Table sx={{ margin: 'auto', minWidth: 450, maxWidth: 600 }} aria-label="cart items">

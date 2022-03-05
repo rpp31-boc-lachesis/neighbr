@@ -1,18 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 
 export default function ReviewModal(props) {
-  // const [givenRating, setGivenRating] = React.useState(0);
   const {
     runnerUsername, progress, value, setValue, hover, setHover, setGivenRating, setDone, givenRating
   } = props;
 
-  // update on first click
-  function updateRating(givenRating) {
-    axios.put('/users/rate', { user: runnerUsername, givenRating })
+  function updateRating(rating) {
+    axios.put('/users/rate', { user: runnerUsername, rating })
       .then((result) => {
         console.log('updated rating: ', result);
       })
@@ -60,7 +59,11 @@ export default function ReviewModal(props) {
           onChangeActive={(event, newHover) => {
             setHover(newHover);
           }}
-          onClick={(e) => { setGivenRating(e.target.value); setDone(true); }}
+          onClick={(e) => {
+            setGivenRating(e.target.value);
+            updateRating(e.target.value);
+            setDone(true);
+          }}
           emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
         />
         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
@@ -96,3 +99,21 @@ export default function ReviewModal(props) {
     </Box>
   );
 }
+
+ReviewModal.propTypes = {
+  setDone: PropTypes.func.isRequired,
+  setGivenRating: PropTypes.func.isRequired,
+  setHover: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
+  value: PropTypes.number.isRequired,
+  progress: PropTypes.number.isRequired,
+  runnerUsername: PropTypes.string,
+  hover: PropTypes.number,
+  givenRating: PropTypes.number
+};
+
+ReviewModal.defaultProps = {
+  runnerUsername: PropTypes.string,
+  hover: PropTypes.number,
+  givenRating: PropTypes.number
+};

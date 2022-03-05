@@ -1,19 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import ReviewModal from './ReviewModal.jsx';
 import ProfilePopover from '../Profile/ProfilePopover.jsx';
-import Rating from '@mui/material/Rating';
-import StarIcon from '@mui/icons-material/Star';
 
 export default function RunnerContainer(props) {
   const {
     handleOpen, handleClose, runnerAvatar, runnerFullname, open, progress, setValue, value,
-    setHover, hover, runnerUsername, setDone, setGivenRating, givenRating, done
+    setHover, hover, runnerUsername, setDone, setGivenRating, givenRating
   } = props;
 
   return (
@@ -32,7 +32,7 @@ export default function RunnerContainer(props) {
           {runnerFullname}
         </Typography>
         {runnerUsername ? (
-          <ProfilePopover user={runnerUsername} themeColor="primary" />
+          <ProfilePopover user={runnerUsername} themeColor="secondary" />
         ) : ''}
         {givenRating > 0 ? <Rating name="runner-rating" value={givenRating} readOnly /> : (
           <Box>
@@ -56,3 +56,28 @@ export default function RunnerContainer(props) {
     </Grid>
   );
 }
+
+RunnerContainer.propTypes = {
+  handleOpen: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  setDone: PropTypes.func.isRequired,
+  setGivenRating: PropTypes.func.isRequired,
+  setHover: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  value: PropTypes.number.isRequired,
+  progress: PropTypes.number.isRequired,
+  runnerAvatar: PropTypes.string,
+  runnerFullname: PropTypes.string,
+  runnerUsername: PropTypes.string,
+  hover: PropTypes.number,
+  givenRating: PropTypes.number
+};
+
+RunnerContainer.defaultProps = {
+  runnerAvatar: PropTypes.string,
+  runnerFullname: PropTypes.string,
+  runnerUsername: PropTypes.string,
+  hover: PropTypes.number,
+  givenRating: PropTypes.number
+};
