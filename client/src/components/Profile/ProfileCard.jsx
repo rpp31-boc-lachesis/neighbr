@@ -67,7 +67,7 @@ export default function ProfileCard(props) {
             alt="profile image"
             name="User Avatar"
             src={currentUser.avatar_url ? currentUser.avatar_url : ''}
-            sx={{ height: 'auto', width: '90%' }}
+            sx={{ height: '150px', width: '150px' }}
           />
           <Typography variant="h5" component="h5">
             {currentUser.first_name ? currentUser.first_name : ''}
