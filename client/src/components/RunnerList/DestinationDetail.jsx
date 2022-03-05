@@ -23,7 +23,7 @@ const {handlePostErrand, refreshData, runDetail} = props
     return (
 <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#5FC6C9'}}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '0px solid black', borderRadius: '10px', background: '#8fd7d9'}}>
               Select run for details
             </Box>
             </>
@@ -40,7 +40,7 @@ const {handlePostErrand, refreshData, runDetail} = props
   return (
   <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#5FC6C9'}}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '0px solid black', borderRadius: '10px', background: '#8fd7d9'}}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue', alignItems:'top' }}>
                 <div className="entryColumn" alignself="flex-start">
                 <div className="detailItem topLineLeft">

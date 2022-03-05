@@ -23,7 +23,7 @@ function RequestDetail({requestDetail}) {
     return (
       <>
   {/* entryBox */}
-        <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+        <Box sx={{ height: '200px', minWidth: '100%', border: '0px solid black', borderRadius: '10px', background: '#e4b0ed'}}>
           Select request for details
         </Box>
       </>
@@ -63,7 +63,7 @@ function RequestDetail({requestDetail}) {
   return  (
       <>
       {/* entryBox */}
-        <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+        <Box sx={{ height: '200px', minWidth: '100%', border: '0px solid black', borderRadius: '10px', background: '#e4b0ed'}}>
           <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
             <div className="entryColumn">
             <div className="detailItem topLineLeft">

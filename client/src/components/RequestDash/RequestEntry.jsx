@@ -32,7 +32,7 @@ function RequestEntry({errand, users, handleEntryClick}) {
               sx={{
               // height: '100px',
                 maxWidth: '95%',
-                border: '1px solid black',
+                border: '0px solid black',
                 borderRadius: '10px',
                 background: '#DE9DE9',
                 '&:hover': {
@@ -42,14 +42,17 @@ function RequestEntry({errand, users, handleEntryClick}) {
               }}
               key={errand.id}
               onClick={() => { handleEntryClick(errand); }}>
-              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
+              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '0px dashed blue' }}>
                 <div className="entryColumn">
                   <div className="lineItem topLineLeft">
-                    <div className="locationNumber">1</div>
+                    <Typography variant="h5">
                     {req_items[0].item}
+                      </Typography>
                   </div>
+                  <Typography variant='body2'>
                   <div className="lineItem">Time: {startTimeEvent}</div>
                   <div className="lineItem">Date: {dateEvent}</div>
+                    </Typography>
                 </div>
                 <div className="entryColumn">
                   <div className="lineItem textEnd topLineRight"></div>
@@ -59,7 +62,7 @@ function RequestEntry({errand, users, handleEntryClick}) {
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
-                {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
+                {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '0px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>
                   <EntryBox>Item 3</EntryBox>
