@@ -62,7 +62,7 @@ class RunnerStatus extends React.Component {
      * The problem atm is that I have been unsuccessful at adding a previously
      * existing map to the page, or if I am able to somehow make that happen,
      * The Completed button on each card would not be able to remove its respective
-     * marker on the map, as there is no way to reference the items within the _markers array
+     * marker on the map, as there is no way to reference the items within the _markers array.
      */
 
     // const currentRunMarkers = Object.entries(runMap);
