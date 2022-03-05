@@ -7,7 +7,7 @@ import StarIcon from '@mui/icons-material/Star';
 export default function ReviewModal(props) {
   // const [givenRating, setGivenRating] = React.useState(0);
   const {
-    runnerUsername, progress, setHover, setValue, value, hover
+    runnerUsername, progress, value, setValue, hover, setHover, setGivenRating, setDone, givenRating
   } = props;
 
   // update on first click
@@ -32,19 +32,19 @@ export default function ReviewModal(props) {
   };
 
   const labels = {
-    0.5: 'Poor',
-    1: 'Poor+',
-    1.5: 'Average',
-    2: 'Average+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Great',
-    4: 'Great+',
+    0.5: 'Terrible',
+    1: 'Terrible+',
+    1.5: 'Poor',
+    2: 'Poor+',
+    2.5: 'Average',
+    3: 'Average+',
+    3.5: 'Good',
+    4: 'Good+',
     4.5: 'Excellent',
     5: 'Excellent+',
   };
 
-  if (progress === 100) {
+  if (progress === 100 && givenRating === null) {
     return (
       <Box sx={modalsx}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
@@ -60,18 +60,38 @@ export default function ReviewModal(props) {
           onChangeActive={(event, newHover) => {
             setHover(newHover);
           }}
+          onClick={(e) => { setGivenRating(e.target.value); setDone(true); }}
           emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
         />
-        {value !== null && (
-          <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-        )}
+        <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+      </Box>
+    );
+  }
+
+  if (givenRating > 0) {
+    return (
+      <Box sx={modalsx}>
+        <Typography variant="subtitle">
+          Rated: &nbsp;
+          {givenRating}
+        </Typography>
+      </Box>
+    );
+  }
+
+  if (givenRating === null) {
+    return (
+      <Box sx={modalsx}>
+        <Typography variant="subtitle">
+          Errand is still in progress.
+        </Typography>
       </Box>
     );
   }
   return (
     <Box sx={modalsx}>
       <Typography variant="subtitle">
-        Errand is still in progress.
+        Thank you for your review!
       </Typography>
     </Box>
   );
