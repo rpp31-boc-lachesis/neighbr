@@ -81,7 +81,7 @@ export default function ProfileMain(props) {
     axios.get(`/users/populate/${user}`)
       .then((results) => {
         const oneUser = results.data[0];
-        console.log('CURRENT USER:', oneUser);
+        // console.log('CURRENT USER:', oneUser);
         setCurrentUser(oneUser);
       })
       .catch((err) => {
@@ -175,7 +175,10 @@ export default function ProfileMain(props) {
                 opacity: 0.5
               }}
             >
-              {`Member since ${currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}`}
+              {
+              `Member since ${currentUser.created_at ? currentUser.created_at.slice(0, 10)
+                : new Date()}`
+                }
             </Typography>
             <Rating
               alt="User Star Rating"
