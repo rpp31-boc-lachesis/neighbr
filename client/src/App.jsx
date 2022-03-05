@@ -222,7 +222,7 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <Router>
           {/* <TestingMenu /> */}
-          {(user && window.location.pathname !== '/') ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
+          {user ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
             <Route path="/signup" element={<Signup handleSignin={this.handleSignin} user={user} />} />
@@ -238,7 +238,7 @@ class App extends React.Component {
             <Route path="/profilemain" element={<ProfileMain user={user} />} />
             <Route path="*" element={<Error />} />
           </Routes>
-          {(user && window.location.pathname !== '/') ? <Footer /> : null}
+          {user ? <Footer /> : null}
         </Router>
       </ThemeProvider>
     );
