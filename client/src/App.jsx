@@ -48,8 +48,6 @@ class App extends React.Component {
       user: '',
       userPhoto: '',
       warning: false,
-      isLoggedIn: false,
-      // isLoggedIn: true, //test setting
       isLoaded: false,
       locations: [],
       runs: [],
@@ -206,7 +204,6 @@ class App extends React.Component {
       errands,
       error,
       isLoaded,
-      isLoggedIn,
       lastRun,
       destinations,
       locations,
@@ -225,12 +222,11 @@ class App extends React.Component {
       <ThemeProvider theme={theme}>
         <Router>
           {/* <TestingMenu /> */}
-          {user ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
+          {(user && window.location.pathname !== '/') ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
             <Route path="/signup" element={<Signup handleSignin={this.handleSignin} user={user} />} />
             <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} warning={warning} />} />
-            {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
             <Route path="/runnerList" element={<RunnerList runs={runs} locations={locations} />} />
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
@@ -242,7 +238,7 @@ class App extends React.Component {
             <Route path="/profilemain" element={<ProfileMain user={user} />} />
             <Route path="*" element={<Error />} />
           </Routes>
-          {user ? <Footer /> : null}
+          {(user && window.location.pathname !== '/') ? <Footer /> : null}
         </Router>
       </ThemeProvider>
     );
