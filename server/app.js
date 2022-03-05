@@ -14,7 +14,7 @@ const {
   addRunToUser,
   getUserById,
   getUserPopulate,
-  updateRating
+  putUpdatedRating
 } = require('../controllers/userController');
 const {
   getRuns,
@@ -51,7 +51,7 @@ app.get('/users', getUsers);
 app.get('/user/:id', getUserById);
 app.get('/users/:username', getOneUser);
 app.post('/users/addRun', addRunToUser);
-app.put('/users/rate', updateRating);
+app.put('/users/rate', putUpdatedRating);
 
 app.get('/locations', getLocations);
 app.get('/locations/:id', getLocationById);
