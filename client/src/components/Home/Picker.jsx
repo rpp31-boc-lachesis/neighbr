@@ -33,7 +33,7 @@ const resImage = {
 
 export default function Picker() {
   return (
-    <>
+    <div data-testid="main-display">
       <Stack direction="column" spacing={2} alignItems="center" sx={{ mt: 13, mb: 3 }}>
         <div style={decoWrapper}>
           <img alt="above btn" style={deco} src="https://ucarecdn.com/983739cd-c15a-4d31-a4af-1b32b6ebcf1e/" />
@@ -48,6 +48,6 @@ export default function Picker() {
       <div style={resWrapper}>
         <img alt="main" style={resImage} src="https://ucarecdn.com/0145f339-82cd-4b03-8a6e-fa826848a5ca/" />
       </div>
-    </>
+    </div>
   );
 }

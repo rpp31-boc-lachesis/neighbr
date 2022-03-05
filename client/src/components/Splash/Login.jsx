@@ -82,7 +82,7 @@ function Login({ user, warning, handleSignin }) {
             alignItems: 'center',
           }}
         >
-          {warning && handleWarning('!  Incorrect username or password.')}
+          {warning && handleWarning('⚠️  Incorrect username or password.')}
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <PeopleIcon />
           </Avatar>

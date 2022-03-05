@@ -1,69 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="26" failures="0" errors="0" time="10.375">
-  <testsuite name="&lt;ProfileCard /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T02:36:36" time="3.482" tests="8">
-    <testcase classname="&lt;ProfileCard /&gt; Renders Profile Card component" name="&lt;ProfileCard /&gt; Renders Profile Card component" time="0.214">
+<testsuites name="jest tests" tests="11" failures="0" errors="0" time="1.85">
+  <testsuite name="Unit test" errors="0" failures="0" skipped="7" timestamp="2022-03-05T03:59:03" time="1.412" tests="11">
+    <testcase classname="Unit test Renders header on top of the page" name="Unit test Renders header on top of the page" time="0.175">
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Has an X button to close the modal" name="&lt;ProfileCard /&gt; Has an X button to close the modal" time="0.069">
+    <testcase classname="Unit test Renders navigation drawer" name="Unit test Renders navigation drawer" time="0.028">
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Can close the modal by clicking the X button" name="&lt;ProfileCard /&gt; Can close the modal by clicking the X button" time="0.068">
+    <testcase classname="Unit test Renders application logo" name="Unit test Renders application logo" time="0.061">
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User avatar" name="&lt;ProfileCard /&gt; Displays a User avatar" time="0.062">
+    <testcase classname="Unit test Renders user&apos;s profile photo" name="Unit test Renders user&apos;s profile photo" time="0.046">
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User name" name="&lt;ProfileCard /&gt; Displays a User name" time="0.12">
+    <testcase classname="Integration test Renders the user&apos;s menu with options of logout and profile" name="Integration test Renders the user&apos;s menu with options of logout and profile" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User location" name="&lt;ProfileCard /&gt; Displays a User location" time="0.096">
+    <testcase classname="Integration test should render menuitems uplon clicking the avartat" name="Integration test should render menuitems uplon clicking the avartat" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays a User biography" name="&lt;ProfileCard /&gt; Displays a User biography" time="0.065">
+    <testcase classname="Integration test Renders upon user signing in / signing up" name="Integration test Renders upon user signing in / signing up" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;ProfileCard /&gt; Displays previous Runs or Requests" name="&lt;ProfileCard /&gt; Displays previous Runs or Requests" time="0.057">
+    <testcase classname="Integration test Renders user&apos;s profile picture" name="Integration test Renders user&apos;s profile picture" time="0">
+      <skipped/>
     </testcase>
-  </testsuite>
-  <testsuite name="&lt;ProfilePopover /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T02:36:39" time="0.812" tests="2">
-    <testcase classname="&lt;ProfilePopover /&gt; Renders view profile button" name="&lt;ProfilePopover /&gt; Renders view profile button" time="0.114">
+    <testcase classname="Integration test Links user to main page upon clicking the logo" name="Integration test Links user to main page upon clicking the logo" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname="&lt;ProfilePopover /&gt; Popover opens when button is clicked" name="&lt;ProfilePopover /&gt; Popover opens when button is clicked" time="0.221">
+    <testcase classname="Integration test Links user to corresponding pages upon clicking menus on the navigation drop-down." name="Integration test Links user to corresponding pages upon clicking menus on the navigation drop-down." time="0">
+      <skipped/>
     </testcase>
-  </testsuite>
-  <testsuite name="&lt;ProfileButton /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T02:36:40" time="0.429" tests="5">
-    <testcase classname="&lt;ProfileButton /&gt; Renders Profile Button component" name="&lt;ProfileButton /&gt; Renders Profile Button component" time="0.018">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Should be enabled" name="&lt;ProfileButton /&gt; Should be enabled" time="0.03">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct text to view profile" name="&lt;ProfileButton /&gt; Has correct text to view profile" time="0.02">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color when primary" name="&lt;ProfileButton /&gt; Has correct theme color when primary" time="0.021">
-    </testcase>
-    <testcase classname="&lt;ProfileButton /&gt; Has correct theme color when secondary" name="&lt;ProfileButton /&gt; Has correct theme color when secondary" time="0.027">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;Signup /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T02:36:41" time="1.444" tests="6">
-    <testcase classname="&lt;Signup /&gt; Renders Signup component" name="&lt;Signup /&gt; Renders Signup component" time="0.257">
-    </testcase>
-    <testcase classname="&lt;Signup /&gt; Submission works" name="&lt;Signup /&gt; Submission works" time="0.122">
-    </testcase>
-    <testcase classname="&lt;Signup /&gt; Rendered default state" name="&lt;Signup /&gt; Rendered default state" time="0.111">
-    </testcase>
-    <testcase classname="&lt;Signup /&gt; Rendered all textbox" name="&lt;Signup /&gt; Rendered all textbox" time="0.232">
-    </testcase>
-    <testcase classname="&lt;Signup /&gt; Rendered username state" name="&lt;Signup /&gt; Rendered username state" time="0.095">
-    </testcase>
-    <testcase classname="&lt;Signup /&gt; Rendered password state" name="&lt;Signup /&gt; Rendered password state" time="0.1">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;Error /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T02:36:42" time="0.279" tests="3">
-    <testcase classname="&lt;Error /&gt; Renders Error page" name="&lt;Error /&gt; Renders Error page" time="0.013">
-    </testcase>
-    <testcase classname="&lt;Error /&gt; Greets the user in a friendly way" name="&lt;Error /&gt; Greets the user in a friendly way" time="0.025">
-    </testcase>
-    <testcase classname="&lt;Error /&gt; Displays the Neighbr color themes" name="&lt;Error /&gt; Displays the Neighbr color themes" time="0.025">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;Login /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T02:36:42" time="0.372" tests="1">
-    <testcase classname="&lt;Login /&gt; Renders Login Form component" name="&lt;Login /&gt; Renders Login Form component" time="0.098">
-    </testcase>
-  </testsuite>
-  <testsuite name="&lt;App /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-04T02:36:43" time="2.458" tests="1">
-    <testcase classname="&lt;App /&gt; Renders App component" name="&lt;App /&gt; Renders App component" time="0.097">
+    <testcase classname="Integration test Logs out user upon clicking Logout on the menu" name="Integration test Logs out user upon clicking Logout on the menu" time="0">
+      <skipped/>
     </testcase>
   </testsuite>
 </testsuites>

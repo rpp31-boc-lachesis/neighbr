@@ -97,10 +97,11 @@ export default function Header({ user, userPhoto, logout }) {
           <Box>
             <Tooltip title={user}>
               <IconButton onClick={handleOpenUserMenu}>
-                <Avatar size="small" alt="Hack Rector" src={userPhoto} sx={{ backgroundColor: '#FFFFFF' }} />
+                <Avatar size="small" alt={user} src={userPhoto} sx={{ backgroundColor: '#FFFFFF' }} />
               </IconButton>
             </Tooltip>
             <Menu
+              data-testid="user-dropdown"
               sx={{ mt: '50px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
