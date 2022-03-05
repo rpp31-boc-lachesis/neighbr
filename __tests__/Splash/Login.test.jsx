@@ -28,4 +28,21 @@ describe('<Login />', () => {
     expect(component).toBeDefined();
   });
 });
+
+describe('Functional test', () => {
+  it('The user should be navigated to the main page after valid entry and clicking the Login button.', () => {
+    const user = 'valid';
+    render(
+    );
+    userEvent.click(screen.getByRole('button', { name: /LOG IN/i }));
+    expect(screen.getByTestId('main-display')).toBeInTheDocument();
+  });
+
+  // it('Displays error message that should appear on an invalid entries.', () => {
+  // });
+
+  // it('Can an unauthenticated user log in?', () => {
+  // });
+});
+
 // npm run test Login.test.jsx
