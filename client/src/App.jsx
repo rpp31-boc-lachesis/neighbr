@@ -253,7 +253,7 @@ class App extends React.Component {
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
             <Route path="/runnerList" element={<RunnerList destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostErrand={this.handlePostErrand} refreshData={this.refreshData} />} />
-            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
+            <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} currentRun={currentRun} setRun={this.setRun} refreshData={this.refreshData} />} />
             <Route path="/requestDash" element={<RequestDash errands={errands} />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}
             <Route path="/runnerStatus" element={<RunnerStatus errands={errands} runs={runs} user={user} />} />
