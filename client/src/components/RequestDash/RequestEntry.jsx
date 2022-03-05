@@ -34,9 +34,9 @@ function RequestEntry({errand, users, handleEntryClick}) {
                 maxWidth: '95%',
                 border: '1px solid black',
                 borderRadius: '10px',
-                background: '#5FC6C9',
+                background: '#DE9DE9',
                 '&:hover': {
-                  background: '#5FC6C9',
+                  background: '#DE9DE9',
                   opacity: [0.9, 0.8, 0.7],
                 }
               }}

@@ -52,11 +52,8 @@ function RequestDetail({requestDetail}) {
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 <div className="entryColumn">
-                <RouterLink style={{ textDecoration: 'none' }} to="/main">
                 <Avatar variant="contained" alt="Haylie Schleifer" src={requester.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                {/* <ProfilePopover user={requester.username} /> */}
-                {/* <ProfilePopover users={requester.username} /> */}
-                </RouterLink>
+                <ProfilePopover user={requester.username} themeColor='primary' />
                   <div className="detailItem textEnd topLineRight">Your Runner</div>
                   <div className="detailItem textEnd">---</div>
                   <div className="detailItem textEnd">Message: {message}</div>
@@ -71,8 +68,6 @@ function RequestDetail({requestDetail}) {
                 >
                   <Button>Status</Button>
                 </RouterLink>
-                {/* <RouterLink to="/requestStatus" state={{ requestDetail }}>Status</RouterLink> */}
-                  {/* <Button>Status</Button> */}
                 {/* <Stack spacing={3} sx={{ misnHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>

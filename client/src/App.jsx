@@ -9,7 +9,7 @@ import Footer from './components/Home/Footer.jsx';
 import Main from './components/Home/Main.jsx';
 import RunnerDash from './components/RunnerDash/RunnerDash.jsx';
 import RunnerList from './components/RunnerList/RunnerList.jsx';
-import RequestDash from './components/RequestDashActual/RequestDash.jsx';
+import RequestDash from './components/RequestDash/RequestDash.jsx';
 import RequestStatus from './components/RequestStatus/RequestStatus.jsx';
 import RunnerStatus from './components/RunnerStatus/RunnerStatus.jsx';
 import Error from './components/Error.jsx';
@@ -58,6 +58,7 @@ class App extends React.Component {
       lastRun: {},
     };
     this.handlePostRun = this.handlePostRun.bind(this);
+    this.handlePostRequest = this.handlePostRequest.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handlelogout = this.handlelogout.bind(this);
@@ -79,6 +80,21 @@ class App extends React.Component {
       .then((r) => r.data.data)
       .then((response) => {
         this.setState({ lastRun: response });
+      })
+      .catch((err) => console.error(err));
+  }
+
+  handlePostErrand(errand, location) {
+    const { user } = this.state;
+    const combined = { errand, location };
+    combined.errand.requester = user;
+    return axios.post('/errands/post', {
+      data: combined,
+
+    })
+      .then((r) => r.data.data)
+      .then((response) => {
+        // this.setState({ lastRun: response });
       })
       .catch((err) => console.error(err));
   }
@@ -243,7 +259,7 @@ class App extends React.Component {
             <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} warning={warning} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />
-            <Route path="/runnerList" element={<RunnerList runs={runs} locations={locations} />} />
+            <Route path="/runnerList" element={<RunnerList destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostErrand={this.handlePostErrand} refreshData={this.refreshData} />} />
             <Route path="/runnerDash" element={<RunnerDash lastRun={lastRun} destinations={destinations} runs={runs} user={localStorage.getItem('user')} users={users} errands={errands} locations={locations} handlePostRun={this.handlePostRun} refreshData={this.refreshData} />} />
             <Route path="/requestDash" element={<RequestDash errands={errands} />} />
             {/* <Route path="/requestDash" element={<RunnerList />} /> */}

@@ -13,7 +13,8 @@ export default function RunnerContainer(props) {
     handleOpen, handleClose, runner, open, progress, setValue, value, setHover, hover,
     runnerUsername
   } = props;
-
+  console.log('ML props', props)
+  console.log('ML runner', runner)
   return (
     <Grid item xs={4}>
       <Box sx={{
@@ -31,7 +32,7 @@ export default function RunnerContainer(props) {
           &nbsp;
           {runner.last_name}
         </Typography>
-        <ProfilePopover user={runner.username} />
+        <ProfilePopover user={runner.username} themeColor='primary' />
         <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
         <Modal
           open={open}

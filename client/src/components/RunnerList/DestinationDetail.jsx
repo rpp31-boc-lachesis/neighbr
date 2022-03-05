@@ -22,7 +22,7 @@ function DestinationDetail({runDetail}) {
     return (
 <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#5FC6C9'}}>
               Select run for details
             </Box>
             </>
@@ -39,7 +39,7 @@ function DestinationDetail({runDetail}) {
   return (
   <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#5FC6C9'}}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue', alignItems:'top' }}>
                 <div className="entryColumn" alignself="flex-start">
                 <div className="detailItem topLineLeft">
@@ -52,7 +52,7 @@ function DestinationDetail({runDetail}) {
                 <div className="entryColumn">
                 {/* <RouterLink style={{ textDecoration: 'none' }} to="/main"> */}
                 <Avatar variant="contained" alt="Haylie Schleifer" src={user.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                {/* <ProfilePopover user={user.username} /> */}
+                <ProfilePopover user={user.username} themeColor='primary'/>
                 {/* </RouterLink> */}
                   <div className="detailItem textEnd topLineRight">{username}</div>
                   <div className="detailItem textEnd">By: {transportation}
@@ -63,11 +63,10 @@ function DestinationDetail({runDetail}) {
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 {/* link to requestStatus */}
-                {/* <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus"> */}
+                <AddRequestModal run={runDetail}/>
+                {/* <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
                 <Button>Request</Button>
-                <AddRequestModal />
-                {/* <AddRequestModal refreshData={refreshData} handlePostErrand={handlePostErrand}/> */}
-                {/* </RouterLink> */}
+                </RouterLink> */}
 
                 {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
