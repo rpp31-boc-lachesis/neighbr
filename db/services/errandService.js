@@ -1,5 +1,7 @@
 const { Errand, Location, Users } = require('../models/index.js');
 
+//createErrand or postErrand?
+
 const createErrand = (errandObject, callback) => {
   Errand.create(errandObject)
     .then((result) => {
@@ -31,6 +33,8 @@ const getErrandById = (id, callback) => {
     .catch((err) => { callback(err, null); });
 };
 
+
+
 const markErrandAccepted = (errandId, user, callback) => {
   console.log('user: ', user);
   Users.findOne(
@@ -55,5 +59,6 @@ module.exports = {
   getAllErrands,
   getErrand,
   getErrandById,
+  // postErrand,
   markErrandAccepted
 };

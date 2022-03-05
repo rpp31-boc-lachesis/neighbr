@@ -29,13 +29,12 @@ function RequestDetail({requestDetail}) {
     )
   }
 
-  const { start_time, end_time, date, message, weight, req_items, requester } = requestDetail;
+  const { _id, start_time, end_time, date, message, weight, req_items, requester } = requestDetail;
   // const { placeText } = location;
   // const { username } = user;
-
   const startTimeEvent = new Date(start_time).toLocaleTimeString()
   const dateEvent = new Date(date).toLocaleDateString()
-
+  console.log(_id)
   return (
   <>
   {/* entryBox */}
@@ -53,10 +52,8 @@ function RequestDetail({requestDetail}) {
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 <div className="entryColumn">
-                <RouterLink style={{ textDecoration: 'none' }} to="/main">
                 <Avatar variant="contained" alt="Haylie Schleifer" src={requester.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                {/* <ProfilePopover users={requester.username} /> */}
-                </RouterLink>
+                <ProfilePopover user={requester.username} themeColor='secondary' />
                   <div className="detailItem textEnd topLineRight">Your Runner</div>
                   <div className="detailItem textEnd">---</div>
                   <div className="detailItem textEnd">Message: {message}</div>
@@ -71,8 +68,6 @@ function RequestDetail({requestDetail}) {
                 >
                   <Button>Status</Button>
                 </RouterLink>
-                {/* <RouterLink to="/requestStatus" state={{ requestDetail }}>Status</RouterLink> */}
-                  {/* <Button>Status</Button> */}
                 {/* <Stack spacing={3} sx={{ misnHeight: '100%', border: '1px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>

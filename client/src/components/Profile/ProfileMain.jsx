@@ -81,7 +81,7 @@ export default function ProfileMain(props) {
     axios.get(`/users/populate/${user}`)
       .then((results) => {
         const oneUser = results.data[0];
-        console.log('CURRENT USER:', oneUser);
+        // console.log('CURRENT USER:', oneUser);
         setCurrentUser(oneUser);
       })
       .catch((err) => {
@@ -153,15 +153,16 @@ export default function ProfileMain(props) {
             }}
           >
             <Avatar
+              alt="User Profile Image"
               src={currentUser.avatar_url}
               sx={{
-                height: 'auto',
-                width: '75%'
+                height: '150px',
+                width: '150px'
               }}
             />
             <Typography
               color="primary"
-              component="span"
+              component="h4"
               sx={{
                 fontSize: '1.8rem'
               }}
@@ -169,14 +170,18 @@ export default function ProfileMain(props) {
               {`@${currentUser.username}`}
             </Typography>
             <Typography
-              component="span"
+              component="h4"
               sx={{
                 opacity: 0.5
               }}
             >
-              {`Member since ${currentUser.created_at ? currentUser.created_at.slice(0, 10) : null}`}
+              {
+              `Member since ${currentUser.created_at ? currentUser.created_at.slice(0, 10)
+                : new Date()}`
+                }
             </Typography>
             <Rating
+              alt="User Star Rating"
               name="half-rating-read"
               value={
                 currentUser.sum_rating ? (currentUser.sum_rating / currentUser.rating_count) : 0
@@ -184,9 +189,7 @@ export default function ProfileMain(props) {
               precision={0.5}
               readOnly
               sx={{
-                color: '#5E4CFF',
-                paddingTop: '5%',
-                paddingRight: '15%'
+                color: '#5E4CFF'
               }}
             />
           </Grid>
@@ -356,18 +359,22 @@ export default function ProfileMain(props) {
                 Most Recent Category:
                 {' '}
                 {
-                currentUser.run_history[currentUser.run_history.length - 1].location.category
+                currentUser.run_history.length
+                  ? currentUser.run_history[currentUser.run_history.length - 1].location.category
+                  : '🛍️'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
                 Most Recent Run Time:
                 {' '}
                 {
-                (Number(currentUser.run_history[currentUser.run_history.length - 1]
-                  .endTime.slice(11, 13))
+                currentUser.run_history.length
+                  ? (Number(currentUser.run_history[currentUser.run_history.length - 1]
+                    .endTime.slice(11, 13))
                 - Number(currentUser.run_history[currentUser.run_history.length - 1]
                   .startTime.slice(11, 13)))
                 * 60
+                  : '⏱️'
                 }
                 {' '}
                 mins
@@ -376,13 +383,20 @@ export default function ProfileMain(props) {
                 Most Recent Neighborhood:
                 {' '}
                 {
-                currentUser.run_history[currentUser.run_history.length - 1].location.neighborhood
+                currentUser.run_history.length
+                  ? currentUser.run_history[currentUser.run_history.length - 1]
+                    .location.neighborhood
+                  : '🏘️'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
                 Total Runs:
                 {' '}
-                {currentUser.run_history.length}
+                {
+                currentUser.run_history.length
+                  ? currentUser.run_history.length
+                  : '📋'
+                }
               </Item>
             </Stack>
           </Grid>
@@ -408,7 +422,7 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              {currentUser.run_history.map((run) => (
+              {currentUser.run_history.length > 0 && currentUser.run_history.map((run) => (
                 <Item
                   key={run._id}
                   sx={{
@@ -487,19 +501,23 @@ export default function ProfileMain(props) {
                 Most Recent Category:
                 {' '}
                 {
-                currentUser.req_history[currentUser.req_history.length - 1]
-                  .pickup.locationId.category
+                currentUser.req_history.length
+                  ? currentUser.req_history[currentUser.req_history.length - 1]
+                    .pickup.locationId.category
+                  : '🛍️'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
                 Most Recent Request Time:
                 {' '}
                 {
-                (Number(currentUser.req_history[currentUser.req_history.length - 1]
-                  .end_time.slice(11, 13))
+                currentUser.req_history.length
+                  ? (Number(currentUser.req_history[currentUser.req_history.length - 1]
+                    .end_time.slice(11, 13))
                 - Number(currentUser.req_history[currentUser.req_history.length - 1]
                   .start_time.slice(11, 13)))
                 * 60
+                  : '⏱️'
                 }
                 {' '}
                 mins
@@ -508,14 +526,20 @@ export default function ProfileMain(props) {
                 Most Recent Neighborhood:
                 {' '}
                 {
-                currentUser.req_history[currentUser.req_history.length - 1]
-                  .pickup.locationId.neighborhood
+                currentUser.req_history.length
+                  ? currentUser.req_history[currentUser.req_history.length - 1]
+                    .pickup.locationId.neighborhood
+                  : '🏘️'
                 }
               </Item>
               <Item sx={{ fontSize: '1.2rem' }}>
                 Total Requests:
                 {' '}
-                {currentUser.req_history.length}
+                {
+                currentUser.req_history.length
+                  ? currentUser.req_history.length
+                  : '📋'
+                }
               </Item>
             </Stack>
           </Grid>
@@ -541,7 +565,7 @@ export default function ProfileMain(props) {
                 overflow: 'scroll'
               }}
             >
-              {currentUser.req_history.map((req) => (
+              {currentUser.req_history.length > 0 && currentUser.req_history.map((req) => (
                 <Item
                   key={req._id}
                   sx={{

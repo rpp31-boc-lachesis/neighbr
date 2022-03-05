@@ -67,7 +67,7 @@ export default function ProfileCard(props) {
             alt="profile image"
             name="User Avatar"
             src={currentUser.avatar_url ? currentUser.avatar_url : ''}
-            sx={{ height: 'auto', width: '90%' }}
+            sx={{ height: '150px', width: '150px' }}
           />
           <Typography variant="h5" component="h5">
             {currentUser.first_name ? currentUser.first_name : ''}
@@ -86,6 +86,7 @@ export default function ProfileCard(props) {
           }}
         >
           <Rating
+            alt="User Star Rating"
             name="half-rating-read"
             value={currentUser.sum_rating ? (currentUser.sum_rating / currentUser.rating_count) : 0}
             precision={0.5}
@@ -117,28 +118,30 @@ export default function ProfileCard(props) {
         <Typography
           variant="h6"
         >
-          {themeColor === 'primary' ? 'Previous Runs' : 'Previous Requests'}
+          {themeColor === 'secondary' ? 'Previous Runs' : 'Previous Requests'}
         </Typography>
         <Box sx={{
           height: '135px',
           width: '325px',
+          paddingLeft: '12px',
           overflow: 'scroll'
         }}
         >
           <Stack sx={{
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
             width: '300px',
             padding: '10px',
             gap: '7px'
           }}
           >
-            {themeColor === 'primary'
-              ? currentUser.run_history.map((run) => (
+            {themeColor === 'secondary' && currentUser.run_history.length > 0
+              && currentUser.run_history.map((run) => (
                 <Item
                   key={run._id}
                   sx={{
-                    backgroundColor: '#88C4FB',
+                    backgroundColor: '#73B4FA',
                     color: 'white',
                     width: '92%',
                     height: 'auto',
@@ -163,36 +166,37 @@ export default function ProfileCard(props) {
                     </Grid>
                   </Grid>
                 </Item>
-              ))
-              : currentUser.req_history.map((req) => (
-                <Item
-                  key={req._id}
-                  sx={{
-                    backgroundColor: '#88C4FB',
-                    color: 'white',
-                    width: '92%',
-                    height: 'auto',
-                    borderRadius: '8px'
-                  }}
-                >
-                  <Grid
-                    container
-                  >
-                    <Grid
-                      item
-                      sm={12}
+              ))}
+            {themeColor === 'primary' && currentUser.req_history.length > 0
+                  && currentUser.req_history.map((req) => (
+                    <Item
+                      key={req._id}
                       sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        fontSize: '125%',
-                        fontWeight: 'bold'
+                        backgroundColor: '#73B4FA',
+                        color: 'white',
+                        width: '92%',
+                        height: 'auto',
+                        borderRadius: '8px'
                       }}
                     >
-                      <ProfileReqHistory history={req} />
-                    </Grid>
-                  </Grid>
-                </Item>
-              ))}
+                      <Grid
+                        container
+                      >
+                        <Grid
+                          item
+                          sm={12}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            fontSize: '125%',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          <ProfileReqHistory history={req} />
+                        </Grid>
+                      </Grid>
+                    </Item>
+                  ))}
           </Stack>
         </Box>
       </Grid>
