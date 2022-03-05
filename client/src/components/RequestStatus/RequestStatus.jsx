@@ -50,64 +50,71 @@ function LinearProgressWithLabel(percentage) {
 }
 
 export default function RequestStatus(props) {
-  const [promisedBy, setPromisedBy] = React.useState(null);
+  // const [promisedBy, setPromisedBy] = React.useState(null);
   const [pickupData, setPickupData] = React.useState({});
   const [done, setDone] = React.useState(false);
-  // const [transportation, setTransportation] = React.useState(null);
-  // const [cart, setCart] = React.useState(useLocation().state.req_items);
-  const [dropoff, setDropoff] = React.useState(null);
-  const [dropoffNote, setDropoffNote] = React.useState(null);
+  const [givenRating, setGivenRating] = React.useState(null);
+  const [dropoff, setDropoff] = React.useState([{}]);
   // const [runner, setRunner] = React.useState({});
   const [progress, setProgress] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(null);
   const [hover, setHover] = React.useState(-1);
-  const [mouseover, setMouseover] = React.useState(false);
-  const [editMode, setEditMode] = React.useState(false);
+  // const [mouseover, setMouseover] = React.useState(false);
+  // const [editMode, setEditMode] = React.useState(false);
+  const [runnerFullname, setRunnerFullname] = React.useState('');
+  const [runnerAvatar, setRunnerAvatar] = React.useState('');
+  const [runnerUsername, setRunnerUsername] = React.useState('');
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const cart = useLocation().state.req_items;
+  const cart = useLocation().state.req_items || [];
+  const promisedBy = `${new Date(useLocation().state.end_time)}`;
 
   const {
-    user, errands, users, locations
+    locations
   } = props;
 
   const {
-    accepted, end_time, message, pickup, requester, size, weight, _id, runner,
+    accepted, message, pickup, requester, size, weight, runner,
     transportation, category
   } = useLocation().state;
 
-  React.useEffect(() => {
-    const endTime = `${new Date(end_time)}`;
-    setPromisedBy(endTime);
+  const sx = {
+    border: '2px solid #DE9DE9',
+    borderRadius: '10px',
+    maxWidth: '85%',
+    margin: 'auto'
+  };
 
-    // axios.get(`/users/${user}`)
-    axios.get(`/users/${user}`)
-      .then((results) => {
-        const dropoffAddress = `${results.data[0].street_address}, ${results.data[0].city}, ${results.data[0].state} ${results.data[0].zip}`;
-        setDropoff(dropoffAddress);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+  React.useEffect(() => {
+    if (runner) {
+      axios.get(`/user/${runner}`)
+        .then((results) => {
+          // console.log('RUNNER RESULTS: ', results.data[0]);
+          setRunnerAvatar(results.data[0].avatar_url);
+          setRunnerUsername(results.data[0].username);
+          setRunnerFullname(`${results.data[0].first_name} ${results.data[0].last_name}`);
+        })
+        // .then(() => {
+        //   console.log('runner avatar: ', runnerAvatar);
+        //   console.log('runner username: ', runnerUsername);
+        //   console.log('runner fullname: ', runnerFullname);
+        // })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+
+    setDropoff([{
+      address: `${requester.street_address}, ${requester.city}, ${requester.state} ${requester.zip}`,
+      coordinates: requester.coordinates
+    }]);
 
     for (let i = 0; i < locations.length; i += 1) {
       if (locations[i]._id === pickup.locationId) {
         setPickupData(locations[i]);
-        console.log('pickup data: ', locations[i]);
       }
     }
-
-    // axios.get(`/requestStatus/${errandData._id}`)
-    //   .then((results) => {
-    //     axios.get(`/user/${results.data.runner}`)
-    //       .then((result) => {
-    //         console.log('runner: ', result.data);
-    //         setRunner(result.data[0]);
-    //       })
-    //       .catch((err) => {
-    //         console.error(err);
-    //       });
 
     const progressTotal = cart.map((item) => (item.status !== 'Cancelled')).reduce((a, b) => a + b, 0) * 100;
     let accum = 0;
@@ -131,14 +138,6 @@ export default function RequestStatus(props) {
 
     setProgress(isAccepted());
   }, []);
-
-  const sx = {
-    border: '2px solid #DE9DE9',
-    borderRadius: '10px',
-    maxWidth: '85%',
-    margin: 'auto'
-  };
-
   // const handleNoteChange = (e) => {
   //   console.log('target value: ', e.target.value);
   //   // setDropoffNote(e.target.value);
@@ -246,11 +245,14 @@ export default function RequestStatus(props) {
         sx={sx}
       >
         <Grid item xs={4} justifyContent="flex-end">
-          {accepted ? <RunnerContainer setDone={setDone} handleOpen={handleOpen} handleClose={handleClose} runner={runner} open={open} progress={progress} setValue={setValue} setHover={setHover} value={value} hover={hover} runnerUsername={runner.username} /> : <Typography variant="caption">No runner yet!</Typography>}
+          {accepted ? <RunnerContainer runnerAvatar={runnerAvatar} runnerFullname={runnerFullname} runnerUsername={runnerUsername} open={open} value={value} setValue={setValue} progress={progress} handleOpen={handleOpen} handleClose={handleClose} setHover={setHover} hover={hover} setGivenRating={setGivenRating} setDone={setDone} givenRating={givenRating} done={done} /> : <Typography variant="caption">No runner yet!</Typography>}
+          {/* setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose}  */}
+          {/* setDone={setDone} handleOpen={handleOpen()} handleClose={handleClose}
+          setValue={setValue} setHover={setHover} */}
         </Grid>
         <Grid item>
           <Typography variant="h5">
-            Pick-Up:
+            Pick-Up: &nbsp;
           </Typography>
           <Typography variant="overline">
             {pickupData.placeText}
@@ -265,10 +267,10 @@ export default function RequestStatus(props) {
             Drop-Off: &nbsp;
           </Typography>
           <Typography variant="caption">
-            {dropoff}
+            {dropoff[0].address || ''}
           </Typography>
           <Typography variant="body2">
-            {dropoffNote === undefined || dropoffNote === null ? '' : `Note: ${dropoffNote}`}
+            {dropoff[0].note === undefined ? '' : `Note: ${dropoff[0].note}` || ''}
           </Typography>
           {/* <Typography variant="body2">
             Note: &nbsp;
@@ -353,7 +355,7 @@ export default function RequestStatus(props) {
         </TableContainer>
         <Typography alignItems="right" variant="body1">
           Message to&nbsp;
-          {runner ? runner.first_name : 'runner'}
+          {runner ? runnerUsername : 'runner'}
           : &nbsp;
           {message}
         </Typography>
@@ -364,8 +366,5 @@ export default function RequestStatus(props) {
 }
 
 RequestStatus.propTypes = {
-  user: PropTypes.string.isRequired,
-  errands: PropTypes.array.isRequired,
-  users: PropTypes.array.isRequired,
   locations: PropTypes.array.isRequired,
 };

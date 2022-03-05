@@ -18,9 +18,6 @@ import Signup from './components/Splash/Signup.jsx';
 import Login from './components/Splash/Login.jsx';
 import ProfilePopover from './components/Profile/ProfilePopover.jsx';
 import ProfileMain from './components/Profile/ProfileMain.jsx';
-// import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import Box from '@mui/material/Box';
 import TestingMenu from './TestingMenu.jsx';
 
 let theme = createTheme({
@@ -56,13 +53,14 @@ class App extends React.Component {
       users: [],
       errands: [],
       lastRun: {},
+      currentRun: null,
     };
     this.handlePostRun = this.handlePostRun.bind(this);
-    this.handlePostRequest = this.handlePostRequest.bind(this);
+    this.handlePostErrand = this.handlePostErrand.bind(this);
     this.handleSignin = this.handleSignin.bind(this);
-    this.handleSignUp = this.handleSignUp.bind(this);
     this.handlelogout = this.handlelogout.bind(this);
     this.refreshData = this.refreshData.bind(this);
+    this.setRun = this.setRun.bind(this);
   }
 
   componentDidMount() {
@@ -115,16 +113,6 @@ class App extends React.Component {
     }
   }
 
-  handleSignUp(e, loginData) {
-    e.preventDefault();
-    localStorage.setItem('user', loginData.username);
-    localStorage.setItem('userphoto', loginData.avatar_url);
-    this.setState({
-      user: loginData.username,
-      userPhoto: loginData.avatar_url
-    });
-  }
-
   async handlelogout() {
     await axios.get('/logout');
     this.setState({
@@ -133,6 +121,10 @@ class App extends React.Component {
     });
     localStorage.removeItem('user');
     localStorage.removeItem('userphoto');
+  }
+
+  setRun(newRun) {
+    this.setState({ currentRun: newRun });
   }
 
   refreshData() {
@@ -238,7 +230,8 @@ class App extends React.Component {
       destinations,
       locations,
       users,
-      runs
+      runs,
+      currentRun,
     } = this.state;
 
     if (error) {
@@ -255,7 +248,7 @@ class App extends React.Component {
           {user ? <Header userPhoto={userPhoto} user={user} logout={this.handlelogout} /> : null }
           <Routes>
             <Route path="/" element={<Splash user={user} />} />
-            <Route path="/signup" element={<Signup handleSignUp={this.handleSignUp} user={user} />} />
+            <Route path="/signup" element={<Signup handleSignin={this.handleSignin} user={user} />} />
             <Route path="/login" element={<Login handleSignin={this.handleSignin} user={user} warning={warning} />} />
             {/* {user ? <Route path="/main" element={<Main />} /> : null} */}
             <Route path="/main" element={<Main />} />

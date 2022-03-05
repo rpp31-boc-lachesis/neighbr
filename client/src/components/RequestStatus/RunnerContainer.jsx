@@ -7,11 +7,13 @@ import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import ReviewModal from './ReviewModal.jsx';
 import ProfilePopover from '../Profile/ProfilePopover.jsx';
+import Rating from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
 
 export default function RunnerContainer(props) {
   const {
-    handleOpen, handleClose, runner, open, progress, setValue, value, setHover, hover,
-    runnerUsername
+    handleOpen, handleClose, runnerAvatar, runnerFullname, open, progress, setValue, value,
+    setHover, hover, runnerUsername, setDone, setGivenRating, givenRating, done
   } = props;
   console.log('ML props', props)
   console.log('ML runner', runner)
@@ -26,29 +28,31 @@ export default function RunnerContainer(props) {
         height: 175
       }}
       >
-        <Avatar variant="contained" alt="Haylie Schleifer" src={runner.avatar_url} sx={{ width: '80px', height: '80px' }} />
+        <Avatar variant="contained" alt={runnerFullname} src={runnerAvatar} sx={{ width: '80px', height: '80px' }} />
         <Typography variant="subtitle2">
-          {runner.first_name}
-          &nbsp;
-          {runner.last_name}
+          {runnerFullname}
         </Typography>
-        <ProfilePopover user={runner.username} themeColor='primary' />
-        <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <ReviewModal
-            progress={progress}
-            setValue={setValue}
-            setHover={setHover}
-            value={value}
-            hover={hover}
-            runnerUsername={runnerUsername}
-          />
-        </Modal>
+        {runnerUsername ? (
+          <ProfilePopover user={runnerUsername} themeColor="primary" />
+        ) : ''}
+        {givenRating > 0 ? <Rating name="runner-rating" value={givenRating} readOnly /> : (
+          <Box>
+            <Button variant="outlined" onClick={handleOpen}>Review Runner</Button>
+            <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+              <ReviewModal
+                progress={progress}
+                setValue={setValue}
+                setHover={setHover}
+                value={value}
+                hover={hover}
+                runnerUsername={runnerUsername}
+                setGivenRating={setGivenRating}
+                setDone={setDone}
+                givenRating={givenRating}
+              />
+            </Modal>
+          </Box>
+        )}
       </Box>
     </Grid>
   );

@@ -1,7 +1,7 @@
-import * as React from 'react';
+/* eslint-disable react/jsx-props-no-spreading, react/prop-types */
+import React from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
 import searchLocation from './searchLocation.js';
 
 export default function LocationAutoComplete(props) {
@@ -9,7 +9,7 @@ export default function LocationAutoComplete(props) {
   const [inputValue, setInputValue] = React.useState('');
   const [options, setOptions] = React.useState([]);
 
-  const { proximity } = props;
+  const { proximity, handleLocChange } = props;
 
   React.useEffect(() => {
     let active = true;
@@ -34,7 +34,7 @@ export default function LocationAutoComplete(props) {
         })
         .catch((err) => console.error(err));
     }
-    props.handleLocChange(value);
+    handleLocChange(value);
     return () => {
       active = false;
     };

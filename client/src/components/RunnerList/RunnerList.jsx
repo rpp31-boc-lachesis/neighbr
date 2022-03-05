@@ -27,7 +27,7 @@ const BORDER_PX = '0px'
 
 
 function RunnerList(props) {
-  const { runs, locations, errands, user, handleRequestErrand, refreshData} = props;
+  const { runs, locations, errands, user, handlePostErrand, refreshData} = props;
   console.log('in RunsList', 'RUNS', runs);
   console.log('in RunsList', 'LOCATIONS', locations);
 
