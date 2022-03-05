@@ -216,6 +216,8 @@ export default function RequestStatus(props) {
     );
   }
 
+  // console.log('outside', state)
+
   return (
     <Container fixed sx={{ pb: 10 }}>
       <Typography display="block" align="left" variant="subtitle1" sx={{ pl: 11 }}>

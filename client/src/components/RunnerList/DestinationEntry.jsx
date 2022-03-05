@@ -22,7 +22,7 @@ function DestinationEntry({run, handleEntryClick}) {
 
   const startTimeEvent = new Date(startTime).toLocaleTimeString()
   const dateEvent = new Date(date)
-  console.log('run', run)
+  // console.log('run', run)
 
   return (
   <>

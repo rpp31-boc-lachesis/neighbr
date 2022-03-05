@@ -27,7 +27,7 @@ const BORDER_PX = '0px'
 
 
 function RunnerList(props) {
-  const { runs, locations } = props;
+  const { runs, locations, errands, user, handlePostErrand, refreshData} = props;
   console.log('in RunsList', 'RUNS', runs);
   console.log('in RunsList', 'LOCATIONS', locations);
 
@@ -63,11 +63,13 @@ function RunnerList(props) {
       // center: [-79.4512, 43.6568],
       center: mapCenter,
       zoom: 13
-  })
-  }
+    });
+    const marker1 = new mapboxgl.Marker()
+      .setLngLat(mapCenter)
+      .addTo(map);
+  };
 
-  const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} />);
-console.log('Runs', Runs)
+  const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} key={run._id}/>);
 
   return (
     <Container maxwidth="sm" sx={{border: `${BORDER_PX} dashed red` }}>
@@ -127,7 +129,7 @@ console.log('Runs', Runs)
           >
                 <Typography>Map</Typography>
           </Box>
-            <DestinationDetail runDetail={runDetail} />
+            <DestinationDetail runDetail={runDetail} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
           {/* </Box> */}
         </Stack>
         </Grid>
