@@ -179,12 +179,6 @@ export default function AddRequestModal(props) {
             <LocationAutocomplete proximity={proximity} handleLocChange={handleLocChange} />
             <TextField
               fullWidth
-              label="Drop-off Address"
-              value={dropoff}
-              onChange={(e) => setDropoff(e.target.value)}
-            />
-            <TextField
-              fullWidth
               label="Delivery Note"
               value={note}
               onChange={(e) => setNote(e.target.value)}

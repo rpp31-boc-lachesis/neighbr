@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-indent */
 import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import propTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
@@ -17,13 +18,34 @@ import css from '../RunnerList/runnerList.css';
 
 function RequestEntry({errand, users, handleEntryClick}) {
   // console.log('errand here', errand)
-  const { start_time, end_time, date, size, weight, req_items } = errand;
+  const { start_time, end_time, date, size, weight, req_items, runner } = errand;
   // const { placeText } = location;
   // const { username } = user;
 
   const startTimeEvent = new Date(start_time).toLocaleTimeString()
   const dateEvent = new Date(date).toLocaleDateString()
   // console.log('errand', errand)
+
+  const [runnerAvatar, setRunnerAvatar] = useState('');
+  const [runnerUsername, setRunnerUsername] = useState('');
+
+useEffect(() => {
+  if (runner) {
+    axios.get(`/user/${runner}`)
+      .then((results) => {
+        // console.log('RUNNER RESULTS: ', results.data[0]);
+        setRunnerAvatar(results.data[0].avatar_url);
+        setRunnerUsername(results.data[0].username);
+        // setRunnerFullname(`${results.data[0].first_name} ${results.data[0].last_name}`);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    setRunnerAvatar('');
+    setRunnerUsername('');
+  }
+})
 
   return (
   <>
@@ -55,9 +77,13 @@ function RequestEntry({errand, users, handleEntryClick}) {
                     </Typography>
                 </div>
                 <div className="entryColumn">
-                  <div className="lineItem textEnd topLineRight"></div>
-                  <div className="lineItem textEnd">{size}</div>
-                  <div className="lineItem textEnd">{weight}</div>
+                  <Typography variant='body2'>
+                    {errand.accepted ?
+                    <div className="lineItem textEnd topLineRight">{runnerUsername}</div> : <div className="lineItem textEnd topLineRight">-----</div>
+                    }
+                    <div className="lineItem textEnd">Size: {size}</div>
+                    <div className="lineItem textEnd">Weight: {weight}</div>
+                  </Typography>
                   {/* <Typography variant="h5">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
