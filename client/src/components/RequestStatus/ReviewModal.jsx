@@ -1,23 +1,15 @@
 import React from 'react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 
 export default function ReviewModal(props) {
-  // const [givenRating, setGivenRating] = React.useState(0);
   const {
     runnerUsername, progress, value, setValue, hover, setHover, setGivenRating, setDone, givenRating
   } = props;
-
-  // update on first click
-  function updateRating(givenRating) {
-    axios.put('/users/rate', { user: runnerUsername, givenRating })
-      .then((result) => {
-        console.log('updated rating: ', result);
-      })
-      .catch((err) => console.log(err));
-  }
 
   const modalsx = {
     position: 'absolute',
@@ -44,6 +36,28 @@ export default function ReviewModal(props) {
     5: 'Excellent+',
   };
 
+  function updateRating(rating) {
+    console.log('rating: ', rating);
+    axios.put('/users/rate', {
+      user: runnerUsername,
+      rating
+    })
+      .then((result) => {
+        console.log('updated rating: ', result);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function submittedRatingMessage() {
+    return (
+      <Box sx={modalsx}>
+        <Typography variant="subtitle">
+          Thank you for your review!
+        </Typography>
+      </Box>
+    );
+  }
+
   if (progress === 100 && givenRating === null) {
     return (
       <Box sx={modalsx}>
@@ -56,11 +70,14 @@ export default function ReviewModal(props) {
           precision={0.5}
           onChange={(event, newValue) => {
             setValue(newValue);
+            setGivenRating(newValue);
+            updateRating(newValue);
+            setDone(true);
+            submittedRatingMessage();
           }}
           onChangeActive={(event, newHover) => {
             setHover(newHover);
           }}
-          onClick={(e) => { setGivenRating(e.target.value); setDone(true); }}
           emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
         />
         <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
@@ -88,11 +105,25 @@ export default function ReviewModal(props) {
       </Box>
     );
   }
-  return (
-    <Box sx={modalsx}>
-      <Typography variant="subtitle">
-        Thank you for your review!
-      </Typography>
-    </Box>
-  );
+  return ('');
 }
+
+ReviewModal.propTypes = {
+  setDone: PropTypes.func.isRequired,
+  setGivenRating: PropTypes.func.isRequired,
+  setHover: PropTypes.func,
+  setValue: PropTypes.func,
+  value: PropTypes.number.isRequired,
+  progress: PropTypes.number.isRequired,
+  runnerUsername: PropTypes.string,
+  hover: PropTypes.number,
+  givenRating: PropTypes.number
+};
+
+ReviewModal.defaultProps = {
+  setHover: PropTypes.func,
+  setValue: PropTypes.func,
+  runnerUsername: PropTypes.string,
+  hover: PropTypes.number,
+  givenRating: PropTypes.number
+};
