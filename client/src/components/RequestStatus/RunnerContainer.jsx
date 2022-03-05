@@ -15,8 +15,6 @@ export default function RunnerContainer(props) {
     handleOpen, handleClose, runnerAvatar, runnerFullname, open, progress, setValue, value,
     setHover, hover, runnerUsername, setDone, setGivenRating, givenRating, done
   } = props;
-  console.log('ML props', props)
-  console.log('ML runner', runner)
   return (
     <Grid item xs={4}>
       <Box sx={{

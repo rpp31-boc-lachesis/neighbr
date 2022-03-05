@@ -30,7 +30,6 @@ export default function ProfilePopover(props) {
   };
 
   const handleClose = () => {
-    console.log('handleClose')
     setAnchorEl(null);
   };
 
