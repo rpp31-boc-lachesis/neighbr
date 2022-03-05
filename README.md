@@ -95,7 +95,7 @@ Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, We
 - Maxine Seo - Software Engineer\
 * [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)\
 - Mary Miyamoto - Software Engineer\
-* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/<MARY_MIYAMOTO_HERE>)
+* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)\
 
 ## 🔗 Links
 - Links here
