@@ -44,7 +44,7 @@ export default function RunnerDash(props) {
     <Container sx={{ height: '100%' }} maxwidth="sm">
       <Grid container spacing={{ xs: 2, md: 3 }} columnSpacing={4} columns={{ xs: 4, sm: 8, md: 12 }} maxHeight="80vh" paddingTop="1em" marginTop="15px" paddingBottom="0.5em" justifyContent="space-around" alignItems="stretch">
         <Grid container item direction="column" sx={{ minHeight: '100%', justifyContent: 'flex-end' }} xs={3} spacing={2}>
-          <Grid item sx={{ alignself: 'flex-end' }}>
+          <Grid item sx={{ alignSelf: 'flex-end' }}>
             <AddRunModal refreshData={refreshData} handlePostRun={handlePostRun} />
           </Grid>
           <Grid item>

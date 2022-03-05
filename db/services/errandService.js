@@ -3,11 +3,18 @@ const { Errand, Location, Users } = require('../models/index.js');
 //createErrand or postErrand?
 
 const createErrand = (errandObject, callback) => {
-  Errand.create(errandObject)
+  let { errand } = errandObject.data
+    console.log('in errand service:', errand)
+  Users.findOne({ username: errand.requester})
+    .then((result) => {
+      console.log('in errand service result', result)
+      errand.requester = result
+      return Errand.create(errand)
+    })
     .then((result) => {
       return Location
-        .findById(errandObject.pickup.locationId)
-        .update({ $push: { errands: result._id } })
+        .findById(result.pickup.locationId)
+        .updateOne({ $push: { errands: result._id } })
     })
     .then((result) => { callback(null, result); })
     .catch((err) => { callback(err, null); });

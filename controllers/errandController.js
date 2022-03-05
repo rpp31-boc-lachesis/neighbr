@@ -3,7 +3,6 @@ const {
   createErrand,
   getAllErrands,
   getErrandById,
-  postErrand,
   markErrandAccepted,
 } = require('../db/services/errandService.js');
 

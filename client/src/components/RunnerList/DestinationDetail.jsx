@@ -23,7 +23,7 @@ const {handlePostErrand, refreshData, runDetail} = props
     return (
 <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#5FC6C9'}}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '0px solid black', borderRadius: '10px', background: '#8fd7d9'}}>
               Select run for details
             </Box>
             </>
@@ -40,7 +40,7 @@ const {handlePostErrand, refreshData, runDetail} = props
   return (
   <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#5FC6C9'}}>
+            <Box sx={{ height: '200px', minWidth: '100%', border: '0px solid black', borderRadius: '10px', background: '#8fd7d9'}}>
               <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue', alignItems:'top' }}>
                 <div className="entryColumn" alignself="flex-start">
                 <div className="detailItem topLineLeft">
@@ -64,7 +64,7 @@ const {handlePostErrand, refreshData, runDetail} = props
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
                 {/* link to requestStatus */}
-                <AddRequestModal run={runDetail} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
+                <AddRequestModal run={runDetail} location={location} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
                 {/* <RouterLink style={{ textDecoration: 'none' }} to="/requestStatus">
                 <Button>Request</Button>
                 </RouterLink> */}
