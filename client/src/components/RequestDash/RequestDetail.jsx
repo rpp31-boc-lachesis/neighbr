@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-indent */
 import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import propTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Link as RouterLink } from 'react-router-dom';
@@ -22,61 +23,83 @@ function RequestDetail({requestDetail}) {
     return (
       <>
   {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
-              Select request for details
-            </Box>
-            </>
+        <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+          Select request for details
+        </Box>
+      </>
     )
   }
 
-  const { _id, start_time, end_time, date, message, weight, req_items, requester } = requestDetail;
+  const { _id, start_time, end_time, date, message, weight, req_items, requester, runner } = requestDetail;
+  // console.log(requestDetail)
+  // console.log(runner)
+
+  const [runnerAvatar, setRunnerAvatar] = useState('');
+  const [runnerUsername, setRunnerUsername] = useState('');
+
   // const { placeText } = location;
   // const { username } = user;
   const startTimeEvent = new Date(start_time).toLocaleTimeString()
   const dateEvent = new Date(date).toLocaleDateString()
-  console.log(_id)
-  return (
-  <>
-  {/* entryBox */}
-            <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
-              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
-                <div className="entryColumn">
-                <div className="detailItem topLineLeft">
-                  <div className="locationNumber">1</div>
-                    {req_items[0].item}
-                </div>
-                  <div className="detailItem">Time: {startTimeEvent}</div>
-                  <div className="detailItem">Date: {dateEvent}</div>
-                  {/* <Typography variant="h5">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography> */}
-                </div>
-                <div className="entryColumn">
-                <Avatar variant="contained" alt="Haylie Schleifer" src={requester.avatar_url} sx={{ width: '80px', height: '80px' }} />
-                <ProfilePopover user={requester.username} themeColor='secondary' />
-                  <div className="detailItem textEnd topLineRight">Your Runner</div>
-                  <div className="detailItem textEnd">---</div>
-                  <div className="detailItem textEnd">Message: {message}</div>
-                  {/* <Typography variant="h5">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography>
-                  <Typography variant="body1">Item 1</Typography> */}
-                </div>
-                <RouterLink
-                  style={{ textDecoration: 'none' }}
-                  to="/requestStatus"
-                  state={requestDetail}
-                >
-                  <Button>Status</Button>
-                </RouterLink>
-                {/* <Stack spacing={3} sx={{ misnHeight: '100%', border: '1px dashed blue' }}>
-                {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
-                  <EntryBox>Item 2</EntryBox>
-                  <EntryBox>Item 3</EntryBox>
-                </Stack> */}
-              </Stack>
-            </Box>
-  </>
-  );
+
+  useEffect(() => {
+    if (runner) {
+      axios.get(`/user/${runner}`)
+        .then((results) => {
+          console.log('RUNNER RESULTS: ', results.data[0]);
+          setRunnerAvatar(results.data[0].avatar_url);
+          setRunnerUsername(results.data[0].username);
+          // setRunnerFullname(`${results.data[0].first_name} ${results.data[0].last_name}`);
+        })
+        .then(() => {
+          console.log('runner avatar: ', runnerAvatar);
+          console.log('runner username: ', runnerUsername);
+        //   console.log('runner fullname: ', runnerFullname);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      setRunnerAvatar('');
+      setRunnerUsername('');
+    }
+  })
+
+  return  (
+      <>
+      {/* entryBox */}
+        <Box sx={{ height: '200px', minWidth: '100%', border: '1px solid black', borderRadius: '10px', background: '#de9de9'}}>
+          <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
+            <div className="entryColumn">
+            <div className="detailItem topLineLeft">
+              <div className="locationNumber">1</div>
+                {req_items[0].item}
+            </div>
+              <div className="detailItem">Time: {startTimeEvent}</div>
+              <div className="detailItem">Date: {dateEvent}</div>
+            </div>
+            <div className="entryColumn">
+            {runnerUsername ? (
+              <>
+            <Avatar variant="contained" alt="Haylie Schleifer" src={runnerAvatar} sx={{ width: '80px', height: '80px' }} />
+            <ProfilePopover user={runnerUsername} themeColor='secondary' />
+              </>
+            ) : ''}
+              {/* <div className="detailItem textEnd topLineRight">Your Runner</div> */}
+              {/* <div className="detailItem textEnd">---</div> */}
+              <div className="detailItem textEnd">Message: {message}</div>
+            </div>
+            <RouterLink
+              style={{ textDecoration: 'none' }}
+              to="/requestStatus"
+              state={requestDetail}
+            >
+              <Button>Status</Button>
+            </RouterLink>
+          </Stack>
+        </Box>
+      </>
+  )
 }
 
 export default RequestDetail;
