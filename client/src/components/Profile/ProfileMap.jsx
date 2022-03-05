@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
-import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+// import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 export default function ProfileMap(props) {
@@ -30,12 +30,12 @@ export default function ProfileMap(props) {
 
     map.addControl(new mapboxgl.NavigationControl());
 
-    map.addControl(
-      new MapboxGeocoder({
-        accessToken: mapboxgl.accessToken,
-        mapboxgl
-      })
-    );
+    // map.addControl(
+    //   new MapboxGeocoder({
+    //     accessToken: mapboxgl.accessToken,
+    //     mapboxgl
+    //   })
+    // );
   });
 
   const style = {
@@ -53,6 +53,7 @@ export default function ProfileMap(props) {
   return (
     <Box
       id="mapContainer"
+      data-testid="mapbox"
       container
       sx={style}
       item

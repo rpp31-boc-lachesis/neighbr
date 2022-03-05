@@ -11,10 +11,16 @@ export default function Errand(props) {
     errandObj,
     onRequestAccept,
     onRequestDeny,
-    onErrandComplete
+    onErrandComplete,
+    onclick
   } = props;
-  const { _id: errandID, requester, req_items: reqItems } = errandObj;
-  const { first_name: firstName, last_name: lastName,} = requester;
+  const {
+    _id: errandID,
+    requester,
+    req_items: reqItems,
+    start_time: startTime
+  } = errandObj;
+  const { first_name: firstName } = requester;
   const { item, quantity } = reqItems[0];
 
   return (
@@ -34,6 +40,7 @@ export default function Errand(props) {
       justifyContent="space-evenly"
     >
       <Grid
+        onClick={() => onclick(errandObj)}
         container
         direction="column"
         item
@@ -90,7 +97,10 @@ export default function Errand(props) {
             item
             id="TimeDistanceDetails"
           >
-            Time/Distance Details
+            {new Date(startTime).toLocaleTimeString('en-US', {
+              hour: 'numeric',
+              minute: 'numeric'
+            })}
           </Typography>
         </Grid>
       </Grid>
@@ -185,6 +195,7 @@ Errand.propTypes = {
       rating: PropTypes.number
     }),
   }).isRequired,
+  onclick: PropTypes.func.isRequired,
   onRequestAccept: PropTypes.func,
   onRequestDeny: PropTypes.func,
   onErrandComplete: PropTypes.func

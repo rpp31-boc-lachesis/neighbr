@@ -195,7 +195,7 @@ describe('<ProfilePopover />', () => {
     });
     fireEvent.click(viewProfileButton);
     const userNameDisplay = await screen.findByRole('heading', {
-      name: 'Darryl'
+      name: 'Solomon'
     });
     expect(userNameDisplay).toBeInTheDocument();
   });
