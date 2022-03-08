@@ -94,7 +94,7 @@ export default function Header({ user, userPhoto, logout }) {
           {logo}
           <Box>
             <Tooltip title={user}>
-              <IconButton onClick={handleOpenUserMenu}>
+              <IconButton data-testid="right-menu" onClick={handleOpenUserMenu}>
                 <Avatar size="small" alt={user} src={userPhoto} sx={{ backgroundColor: '#FFFFFF' }} />
               </IconButton>
             </Tooltip>

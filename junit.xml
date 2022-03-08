@@ -1,34 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="11" failures="0" errors="0" time="2.847">
-  <testsuite name="Unit test" errors="0" failures="0" skipped="7" timestamp="2022-03-05T05:48:10" time="2.107" tests="11">
-    <testcase classname="Unit test Renders header on top of the page" name="Unit test Renders header on top of the page" time="0.167">
+<testsuites name="jest tests" tests="6" failures="0" errors="0" time="3.491">
+  <testsuite name="&lt;Signup /&gt;" errors="0" failures="0" skipped="0" timestamp="2022-03-07T09:34:10" time="2.737" tests="6">
+    <testcase classname="&lt;Signup /&gt; Renders Signup component" name="&lt;Signup /&gt; Renders Signup component" time="0.4">
     </testcase>
-    <testcase classname="Unit test Renders navigation drawer" name="Unit test Renders navigation drawer" time="0.035">
+    <testcase classname="&lt;Signup /&gt; Submission works" name="&lt;Signup /&gt; Submission works" time="0.143">
     </testcase>
-    <testcase classname="Unit test Renders application logo" name="Unit test Renders application logo" time="0.065">
+    <testcase classname="&lt;Signup /&gt; Rendered default state" name="&lt;Signup /&gt; Rendered default state" time="0.131">
     </testcase>
-    <testcase classname="Unit test Renders user&apos;s profile photo" name="Unit test Renders user&apos;s profile photo" time="0.059">
+    <testcase classname="&lt;Signup /&gt; Rendered all textbox" name="&lt;Signup /&gt; Rendered all textbox" time="0.255">
     </testcase>
-    <testcase classname="Integration test Renders the user&apos;s menu with options of logout and profile" name="Integration test Renders the user&apos;s menu with options of logout and profile" time="0">
-      <skipped/>
+    <testcase classname="&lt;Signup /&gt; Rendered username state" name="&lt;Signup /&gt; Rendered username state" time="0.108">
     </testcase>
-    <testcase classname="Integration test should render menuitems uplon clicking the avartat" name="Integration test should render menuitems uplon clicking the avartat" time="0">
-      <skipped/>
-    </testcase>
-    <testcase classname="Integration test Renders upon user signing in / signing up" name="Integration test Renders upon user signing in / signing up" time="0">
-      <skipped/>
-    </testcase>
-    <testcase classname="Integration test Renders user&apos;s profile picture" name="Integration test Renders user&apos;s profile picture" time="0">
-      <skipped/>
-    </testcase>
-    <testcase classname="Integration test Links user to main page upon clicking the logo" name="Integration test Links user to main page upon clicking the logo" time="0">
-      <skipped/>
-    </testcase>
-    <testcase classname="Integration test Links user to corresponding pages upon clicking menus on the navigation drop-down." name="Integration test Links user to corresponding pages upon clicking menus on the navigation drop-down." time="0">
-      <skipped/>
-    </testcase>
-    <testcase classname="Integration test Logs out user upon clicking Logout on the menu" name="Integration test Logs out user upon clicking Logout on the menu" time="0">
-      <skipped/>
+    <testcase classname="&lt;Signup /&gt; Rendered password state" name="&lt;Signup /&gt; Rendered password state" time="0.109">
     </testcase>
   </testsuite>
 </testsuites>
