@@ -26,8 +26,13 @@ services:
       # - mongo
     restart: always
     volumes:
-      - /var/log/nginx:/var/log/nginx
-      - /etc/letsencrypt/live/neighbr.site:/etc/letsencrypt/live/neighbr.site
+      - type: bind
+        source: /var/log/nginx
+        target: /var/log/nginx
+      - type: bind
+        source: /etc/letsencrypt/archive/neighbr.site
+        target: /etc/nginx/certs
+
     build:
       context: ./nginx
     ports:
