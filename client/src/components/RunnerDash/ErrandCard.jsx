@@ -84,4 +84,4 @@ export default function ErrandCard(props) {
       </CardActions>
     </Card>
   );
-};
+}

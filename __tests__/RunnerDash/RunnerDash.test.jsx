@@ -36,7 +36,7 @@ theme = responsiveFontSizes(theme);
 const StateWrapper = function sw(props) {
   const [currentRun, setRun] = React.useState(null);
   return <RunnerDash lastRun={{}} runs={runs} user="jake" errands={errands} currentRun={currentRun} setRun={setRun} locations={locations} handlePostRun={mockPostRun} refreshData={mockRefreshData} />;
-}
+};
 
 const LocationStateWrapper = function lsw(props) {
   const [location, setLocation] = React.useState('');
@@ -129,9 +129,6 @@ describe('Location autocomplete', () => {
       name: /grace cathedral, 1100 california st, san francisco, california 94108, united states/i
     });
 
-    await userEvent.click(choice)
-    await screen.logTestingPlaygroundURL();
-
-    // screen.debug();
+    await userEvent.click(choice);
   });
 });
