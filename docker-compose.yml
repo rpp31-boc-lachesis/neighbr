@@ -27,6 +27,7 @@ services:
     restart: always
     volumes:
       - /var/log/nginx:/var/log/nginx
+      - /etc/letsencrypt/live/neighbr.site:/etc/letsencrypt/live/neighbr.site
     build:
       context: ./nginx
     ports:
