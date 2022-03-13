@@ -11,7 +11,7 @@ services:
     build: .
     ports:
       - 51234:51234
-      - 443:443
+
   # mongo:
   #   image: mongo
   #   restart: always
@@ -36,7 +36,8 @@ services:
     build:
       context: ./nginx
     ports:
-      - "80:80"
+      - 80:80
+      - 443:443
     environment:
       - NGINX_HOST=neighbr.site
       - NGINX_PORT=80
