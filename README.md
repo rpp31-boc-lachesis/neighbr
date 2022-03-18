@@ -1,6 +1,7 @@
 [![CircleCI](https://circleci.com/gh/rpp31-boc-lachesis/neighbr/tree/master.svg?style=shield&circle-token=8a4b91616d339b1059983589100b52eecf2f2d03)](https://circleci.com/gh/rpp31-boc-lachesis/neighbr/tree/master)
 # 🤝 Welcome to `Neighbr`!
 ### A Community-Building Application For All Your Needs
+
 <img align="right" alt="house in neighborhood" src="https://drive.google.com/uc?export=view&id=1kkKcSb1nXsnBaBPYV83IwauRRhqGaonu" />
 <hr />
 
@@ -22,6 +23,8 @@
    ```sh
    npm install
    ```
+   
+<img align="right" alt="Neighbr browsing phone" src="https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB" />
 
 ## ⚗️ Usage & Examples
 1. Signup/Login
@@ -184,3 +187,4 @@ or, when deploying via your CI/CD pipeline:
 ## 🔊 Special Acknowledgements
  - [Hack Reactor](https://www.hackreactor.com/)
     * A special thank you to Hack Reactor!
+<img align="right" alt="Lounging Neighbr" src="https://ucarecdn.com/0145f339-82cd-4b03-8a6e-fa826848a5ca/" />
