@@ -109,13 +109,17 @@ or, when deploying via your CI/CD pipeline:
    <img alt="Circle CI Docs" src="https://img.shields.io/badge/circle%20ci-%23161616.svg?style=for-the-badge&logo=circleci&logoColor=white" />
  </a>
 <a href="https://www.passportjs.org/">
-  <img alt="Passport JS Docs" src="https://img.shields.io/badge/passport-%2334E27A.svg?style=for-the-badge&logo=circleci&logoColor=white" />
+  <img alt="Passport JS Docs" src="https://img.shields.io/badge/passport-%2334E27A.svg?style=for-the-badge&logo=passport&logoColor=white" />
+</a>
+<a href="https://www.figma.com/">
+  <img alt="Figma Docs" src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white" />
+</a>
+<a href="https://www.figma.com/">
+  <img alt="Figma Docs" src="https://img.shields.io/badge/mapbox-%23000000.svg?style=for-the-badge&logo=mapbox&logoColor=white" />
 </a>
 </div>
 
 * [Mongoose](https://mongoosejs.com/)
-* [Passport JS](https://www.passportjs.org/)
-* [Figma](https://www.figma.com/design/)
 
 
 ## 🛠 Skills
