@@ -5,15 +5,29 @@
 <img align="right" alt="house in neighborhood" src="https://drive.google.com/uc?export=view&id=1kkKcSb1nXsnBaBPYV83IwauRRhqGaonu" />
 <hr />
 
-## 📋 Features
-- [Signup & Login](#signup-and-login)
-- [User Profiles](#user-profiles)
-- [Requester Dashboard](#requester-dashboard)
-- [Runner Dashboard](#runner-dashboard)
-- [Requester Status Window](#requester-status-window)
-- [Runner Status Window](#runner-status-window)
+## 🧭 Navigation
+- [Features](#features)
+- [Installation](#installation)
+- [Usage and Examples](#usage&examples)
+- [Running Tests](#runningtests)
+- [Environment](#environment)
+- [Optimizations](#optimizations)
+- [Technologies & Tools](#tech)
+- [Skills](#skills)
+- [Contributors](#contributors)
+- [Links](#links)
+- [Screenshots](#screenshots)
+- [Special Acknowledgements](#acknowledgements)
 
-## 💾 Installation
+## 📋 <a id="features">Features</a>
+- [Signup & Login](#signuplogin)
+- [User Profiles](#profiles)
+- [Requester Dashboard](#requester-dash)
+- [Runner Dashboard](#runner-dash)
+- [Requester Status Window](#requester-status)
+- [Runner Status Window](#runner-status)
+
+## 💾 <a id="installation">Installation</a>
 1. Clone the repository: <br />
    `git clone https://github.com/rpp31-boc-lachesis/neighbr.git`
 3. Install dependencies: <br />
@@ -21,14 +35,14 @@
    
 <img align="right" alt="Neighbr browsing phone" src="https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB" />
 
-## ⚗️ Usage & Examples
+## ⚗️ <a id="usage&examples">Usage & Examples</a>
 1. Signup/Login
 2. Request or run an errand
 3. Track your progress
 4. Thank your neighbor
 5. View your profile or others
 
-## 🧪 Running Tests
+## 🧪 <a id="runningtests">Running Tests</a>
 Our test suite is set up with Jest, React Testing Library, and Mock Service Worker.
 <br />
 To run the test suite in development, simply run:
@@ -41,14 +55,14 @@ or, when deploying via your CI/CD pipeline:
   npm test:ci
 ```
 
-## ⛰️ Environment
+## ⛰️ <a id="environment">Environment</a>
 - Custom environment variables are available for connecting to our deployed database, or configuring your own: <br />
 `DB_URI=mongodb://mongodev.neighbr.site:51234/neighbr`
 
 - Auth tokens are setup with JWT for your convenience: <br />
 `jwtSecret=jwtauthsecret`
 
-## ⚙️ Optimizations
+## ⚙️ <a id="optimizations">Optimizations</a>
 1. Bundling of React code and all media assets with Webpack
 2. Use of compression middleware for faster payload transfers
 3. Performance-tuned database queries
@@ -58,7 +72,7 @@ or, when deploying via your CI/CD pipeline:
 7. Continuous integration and continuous deployment for faster development and shipment
 8. NGINX placed as proxy server for security enhancement and future load-balancing & caching
 
-## 💻 Technologies & Tools
+## 💻 <a id="tech">Technologies & Tools</a>
 <div align="left">
   <a href="https://reactjs.org/">
     <img alt="React" src="https://img.shields.io/badge/React%20-%2361DAFB.svg?&style=for-the-badge&logo=react&logoColor=black" />
@@ -127,7 +141,7 @@ or, when deploying via your CI/CD pipeline:
 
 * [Mongoose](https://mongoosejs.com/)
 
-## 🛠 Skills
+## 🛠 <a id="skills">Skills</a>
 - RESTful API architecture
 - Modular controllers
 - Object relational database management
@@ -140,7 +154,7 @@ or, when deploying via your CI/CD pipeline:
 - Containerization
 - Continuous integration and continuous deployment
 
-## 🤖 Contributors
+## 🤖 <a id="contributors">Contributors</a>
 - Git Hub
   * [![portfolio](https://img.shields.io/badge/our_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)
 - Jake Caughern - Architecture Owner
@@ -158,22 +172,22 @@ or, when deploying via your CI/CD pipeline:
 - Mary Miyamoto - Software Engineer
   * [![linkedin](https://img.shields.io/badge/Mary%20Miyamoto-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)
 
-## 🔗 Links
+## 🔗 <a id="links">Links</a>
 - 👇 Visit our homepage! <br />
   - ### [Neighbr](https://neighbr.site/)
 
-## 📷 Screenshots
-- ### Signup and Login
+## 📷 <a id="screenshots">Screenshots</a>
+- ### <a id="signuplogin">Signup & Login</a>
    ![auth-neighbr](https://user-images.githubusercontent.com/64869554/156875923-9b985bb9-a6f3-4555-9de4-7568256281fe.jpg)
-- ### Requester Dashboard
+- ### <a id="requester-dash">Requester Dashboard</a>
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-- ### Runner Dashboard
+- ### <a id="runner-dash">Runner Dashboard</a>
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-- ### Requester Status Window
+- ### <a id="requester-status">Requester Status Window</a>
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-- ### Runner Status Window
+- ### <a id="runner-status">Runner Status Window</a>
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-- ### User Profiles
+- ### <a id="profiles">User Profiles</a>
 <div>
   <img alt="Main User Profile 1" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11KM3BBvJc7tdMlFKw9bMRrdYImJcO0wK" />
   <img alt="Main User Profile 2" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=1oVsbzQ86ZJlwfOM4vbcSHr6YgowiIZe5" />
@@ -182,7 +196,7 @@ or, when deploying via your CI/CD pipeline:
   <img alt="User Profile Card 1" width="35%" height="auto" src="https://drive.google.com/uc?export=view&id=1VZzOkBU-ej72LbQdi14qr5faBVhwXW8B" />
 </div>
 
-## 🔊 Special Acknowledgements
+## 🔊 <a id="acknowledgements">Special Acknowledgements</a>
  * [Hack Reactor](https://www.hackreactor.com/)
     * A special thank you to Hack Reactor!
 <img align="right" alt="Lounging Neighbr" src="https://ucarecdn.com/0145f339-82cd-4b03-8a6e-fa826848a5ca/" />
