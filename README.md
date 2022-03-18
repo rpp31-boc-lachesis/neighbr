@@ -178,11 +178,11 @@ or, when deploying via your CI/CD pipeline:
 * ### **Screenshot:**
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **User Profiles**
-  ![Main User Profile 1](https://drive.google.com/uc?export=view&id=11KM3BBvJc7tdMlFKw9bMRrdYImJcO0wK)
-  ![Main User Profile 2](https://drive.google.com/uc?export=view&id=1oVsbzQ86ZJlwfOM4vbcSHr6YgowiIZe5)
-  ![Main User Profile 3](https://drive.google.com/uc?export=view&id=11dhREPPgMEw_L0xxzY9Vr_PmddkYmmBs)
-  ![Main User Profile 4](https://drive.google.com/uc?export=view&id=1qzEYK_l70TfGT2jWPgW5ouj9BxFzTUt8)
-  ![User Profile Card 1](https://drive.google.com/uc?export=view&id=1VZzOkBU-ej72LbQdi14qr5faBVhwXW8B)
+  <img alt="Main User Profile 1" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11KM3BBvJc7tdMlFKw9bMRrdYImJcO0wK" />
+  <img alt="Main User Profile 2" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=1oVsbzQ86ZJlwfOM4vbcSHr6YgowiIZe5" />
+  <img alt="Main User Profile 3" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11dhREPPgMEw_L0xxzY9Vr_PmddkYmmBs" />
+  <img alt="Main User Profile 4" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=1qzEYK_l70TfGT2jWPgW5ouj9BxFzTUt8" />
+  <img alt="User Profile Card 1" width="35%" height="auto" src="https://drive.google.com/uc?export=view&id=1VZzOkBU-ej72LbQdi14qr5faBVhwXW8B" />
 
 ## 🔊 Special Acknowledgements
  * [Hack Reactor](https://www.hackreactor.com/)
