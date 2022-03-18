@@ -24,11 +24,11 @@
    ```
 
 ## ⚗️ Usage & Examples
-- Custom environment variables are available for connecting to our deployed database, or configuring your own: <br />
-`DB_URI=mongodb://mongodev.neighbr.site:51234/neighbr`
-
-- Auth tokens are setup with JWT for your convenience: <br />
-`jwtSecret=jwtauthsecret`
+1. Signup/Login
+2. Request or run an errand
+3. Track your progress
+4. Thank your neighbor
+5. View your profile or others
 
 ## 🧪 Running Tests
 Our test suite is set up with Jest, React Testing Library, and Mock Service Worker.
@@ -44,13 +44,21 @@ or, when deploying via your CI/CD pipeline:
 ```
 
 ## ⛰️ Environment
+- Custom environment variables are available for connecting to our deployed database, or configuring your own: <br />
+`DB_URI=mongodb://mongodev.neighbr.site:51234/neighbr`
 
-
+- Auth tokens are setup with JWT for your convenience: <br />
+`jwtSecret=jwtauthsecret`
 
 ## ⚙️ Optimizations
-
-**Performance:** Performance info!
-
+1. Bundling of React code and all media assets with Webpack
+2. Use of compression middleware for faster payload transfers
+3. Performance-tuned database queries
+4. Use of Passport JS for secure authentication and reduction of malicious behavior
+5. Containerization for ease of deployment and scaling
+6. Use of React Router for faster page loads and seamless user experience
+7. Continuous integration and continuous deployment for faster development and shipment
+8. NGINX placed as proxy server for security enhancement and future load-balancing & caching
 
 ## 💻 Technologies & Tools
 <div align="left">
@@ -154,7 +162,8 @@ or, when deploying via your CI/CD pipeline:
 * [![linkedin](https://img.shields.io/badge/Mary.Miyamoto-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)
 
 ## 🔗 Links
-- Links here
+- Visit our homepage!
+[Neighbr](https://neighbr.site/)
 
 ## 📷 Screenshots
 * ### **Authorization / Authentication flow**
