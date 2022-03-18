@@ -123,7 +123,17 @@ or, when deploying via your CI/CD pipeline:
 
 
 ## 🛠 Skills
-Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, Webpack, CircleCI, Docker, Passport, Amazon Web Services, MapBox GL, Passport JS, Jest, React Testing Library...
+- RESTful API architecture
+- Modular controllers
+- Object relational database management
+- Secure authentication and sign-up
+- Request and run location tracking
+- Responsive web design / mobile friendly
+- Dynamic and conditional rendering
+- Map navigation
+- High test coverage
+- Containerization
+- Continuous integration and continuous deployment
 
 ## 🤖 Contributors
 - Git Hub:
