@@ -15,14 +15,10 @@
 - Runner Status Window
 
 ## 💾 Installation
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/rpp31-boc-lachesis/neighbr.git
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
+1. Clone the repository: <br />
+   `git clone https://github.com/rpp31-boc-lachesis/neighbr.git`
+3. Install dependencies: <br />
+   `npm install`
    
 <img align="right" alt="Neighbr browsing phone" src="https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB" />
 
@@ -165,8 +161,8 @@ or, when deploying via your CI/CD pipeline:
 * [![linkedin](https://img.shields.io/badge/Mary.Miyamoto-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)
 
 ## 🔗 Links
-- Visit our homepage!
-[Neighbr](https://neighbr.site/)
+- 👇 Visit our homepage! <br />
+  - ### [Neighbr](https://neighbr.site/)
 
 ## 📷 Screenshots
 * ### **Authorization / Authentication flow**
@@ -185,6 +181,6 @@ or, when deploying via your CI/CD pipeline:
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 
 ## 🔊 Special Acknowledgements
- - [Hack Reactor](https://www.hackreactor.com/)
+ * [Hack Reactor](https://www.hackreactor.com/)
     * A special thank you to Hack Reactor!
 <img align="right" alt="Lounging Neighbr" src="https://ucarecdn.com/0145f339-82cd-4b03-8a6e-fa826848a5ca/" />
