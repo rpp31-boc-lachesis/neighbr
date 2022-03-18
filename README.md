@@ -143,22 +143,22 @@ or, when deploying via your CI/CD pipeline:
 - Continuous integration and continuous deployment
 
 ## 🤖 Contributors
-- Git Hub:
-* [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)
+- Git Hub
+  * [![portfolio](https://img.shields.io/badge/our_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)
 - Jake Caughern - Architecture Owner
-* [![linkedin](https://img.shields.io/badge/Jake.Caughern-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jake-caughern/)
+  * [![linkedin](https://img.shields.io/badge/Jake%20Caughern-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jake-caughern/)
 - Cameron Colaco - Software Engineer
-* [![linkedin](https://img.shields.io/badge/Cameron.Colaco-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cameroncolaco/)
+  * [![linkedin](https://img.shields.io/badge/Cameron%20Colaco-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cameroncolaco/)
 - Josh Fuqua - Product Manager
-* [![linkedin](https://img.shields.io/badge/Josh.Fuqua-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)
+  * [![linkedin](https://img.shields.io/badge/Josh%20Fuqua-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)
 - Michael Lapid - UI Owner
-* [![linkedin](https://img.shields.io/badge/Michael.Lapid-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)
+  * [![linkedin](https://img.shields.io/badge/Michael%20Lapid-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)
 - Yitong Liu - Software Engineer
-* [![linkedin](https://img.shields.io/badge/Yitong.Liu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
+  * [![linkedin](https://img.shields.io/badge/Yitong%20Liu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
 - Maxine Majnaric - Software Engineer
-* [![linkedin](https://img.shields.io/badge/Maxine.Majnaric-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)
+  * [![linkedin](https://img.shields.io/badge/Maxine%20Majnaric-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)
 - Mary Miyamoto - Software Engineer
-* [![linkedin](https://img.shields.io/badge/Mary.Miyamoto-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)
+  * [![linkedin](https://img.shields.io/badge/Mary%20Miyamoto-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)
 
 ## 🔗 Links
 - 👇 Visit our homepage! <br />
@@ -177,8 +177,8 @@ or, when deploying via your CI/CD pipeline:
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-* ### **Screenshot:**
-<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
+* ### **User Profiles**
+  ![Main User Profile](https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB)
 
 ## 🔊 Special Acknowledgements
  * [Hack Reactor](https://www.hackreactor.com/)
