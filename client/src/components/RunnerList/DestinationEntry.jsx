@@ -22,7 +22,7 @@ function DestinationEntry({run, handleEntryClick}) {
 
   const startTimeEvent = new Date(startTime).toLocaleTimeString()
   const dateEvent = new Date(date)
-  console.log('run', run)
+  // console.log('run', run)
 
   return (
   <>
@@ -31,7 +31,7 @@ function DestinationEntry({run, handleEntryClick}) {
               sx={{
               // height: '100px',
                 maxWidth: '95%',
-                border: '1px solid black',
+                border: '0px solid black',
                 borderRadius: '10px',
                 background: '#5FC6C9',
                 '&:hover': {
@@ -41,7 +41,7 @@ function DestinationEntry({run, handleEntryClick}) {
               }}
               key={run.id}
               onClick={() => { handleEntryClick(run); }}>
-              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
+              <Stack direction="row" spacing={2} sx={{ minHeight: '100%', border: '0px dashed blue' }}>
                 <div className="entryColumn">
                   <div className="lineItem topLineLeft">
                     <div className="locationNumber">1</div>
@@ -58,7 +58,7 @@ function DestinationEntry({run, handleEntryClick}) {
                   <Typography variant="body1">Item 1</Typography>
                   <Typography variant="body1">Item 1</Typography> */}
                 </div>
-                {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '1px dashed blue' }}>
+                {/* <Stack spacing={3} sx={{ minHeight: '100%', border: '0px dashed blue' }}>
                 {/* <EntryBox>Item 1 Item 1 Item 1</EntryBox>
                   <EntryBox>Item 2</EntryBox>
                   <EntryBox>Item 3</EntryBox>

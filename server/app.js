@@ -14,7 +14,7 @@ const {
   addRunToUser,
   getUserById,
   getUserPopulate,
-  updateRating
+  putUpdatedRating
 } = require('../controllers/userController');
 const {
   getRuns,
@@ -27,6 +27,7 @@ const {
   getAllErrands,
   getErrandById,
   addErrand,
+  postErrand,
   acceptErrand
 } = require('../controllers/errandController');
 const { locationSearch } = require('../controllers/locationSearch');
@@ -50,7 +51,7 @@ app.get('/users', getUsers);
 app.get('/user/:id', getUserById);
 app.get('/users/:username', getOneUser);
 app.post('/users/addRun', addRunToUser);
-app.put('/users/rate', updateRating);
+app.put('/users/rate', putUpdatedRating);
 
 app.get('/locations', getLocations);
 app.get('/locations/:id', getLocationById);
@@ -65,7 +66,8 @@ app.post('/runs/updateNoMap', updateRunNoMap);
 
 app.get('/errands', getAllErrands);
 app.get('/requestStatus/:id', getErrandById);
-app.post('/errands/create', addErrand);
+app.post('/errands/create', addErrand); //in use
+app.post('/errands/post', postErrand);
 app.post('/errands/accept', acceptErrand);
 
 app.get('/login', (req, res) => {

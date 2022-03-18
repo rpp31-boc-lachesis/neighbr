@@ -80,41 +80,41 @@ API_KEY=<your API key here>
 Node.js, Express, MongoDB, Mongoose, React, React Router, Material UI, Babel, Webpack, CircleCI, Docker, Passport, Amazon Web Services, MapBox GL, Passport JS, Jest, React Testing Library...
 
 ## 🤖 Contributors
-- Git Hub:\
-* [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)\
-- Jake Caughern - Architecture Owner\
-* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jake-caughern/)\
-- Cameron Colaco - Software Engineer\
-* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cameroncolaco/)\
-- Josh Fuqua - Product Manager\
-* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)\
-- Michael Lapid - UI Owner\
-* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)\
-- Yitong Lui - Software Engineer\
-* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)\
-- Maxine Seo - Software Engineer\
-* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)\
-- Mary Miyamoto - Software Engineer\
-* [![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/<MARY_MIYAMOTO_HERE>)
+- Git Hub:
+* [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/rpp31-boc-lachesis/neighbr/blob/master/README.md)
+- Jake Caughern - Architecture Owner
+* [![linkedin](https://img.shields.io/badge/Jake.Caughern-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jake-caughern/)
+- Cameron Colaco - Software Engineer
+* [![linkedin](https://img.shields.io/badge/Cameron.Colaco-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cameroncolaco/)
+- Josh Fuqua - Product Manager
+* [![linkedin](https://img.shields.io/badge/Josh.Fuqua-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/joshdfuqua/)
+- Michael Lapid - UI Owner
+* [![linkedin](https://img.shields.io/badge/Michael.Lapid-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/michaeljohnlapid/)
+- Yitong Liu - Software Engineer
+* [![linkedin](https://img.shields.io/badge/Yitong.Liu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
+- Maxine Majnaric - Software Engineer
+* [![linkedin](https://img.shields.io/badge/Maxine.Majnaric-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)
+- Mary Miyamoto - Software Engineer
+* [![linkedin](https://img.shields.io/badge/Mary.Miyamoto-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)
 
 ## 🔗 Links
 - Links here
 
 ## 📷 Screenshots
+* ### **Authorization / Authentication flow**
+   ![auth-neighbr](https://user-images.githubusercontent.com/64869554/156875923-9b985bb9-a6f3-4555-9de4-7568256281fe.jpg)
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 * ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
-* ### **Screenshot:**
-![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>)
+<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 
 ## 🔊 Special Acknowledgements
  - [Hack Reactor](https://www.hackreactor.com/)

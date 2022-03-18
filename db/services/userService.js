@@ -11,9 +11,13 @@ module.exports = {
       return Math.round((newSum + Number.EPSILON) * 100) / 100;
     };
 
-    Users.findOneAndUpdate(
+    return Users.findOneAndUpdate(
       { username: user },
-      { $set: { sum_rating: calculateSumRating() }, $inc: { rating_count: 1 } },
+      {
+        $set:
+          { sum_rating: calculateSumRating(sum_rating, rating_count) },
+        $inc: { rating_count: 1 }
+      },
       { new: true }
     );
   },

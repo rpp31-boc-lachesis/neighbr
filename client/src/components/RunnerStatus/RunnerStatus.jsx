@@ -27,27 +27,8 @@ class RunnerStatus extends React.Component {
   }
 
   componentDidMount() {
-    const { errands, runs, user } = this.props;
+    const { currentRun, errands } = this.props;
     const newRequests = [];
-    let currentRun;
-
-    for (let i = 0; i < runs.length; i += 1) {
-      if (runs[i].user.username === user) {
-        currentRun = runs[i];
-        break;
-      }
-    }
-
-    // for (let i = 0; i < errands.length; i += 1) {
-    //   const { _id: errandID } = errands[i];
-    //   const { acceptedErrands, declinedErrands } = currentRun;
-
-    //   if (!acceptedErrands.includes(errandID) && !declinedErrands.includes(errandID)) {
-    //     newRequests.push(errands[i]);
-    //   }
-    // }
-
-    // const currentRun = runs[3];
 
     const {
       acceptedErrands,
@@ -81,7 +62,7 @@ class RunnerStatus extends React.Component {
      * The problem atm is that I have been unsuccessful at adding a previously
      * existing map to the page, or if I am able to somehow make that happen,
      * The Completed button on each card would not be able to remove its respective
-     * marker on the map, as there is no way to reference the items within the _markers array
+     * marker on the map, as there is no way to reference the items within the _markers array.
      */
 
     // const currentRunMarkers = Object.entries(runMap);
@@ -105,7 +86,6 @@ class RunnerStatus extends React.Component {
   onRequestAccept(errandObj) {
     const {
       _id: errandID,
-      category,
       requester,
       req_items: reqItems,
       start_time: startTime
@@ -147,15 +127,14 @@ class RunnerStatus extends React.Component {
         }
         const feature = response.body.features[0];
         const { map } = this.state;
-        let marker = new mapboxgl
+        const marker = new mapboxgl
           .Marker()
           .setLngLat(feature.center)
           .setPopup(
-            new mapboxgl.Popup().setHTML(`<h2>${category}</h2>
+            new mapboxgl.Popup().setHTML(`<h2>${reqItems.item}</h2>
             <p><strong>${requester}</strong><br>
             <strong>Address:</strong> ${streetAddress}<br>
             <strong>Requested at:</strong> ${startTime}<br>
-            <strong>Item:</strong> ${reqItems.item}</p>
             `)
           )
           .addTo(map);
@@ -634,10 +613,18 @@ class RunnerStatus extends React.Component {
 
 RunnerStatus.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  errands: PropTypes.array.isRequired,
+  currentRun: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
-  runs: PropTypes.array.isRequired,
-  user: PropTypes.string.isRequired
+  errands: PropTypes.array.isRequired
+};
+
+RunnerStatus.defaultProps = {
+  currentRun: {
+    acceptedErrands: [],
+    declinedErrands: [],
+    completedErrands: [],
+    map: undefined
+  }
 };
 
 export default RunnerStatus;

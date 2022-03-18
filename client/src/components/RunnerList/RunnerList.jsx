@@ -27,9 +27,9 @@ const BORDER_PX = '0px'
 
 
 function RunnerList(props) {
-  const { runs, locations } = props;
-  console.log('in RunsList', 'RUNS', runs);
-  console.log('in RunsList', 'LOCATIONS', locations);
+  const { runs, locations, errands, user, handlePostErrand, refreshData} = props;
+  // console.log('in RunsList', 'RUNS', runs);
+  // console.log('in RunsList', 'LOCATIONS', locations);
 
   const [runDetail, setRunDetail] = useState(null);
   const [mapCenter, setMapCenter] = useState([-79.4512, 43.6568])
@@ -63,11 +63,13 @@ function RunnerList(props) {
       // center: [-79.4512, 43.6568],
       center: mapCenter,
       zoom: 13
-  })
-  }
+    });
+    const marker1 = new mapboxgl.Marker()
+      .setLngLat(mapCenter)
+      .addTo(map);
+  };
 
-  const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} />);
-console.log('Runs', Runs)
+  const Runs = runs.map((run) => <DestinationEntry run={run} handleEntryClick={handleEntryClick} key={run._id}/>);
 
   return (
     <Container maxwidth="sm" sx={{border: `${BORDER_PX} dashed red` }}>
@@ -75,7 +77,7 @@ console.log('Runs', Runs)
 {/* left column */}
         <Grid container item direction="column" sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }} xs={2}>
 
-          <center>
+          {/* <center>
 
           Filter by:
 <br />
@@ -100,7 +102,7 @@ console.log('Runs', Runs)
 <br />
           etc
 <br />
-          </center>
+          </center> */}
         </Grid>
 {/* middle column */}
         <Grid item xs={4} sx={{ minHeight: '100%', border: `${BORDER_PX} solid orange` }}>
@@ -127,7 +129,7 @@ console.log('Runs', Runs)
           >
                 <Typography>Map</Typography>
           </Box>
-            <DestinationDetail runDetail={runDetail} />
+            <DestinationDetail runDetail={runDetail} handlePostErrand={handlePostErrand} refreshData={refreshData}/>
           {/* </Box> */}
         </Stack>
         </Grid>

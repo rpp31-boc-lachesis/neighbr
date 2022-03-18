@@ -9,13 +9,11 @@ const {
 } = require('../db/services/userService');
 
 module.exports = {
-  updateRating: async (req, res) => {
-    console.log('updated rating: ', req.body);
+  putUpdatedRating: async (req, res) => {
     try {
-      const newRating = await updateRating(user, givenRating);
-      console.log('New rating sum: ', newRating);
+      await updateRating(req.body.user, req.body.rating);
       if (newRating) {
-        res.status(200).send(newRating);
+        res.status(200).send('Updated rating');
       }
     } catch (err) {
       res.status(500).send(err);
