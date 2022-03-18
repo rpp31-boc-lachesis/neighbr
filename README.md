@@ -6,8 +6,7 @@
 <hr />
 
 ## 📋 Features
-- [Signup](#signup)
-- [Login](#login)
+- [Signup & Login](#signup-and-login)
 - [User Profiles](#user-profiles)
 - [Requester Dashboard](#requester-dashboard)
 - [Runner Dashboard](#runner-dashboard)
@@ -165,7 +164,7 @@ or, when deploying via your CI/CD pipeline:
   - ### [Neighbr](https://neighbr.site/)
 
 ## 📷 Screenshots
-- ### Signup / Login
+- ### Signup and Login
    ![auth-neighbr](https://user-images.githubusercontent.com/64869554/156875923-9b985bb9-a6f3-4555-9de4-7568256281fe.jpg)
 - ### Requester Dashboard
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
