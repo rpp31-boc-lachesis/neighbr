@@ -6,13 +6,13 @@
 <hr />
 
 ## 📋 Features
-- Signup
-- Login
-- User Profiles
-- Requester Dashboard
-- Runner Dashboard
-- Requester Status Window
-- Runner Status Window
+- [Signup](#signup)
+- [Login](#login)
+- [User Profiles](#user-profiles)
+- [Requester Dashboard](#requester-dashboard)
+- [Runner Dashboard](#runner-dashboard)
+- [Requester Status Window](#requester-status-window)
+- [Runner Status Window](#runner-status-window)
 
 ## 💾 Installation
 1. Clone the repository: <br />
@@ -165,19 +165,17 @@ or, when deploying via your CI/CD pipeline:
   - ### [Neighbr](https://neighbr.site/)
 
 ## 📷 Screenshots
-* ### **Authorization / Authentication flow**
+- ### Signup / Login
    ![auth-neighbr](https://user-images.githubusercontent.com/64869554/156875923-9b985bb9-a6f3-4555-9de4-7568256281fe.jpg)
-* ### **Screenshot:**
+- ### Requester Dashboard
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-* ### **Screenshot:**
+- ### Runner Dashboard
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-* ### **Screenshot:**
+- ### Requester Status Window
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-* ### **Screenshot:**
+- ### Runner Status Window
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-* ### **Screenshot:**
-<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
-* ### **User Profiles**
+- ### User Profiles
   <img alt="Main User Profile 1" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11KM3BBvJc7tdMlFKw9bMRrdYImJcO0wK" />
   <img alt="Main User Profile 2" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=1oVsbzQ86ZJlwfOM4vbcSHr6YgowiIZe5" />
   <img alt="Main User Profile 3" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11dhREPPgMEw_L0xxzY9Vr_PmddkYmmBs" />
