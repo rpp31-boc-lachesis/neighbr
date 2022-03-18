@@ -127,7 +127,6 @@ or, when deploying via your CI/CD pipeline:
 
 * [Mongoose](https://mongoosejs.com/)
 
-
 ## 🛠 Skills
 - RESTful API architecture
 - Modular controllers
