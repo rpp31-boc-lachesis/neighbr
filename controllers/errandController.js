@@ -49,7 +49,6 @@ module.exports.getErrandById = async (req, res) => {
 };
 
 module.exports.acceptErrand = (req, res) => {
-  console.log(req.body);
   const { errandId, user } = req.body.data;
   markErrandAccepted(errandId, user, (err, data) => {
     if (err) {
