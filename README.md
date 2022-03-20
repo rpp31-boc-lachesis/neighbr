@@ -32,7 +32,7 @@
    `git clone https://github.com/rpp31-boc-lachesis/neighbr.git`
 3. Install dependencies: <br />
    `npm install`
-   
+
 <img align="right" alt="Neighbr browsing phone" src="https://drive.google.com/uc?export=view&id=1pi1xoToPs-XtlMIdmXcMAiQa93m-3SoB" />
 
 ## ⚗️ <a id="usage&examples">Usage & Examples</a>
@@ -56,11 +56,25 @@ or, when deploying via your CI/CD pipeline:
 ```
 
 ## ⛰️ <a id="environment">Environment</a>
-- Custom environment variables are available for connecting to our deployed database, or configuring your own: <br />
-`DB_URI=mongodb://mongodev.neighbr.site:51234/neighbr`
+Copy `.env.example` to `.env` and fill in your information.
+```bash
+NODE_ENV="PRODUCTION or DEVELOPMENT"
+PORT="EXPRESS-PORT"
 
-- Auth tokens are setup with JWT for your convenience: <br />
-`jwtSecret=jwtauthsecret`
+PRODUCTION_URL="productionURL"
+
+DB_URI="mongo://your.mongo.uri"
+DB_NAME="mongoDatabaseName"
+DB_USER="mongoUsername"
+DB_PASSWORD="mongoUserPassword"
+
+MONGO_INITDB_ROOT_USERNAME="rootUsernameForMongoDBDocker"
+MONGO_INITDB_ROOT_PASSWORD"rootPasswordForMongoDBDocker"
+
+MAPBOX_API_KEY="YourAPIKey"
+
+jwtSecret="your JWT auth secret"
+```
 
 ## ⚙️ <a id="optimizations">Optimizations</a>
 1. Bundling of React code and all media assets with Webpack
