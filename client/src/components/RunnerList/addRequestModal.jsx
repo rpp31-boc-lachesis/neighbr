@@ -96,7 +96,7 @@ export default function AddRequestModal(props) {
         locationId: location._id,
       },
       dropoff: {
-        address: dropoff, //fill with new. if empty, then fill in app
+        address: dropoff.place_name, //fill with new. if empty, then fill in app
         note,
         // locationId: { type: mongoose.Types.ObjectId, ref: 'Location' },
       },
