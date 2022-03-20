@@ -161,6 +161,17 @@ class App extends React.Component {
                   console.log('RUNS:', result);
                 }
               );
+              if (this.state.currentRun !== null) {
+                let newCurrentRun;
+                result.forEach((run) => {
+                  if (run._id === this.state.currentRun._id) {
+                    newCurrentRun = run;
+                  }
+                });
+                this.setState(
+                  { currentRun: newCurrentRun }
+                );
+              }
             }
           },
           (error) => {
