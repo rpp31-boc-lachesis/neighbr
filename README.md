@@ -196,7 +196,7 @@ jwtSecret="your JWT auth secret"
 - ### <a id="requester-dash">Requester Dashboard</a>
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 - ### <a id="runner-dash">Runner Dashboard</a>
-<video autoplay loop muted playsinline src="https://user-images.githubusercontent.com/80003881/159187913-66124b46-47e6-4b1f-8a32-53f2f9ba87df.mov"></video>
+![RunnerDashClip](https://user-images.githubusercontent.com/80003881/159188612-3d7d0648-2c52-46c0-9cb9-6201c3d209d8.gif)
 - ### <a id="requester-status">Requester Status Window</a>
 <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 - ### <a id="runner-status">Runner Status Window</a>
