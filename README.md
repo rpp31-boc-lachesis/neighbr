@@ -21,6 +21,7 @@
 
 ## 📋 <a id="features">Features</a>
 - [Signup & Login](#signuplogin)
+- [Navigation](#navigation)
 - [User Profiles](#profiles)
 - [Requester Dashboard](#requester-dash)
 - [Runner Dashboard](#runner-dash)
@@ -142,14 +143,14 @@ jwtSecret="your JWT auth secret"
  <a href="https://circleci.com/">
    <img alt="Circle CI Docs" src="https://img.shields.io/badge/circle%20ci-%23161616.svg?style=for-the-badge&logo=circleci&logoColor=white" />
  </a>
-<a href="https://www.passportjs.org/">
-  <img alt="Passport JS Docs" src="https://img.shields.io/badge/passport-%2334E27A.svg?style=for-the-badge&logo=passport&logoColor=white" />
+<a href="https://www.jwt.io/">
+  <img alt="JWT Docs" src="https://img.shields.io/badge/-JSON%20Web%20Tokens-000000?logo=json%20web%20tokens&logoColor=white&style=for-the-badge" />
 </a>
 <a href="https://www.figma.com/">
   <img alt="Figma Docs" src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white" />
 </a>
-<a href="https://www.figma.com/">
-  <img alt="Figma Docs" src="https://img.shields.io/badge/mapbox-%23000000.svg?style=for-the-badge&logo=mapbox&logoColor=white" />
+<a href="https://www.mapbox.com/">
+  <img alt="Mapbox Docs" src="https://img.shields.io/badge/mapbox-%23000000.svg?style=for-the-badge&logo=mapbox&logoColor=white" />
 </a>
 </div>
 
@@ -182,7 +183,7 @@ jwtSecret="your JWT auth secret"
 - Yitong Liu - Software Engineer
   * [![linkedin](https://img.shields.io/badge/Yitong%20Liu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
 - Maxine Majnaric - Software Engineer
-  * [![linkedin](https://img.shields.io/badge/Maxine%20Majnaric-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)
+  (https://www.linkedin.com/in/maxinemajnaric/)
 - Mary Miyamoto - Software Engineer
   * [![linkedin](https://img.shields.io/badge/Mary%20Miyamoto-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)
 
@@ -192,15 +193,19 @@ jwtSecret="your JWT auth secret"
 
 ## 📷 <a id="screenshots">Screenshots</a>
 - ### <a id="signuplogin">Signup & Login</a>
+   Checkout how it works here 👉 [Demo](https://www.youtube.com/watch?v=B-dx6UWxV44)
    ![auth-neighbr](https://user-images.githubusercontent.com/64869554/156875923-9b985bb9-a6f3-4555-9de4-7568256281fe.jpg)
+- ### <a id="navigation">Navigation</a>
+   Checkout how it works here 👉 [Demo](https://www.youtube.com/watch?v=kup9G8m3LnU)
+   <img width="929" alt="navigation" src="https://user-images.githubusercontent.com/64869554/159628469-38cab60c-471a-4745-899c-7252aa09d2d9.png">
 - ### <a id="requester-dash">Requester Dashboard</a>
-<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
+   <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 - ### <a id="runner-dash">Runner Dashboard</a>
-![RunnerDashClip](https://user-images.githubusercontent.com/80003881/159188612-3d7d0648-2c52-46c0-9cb9-6201c3d209d8.gif)
+   ![RunnerDashClip](https://user-images.githubusercontent.com/80003881/159188612-3d7d0648-2c52-46c0-9cb9-6201c3d209d8.gif)
 - ### <a id="requester-status">Requester Status Window</a>
-<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
+   <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 - ### <a id="runner-status">Runner Status Window</a>
-<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
+   <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 
 
 - ### <a id="profiles">User Profiles</a>
