@@ -152,9 +152,10 @@ jwtSecret="your JWT auth secret"
 <a href="https://www.mapbox.com/">
   <img alt="Mapbox Docs" src="https://img.shields.io/badge/mapbox-%23000000.svg?style=for-the-badge&logo=mapbox&logoColor=white" />
 </a>
+ <a href="https://mongoosejs.com">
+  <img alt="Mongoose Docs" src="https://img.shields.io/badge/-mongoose-800?logo=mongoose&logoColor=white&style=for-the-badge" />
+</a>
 </div>
-
-* [Mongoose](https://mongoosejs.com/)
 
 ## 🛠 <a id="skills">Skills</a>
 - RESTful API architecture
@@ -183,7 +184,7 @@ jwtSecret="your JWT auth secret"
 - Yitong Liu - Software Engineer
   * [![linkedin](https://img.shields.io/badge/Yitong%20Liu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yitongl/)
 - Maxine Majnaric - Software Engineer
-  (https://www.linkedin.com/in/maxinemajnaric/)
+  * [![linkedin](https://img.shields.io/badge/Maxine%20Majnaric-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxinemajnaric/)
 - Mary Miyamoto - Software Engineer
   * [![linkedin](https://img.shields.io/badge/Mary%20Miyamoto-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mary-miyamoto/)
 
