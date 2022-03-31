@@ -211,11 +211,11 @@ jwtSecret="your JWT auth secret"
 
 - ### <a id="profiles">User Profiles</a>
 <div>
-  <img alt="Main User Profile 1" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11KM3BBvJc7tdMlFKw9bMRrdYImJcO0wK" />
-  <img alt="Main User Profile 2" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=1oVsbzQ86ZJlwfOM4vbcSHr6YgowiIZe5" />
-  <img alt="Main User Profile 3" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11dhREPPgMEw_L0xxzY9Vr_PmddkYmmBs" />
-  <img alt="Main User Profile 4" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=1qzEYK_l70TfGT2jWPgW5ouj9BxFzTUt8" />
-  <img alt="User Profile Card 1" width="35%" height="auto" src="https://drive.google.com/uc?export=view&id=1VZzOkBU-ej72LbQdi14qr5faBVhwXW8B" />
+  <img width="80%" alt="User Profile 1" src="https://user-images.githubusercontent.com/78557835/161098642-67848a8f-0401-44d0-b0f4-e3b9f57b6544.png">
+  <img width="80%" alt="User Profile 2" src="https://user-images.githubusercontent.com/78557835/161098699-b2b37d42-057b-475f-bbac-3badf7966dec.png">
+  <img width="80%" alt="User Profile 3" src="https://user-images.githubusercontent.com/78557835/161098763-5ebc9afe-33c8-4301-a3a0-5a9a62a48478.png">
+  <img width="80%" alt="User Profile 4" src="https://user-images.githubusercontent.com/78557835/161098819-4fb0a173-1315-4208-a6dd-a4499803ddaf.png">
+  <img width="30%" alt="User Profile Card 1" src="https://user-images.githubusercontent.com/78557835/161098868-0a71491c-c4b0-41d1-834a-3d487781c482.png">
 </div>
 
 ## 🔊 <a id="acknowledgements">Special Acknowledgements</a>
