@@ -12,14 +12,15 @@ services:
     ports:
       - 51234:51234
 
-  # mongo:
-  #   image: mongo
-  #   restart: always
-  #   volumes:
-  #     - ~/mongodb/database:/data/db
-  #   environment:
-  #     - MONGO_INITDB_ROOT_USERNAME
-  #     - MONGO_INITDB_ROOT_PASSWORD
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - ~/mongodb/database:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+
   nginx:
     depends_on:
       - neighbr
