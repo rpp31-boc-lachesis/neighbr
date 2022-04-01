@@ -21,6 +21,7 @@
 
 ## 📋 <a id="features">Features</a>
 - [Signup & Login](#signuplogin)
+- [Navigation](#navigation)
 - [User Profiles](#profiles)
 - [Requester Dashboard](#requester-dash)
 - [Runner Dashboard](#runner-dash)
@@ -142,18 +143,19 @@ jwtSecret="your JWT auth secret"
  <a href="https://circleci.com/">
    <img alt="Circle CI Docs" src="https://img.shields.io/badge/circle%20ci-%23161616.svg?style=for-the-badge&logo=circleci&logoColor=white" />
  </a>
-<a href="https://www.passportjs.org/">
-  <img alt="Passport JS Docs" src="https://img.shields.io/badge/passport-%2334E27A.svg?style=for-the-badge&logo=passport&logoColor=white" />
+<a href="https://www.jwt.io/">
+  <img alt="JWT Docs" src="https://img.shields.io/badge/-JSON%20Web%20Tokens-000000?logo=json%20web%20tokens&logoColor=white&style=for-the-badge" />
 </a>
 <a href="https://www.figma.com/">
   <img alt="Figma Docs" src="https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white" />
 </a>
-<a href="https://www.figma.com/">
-  <img alt="Figma Docs" src="https://img.shields.io/badge/mapbox-%23000000.svg?style=for-the-badge&logo=mapbox&logoColor=white" />
+<a href="https://www.mapbox.com/">
+  <img alt="Mapbox Docs" src="https://img.shields.io/badge/mapbox-%23000000.svg?style=for-the-badge&logo=mapbox&logoColor=white" />
+</a>
+ <a href="https://mongoosejs.com">
+  <img alt="Mongoose Docs" src="https://img.shields.io/badge/-mongoose-800?logo=mongoose&logoColor=white&style=for-the-badge" />
 </a>
 </div>
-
-* [Mongoose](https://mongoosejs.com/)
 
 ## 🛠 <a id="skills">Skills</a>
 - RESTful API architecture
@@ -192,24 +194,28 @@ jwtSecret="your JWT auth secret"
 
 ## 📷 <a id="screenshots">Screenshots</a>
 - ### <a id="signuplogin">Signup & Login</a>
+   Checkout how it works here 👉 [Demo](https://www.youtube.com/watch?v=B-dx6UWxV44)
    ![auth-neighbr](https://user-images.githubusercontent.com/64869554/156875923-9b985bb9-a6f3-4555-9de4-7568256281fe.jpg)
+- ### <a id="navigation">Navigation</a>
+   Checkout how it works here 👉 [Demo](https://www.youtube.com/watch?v=kup9G8m3LnU)
+   <img width="929" alt="navigation" src="https://user-images.githubusercontent.com/64869554/159628469-38cab60c-471a-4745-899c-7252aa09d2d9.png">
 - ### <a id="requester-dash">Requester Dashboard</a>
-<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
+   <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 - ### <a id="runner-dash">Runner Dashboard</a>
-![RunnerDashClip](https://user-images.githubusercontent.com/80003881/159188612-3d7d0648-2c52-46c0-9cb9-6201c3d209d8.gif)
+   ![RunnerDashClip](https://user-images.githubusercontent.com/80003881/159188612-3d7d0648-2c52-46c0-9cb9-6201c3d209d8.gif)
 - ### <a id="requester-status">Requester Status Window</a>
-<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
+   <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 - ### <a id="runner-status">Runner Status Window</a>
-<!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
+   <!-- ![App Screenshot](https://drive.google.com/uc?export=view&id=<ADD_ME>) -->
 
 
 - ### <a id="profiles">User Profiles</a>
 <div>
-  <img alt="Main User Profile 1" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11KM3BBvJc7tdMlFKw9bMRrdYImJcO0wK" />
-  <img alt="Main User Profile 2" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=1oVsbzQ86ZJlwfOM4vbcSHr6YgowiIZe5" />
-  <img alt="Main User Profile 3" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=11dhREPPgMEw_L0xxzY9Vr_PmddkYmmBs" />
-  <img alt="Main User Profile 4" width="100%" height="auto" src="https://drive.google.com/uc?export=view&id=1qzEYK_l70TfGT2jWPgW5ouj9BxFzTUt8" />
-  <img alt="User Profile Card 1" width="35%" height="auto" src="https://drive.google.com/uc?export=view&id=1VZzOkBU-ej72LbQdi14qr5faBVhwXW8B" />
+  <img width="80%" alt="User Profile 1" src="https://user-images.githubusercontent.com/78557835/161098642-67848a8f-0401-44d0-b0f4-e3b9f57b6544.png">
+  <img width="80%" alt="User Profile 2" src="https://user-images.githubusercontent.com/78557835/161098699-b2b37d42-057b-475f-bbac-3badf7966dec.png">
+  <img width="80%" alt="User Profile 3" src="https://user-images.githubusercontent.com/78557835/161098763-5ebc9afe-33c8-4301-a3a0-5a9a62a48478.png">
+  <img width="80%" alt="User Profile 4" src="https://user-images.githubusercontent.com/78557835/161098819-4fb0a173-1315-4208-a6dd-a4499803ddaf.png">
+  <img width="30%" alt="User Profile Card 1" src="https://user-images.githubusercontent.com/78557835/161098868-0a71491c-c4b0-41d1-834a-3d487781c482.png">
 </div>
 
 ## 🔊 <a id="acknowledgements">Special Acknowledgements</a>
